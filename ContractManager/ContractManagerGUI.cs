@@ -34,8 +34,8 @@ namespace ContractManager
 
         protected void InitializeService()
         {
-            ContractService.SetRegistryEndpoint("127.0.0.1", 5555);
-            ContractService.SetLocalEndpoint(int.Parse(portInput.Text));
+            ContractService.SetAuthenticatorEndpoint(authenticatorAddressInput.Text, int.Parse(authenticatorPortInput.Text));
+            ContractService.SetLocalEndpoint(int.Parse(myPortInput.Text));
         }
 
         private void Connect_Clicked(object sender, EventArgs e)
@@ -113,10 +113,17 @@ namespace ContractManager
             }
 
             int throwaway = 0;
-            if (!int.TryParse(portInput.Text, out throwaway))
+            if (!int.TryParse(myPortInput.Text, out throwaway))
             {
                 validInformation = false;
-                InputErrorProvider.SetError(portInput, "Please enter a valid port number");
+                InputErrorProvider.SetError(myPortInput, "Please enter a valid port number");
+            }
+
+            throwaway = 0;
+            if (!int.TryParse(authenticatorPortInput.Text, out throwaway))
+            {
+                validInformation = false;
+                InputErrorProvider.SetError(myPortInput, "Please enter a valid port number");
             }
 
             return validInformation;
@@ -124,15 +131,11 @@ namespace ContractManager
 
         private Task<bool> PerformLogin()
         {
-            Logger.Trace("Calling Login function for player");
-
             return Task.Factory.StartNew<bool>(ContractService.LoginHelper);
         }
 
         private Task<bool> PerformLogout()
         {
-            Logger.Trace("Requesting user log out");
-
             return Task.Factory.StartNew<bool>(ContractService.LogoutHelper);
         }
 
@@ -140,12 +143,10 @@ namespace ContractManager
         {
             if (loggedIn)
             {
-                Logger.Trace("Player is logged in");
                 ConnectButton.Text = "Disconnect";
             }
             else
             {
-                Logger.Trace("Player is logged out");
                 ConnectButton.Text = "Connect";
             }
 
@@ -164,6 +165,11 @@ namespace ContractManager
         public static ConcurrentDictionary<Level, bool> LogPrintDictionary = new ConcurrentDictionary<Level, bool>();
 
         private void portInput_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
         {
 
         }

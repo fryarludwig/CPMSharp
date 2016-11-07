@@ -29,7 +29,7 @@ namespace ContractManager
             MyProcess.AliveRetries = 5;
             MyProcess.AliveTimestamp = DateTime.Now;
             MyProcess.EndPoint = LocalEndpoint;
-            MyProcess.Label = "Authentication Manager";
+            MyProcess.Label = "Contract Manager";
             Properties.Process = MyProcess;
 
             ConversationHandler = new ConversationManager(PopulateConversationTypes(), Properties);
@@ -56,7 +56,7 @@ namespace ContractManager
 
         public bool LoginHelper()
         {
-            Logger.Info("Attempting to log in");
+            Logger.Info("Attempting to connect");
 
             base.Start();
 
@@ -64,7 +64,6 @@ namespace ContractManager
             int checkCounter = 10;
             while (Process.Status != ProcessInfo.StatusCode.Registered && checkCounter-- > 0)
             {
-                Logger.Trace("Attempting to log in");
                 Thread.Sleep(500);
             }
 
@@ -83,7 +82,7 @@ namespace ContractManager
             int checkCounter = 5;
             while (Process != null && checkCounter-- > 0)
             {
-                Logger.Trace("Attempting to log player out");
+                Logger.Trace("Attempting to log out");
                 Thread.Sleep(1000);
             }
 
@@ -95,7 +94,7 @@ namespace ContractManager
             LocalEndpoint = new IPEndPoint(IPAddress.Any, port);
         }
 
-        public void SetRegistryEndpoint(string ip, int port)
+        public void SetAuthenticatorEndpoint(string ip, int port)
         {
             AuthenticatorEndpoint = new IPEndPoint(IPAddress.Parse(ip), port);
         }
@@ -169,19 +168,22 @@ namespace ContractManager
 
             while (ContinueThread)
             {
+                Logger.Info($"The deets: {Properties.Process.ToString()}");
+
                 if (Process.Status == ProcessInfo.StatusCode.Unknown || Process.Status == ProcessInfo.StatusCode.NotInitialized)
                 {
                     Register(loginAttempt++);
                 }
                 else if (Process.Status == ProcessInfo.StatusCode.Registered)
                 {
+                    Logger.Info("Successfully registered!");
                 }
                 else if (Process.Status == ProcessInfo.StatusCode.Terminating)
                 {
                     break;
                 }
 
-                Thread.Sleep(250);
+                Thread.Sleep(1000);
             }
 
             Logger.Warn("Closing Connection");

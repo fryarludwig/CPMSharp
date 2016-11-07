@@ -20,7 +20,7 @@ namespace Common.Communication
         {
             Id = MessageNumber.Create();
             Timeout = 1000;
-            MaxRetries = 0;
+            MaxRetries = 5;
             Properties = SharedProperties.Instance;
             NewMessages = new ConcurrentQueue<Envelope>();
             Communicator = CommunicationService.Instance;

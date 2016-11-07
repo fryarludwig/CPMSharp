@@ -43,13 +43,12 @@ namespace AuthenticationManager
             StartButton.Enabled = false;
             if (StartButton.Text == "Start Server" && ValidateLoginInformation())
             {
-                Logger.Trace("Login information passed basic validation");
                 InitializeService();
-                PerformLogin().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
+                InitializeServerConnection().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
             }
             else if (StartButton.Text == "Stop Server")
             {
-                PerformLogout().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
+                ShutdownServer().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
             }
             else
             {
@@ -122,18 +121,14 @@ namespace AuthenticationManager
             return validInformation;
         }
         
-        private Task<bool> PerformLogin()
+        private Task<bool> InitializeServerConnection()
         {
-            Logger.Trace("Calling Login function for player");
-
-            return Task.Factory.StartNew<bool>(AuthenticationService.LoginHelper);
+            return Task.Factory.StartNew<bool>(AuthenticationService.StartServerHelper);
         }
 
-        private Task<bool> PerformLogout()
+        private Task<bool> ShutdownServer()
         {
-            Logger.Trace("Requesting user log out");
-
-            return Task.Factory.StartNew<bool>(AuthenticationService.LogoutHelper);
+            return Task.Factory.StartNew<bool>(AuthenticationService.ShutdownServerHelper);
         }
 
         private void UpdateLoginStatus(bool loggedIn)

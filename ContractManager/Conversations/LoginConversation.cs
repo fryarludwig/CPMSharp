@@ -37,7 +37,6 @@ namespace ContractManager.Conversations
                             LoginReply replyMessage = (LoginReply)tempEnvelope.Message;
                             Logger.Info("Received Login response: " + replyMessage.Note);
                             Properties.Process = replyMessage.ProcessInfo;
-
                         }
                         else
                         {

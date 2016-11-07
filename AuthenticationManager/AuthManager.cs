@@ -54,36 +54,27 @@ namespace AuthenticationManager
             ConversationHandler.Stop();
         }
 
-        public bool LoginHelper()
+        public bool StartServerHelper()
         {
-            Logger.Info("Attempting to log in");
-
+            Logger.Info("Starting Server");
             base.Start();
-
-            // Wait for 5 seconds, or for a value of true
-            int checkCounter = 10;
-            while (Process.Status != ProcessInfo.StatusCode.Registered && checkCounter-- > 0)
-            {
-                Logger.Trace("Attempting to log in");
-                Thread.Sleep(500);
-            }
-
-            return Process.Status == ProcessInfo.StatusCode.Registered;
+            Thread.Sleep(1000);
+            return Process.Status == ProcessInfo.StatusCode.Idle;
         }
 
-        public bool LogoutHelper()
+        public bool ShutdownServerHelper()
         {
-            Logger.Info("Attempting to log out");
+            Logger.Info("Shuttind down server");
             if (base.ContinueThread)
             {
                 base.Stop();
             }
 
             // Wait for 5 seconds, or for a value of true
+            Logger.Trace("Waiting for shutdown messages to propogate");
             int checkCounter = 5;
             while (Process != null && checkCounter-- > 0)
             {
-                Logger.Trace("Attempting to log player out");
                 Thread.Sleep(1000);
             }
 
@@ -129,6 +120,7 @@ namespace AuthenticationManager
 
         protected override void Run()
         {
+            Process.Status = ProcessInfo.StatusCode.Idle;
 
             while (ContinueThread)
             {
@@ -145,20 +137,17 @@ namespace AuthenticationManager
                     break;
                 }
 
-
                 Thread.Sleep(1000);
             }
 
             Logger.Trace("Closing Connection");
-
-            //Logout(2000);
+            Process.Status = ProcessInfo.StatusCode.Terminated;
         }
 
         public SharedProperties Properties { get; }
         #endregion
 
         #region Protected and Private Member Variables
-        protected int LoginRetries;
         protected ConversationManager ConversationHandler;
         #endregion
     }

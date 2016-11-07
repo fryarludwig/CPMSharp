@@ -100,7 +100,7 @@
             this.Controls.Add(this.addressInput);
             this.Controls.Add(this.label1);
             this.Name = "SharpMainWindow";
-            this.Text = "Contract Process Manager";
+            this.Text = "CPM Client";
             this.ResumeLayout(false);
             this.PerformLayout();
 

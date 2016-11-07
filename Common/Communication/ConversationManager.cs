@@ -18,6 +18,7 @@ namespace Common.Communication
     {
         public ConversationManager(Dictionary<Type, Type> msgConvRegistry, SharedProperties properties) : base("ConversationManager")
         {
+            Logger.Info("Creating conversation manager");
             ConversationDictionary = new Dictionary<MessageNumber, Conversation>();
             if (properties.LocalEndpoint != null)
             {
@@ -67,6 +68,7 @@ namespace Common.Communication
 
             while (ContinueThread)
             {
+                Logger.Trace("Conversation manager is running");
                 if (Communicator.ReplyWaiting)
                 {
                     Logger.Info("Message waiting - attempting to retrieve");
@@ -87,7 +89,7 @@ namespace Common.Communication
                     }
                 }
                 
-                Thread.Sleep(250);
+                Thread.Sleep(1000);
             }
 
             Logger.Info("Conversation manager has closed");

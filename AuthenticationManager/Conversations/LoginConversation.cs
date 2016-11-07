@@ -11,6 +11,7 @@ using Common.Messages;
 using Common.Users;
 using Common.Utilities;
 using System.Threading;
+using System.Net;
 
 namespace AuthenticationManager.Conversations
 {
@@ -27,6 +28,8 @@ namespace AuthenticationManager.Conversations
 
             while (ContinueThread)
             {
+                Logger.Trace("Conversation is active");
+
                 if (!NewMessages.IsEmpty)
                 {
                     Logger.Info("Received some kind of response");
@@ -37,7 +40,9 @@ namespace AuthenticationManager.Conversations
                             LoginRequest request = (LoginRequest)tempEnvelope.Message;
                             Logger.Info("Received Login response");
                             Logger.Info($"Sender: {request.ProcessLabel}");
-                            Communicator.Send(PopulateEnvelope());
+                            Envelope env = PopulateEnvelope();
+                            env.Address = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5556);
+                            Communicator.Send(env);
                             Stop();
                         }
                         else

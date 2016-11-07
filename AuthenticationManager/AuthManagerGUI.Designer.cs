@@ -100,7 +100,7 @@
             this.Controls.Add(this.addressInput);
             this.Controls.Add(this.label1);
             this.Name = "AuthManagerGUI";
-            this.Text = "Form1";
+            this.Text = "Authentication Manager";
             this.ResumeLayout(false);
             this.PerformLayout();
 

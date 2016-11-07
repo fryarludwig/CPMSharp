@@ -140,8 +140,8 @@ namespace Common.Utilities
 
             GlobalLogLevel = Level.TRACE;
             PrintToConsole = true;
-            WriteToFile = false;
-            GuiOutput = false;
+            WriteToFile = true;
+            GuiOutput = true;
             LogFileName = "Log - " + DateTime.Now.ToString("yyyy-MM-dd_HH-mm") + ".txt";
 
             ContinueThread = true;
@@ -174,7 +174,7 @@ namespace Common.Utilities
                 {
                     LogQueue.Enqueue(logMessageLine);
                 }
-                if (GuiOutput)
+                if (GuiOutput && WindowLoggingAdapter.LogMessageQueue != null)
                 {
                     WindowLoggingAdapter.LogMessageQueue.Enqueue(new LogItem(logLevel, logMessageLine));
                 }
