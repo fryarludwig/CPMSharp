@@ -1,0 +1,161 @@
+﻿using Common.Utilities;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace ContractManager
+{
+    public partial class ContractManagerGUI : Form
+    {
+        public ContractManagerGUI()
+        {
+            InitializeComponent();
+
+            Logger.ConsoleOutput = true;
+            Logger.GuiOutput = true;
+            Logger.FileOutput = true;
+            Task.Factory.StartNew(RunLoop);
+        }
+        
+        public void KillChildren()
+        {
+            ContractService.Stop();
+        }
+
+
+        private void Connect_Clicked(object sender, EventArgs e)
+        {
+            ConnectButton.Enabled = false;
+            if (ConnectButton.Text == "Connect" && ValidateLoginInformation())
+            {
+                Logger.Trace("Login information passed basic validation");
+                //InitializePlayerInformation();
+                PerformLogin().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
+            }
+            else if (ConnectButton.Text == "Disconnect")
+            {
+                PerformLogout().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
+            }
+            else
+            {
+                Logger.Info("User entered invalid information");
+                ConnectButton.Enabled = true;
+            }
+        }
+
+
+        protected void RunLoop()
+        {
+            int NumberOfItems = GuiLogOutput.ClientSize.Height / GuiLogOutput.ItemHeight;
+            bool keepGoing = true;
+            LogItem message;
+
+            while (keepGoing)
+            {
+                if (!GuiLogQueue.IsEmpty && GuiLogQueue.TryDequeue(out message))
+                {
+                    Invoke((MethodInvoker)delegate
+                    {
+                        try
+                        {
+                            if (LogPrintDictionary[message.LogLevel])
+                            {
+                                GuiLogOutput.Items.Add(message.LogMessage);
+                                if (GuiLogOutput.TopIndex == GuiLogOutput.Items.Count - NumberOfItems - 1)
+                                {
+                                    //The item at the top when you can just see the bottom item
+                                    GuiLogOutput.TopIndex = GuiLogOutput.Items.Count - NumberOfItems + 1;
+                                }
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Logger.GuiOutput = false;
+                            Logger.ConsoleOutput = true;
+                            Logger.Error(e.Message);
+                            keepGoing = false;
+                        }
+                    });
+                }
+
+                Thread.Sleep(100);
+            }
+        }
+
+        private bool ValidateLoginInformation()
+        {
+            bool validInformation = true;
+            InputErrorProvider.Clear();
+
+            IEnumerable<TextBox> textBoxes = Controls.OfType<TextBox>();
+            foreach (TextBox box in textBoxes)
+            {
+                if (string.IsNullOrWhiteSpace(box.Text))
+                {
+                    InputErrorProvider.SetError(box, "Input cannot be blank");
+                    validInformation = false;
+                }
+            }
+
+            int throwaway = 0;
+            if (!int.TryParse(portInput.Text, out throwaway))
+            {
+                validInformation = false;
+                InputErrorProvider.SetError(portInput, "Please enter a valid port number");
+            }
+
+            return validInformation;
+        }
+
+        private Task<bool> PerformLogin()
+        {
+            Logger.Trace("Calling Login function for player");
+
+            return Task.Factory.StartNew<bool>(ContractService.LoginHelper);
+        }
+
+        private Task<bool> PerformLogout()
+        {
+            Logger.Trace("Requesting user log out");
+
+            return Task.Factory.StartNew<bool>(ContractService.LogoutHelper);
+        }
+
+        private void UpdateLoginStatus(bool loggedIn)
+        {
+            if (loggedIn)
+            {
+                Logger.Trace("Player is logged in");
+                ConnectButton.Text = "Disconnect";
+            }
+            else
+            {
+                Logger.Trace("Player is logged out");
+                ConnectButton.Text = "Connect";
+            }
+
+            ConnectButton.Enabled = true;
+        }
+
+        public void UpdateGuiStatus()
+        {
+            // Call a method to update the gui
+        }
+
+        protected ErrorProvider InputErrorProvider = new ErrorProvider();
+        protected LogUtility Logger = new LogUtility("DSoak GUI");
+        protected ContractManager ContractService { get; }
+        public static ConcurrentQueue<LogItem> GuiLogQueue = new ConcurrentQueue<LogItem>();
+        public static ConcurrentDictionary<Level, bool> LogPrintDictionary = new ConcurrentDictionary<Level, bool>();
+
+
+    }
+}
