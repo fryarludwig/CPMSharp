@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alerts\Alert.cs" />
-    <Compile Include="Communication\Communicator.cs" />
+    <Compile Include="Communication\CommunicationService.cs" />
     <Compile Include="Communication\Conversation.cs" />
     <Compile Include="Communication\ConversationFactory.cs" />
     <Compile Include="Communication\ConversationManager.cs" />
@@ -71,7 +71,6 @@
     <Compile Include="WorkItems\Task.cs" />
     <Compile Include="WorkItems\WorkItem.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

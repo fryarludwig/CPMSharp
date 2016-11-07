@@ -30,22 +30,11 @@ namespace AuthenticationManager
             MyProcess.AliveTimestamp = DateTime.Now;
             MyProcess.EndPoint = LocalEndpoint;
             MyProcess.Label = "Authentication Manager";
-
             Properties.Process = MyProcess;
-
-            CommunicationManager tempInstance = CommunicationManager.ServerInstance;
+            
             ConversationHandler = new ConversationManager(GetValidConversations(), Properties);
             ConversationHandler.Start();
-
-            if (tempInstance.IsServer)
-            {
-                Logger.Info("Boom, we got a server");
-            }
-            else
-            {
-                Logger.Info("Failed to start a server");
-            }
-
+            
             Logger.Trace("Initialized Authentication Manager");
         }
 

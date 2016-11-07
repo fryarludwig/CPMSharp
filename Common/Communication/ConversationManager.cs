@@ -19,14 +19,26 @@ namespace Common.Communication
         public ConversationManager(Dictionary<Type, Type> msgConvRegistry, SharedProperties properties) : base("ConversationManager")
         {
             ConversationDictionary = new Dictionary<MessageNumber, Conversation>();
-            Communicator = CommunicationManager.Instance;
-
+            if (properties.LocalEndpoint != null)
+            {
+                Communicator = CommunicationService.GetInstanceAtLocalPort(properties.LocalEndpoint.Port);
+            }
+            else
+            {
+                Communicator = CommunicationService.Instance;
+            }
+            
             foreach (Type messageType in msgConvRegistry.Keys)
             {
                 ConversationFactory.RegisterNewConversationType(messageType, msgConvRegistry[messageType]);
             }
         }
-        
+
+        public ConversationManager(Dictionary<Type, Type> dictionary) : base ("ConversationManager")
+        {
+            this.dictionary = dictionary;
+        }
+
         protected override void DerivedStop()
         {
             lock (ConvQueueLock)
@@ -97,7 +109,8 @@ namespace Common.Communication
         }
         
         private Dictionary<MessageNumber, Conversation> ConversationDictionary;
-        private CommunicationManager Communicator;
+        private CommunicationService Communicator;
         private object ConvQueueLock = new object();
+        private Dictionary<Type, Type> dictionary;
     }
 }

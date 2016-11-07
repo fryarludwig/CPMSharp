@@ -23,7 +23,7 @@ namespace Common.Communication
             MaxRetries = 0;
             Properties = SharedProperties.Instance;
             NewMessages = new ConcurrentQueue<Envelope>();
-            Communicator = CommunicationManager.Instance;
+            Communicator = CommunicationService.Instance;
         }
         
         protected Envelope PopulateEnvelope()
@@ -52,7 +52,7 @@ namespace Common.Communication
             }
         }
         public SharedProperties Properties { get; set; }
-        public CommunicationManager Communicator { get; }
+        public CommunicationService Communicator { get; }
         public ConcurrentQueue<Envelope> NewMessages { get; }
     }
 }

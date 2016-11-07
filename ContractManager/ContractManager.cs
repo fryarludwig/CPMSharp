@@ -20,14 +20,26 @@ namespace ContractManager
         public ContractManager() : base("Contract Manager")
         {
             Properties = SharedProperties.Instance;
-            ConversationHandler = new ConversationManager(GetValidConversations());
+            Properties.AuthenticatorEndpoint = AuthenticatorEndpoint;
+
+            ProcessInfo MyProcess = new ProcessInfo();
+            MyProcess.ProcessId = 0;
+            MyProcess.Type = ProcessInfo.ProcessType.ContractManager;
+            MyProcess.Status = ProcessInfo.StatusCode.Initializing;
+            MyProcess.AliveRetries = 5;
+            MyProcess.AliveTimestamp = DateTime.Now;
+            MyProcess.EndPoint = LocalEndpoint;
+            MyProcess.Label = "Authentication Manager";
+            Properties.Process = MyProcess;
+
+            ConversationHandler = new ConversationManager(PopulateConversationTypes(), Properties);
             ConversationHandler.Start();
 
             Logger.Trace("Initialized Authentication Manager");
         }
 
 
-        private Dictionary<Type, Type> GetValidConversations()
+        private Dictionary<Type, Type> PopulateConversationTypes()
         {
             Dictionary<Type, Type> typeMap = new Dictionary<Type, Type>();
             typeMap[typeof(LoginRequest)] = typeof(LoginConversation);
@@ -78,16 +90,20 @@ namespace ContractManager
             return Process == null || Process.Status == ProcessInfo.StatusCode.Terminating;
         }
 
+        public void SetLocalEndpoint(int port)
+        {
+            LocalEndpoint = new IPEndPoint(IPAddress.Any, port);
+        }
 
         public void SetRegistryEndpoint(string ip, int port)
         {
-            RegistryEndpoint = new IPEndPoint(IPAddress.Parse(ip), port);
+            AuthenticatorEndpoint = new IPEndPoint(IPAddress.Parse(ip), port);
         }
 
 
         #region Public Member Variables
 
-        public IPEndPoint RegistryEndpoint
+        public IPEndPoint AuthenticatorEndpoint
         {
             get
             {
@@ -96,6 +112,18 @@ namespace ContractManager
             set
             {
                 Properties.AuthenticatorEndpoint = value;
+            }
+        }
+
+        public IPEndPoint LocalEndpoint
+        {
+            get
+            {
+                return Properties.LocalEndpoint;
+            }
+            set
+            {
+                Properties.LocalEndpoint = value;
             }
         }
 

@@ -121,6 +121,7 @@ namespace Common.Users
             {
                 lock (LocalEndpointLock)
                 {
+                    MyProcess.EndPoint = value;
                     MyLocalEndpoint = value;
                 }
             }

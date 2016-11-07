@@ -20,12 +20,12 @@ namespace AuthenticationManager
         {
             InitializeComponent();
             WindowLoggingAdapter.LogMessageQueue = GuiLogQueue;
-            AuthenticationService = new AuthManager();
 
             Logger.ConsoleOutput = true;
             Logger.GuiOutput = true;
             Logger.FileOutput = true;
             Task.Factory.StartNew(RunLoop);
+            AuthenticationService = new AuthManager();
         }
 
         public void KillChildren()

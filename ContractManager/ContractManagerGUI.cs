@@ -19,12 +19,12 @@ namespace ContractManager
         {
             InitializeComponent();
             WindowLoggingAdapter.LogMessageQueue = GuiLogQueue;
-            ContractService = new ContractManager();
 
             Logger.ConsoleOutput = true;
             Logger.GuiOutput = true;
             Logger.FileOutput = true;
             Task.Factory.StartNew(RunLoop);
+            ContractService = new ContractManager();
         }
         
         public void KillChildren()
@@ -34,7 +34,8 @@ namespace ContractManager
 
         protected void InitializeService()
         {
-
+            ContractService.SetRegistryEndpoint("127.0.0.1", 5555);
+            ContractService.SetLocalEndpoint(int.Parse(portInput.Text));
         }
 
         private void Connect_Clicked(object sender, EventArgs e)
@@ -162,6 +163,9 @@ namespace ContractManager
         public static ConcurrentQueue<LogItem> GuiLogQueue = new ConcurrentQueue<LogItem>();
         public static ConcurrentDictionary<Level, bool> LogPrintDictionary = new ConcurrentDictionary<Level, bool>();
 
+        private void portInput_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }

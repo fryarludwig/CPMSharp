@@ -12,17 +12,16 @@ using Common.Utilities;
 
 namespace Common.Communication
 {
-    public class CommunicationManager : Threaded
+    public class CommunicationService : Threaded
     {
-        private CommunicationManager(int localPort = 0) : base("Communicator")
+        private CommunicationService(int localPort = 0) : base("Communicator")
         {
             LocalPort = localPort;
-            CreateAsServer = false;
             InboundQueue = new ConcurrentQueue<Envelope>();
             OutboundQueue = new ConcurrentQueue<Envelope>();
         }
-
-        public static CommunicationManager ServerInstance
+        
+        public static CommunicationService Instance
         {
             get
             {
@@ -32,8 +31,7 @@ namespace Common.Communication
                     {
                         if (instance == null)
                         {
-                            instance = new CommunicationManager();
-                            instance.CreateAsServer = true;
+                            instance = new CommunicationService();
                             instance.Start();
                         }
                     }
@@ -43,28 +41,7 @@ namespace Common.Communication
             }
         }
 
-        public static CommunicationManager Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    lock (InstanceLock)
-                    {
-                        if (instance == null)
-                        {
-                            instance = new CommunicationManager();
-                            instance.CreateAsServer = false;
-                            instance.Start();
-                        }
-                    }
-                }
-
-                return instance;
-            }
-        }
-
-        public static CommunicationManager GetInstanceAtLocalPort(int port = 0)
+        public static CommunicationService GetInstanceAtLocalPort(int port = 0)
         {
             if (instance == null)
             {
@@ -72,8 +49,7 @@ namespace Common.Communication
                 {
                     if (instance == null)
                     {
-                        instance = new CommunicationManager();
-                        instance.CreateAsServer = false;
+                        instance = new CommunicationService(port);
                         instance.Start();
                     }
                 }
@@ -154,16 +130,11 @@ namespace Common.Communication
             }
         }
 
-        public bool IsServer
-        {
-            get { return CreateAsServer && instance != null; }
-        }
-        public int LocalPort { get; set; }
+        public int LocalPort { get; }
         protected ConcurrentQueue<Envelope> InboundQueue { get; }
         protected ConcurrentQueue<Envelope> OutboundQueue { get; }
-        protected bool CreateAsServer { get; set; }
 
         private static object InstanceLock = new object();
-        private static volatile CommunicationManager instance;
+        private static volatile CommunicationService instance;
     }
 }

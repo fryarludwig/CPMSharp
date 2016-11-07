@@ -140,8 +140,8 @@ namespace Common.Utilities
 
             GlobalLogLevel = Level.TRACE;
             PrintToConsole = true;
-            WriteToFile = true;
-            GuiOutput = true;
+            WriteToFile = false;
+            GuiOutput = false;
             LogFileName = "Log - " + DateTime.Now.ToString("yyyy-MM-dd_HH-mm") + ".txt";
 
             ContinueThread = true;

@@ -61,6 +61,7 @@
             this.portInput.Size = new System.Drawing.Size(100, 20);
             this.portInput.TabIndex = 9;
             this.portInput.Text = "5555";
+            this.portInput.TextChanged += new System.EventHandler(this.portInput_TextChanged);
             // 
             // label2
             // 
