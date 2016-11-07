@@ -19,6 +19,8 @@ namespace AuthenticationManager
         public AuthManagerGUI()
         {
             InitializeComponent();
+            WindowLoggingAdapter.LogMessageQueue = GuiLogQueue;
+            AuthenticationService = new AuthManager();
 
             Logger.ConsoleOutput = true;
             Logger.GuiOutput = true;
@@ -31,16 +33,21 @@ namespace AuthenticationManager
             AuthenticationService.Stop();
         }
 
+        protected void InitializeService()
+        {
+            AuthenticationService.SetLocalEndpoint(int.Parse(portInput.Text));
+        }
+
         private void StartServer_Clicked(object sender, EventArgs e)
         {
             StartButton.Enabled = false;
-            if (StartButton.Text == "Login" && ValidateLoginInformation())
+            if (StartButton.Text == "Start Server" && ValidateLoginInformation())
             {
                 Logger.Trace("Login information passed basic validation");
-                //InitializePlayerInformation();
+                InitializeService();
                 PerformLogin().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
             }
-            else if (StartButton.Text == "Logout")
+            else if (StartButton.Text == "Stop Server")
             {
                 PerformLogout().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
             }
@@ -133,13 +140,13 @@ namespace AuthenticationManager
         {
             if (loggedIn)
             {
-                Logger.Trace("Player is logged in");
-                StartButton.Text = "Logout";
+                Logger.Trace("Server Started");
+                StartButton.Text = "Stop Server";
             }
             else
             {
-                Logger.Trace("Player is logged out");
-                StartButton.Text = "Login";
+                Logger.Trace("Server Stopped");
+                StartButton.Text = "Start Server";
             }
 
             StartButton.Enabled = true;
@@ -151,7 +158,7 @@ namespace AuthenticationManager
         }
 
         protected ErrorProvider InputErrorProvider = new ErrorProvider();
-        protected LogUtility Logger = new LogUtility("DSoak GUI");
+        protected LogUtility Logger = new LogUtility("Auth Service");
         protected AuthManager AuthenticationService { get; }
         public static ConcurrentQueue<LogItem> GuiLogQueue = new ConcurrentQueue<LogItem>();
         public static ConcurrentDictionary<Level, bool> LogPrintDictionary = new ConcurrentDictionary<Level, bool>();

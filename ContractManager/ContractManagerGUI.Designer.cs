@@ -41,7 +41,7 @@
             this.GuiLogOutput.FormattingEnabled = true;
             this.GuiLogOutput.Location = new System.Drawing.Point(12, 189);
             this.GuiLogOutput.Name = "GuiLogOutput";
-            this.GuiLogOutput.Size = new System.Drawing.Size(541, 160);
+            this.GuiLogOutput.Size = new System.Drawing.Size(577, 160);
             this.GuiLogOutput.TabIndex = 11;
             // 
             // ConnectButton

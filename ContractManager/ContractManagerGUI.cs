@@ -18,6 +18,8 @@ namespace ContractManager
         public ContractManagerGUI()
         {
             InitializeComponent();
+            WindowLoggingAdapter.LogMessageQueue = GuiLogQueue;
+            ContractService = new ContractManager();
 
             Logger.ConsoleOutput = true;
             Logger.GuiOutput = true;
@@ -30,6 +32,10 @@ namespace ContractManager
             ContractService.Stop();
         }
 
+        protected void InitializeService()
+        {
+
+        }
 
         private void Connect_Clicked(object sender, EventArgs e)
         {
@@ -37,7 +43,7 @@ namespace ContractManager
             if (ConnectButton.Text == "Connect" && ValidateLoginInformation())
             {
                 Logger.Trace("Login information passed basic validation");
-                //InitializePlayerInformation();
+                InitializeService();
                 PerformLogin().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
             }
             else if (ConnectButton.Text == "Disconnect")
@@ -151,7 +157,7 @@ namespace ContractManager
         }
 
         protected ErrorProvider InputErrorProvider = new ErrorProvider();
-        protected LogUtility Logger = new LogUtility("DSoak GUI");
+        protected LogUtility Logger = new LogUtility("Contract GUI");
         protected ContractManager ContractService { get; }
         public static ConcurrentQueue<LogItem> GuiLogQueue = new ConcurrentQueue<LogItem>();
         public static ConcurrentDictionary<Level, bool> LogPrintDictionary = new ConcurrentDictionary<Level, bool>();

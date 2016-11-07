@@ -8,7 +8,7 @@ namespace Common.Users
     [DataContract]
     public class ProcessInfo
     {
-        public enum ProcessType { Unknown = 0, AuthenticationManager, ContractManager, Client};
+        public enum ProcessType { Unknown = 0, AuthenticationManager = 1, ContractManager = 2, Client = 3};
         public enum StatusCode { Unknown = 0, NotInitialized = 1, Initializing = 2, Registered = 3, Idle = 4, Streaming = 5, Terminating = 6, Terminated = 7};
 
         private StatusCode status;
@@ -46,7 +46,7 @@ namespace Common.Users
         public string StatusString { get { return statusNames[(int)Status]; } }
 
         public DateTime? AliveTimestamp { get; set; }
-        public Int32 AliveReties { get; set; }
+        public Int32 AliveRetries { get; set; }
 
         public ProcessInfo Clone()
         {

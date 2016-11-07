@@ -20,8 +20,31 @@ namespace AuthenticationManager
         public AuthManager() : base("AuthManager")
         {
             Properties = SharedProperties.Instance;
-            ConversationHandler = new ConversationManager(GetValidConversations());
+            Properties.AuthenticatorEndpoint = LocalEndpoint;
+
+            ProcessInfo MyProcess = new ProcessInfo();
+            MyProcess.ProcessId = 0;
+            MyProcess.Type = ProcessInfo.ProcessType.AuthenticationManager;
+            MyProcess.Status = ProcessInfo.StatusCode.Initializing;
+            MyProcess.AliveRetries = 5;
+            MyProcess.AliveTimestamp = DateTime.Now;
+            MyProcess.EndPoint = LocalEndpoint;
+            MyProcess.Label = "Authentication Manager";
+
+            Properties.Process = MyProcess;
+
+            CommunicationManager tempInstance = CommunicationManager.ServerInstance;
+            ConversationHandler = new ConversationManager(GetValidConversations(), Properties);
             ConversationHandler.Start();
+
+            if (tempInstance.IsServer)
+            {
+                Logger.Info("Boom, we got a server");
+            }
+            else
+            {
+                Logger.Info("Failed to start a server");
+            }
 
             Logger.Trace("Initialized Authentication Manager");
         }
@@ -79,23 +102,23 @@ namespace AuthenticationManager
         }
 
 
-        public void SetRegistryEndpoint(string ip, int port)
+        public void SetLocalEndpoint(int port)
         {
-            RegistryEndpoint = new IPEndPoint(IPAddress.Parse(ip), port);
+            LocalEndpoint = new IPEndPoint(IPAddress.Any, port);
         }
 
 
         #region Public Member Variables
 
-        public IPEndPoint RegistryEndpoint
+        public IPEndPoint LocalEndpoint
         {
             get
             {
-                return Properties.RegistryEndpoint;
+                return Properties.LocalEndpoint;
             }
             set
             {
-                Properties.RegistryEndpoint = value;
+                Properties.LocalEndpoint = value;
             }
         }
 
@@ -120,6 +143,7 @@ namespace AuthenticationManager
 
             while (ContinueThread)
             {
+                Logger.Info($"The deets: {Properties.Process.ToString()}");
                 if (Process.Status == ProcessInfo.StatusCode.Unknown || Process.Status == ProcessInfo.StatusCode.NotInitialized)
                 {
                     //Login();
@@ -133,7 +157,7 @@ namespace AuthenticationManager
                 }
 
 
-                Thread.Sleep(250);
+                Thread.Sleep(1000);
             }
 
             Logger.Trace("Closing Connection");

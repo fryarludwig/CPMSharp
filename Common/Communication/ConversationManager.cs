@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 
 using Common.Utilities;
+using Common.Users;
 using Common.Messages;
 using Common.Messages.Replies;
 using Common.Messages.Requests;
@@ -15,7 +16,7 @@ namespace Common.Communication
 {
     public class ConversationManager : Threaded
     {
-        public ConversationManager(Dictionary<Type, Type> msgConvRegistry) : base("ConversationManager")
+        public ConversationManager(Dictionary<Type, Type> msgConvRegistry, SharedProperties properties) : base("ConversationManager")
         {
             ConversationDictionary = new Dictionary<MessageNumber, Conversation>();
             Communicator = CommunicationManager.Instance;

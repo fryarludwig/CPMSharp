@@ -91,11 +91,11 @@ namespace ContractManager
         {
             get
             {
-                return Properties.RegistryEndpoint;
+                return Properties.AuthenticatorEndpoint;
             }
             set
             {
-                Properties.RegistryEndpoint = value;
+                Properties.AuthenticatorEndpoint = value;
             }
         }
 

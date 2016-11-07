@@ -8,13 +8,15 @@ namespace Common.Users
     public class Identity
     {
         [DataMember]
-        public string ANumber { get; set; }
+        public string UserName { get; set; }
         [DataMember]
         public string FirstName { get; set; }
         [DataMember]
         public string LastName { get; set; }
         [DataMember]
         public string Alias { get; set; }
+        [DataMember]
+        public string UserID { get; set; }
 
         public Identity Clone()
         {

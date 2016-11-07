@@ -176,7 +176,7 @@ namespace Common.Utilities
                 }
                 if (GuiOutput)
                 {
-                    MainWindow.GuiLogQueue.Enqueue(new LogItem(logLevel, logMessageLine));
+                    WindowLoggingAdapter.LogMessageQueue.Enqueue(new LogItem(logLevel, logMessageLine));
                 }
             }
             catch (KeyNotFoundException e)
@@ -220,7 +220,6 @@ namespace Common.Utilities
         }
 
         public Level GlobalLogLevel { get; set; }
-        public delegate
         public bool PrintToConsole { get; set; }
         public bool GuiOutput { get; set; }
         public bool WriteToFile { get; set; }

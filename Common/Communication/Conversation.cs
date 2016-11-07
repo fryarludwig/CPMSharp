@@ -28,7 +28,7 @@ namespace Common.Communication
         
         protected Envelope PopulateEnvelope()
         {
-            return new Envelope(Properties.RegistryEndpoint, CreateMessage());
+            return new Envelope(Properties.AuthenticatorEndpoint, CreateMessage());
         }
 
         protected abstract Message CreateMessage();

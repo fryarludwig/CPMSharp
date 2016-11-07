@@ -32,6 +32,12 @@ namespace Common.Communication
 
             if (envelope != null && envelope.Message != null)
             {
+                // May be true if we originate the message
+                if (envelope.Message.ConvId == null && envelope.Message.MsgId == null)
+                {
+                    envelope.Message.InitMessageAndConversationNumbers();
+                }
+
                 if (ConversationTypes.ContainsKey(envelope.Message.GetType()))
                 {
                     newConversation = Activator.CreateInstance(ConversationTypes[envelope.Message.GetType()]) as Conversation;

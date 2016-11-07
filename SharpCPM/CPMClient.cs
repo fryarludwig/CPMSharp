@@ -59,7 +59,7 @@ namespace SharpCPM
             }
         }
 
-        public void LoginHelper()
+        public bool LoginHelper()
         {
             Logger.Info("Attempting to log in");
 
@@ -73,7 +73,7 @@ namespace SharpCPM
                 Thread.Sleep(500);
             }
 
-            //return Process.Status == ProcessInfo.StatusCode.Registered;
+            return Process.Status == ProcessInfo.StatusCode.Registered;
         }
 
 
@@ -91,7 +91,7 @@ namespace SharpCPM
             }
         }
 
-        public void LogoutHelper()
+        public bool LogoutHelper()
         {
             Logger.Info("Attempting to log out");
             if (base.ContinueThread)
@@ -107,7 +107,7 @@ namespace SharpCPM
                 Thread.Sleep(1000);
             }
 
-            //return Process == null || Process.Status == ProcessInfo.StatusCode.Terminating;
+            return Process == null || Process.Status == ProcessInfo.StatusCode.Terminating;
         }
 
         protected override void Run()
@@ -144,11 +144,11 @@ namespace SharpCPM
         {
             get
             {
-                return Properties.RegistryEndpoint;
+                return Properties.AuthenticatorEndpoint;
             }
             set
             {
-                Properties.RegistryEndpoint = value;
+                Properties.AuthenticatorEndpoint = value;
             }
         }
 

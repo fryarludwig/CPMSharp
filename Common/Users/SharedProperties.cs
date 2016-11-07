@@ -11,15 +11,13 @@ namespace Common.Users
     {
         private SharedProperties()
         {
-            //GameInfoList = new List<GameInfo>();
             IdentityInfo = new Identity();
             MyProcess = new ProcessInfo();
             MyProcess.ProcessId = 0;
             MyProcess.Status = ProcessInfo.StatusCode.Unknown;
-            MyProcess.AliveReties = 5;
+            MyProcess.AliveRetries = 5;
             MyProcess.AliveTimestamp = DateTime.Now;
             MyProcess.EndPoint = new IPEndPoint(IPAddress.Any, 0);
-            MyProcess.Type = ProcessInfo.ProcessType.Player;
             MyProcess.Label = "Some Label, yeah?";
         }
 
@@ -42,14 +40,15 @@ namespace Common.Users
         private static object InstanceLock = new object();
         private static object ProcessLock = new object();
         private static object IdentityLock = new object();
-        private static object RegistryEndpointLock = new object();
+        private static object AuthenticatorEndpointLock = new object();
+        private static object LocalEndpointLock = new object();
         private static object GameInfoListLock = new object();
         private static volatile SharedProperties instance;
 
-        private IPEndPoint MyRegistryEndpoint;
+        private IPEndPoint MyAuthenticatorEndpoint;
+        private IPEndPoint MyLocalEndpoint;
         private Identity MyIdentity;
         private ProcessInfo MyProcess;
-        //private List<GameInfo> MyList;
 
         public ProcessInfo Process
         {
@@ -68,7 +67,7 @@ namespace Common.Users
                     MyProcess.ProcessId = value.ProcessId;
                     MyProcess.Status = value.Status;
                     MyProcess.Type = value.Type;
-                    MyProcess.AliveReties = value.AliveReties;
+                    MyProcess.AliveRetries = value.AliveRetries;
                     MyProcess.AliveTimestamp = value.AliveTimestamp;
                     MyProcess.EndPoint = value.EndPoint;
                 }
@@ -91,20 +90,38 @@ namespace Common.Users
                 }
             }
         }
-        public IPEndPoint RegistryEndpoint
+        public IPEndPoint AuthenticatorEndpoint
         {
             get
             {
-                lock (RegistryEndpointLock)
+                lock (AuthenticatorEndpointLock)
                 {
-                    return MyRegistryEndpoint;
+                    return MyAuthenticatorEndpoint;
                 }
             }
             set
             {
-                lock (RegistryEndpointLock)
+                lock (AuthenticatorEndpointLock)
                 {
-                    MyRegistryEndpoint = value;
+                    MyAuthenticatorEndpoint = value;
+                }
+            }
+        }
+
+        public IPEndPoint LocalEndpoint
+        {
+            get
+            {
+                lock (LocalEndpointLock)
+                {
+                    return MyLocalEndpoint;
+                }
+            }
+            set
+            {
+                lock (LocalEndpointLock)
+                {
+                    MyLocalEndpoint = value;
                 }
             }
         }
