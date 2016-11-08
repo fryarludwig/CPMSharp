@@ -18,7 +18,7 @@ namespace Common.Users
             MyProcess.AliveRetries = 5;
             MyProcess.AliveTimestamp = DateTime.Now;
             MyProcess.EndPoint = new IPEndPoint(IPAddress.Any, 0);
-            MyProcess.Label = "Some Label, yeah?";
+            MyProcess.Label = "DEFAULT_LABEL";
         }
 
         public static SharedProperties Instance

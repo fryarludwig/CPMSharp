@@ -19,6 +19,7 @@ namespace Common.Messages
     {
         static Message()
         {
+            Register(typeof(Message));
             Register(typeof(LoginReply));
             //Register(typeof(PublicKeyReply));
             Register(typeof(Reply));

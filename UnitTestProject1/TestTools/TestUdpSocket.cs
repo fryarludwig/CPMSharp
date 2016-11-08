@@ -1,49 +1,26 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 
+using Common.Communication;
 using Common.Messages;
-using Common.Utilities;
 
-namespace Common.Communication
+namespace TestCommon.TestTools
 {
-    public class CommunicationService : Threaded
+    public class TestUdpSocket
     {
-        private CommunicationService(int localPort) : base("Communicator")
+        public TestUdpSocket(int port)
         {
-            LocalPort = localPort;
+            LocalPort = port;
             InboundQueue = new ConcurrentQueue<Envelope>();
             OutboundQueue = new ConcurrentQueue<Envelope>();
+            ActiveThread = new Thread(Run);
+            ContinueThread = false;
         }
 
-        public static CommunicationService GetInstance(int port = 0)
-        {
-            if (instance == null)
-            {
-                lock (InstanceLock)
-                {
-                    if (instance == null)
-                    {
-                        instance = new CommunicationService(port);
-                        instance.Start();
-                    }
-                }
-            }
-            else if (!instance.IsActive())
-            {
-                instance.Start();
-            }
-
-            return instance;
-        }
-
-
-        protected override void Run()
+        protected void Run()
         {
             UdpClient socket = new UdpClient(new IPEndPoint(IPAddress.Any, LocalPort));
             IPEndPoint recvEndpoint = new IPEndPoint(IPAddress.Any, LocalPort);
@@ -55,15 +32,12 @@ namespace Common.Communication
                 {
                     if (socket.Available > 0)
                     {
-                        //Logger.Info("Information is available on the socket");
                         byte[] bytesReceived = socket.Receive(ref recvEndpoint);
                         if (bytesReceived.Length > 0)
                         {
-                            IPEndPoint endpoint = new IPEndPoint(recvEndpoint.Address, recvEndpoint.Port);
-                            Envelope tempEnvelope = new Envelope(endpoint, Message.Decode(bytesReceived));
+                            Envelope tempEnvelope = new Envelope(recvEndpoint, Message.Decode(bytesReceived));
                             if (tempEnvelope.Message != null)
                             {
-                                Logger.Info("Received message, enqueuing.");
                                 InboundQueue.Enqueue(tempEnvelope);
                             }
                         }
@@ -74,7 +48,6 @@ namespace Common.Communication
                         if (OutboundQueue.TryDequeue(out outboundEnvelope))
                         {
                             byte[] bytesToSend = outboundEnvelope.Message.Encode();
-                            Logger.Info($"Sending outbound message of length {bytesToSend.Length} to {outboundEnvelope.Address.ToString()}");
                             if (bytesToSend.Length > 0)
                             {
                                 socket.Send(bytesToSend, bytesToSend.Length, outboundEnvelope.Address);
@@ -89,11 +62,10 @@ namespace Common.Communication
             }
             catch (Exception exc)
             {
-                Logger.Error("UDP socket exception : " + exc.Message);
+                Console.WriteLine("Testing UDP socket exception : " + exc.Message);
             }
 
             socket.Close();
-            Logger.Info("Closing down Network Manager");
         }
 
         public void Send(Envelope envelope)
@@ -114,13 +86,35 @@ namespace Common.Communication
             }
         }
 
+        public void Start()
+        {
+            if (!ActiveThread.IsAlive)
+            {
+                ContinueThread = true;
+                ActiveThread = new Thread(Run);
+                ActiveThread.Start();
+            }
+        }
+
+        public void Stop()
+        {
+            if (ActiveThread.IsAlive)
+            {
+                ContinueThread = false;
+                ActiveThread.Join(2000);
+            }
+        }
+
+        public bool IsActive()
+        {
+            return ContinueThread;
+        }
+
         public int LocalPort { get; set; }
-        public IPEndPoint AllowedIP { get; set; }
+        protected Thread ActiveThread;
+        protected volatile bool ContinueThread;
         protected ConcurrentQueue<Envelope> InboundQueue { get; }
         protected ConcurrentQueue<Envelope> OutboundQueue { get; }
-
-
-        private static object InstanceLock = new object();
-        private static volatile CommunicationService instance;
     }
 }
+

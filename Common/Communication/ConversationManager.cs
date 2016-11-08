@@ -22,11 +22,11 @@ namespace Common.Communication
             ConversationDictionary = new Dictionary<MessageNumber, Conversation>();
             if (properties.LocalEndpoint != null)
             {
-                Communicator = CommunicationService.GetInstanceAtLocalPort(properties.LocalEndpoint.Port);
+                Communicator = CommunicationService.GetInstance(properties.LocalEndpoint.Port);
             }
             else
             {
-                Communicator = CommunicationService.Instance;
+                Communicator = CommunicationService.GetInstance();
             }
             
             foreach (Type messageType in msgConvRegistry.Keys)
