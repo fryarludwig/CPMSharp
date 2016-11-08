@@ -68,7 +68,6 @@ namespace Common.Communication
 
             while (ContinueThread)
             {
-                Logger.Trace("Conversation manager is running");
                 if (Communicator.ReplyWaiting)
                 {
                     Logger.Info("Message waiting - attempting to retrieve");
@@ -88,8 +87,10 @@ namespace Common.Communication
                         }
                     }
                 }
-                
-                Thread.Sleep(1000);
+                else
+                {
+                    Thread.Sleep(1500);
+                }
             }
 
             Logger.Info("Conversation manager has closed");

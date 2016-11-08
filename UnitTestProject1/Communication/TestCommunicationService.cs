@@ -5,7 +5,7 @@ using Common.Communication;
 using Common.Messages;
 using Common.Messages.Replies;
 using Common.Messages.Requests;
-using TestCommon.TestTools;
+using TestCommon.TestObjects;
 using System.Threading;
 using System.Net;
 
@@ -17,12 +17,12 @@ namespace TestCommon.Communication
         [TestMethod]
         public void SendAndReceive()
         {
-            int testerPort = 5559;
-            int comServicePort = 5557;
+            int testerPort = 15559;
+            int comServicePort = 15557;
             string testerAddress = "127.0.0.1";
             string comServiceAddress = "127.0.0.1";
             TestUdpSocket testerSocket = new TestUdpSocket(testerPort);
-            CommunicationService testComService = CommunicationService.GetInstance(comServicePort);
+            CommunicationService testComService = CommunicationService.GetUniqueUdpInstance(comServicePort);
 
             testerSocket.Start();
             AliveRequest request = new AliveRequest();
@@ -76,16 +76,18 @@ namespace TestCommon.Communication
         [TestMethod]
         public void SendAndReceiveMultiple()
         {
-            int testerPort = 5559;
-            int comServicePort = 5557;
+            int testerPort = 45558;
+            int comServicePort = 45556;
             string testerAddress = "127.0.0.1";
             string comServiceAddress = "127.0.0.1";
             TestUdpSocket testerSocket = new TestUdpSocket(testerPort);
-            CommunicationService testComService = CommunicationService.GetInstance(comServicePort);
+            CommunicationService testComService = CommunicationService.GetUniqueUdpInstance(comServicePort);
 
             testerSocket.Start();
             AliveRequest request = new AliveRequest();
+            LoginRequest request2 = new LoginRequest();
             AliveReply reply = new AliveReply();
+
             Envelope requestEnvelope = null;
             Envelope replyEnvelope = null;
 
@@ -97,19 +99,35 @@ namespace TestCommon.Communication
             Assert.IsTrue(testerSocket.IsActive());
 
             testComService.Send(new Envelope(new IPEndPoint(IPAddress.Parse(testerAddress), testerPort), request));
-            testComService.Send(new Envelope(new IPEndPoint(IPAddress.Parse(testerAddress), testerPort), request));
-            testComService.Send(new Envelope(new IPEndPoint(IPAddress.Parse(testerAddress), testerPort), request));
+            testComService.Send(new Envelope(new IPEndPoint(IPAddress.Parse(testerAddress), testerPort), reply));
+            testComService.Send(new Envelope(new IPEndPoint(IPAddress.Parse(testerAddress), testerPort), request2));
             retries = 20;
             while (!testerSocket.ReplyWaiting && retries-- > 0 && wait(50)) { }
 
             Assert.IsTrue(testerSocket.ReplyWaiting);
             Assert.IsTrue(testerSocket.Receive(out requestEnvelope));
-            Assert.IsTrue(testerSocket.Receive(out requestEnvelope));
-            Assert.IsTrue(testerSocket.Receive(out requestEnvelope));
             Assert.IsNotNull(requestEnvelope);
             Assert.IsTrue(requestEnvelope.Message.GetType() == request.GetType());
             Assert.IsTrue(requestEnvelope.Message.MsgId == request.MsgId);
             Assert.IsTrue(requestEnvelope.Message.ConvId == request.ConvId);
+            Assert.IsTrue(requestEnvelope.Address.Address.ToString() == comServiceAddress);
+            Assert.IsTrue(requestEnvelope.Address.Port == comServicePort);
+            requestEnvelope = null;
+
+            Assert.IsTrue(testerSocket.Receive(out requestEnvelope));
+            Assert.IsNotNull(requestEnvelope);
+            Assert.IsTrue(requestEnvelope.Message.GetType() == reply.GetType());
+            Assert.IsTrue(requestEnvelope.Message.MsgId == reply.MsgId);
+            Assert.IsTrue(requestEnvelope.Message.ConvId == reply.ConvId);
+            Assert.IsTrue(requestEnvelope.Address.Address.ToString() == comServiceAddress);
+            Assert.IsTrue(requestEnvelope.Address.Port == comServicePort);
+            requestEnvelope = null;
+
+            Assert.IsTrue(testerSocket.Receive(out requestEnvelope));
+            Assert.IsNotNull(requestEnvelope);
+            Assert.IsTrue(requestEnvelope.Message.GetType() == request2.GetType());
+            Assert.IsTrue(requestEnvelope.Message.MsgId == request2.MsgId);
+            Assert.IsTrue(requestEnvelope.Message.ConvId == request2.ConvId);
             Assert.IsTrue(requestEnvelope.Address.Address.ToString() == comServiceAddress);
             Assert.IsTrue(requestEnvelope.Address.Port == comServicePort);
 

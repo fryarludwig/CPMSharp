@@ -7,7 +7,7 @@ using System.Threading;
 using Common.Communication;
 using Common.Messages;
 
-namespace TestCommon.TestTools
+namespace TestCommon.TestObjects
 {
     public class TestUdpSocket
     {

@@ -54,9 +54,10 @@
   <ItemGroup>
     <Compile Include="Communication\TestConversationFactory.cs" />
     <Compile Include="Communication\TestCommunicationService.cs" />
+    <Compile Include="Communication\TestConversation.cs" />
     <Compile Include="Messages\TestMessage.cs" />
-    <Compile Include="TestTools\TestUdpSocket.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="TestObjects\TestConversationSimple.cs" />
+    <Compile Include="TestObjects\TestUdpSocket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

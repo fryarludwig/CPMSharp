@@ -41,7 +41,14 @@ namespace Common.Communication
 
             return instance;
         }
-
+        
+        public static CommunicationService GetUniqueUdpInstance(int port = 0)
+        {
+            CommunicationService tempInstance = new CommunicationService(port);
+            tempInstance.Start();
+            
+            return tempInstance;
+        }
 
         protected override void Run()
         {
