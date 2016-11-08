@@ -32,8 +32,6 @@ namespace AuthenticationManager
             MyProcess.Label = "Authentication Manager";
             Properties.Process = MyProcess;
             
-            ConversationHandler = new ConversationManager(GetValidConversations(), Properties);
-            ConversationHandler.Start();
             
             Logger.Trace("Initialized Authentication Manager");
         }
@@ -57,6 +55,8 @@ namespace AuthenticationManager
         public bool StartServerHelper()
         {
             Logger.Info("Starting Server");
+            ConversationHandler = new ConversationManager(GetValidConversations(), Properties);
+            ConversationHandler.Start();
             base.Start();
             Thread.Sleep(1000);
             return Process.Status == ProcessInfo.StatusCode.Idle;
@@ -85,6 +85,7 @@ namespace AuthenticationManager
         public void SetLocalEndpoint(int port)
         {
             LocalEndpoint = new IPEndPoint(IPAddress.Any, port);
+            Properties.AuthenticatorEndpoint = LocalEndpoint;
         }
 
 
@@ -129,7 +130,7 @@ namespace AuthenticationManager
                 {
                     //Login();
                 }
-                else if (Process.Status == ProcessInfo.StatusCode.Registered)
+                else if (Process.Status == ProcessInfo.StatusCode.Idle)
                 {
                 }
                 else if (Process.Status == ProcessInfo.StatusCode.Terminating)

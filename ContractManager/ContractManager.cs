@@ -25,7 +25,7 @@ namespace ContractManager
             ProcessInfo MyProcess = new ProcessInfo();
             MyProcess.ProcessId = 0;
             MyProcess.Type = ProcessInfo.ProcessType.ContractManager;
-            MyProcess.Status = ProcessInfo.StatusCode.Initializing;
+            MyProcess.Status = ProcessInfo.StatusCode.Unknown;
             MyProcess.AliveRetries = 5;
             MyProcess.AliveTimestamp = DateTime.Now;
             MyProcess.EndPoint = LocalEndpoint;
@@ -33,7 +33,6 @@ namespace ContractManager
             Properties.Process = MyProcess;
 
             ConversationHandler = new ConversationManager(PopulateConversationTypes(), Properties);
-            ConversationHandler.Start();
 
             Logger.Trace("Initialized Authentication Manager");
         }
@@ -92,6 +91,7 @@ namespace ContractManager
         public void SetLocalEndpoint(int port)
         {
             LocalEndpoint = new IPEndPoint(IPAddress.Any, port);
+            Properties.LocalEndpoint = LocalEndpoint;
         }
 
         public void SetAuthenticatorEndpoint(string ip, int port)
@@ -154,7 +154,7 @@ namespace ContractManager
             {
                 Logger.Warn("Login attempt failed.");
                 Stop();
-                Process.Status = ProcessInfo.StatusCode.Terminated;
+                Process.Status = ProcessInfo.StatusCode.Terminating;
             }
             else
             {

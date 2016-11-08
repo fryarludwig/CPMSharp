@@ -17,7 +17,7 @@ namespace AuthenticationManager.Conversations
 {
     public class LoginConversation : Conversation
     {
-        public LoginConversation() : base("Login Conv")
+        public LoginConversation() : base("Auth - Login Conv")
         {
         }
 
@@ -40,8 +40,7 @@ namespace AuthenticationManager.Conversations
                             LoginRequest request = (LoginRequest)tempEnvelope.Message;
                             Logger.Info("Received Login response");
                             Logger.Info($"Sender: {request.ProcessLabel}");
-                            Envelope env = PopulateEnvelope();
-                            env.Address = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5556);
+                            Envelope env = new Envelope(tempEnvelope.Address, CreateMessage()); 
                             Communicator.Send(env);
                             Stop();
                         }
@@ -50,18 +49,6 @@ namespace AuthenticationManager.Conversations
                             Logger.Info("Received unexpected message: " + tempEnvelope.Message.ToString());
                         }
                     }
-                }
-                else if (availableRetries-- > 0)
-                {
-                    Logger.Info("Sending login request");
-                    Communicator.Send(PopulateEnvelope());
-                    Thread.Sleep(Timeout);
-                }
-                else
-                {
-                    Logger.Warn("Failed to log in");
-                    Properties.Process.Status = ProcessInfo.StatusCode.NotInitialized;
-                    Stop();
                 }
             }
 
@@ -73,7 +60,7 @@ namespace AuthenticationManager.Conversations
         {
             LoginReply reply = new LoginReply();
             reply.ConvId = Id;
-            reply.MsgId = Id;
+            reply.MsgId = MessageNumber.Create();
             reply.Note = "Granted!";
             reply.Success = true;
             reply.ProcessInfo = new ProcessInfo();

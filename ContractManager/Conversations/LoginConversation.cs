@@ -18,6 +18,8 @@ namespace ContractManager.Conversations
     {
         public LoginConversation() : base("Login Conv")
         {
+            MsgNum = MessageNumber.Create();
+            ConvId = MessageNumber.Create();
         }
 
         protected override void Run()
@@ -35,7 +37,8 @@ namespace ContractManager.Conversations
                         if (tempEnvelope.Message.GetType() == typeof(LoginReply))
                         {
                             LoginReply replyMessage = (LoginReply)tempEnvelope.Message;
-                            Logger.Info("Received Login response: " + replyMessage.Note);
+                            Logger.Info("Received Login response: " + replyMessage.Note + Properties.Process.StatusString);
+                            
                             Properties.Process = replyMessage.ProcessInfo;
                         }
                         else
@@ -46,7 +49,8 @@ namespace ContractManager.Conversations
                 }
                 else if (availableRetries-- > 0)
                 {
-                    Logger.Info("Sending login request");
+                    Logger.Info($"Sending login request to {Properties.AuthenticatorEndpoint.ToString()}");
+                    Envelope toSend = new Envelope(Properties.AuthenticatorEndpoint, CreateMessage());
                     Communicator.Send(PopulateEnvelope());
                     Thread.Sleep(Timeout);
                 }
@@ -65,8 +69,8 @@ namespace ContractManager.Conversations
         protected override Message CreateMessage()
         {
             LoginRequest request = new LoginRequest();
-            request.ConvId = Id;
-            request.MsgId = Id;
+            request.ConvId = ConvId;
+            request.MsgId = MsgNum;
             request.IdentityInfo = IdentityInfo;
             request.ProcessLabel = Process.Label;
             request.ProcessType = Process.Type;
@@ -74,5 +78,8 @@ namespace ContractManager.Conversations
 
             return request;
         }
+
+        protected MessageNumber MsgNum { get; set; }
+        protected MessageNumber ConvId { get; set; }
     }
 }

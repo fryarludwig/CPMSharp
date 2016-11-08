@@ -41,12 +41,12 @@ namespace Common.Communication
 
             return instance;
         }
-        
+
         public static CommunicationService GetUniqueUdpInstance(int port = 0)
         {
             CommunicationService tempInstance = new CommunicationService(port);
             tempInstance.Start();
-            
+
             return tempInstance;
         }
 
@@ -56,9 +56,9 @@ namespace Common.Communication
             IPEndPoint recvEndpoint = new IPEndPoint(IPAddress.Any, LocalPort);
             socket.Client.ReceiveTimeout = 2000;
 
-            try
+            while (ContinueThread)
             {
-                while (ContinueThread)
+                try
                 {
                     if (socket.Available > 0)
                     {
@@ -90,13 +90,13 @@ namespace Common.Communication
                     }
                     else
                     {
-                        Thread.Sleep(25);
+                        Thread.Sleep(50);
                     }
                 }
-            }
-            catch (Exception exc)
-            {
-                Logger.Error("UDP socket exception : " + exc.Message);
+                catch (Exception exc)
+                {
+                    Logger.Error("UDP socket exception : " + exc.Message);
+                }
             }
 
             socket.Close();
