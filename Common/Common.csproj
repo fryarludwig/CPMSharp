@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alerts\Alert.cs" />
-    <Compile Include="Communication\CommunicationService.cs" />
+    <Compile Include="Communication\UdpCommunicator.cs" />
     <Compile Include="Communication\Conversation.cs" />
     <Compile Include="Communication\ConversationFactory.cs" />
     <Compile Include="Communication\ConversationManager.cs" />

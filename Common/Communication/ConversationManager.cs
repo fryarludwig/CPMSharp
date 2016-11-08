@@ -22,11 +22,11 @@ namespace Common.Communication
             ConversationDictionary = new Dictionary<MessageNumber, Conversation>();
             if (properties.LocalEndpoint != null)
             {
-                Communicator = CommunicationService.GetInstance(properties.LocalEndpoint.Port);
+                Communicator = UdpCommunicator.GetInstance(properties.LocalEndpoint.Port);
             }
             else
             {
-                Communicator = CommunicationService.GetInstance();
+                Communicator = UdpCommunicator.GetInstance();
             }
             
             foreach (Type messageType in msgConvRegistry.Keys)
@@ -112,7 +112,7 @@ namespace Common.Communication
         }
         
         private Dictionary<MessageNumber, Conversation> ConversationDictionary;
-        private CommunicationService Communicator;
+        private UdpCommunicator Communicator;
         private object ConvQueueLock = new object();
         private Dictionary<Type, Type> dictionary;
     }

@@ -183,7 +183,7 @@ namespace ContractManager
                     break;
                 }
 
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
             }
 
             Logger.Warn("Closing Connection");

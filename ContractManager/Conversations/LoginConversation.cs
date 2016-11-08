@@ -22,6 +22,9 @@ namespace ContractManager.Conversations
             ConvId = MessageNumber.Create();
         }
 
+        // Template method
+        // Potentially request/reply initiator
+        // Potenntially request./reply responder
         protected override void Run()
         {
             UInt32 availableRetries = MaxRetries;
@@ -37,7 +40,7 @@ namespace ContractManager.Conversations
                         if (tempEnvelope.Message.GetType() == typeof(LoginReply))
                         {
                             LoginReply replyMessage = (LoginReply)tempEnvelope.Message;
-                            Logger.Info("Received Login response: " + replyMessage.Note + Properties.Process.StatusString);
+                            Logger.Info("Received registration response: " + replyMessage.Note + Properties.Process.StatusString);
                             
                             Properties.Process = replyMessage.ProcessInfo;
                         }
@@ -49,7 +52,7 @@ namespace ContractManager.Conversations
                 }
                 else if (availableRetries-- > 0)
                 {
-                    Logger.Info($"Sending login request to {Properties.AuthenticatorEndpoint.ToString()}");
+                    Logger.Info($"Sending register request to {Properties.AuthenticatorEndpoint.ToString()}");
                     Envelope toSend = new Envelope(Properties.AuthenticatorEndpoint, CreateMessage());
                     Communicator.Send(PopulateEnvelope());
                     Thread.Sleep(Timeout);

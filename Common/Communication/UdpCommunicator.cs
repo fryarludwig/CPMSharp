@@ -12,44 +12,15 @@ using Common.Utilities;
 
 namespace Common.Communication
 {
-    public class CommunicationService : Threaded
+    public class UdpCommunicator : Threaded
     {
-        private CommunicationService(int localPort) : base("Communicator")
+        public UdpCommunicator(int localPort) : base("Communicator")
         {
             LocalPort = localPort;
             InboundQueue = new ConcurrentQueue<Envelope>();
             OutboundQueue = new ConcurrentQueue<Envelope>();
         }
-
-        public static CommunicationService GetInstance(int port = 0)
-        {
-            if (instance == null)
-            {
-                lock (InstanceLock)
-                {
-                    if (instance == null)
-                    {
-                        instance = new CommunicationService(port);
-                        instance.Start();
-                    }
-                }
-            }
-            else if (!instance.IsActive())
-            {
-                instance.Start();
-            }
-
-            return instance;
-        }
-
-        public static CommunicationService GetUniqueUdpInstance(int port = 0)
-        {
-            CommunicationService tempInstance = new CommunicationService(port);
-            tempInstance.Start();
-
-            return tempInstance;
-        }
-
+        
         protected override void Run()
         {
             UdpClient socket = new UdpClient(new IPEndPoint(IPAddress.Any, LocalPort));
@@ -63,6 +34,7 @@ namespace Common.Communication
                     if (socket.Available > 0)
                     {
                         //Logger.Info("Information is available on the socket");
+
                         byte[] bytesReceived = socket.Receive(ref recvEndpoint);
                         if (bytesReceived.Length > 0)
                         {
@@ -122,12 +94,7 @@ namespace Common.Communication
         }
 
         public int LocalPort { get; set; }
-        public IPEndPoint AllowedIP { get; set; }
         protected ConcurrentQueue<Envelope> InboundQueue { get; }
         protected ConcurrentQueue<Envelope> OutboundQueue { get; }
-
-
-        private static object InstanceLock = new object();
-        private static volatile CommunicationService instance;
     }
 }

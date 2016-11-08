@@ -138,7 +138,7 @@ namespace AuthenticationManager
                     break;
                 }
 
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
             }
 
             Logger.Trace("Closing Connection");

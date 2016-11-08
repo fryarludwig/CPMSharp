@@ -50,6 +50,11 @@ namespace AuthenticationManager.Conversations
                         }
                     }
                 }
+                else
+                {
+                    Thread.Sleep(500);
+                }
+
             }
 
             Logger.Info("Ending conversation");
