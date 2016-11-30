@@ -20,22 +20,16 @@ namespace Common.Communication
         {
             Logger.Info("Creating conversation manager");
             ConversationDictionary = new Dictionary<MessageNumber, Conversation>();
-            if (properties.LocalEndpoint != null)
-            {
-                Communicator = UdpCommunicator.GetInstance(properties.LocalEndpoint.Port);
-            }
-            else
-            {
-                Communicator = UdpCommunicator.GetInstance();
-            }
-            
+            //Communicator = new UdpCommunicator(0);
+            Communicator = new UdpCommunicator(properties.LocalEndpoint.Port);
+
             foreach (Type messageType in msgConvRegistry.Keys)
             {
                 ConversationFactory.RegisterNewConversationType(messageType, msgConvRegistry[messageType]);
             }
         }
 
-        public ConversationManager(Dictionary<Type, Type> dictionary) : base ("ConversationManager")
+        public ConversationManager(Dictionary<Type, Type> dictionary) : base("ConversationManager")
         {
             this.dictionary = dictionary;
         }
@@ -62,9 +56,12 @@ namespace Common.Communication
             }
         }
 
+        // TODO - Testing
+        // AWS as well
+        // Test derived classes independently
         protected override void Run()
         {
-            Envelope envelope;
+            Envelope envelope = null;
 
             while (ContinueThread)
             {
@@ -101,7 +98,7 @@ namespace Common.Communication
             bool success = false;
 
             Conversation newConversation = ConversationFactory.CreateNewConversation(envelope);
-            
+
             if (newConversation != null)
             {
                 Execute(newConversation);
@@ -110,10 +107,11 @@ namespace Common.Communication
 
             return success;
         }
-        
+
         private Dictionary<MessageNumber, Conversation> ConversationDictionary;
         private UdpCommunicator Communicator;
         private object ConvQueueLock = new object();
         private Dictionary<Type, Type> dictionary;
+        public event EventHandler ConversationCompleted = delegate { };
     }
 }

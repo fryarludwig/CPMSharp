@@ -126,7 +126,7 @@ namespace ContractManager
             }
         }
 
-        public Identity IdentityInfo
+        public User IdentityInfo
         {
             get
             {

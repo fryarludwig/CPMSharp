@@ -30,7 +30,7 @@ namespace Common.Alerts
             SNOOZED
         }
 
-        public List<Identity> ApplicableUsers { get; set; }
+        public List<User> ApplicableUsers { get; set; }
         public Priority AlertPriority { get; set; }
         public Status AlertStatus { get; set; }
         // Triggers

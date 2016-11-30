@@ -103,7 +103,7 @@ namespace AuthenticationManager
             }
         }
 
-        public Identity IdentityInfo
+        public User IdentityInfo
         {
             get
             {

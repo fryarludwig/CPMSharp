@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Net;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace SharpCPM
         {
             InitializeComponent();
             WindowLoggingAdapter.LogMessageQueue = GuiLogQueue;
+            ClientService = new CPMClient();
             Logger.ConsoleOutput = true;
             Logger.GuiOutput = true;
             Logger.FileOutput = true;
@@ -33,7 +35,9 @@ namespace SharpCPM
 
         protected void InitializeService()
         {
-
+            string address = addressInput.Text;
+            int port = int.Parse(portInput.Text);
+            ClientService.RegistryEndpoint = new IPEndPoint(IPAddress.Parse(address), port);
         }
 
         private void Connect_Clicked(object sender, EventArgs e)

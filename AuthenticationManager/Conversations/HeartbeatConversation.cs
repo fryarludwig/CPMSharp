@@ -13,52 +13,44 @@ using System.Threading;
 
 namespace AuthenticationManager.Conversations
 {
-    public class HeartbeatConversation : Conversation
+    public class HeartbeatConversation : RequestReplyInitiator
     {
         public HeartbeatConversation() : base("Heartbeat")
         {
-
+            ResponseReceived = false;
         }
         
-        protected override void Run()
+        protected override void BeginConversation()
         {
-            Envelope tempEnvelope;
-
-            while (ContinueThread)
+            AliveRequest request = new AliveRequest();
+            request.InitMessageAndConversationNumbers();
+            // TODO Add list of subscribers
+            Envelope toSend = new Envelope(request);
+            SendMessage(toSend);
+        }
+        
+        protected override void ProcessMessage(Envelope envelope)
+        {
+            if (envelope.Message.GetType() == typeof(AliveReply))
             {
-                if (!NewMessages.IsEmpty)
-                {
-                    Logger.Info("Received some kind of response");
-                    if (NewMessages.TryDequeue(out tempEnvelope))
-                    {
-                        if (tempEnvelope.Message.GetType() == typeof(AliveRequest))
-                        {
-                            AliveRequest message = (AliveRequest)tempEnvelope.Message;
-                            Logger.Info("Received Login response: " + message.ConvId.Pid.ToString());
-                            Communicator.Send(PopulateEnvelope());
-                        }
-                        else
-                        {
-                            Logger.Info("Received unexpected message: " + tempEnvelope.Message.ToString());
-                        }
-                    }
-                }
-
-                Thread.Sleep(500);
+                ResponseReceived = true;
             }
 
-            Logger.Info("Conversation: Ending a conversation");
+            HandleConversationCompleted();
         }
 
-        protected override Message CreateMessage()
+        protected override void HandleConversationCompleted()
         {
-            AliveReply message = new AliveReply();
-            message.ConvId = Id;
-            message.MsgId = MessageNumber.Create();
-            message.Success = true;
-            message.Note = "Ah, ha, ha, ha, stayin' alive, stayin' alive";
-
-            return message;
+            if (ResponseReceived)
+            {
+                Logger.Info("This process is still alive");
+            }
+            else
+            {
+                Logger.Warn("Beginning deregistration process");
+            }
         }
+
+        private bool ResponseReceived { get; set; }
     }
 }

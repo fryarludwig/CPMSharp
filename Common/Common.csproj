@@ -43,13 +43,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alerts\Alert.cs" />
+    <Compile Include="Communication\RequestReplyInitiator.cs" />
+    <Compile Include="Communication\RequestReplyResponder.cs" />
     <Compile Include="Communication\UdpCommunicator.cs" />
     <Compile Include="Communication\Conversation.cs" />
     <Compile Include="Communication\ConversationFactory.cs" />
     <Compile Include="Communication\ConversationManager.cs" />
     <Compile Include="Communication\Envelope.cs" />
-    <Compile Include="Communication\MessageNumber.cs" />
-    <Compile Include="Communication\PublicKey.cs" />
+    <Compile Include="Utilities\DistributedProcess.cs" />
+    <Compile Include="Messages\MessageNumber.cs" />
+    <Compile Include="Utilities\PublicKey.cs" />
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Messages\Replies\AliveReply.cs" />
     <Compile Include="Messages\Replies\LoginReply.cs" />
@@ -63,7 +66,7 @@
     <Compile Include="Utilities\Threaded.cs" />
     <Compile Include="Utilities\LogUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Users\Identity.cs" />
+    <Compile Include="Users\User.cs" />
     <Compile Include="WorkItems\Comment.cs" />
     <Compile Include="WorkItems\Contract.cs" />
     <Compile Include="WorkItems\Phase.cs" />

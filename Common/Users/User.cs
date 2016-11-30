@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Common.Users
 {
     [DataContract]
-    public class Identity
+    public class User
     {
         [DataMember]
         public string UserName { get; set; }
@@ -18,9 +18,9 @@ namespace Common.Users
         [DataMember]
         public string UserID { get; set; }
 
-        public Identity Clone()
+        public User Clone()
         {
-            return MemberwiseClone() as Identity;
+            return MemberwiseClone() as User;
         }
     }
 }

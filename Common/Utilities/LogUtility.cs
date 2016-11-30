@@ -57,12 +57,7 @@ namespace Common.Utilities
     {
         public LogUtility(string loggerName)
         {
-            if (loggerName == null)
-            {
-                loggerName = "UNKNOWN";
-            }
-
-            LogSource = loggerName;
+            LogSource = loggerName ?? "UNKNOWN";
         }
 
         public void Trace(string logMessage)

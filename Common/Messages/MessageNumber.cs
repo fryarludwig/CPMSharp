@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace Common.Communication
+namespace Common.Messages
 {
     [DataContract]
     public class MessageNumber

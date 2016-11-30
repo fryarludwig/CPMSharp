@@ -33,7 +33,7 @@ namespace TestCommon.Messages
 
             testMessage = new LoginRequest();
             Assert.IsNull(testMessage.IdentityInfo);
-            testMessage.IdentityInfo = new Common.Users.Identity();
+            testMessage.IdentityInfo = new Common.Users.User();
             Assert.AreEqual(typeof(LoginRequest), testMessage.GetType());
             Assert.IsNotNull(testMessage.IdentityInfo);
             encodedBytes = testMessage.Encode();

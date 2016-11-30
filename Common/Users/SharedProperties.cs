@@ -11,7 +11,6 @@ namespace Common.Users
     {
         private SharedProperties()
         {
-            IdentityInfo = new Identity();
             MyProcess = new ProcessInfo();
             MyProcess.ProcessId = 0;
             MyProcess.Status = ProcessInfo.StatusCode.Unknown;
@@ -37,17 +36,15 @@ namespace Common.Users
                 return instance;
             }
         }
+
         private static object InstanceLock = new object();
         private static object ProcessLock = new object();
-        private static object IdentityLock = new object();
         private static object AuthenticatorEndpointLock = new object();
         private static object LocalEndpointLock = new object();
-        private static object GameInfoListLock = new object();
         private static volatile SharedProperties instance;
 
         private IPEndPoint MyAuthenticatorEndpoint;
         private IPEndPoint MyLocalEndpoint;
-        private Identity MyIdentity;
         private ProcessInfo MyProcess;
 
         public ProcessInfo Process
@@ -73,23 +70,7 @@ namespace Common.Users
                 }
             }
         }
-        public Identity IdentityInfo
-        {
-            get
-            {
-                lock (IdentityLock)
-                {
-                    return MyIdentity;
-                }
-            }
-            set
-            {
-                lock (IdentityLock)
-                {
-                    MyIdentity = value;
-                }
-            }
-        }
+
         public IPEndPoint AuthenticatorEndpoint
         {
             get
@@ -126,22 +107,5 @@ namespace Common.Users
                 }
             }
         }
-        //public List<GameInfo> GameInfoList
-        //{
-        //    get
-        //    {
-        //        lock (GameInfoListLock)
-        //        {
-        //            return MyList;
-        //        }
-        //    }
-        //    set
-        //    {
-        //        lock (GameInfoListLock)
-        //        {
-        //            MyList = value;
-        //        }
-        //    }
-        //}
     }
 }

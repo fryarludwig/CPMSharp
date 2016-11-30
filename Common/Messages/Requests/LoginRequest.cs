@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 using System.Runtime.Serialization;
 using Common.Communication;
+using Common.Messages;
 using Common.Users;
+using Common.Utilities;
 
 namespace Common.Messages.Requests
 {
@@ -20,7 +22,7 @@ namespace Common.Messages.Requests
         public string ProcessLabel { get; set; }
 
         [DataMember]
-        public Identity IdentityInfo { get; set; }
+        public User IdentityInfo { get; set; }
 
         [DataMember]
         public PublicKey PublicKey { get; set; }

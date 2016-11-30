@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Common.Communication
+namespace Common.Utilities
 {
     [DataContract]
     public class PublicKey

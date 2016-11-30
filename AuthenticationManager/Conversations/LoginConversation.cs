@@ -15,63 +15,33 @@ using System.Net;
 
 namespace AuthenticationManager.Conversations
 {
-    public class LoginConversation : Conversation
+    public class LoginConversation : RequestReplyResponder
     {
         public LoginConversation() : base("Auth - Login Conv")
         {
+            // Do nothing
         }
-
-        protected override void Run()
+        
+        protected override void ProcessMessage(Envelope envelope)
         {
-            UInt32 availableRetries = MaxRetries;
-            Envelope tempEnvelope;
-
-            while (ContinueThread)
+            if (envelope.Message != null && envelope.Message.GetType() == typeof(LoginRequest))
             {
-                Logger.Trace("Conversation is active");
-
-                if (!NewMessages.IsEmpty)
-                {
-                    Logger.Info("Received some kind of response");
-                    if (NewMessages.TryDequeue(out tempEnvelope))
-                    {
-                        if (tempEnvelope.Message.GetType() == typeof(LoginRequest))
-                        {
-                            LoginRequest request = (LoginRequest)tempEnvelope.Message;
-                            Logger.Info("Received Login response");
-                            Logger.Info($"Sender: {request.ProcessLabel}");
-                            Envelope env = new Envelope(tempEnvelope.Address, CreateMessage()); 
-                            Communicator.Send(env);
-                            Stop();
-                        }
-                        else
-                        {
-                            Logger.Info("Received unexpected message: " + tempEnvelope.Message.ToString());
-                        }
-                    }
-                }
-                else
-                {
-                    Thread.Sleep(500);
-                }
-
+                LoginReply reply = new LoginReply();
+                reply.ConvId = Id;
+                reply.MsgId = MessageNumber.Create();
+                reply.Note = "Granted!";
+                reply.Success = true;
+                reply.ProcessInfo = new ProcessInfo();
+                reply.ProcessInfo.Status = ProcessInfo.StatusCode.Registered;
+                reply.ProcessInfo.Type = ProcessInfo.ProcessType.ContractManager;
+                
+                Envelope env = new Envelope(envelope.Address, reply);
+                SendMessage(env);
             }
-
-            Logger.Info("Ending conversation");
-        }
-
-
-        protected override Message CreateMessage()
-        {
-            LoginReply reply = new LoginReply();
-            reply.ConvId = Id;
-            reply.MsgId = MessageNumber.Create();
-            reply.Note = "Granted!";
-            reply.Success = true;
-            reply.ProcessInfo = new ProcessInfo();
-            reply.ProcessInfo.Status = ProcessInfo.StatusCode.Registered;
-            reply.ProcessInfo.Type = ProcessInfo.ProcessType.ContractManager;
-            return reply;
+            else
+            {
+                Logger.Info("Received unexpected message: " + envelope.Message);
+            }
         }
     }
 }

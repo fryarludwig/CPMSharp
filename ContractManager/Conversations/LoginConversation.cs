@@ -14,75 +14,52 @@ using System.Threading;
 
 namespace ContractManager.Conversations
 {
-    public class LoginConversation : Conversation
+    public class LoginConversation : RequestReplyInitiator
     {
         public LoginConversation() : base("Login Conv")
         {
-            MsgNum = MessageNumber.Create();
-            ConvId = MessageNumber.Create();
         }
-
-        // Template method
-        // Potentially request/reply initiator
-        // Potenntially request./reply responder
-        protected override void Run()
+        protected override void BeginConversation()
         {
-            UInt32 availableRetries = MaxRetries;
-            Envelope tempEnvelope;
+            WaitingForReply = true;
 
-            while (ContinueThread && Process.Status != ProcessInfo.StatusCode.Registered)
-            {
-                if (!NewMessages.IsEmpty)
-                {
-                    Logger.Info("Received some kind of response");
-                    if (NewMessages.TryDequeue(out tempEnvelope))
-                    {
-                        if (tempEnvelope.Message.GetType() == typeof(LoginReply))
-                        {
-                            LoginReply replyMessage = (LoginReply)tempEnvelope.Message;
-                            Logger.Info("Received registration response: " + replyMessage.Note + Properties.Process.StatusString);
-                            
-                            Properties.Process = replyMessage.ProcessInfo;
-                        }
-                        else
-                        {
-                            Logger.Info("Received unexpected message: " + tempEnvelope.Message.ToString());
-                        }
-                    }
-                }
-                else if (availableRetries-- > 0)
-                {
-                    Logger.Info($"Sending register request to {Properties.AuthenticatorEndpoint.ToString()}");
-                    Envelope toSend = new Envelope(Properties.AuthenticatorEndpoint, CreateMessage());
-                    Communicator.Send(PopulateEnvelope());
-                    Thread.Sleep(Timeout);
-                }
-                else
-                {
-                    Logger.Warn("Failed to log in");
-                    Properties.Process.Status = ProcessInfo.StatusCode.NotInitialized;
-                    Stop();
-                }
-            }
-
-            Logger.Info("Ending conversation");
-        }
-
-
-        protected override Message CreateMessage()
-        {
             LoginRequest request = new LoginRequest();
-            request.ConvId = ConvId;
-            request.MsgId = MsgNum;
+            request.ConvId = Id;
+            request.MsgId = Id;
             request.IdentityInfo = IdentityInfo;
             request.ProcessLabel = Process.Label;
             request.ProcessType = Process.Type;
             request.PublicKey = new PublicKey();
-
-            return request;
+            Envelope toSend = new Envelope(Properties.AuthenticatorEndpoint, request);
+            SendMessage(toSend);
         }
 
-        protected MessageNumber MsgNum { get; set; }
-        protected MessageNumber ConvId { get; set; }
+        protected override void ProcessMessage(Envelope envelope)
+        {
+            if (envelope.Message != null && envelope.Message.GetType() == typeof(LoginReply))
+            {
+                LoginReply replyMessage = (LoginReply)envelope.Message;
+                Logger.Info("Received Login response: " + replyMessage.Note);
+                Properties.Process = replyMessage.ProcessInfo;
+                HandleConversationCompleted();
+            }
+            else
+            {
+                Logger.Info("Received unexpected message: " + envelope.Message.ToString());
+                RetryMessage();
+            }
+        }
+
+        protected override void HandleConversationCompleted()
+        {
+            if (Properties.Process.Status == ProcessInfo.StatusCode.Registered)
+            {
+                Logger.Info("Successfully connected");
+            }
+            else
+            {
+                Logger.Warn("Unable to log in");
+            }
+        }
     }
 }

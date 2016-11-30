@@ -12,42 +12,20 @@ using Common.Messages.Replies;
 
 namespace AuthenticationManager.Conversations
 {
-    class DiscoveryConversation : Conversation
+    class DiscoveryConversation : RequestReplyInitiator
     {
         public DiscoveryConversation() : base("ConvDiscovery")
         {
         }
-
-        protected override void Run()
+        
+        protected override void BeginConversation()
         {
-            Envelope tempEnvelope;
-
-            while (ContinueThread)
-            {
-                if (!NewMessages.IsEmpty)
-                {
-                    Logger.Info("Received some kind of response");
-                    if (NewMessages.TryDequeue(out tempEnvelope))
-                    {
-                        Logger.Info("Received unexpected message: " + tempEnvelope.Message.ToString());
-                    }
-                }
-
-                Thread.Sleep(500);
-            }
-
-            Logger.Info("Conversation: Ending a conversation");
+            throw new NotImplementedException();
         }
 
-        protected override Message CreateMessage()
+        protected override void ProcessMessage(Envelope envelope)
         {
-            AliveReply message = new AliveReply();
-            message.ConvId = Id;
-            message.MsgId = MessageNumber.Create();
-            message.Success = true;
-            message.Note = "Ah, ha, ha, ha, stayin' alive, stayin' alive";
-
-            return message;
+            throw new NotImplementedException();
         }
     }
 }

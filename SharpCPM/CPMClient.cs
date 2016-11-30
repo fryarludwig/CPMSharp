@@ -19,30 +19,29 @@ using Common.Messages.Requests;
 
 namespace SharpCPM
 {
-    public class CPMClient : Threaded
+    public class CPMClient : DistributedProcess
     {
         public CPMClient() : base("CPMClient")
         {
-            Properties = SharedProperties.Instance;
-            ConversationHandler = new ConversationManager(GetValidConversations());
-            ConversationHandler.Start();
+            Properties.Process.ProcessId = 0;
+            Properties.Process.Type = ProcessInfo.ProcessType.AuthenticationManager;
+            Properties.Process.Status = ProcessInfo.StatusCode.Initializing;
+            Properties.Process.AliveRetries = 5;
+            Properties.Process.AliveTimestamp = DateTime.Now;
+            Properties.Process.EndPoint = Properties.LocalEndpoint;
+            Properties.Process.Label = "Authentication Manager";
 
             Logger.Trace("Initialized Client");
         }
 
-        private Dictionary<Type, Type> GetValidConversations()
+        protected override Dictionary<Type, Type> GetValidConversations()
         {
             Dictionary<Type, Type> typeMap = new Dictionary<Type, Type>();
             typeMap[typeof(LoginRequest)] = typeof(LoginConversation);
             typeMap[typeof(AliveRequest)] = typeof(HeartbeatConversation);
             return typeMap;
         }
-
-        protected override void DerivedStop()
-        {
-            Logger.Trace("Calling Derived Stop");
-            ConversationHandler.Stop();
-        }
+        
 
         public void Login()
         {
@@ -152,7 +151,7 @@ namespace SharpCPM
             }
         }
 
-        public Identity IdentityInfo
+        public User IdentityInfo
         {
             get
             {

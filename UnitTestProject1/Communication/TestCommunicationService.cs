@@ -22,9 +22,10 @@ namespace TestCommon.Communication
             string testerAddress = "127.0.0.1";
             string comServiceAddress = "127.0.0.1";
             TestUdpSocket testerSocket = new TestUdpSocket(testerPort);
-            UdpCommunicator testComService = UdpCommunicator.GetUniqueUdpInstance(comServicePort);
+            UdpCommunicator testComService = new UdpCommunicator(comServicePort);
 
             testerSocket.Start();
+            testComService.Start();
             AliveRequest request = new AliveRequest();
             AliveReply reply = new AliveReply();
             Envelope requestEnvelope = null;
@@ -81,9 +82,10 @@ namespace TestCommon.Communication
             string testerAddress = "127.0.0.1";
             string comServiceAddress = "127.0.0.1";
             TestUdpSocket testerSocket = new TestUdpSocket(testerPort);
-            UdpCommunicator testComService = UdpCommunicator.GetUniqueUdpInstance(comServicePort);
+            UdpCommunicator testComService = new UdpCommunicator(comServicePort);
 
             testerSocket.Start();
+            testComService.Start();
             AliveRequest request = new AliveRequest();
             LoginRequest request2 = new LoginRequest();
             AliveReply reply = new AliveReply();

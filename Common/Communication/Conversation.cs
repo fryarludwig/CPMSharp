@@ -7,8 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Common.Messages;
-using Common.Messages.Replies;
-using Common.Messages.Requests;
 using Common.Users;
 using Common.Utilities;
 
@@ -23,50 +21,34 @@ namespace Common.Communication
             MaxRetries = 5;
             Properties = SharedProperties.Instance;
             NewMessages = new ConcurrentQueue<Envelope>();
-        }
-
-        protected Envelope PopulateEnvelope()
-        {
-            //return new Envelope(Properties.AuthenticatorEndpoint, CreateMessage());
+            SentMessages = new ConcurrentQueue<Envelope>();
         }
 
         // Template method
-        // Potentially request/reply initiator
-        // Potenntially request./reply responder
         protected override void Run()
         {
             UInt32 availableRetries = MaxRetries;
             Envelope tempEnvelope;
 
+            BeginConversation();
+
             while (ContinueThread)
             {
-                if (!NewMessages.IsEmpty)
+                if (!NewMessages.IsEmpty && NewMessages.TryDequeue(out tempEnvelope))
                 {
                     Logger.Info("Received some kind of response");
-                    if (NewMessages.TryDequeue(out tempEnvelope))
-                    {
-                        if (tempEnvelope.Message != null)
-                        {
-                            ProcessMessage(tempEnvelope.Message.GetType(), tempEnvelope);
-                        }
-                        else
-                        {
-                            ProcessNullMessage(tempEnvelope);
-                        }
-                    }
+                    ProcessMessage(tempEnvelope);
                 }
                 else if (WaitingForReply && availableRetries-- > 0)
                 {
                     RetryMessage();
-                    Envelope toSend = new Envelope(Properties.AuthenticatorEndpoint, CreateMessage());
-                    Communicator.Send(PopulateEnvelope());
                     Thread.Sleep(Timeout);
                 }
                 else if (WaitingForReply && availableRetries <= 0)
                 {
                     HandleNoResponse();
                 }
-                else
+                else if (!WaitingForReply)
                 {
                     HandleConversationCompleted();
                 }
@@ -75,19 +57,64 @@ namespace Common.Communication
             Logger.Info("Ending conversation");
         }
 
-        protected abstract void RetryMessage();
-        protected abstract void HandleConversationCompleted();
-        protected abstract void HandleNoResponse();
-        protected abstract void ProcessMessage(Type messageType, Envelope envelope);
-        protected abstract void ProcessNullMessage(Envelope envelope);
-        protected abstract Message CreateMessage();
+        protected virtual void RetryMessage()
+        {
+            if (LastMessage != null)
+            {
+                Communicator.Send(LastMessage);
+            }
+        }
+
+        protected virtual void BeginConversation()
+        {
+            // Do nothing
+        }
+
+        protected virtual void HandleConversationCompleted()
+        {
+            this.Stop();
+        }
+
+        protected virtual void HandleNoResponse()
+        {
+            this.Stop();
+        }
+
+        protected abstract void ProcessMessage(Envelope envelope);
+
+        protected virtual void ProcessNullMessage(Envelope envelope)
+        {
+            RetryMessage();
+        }
+
+        protected Envelope LastMessage
+        {
+            get
+            {
+                if (SentMessages.Count == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    return SentMessages.Last();
+                }
+            }
+        }
+
+        protected void SendMessage(Envelope envelope)
+        {
+            Communicator.Send(envelope);
+            SentMessages.Enqueue(envelope);
+        }
+
         protected bool WaitingForReply { get; set; }
 
         public MessageNumber Id { get; set; }
         public int Timeout { get; set; }
         public UInt32 MaxRetries { get; set; }
 
-        public Identity IdentityInfo
+        public User IdentityInfo
         {
             get
             {
@@ -102,7 +129,8 @@ namespace Common.Communication
             }
         }
         public SharedProperties Properties { get; set; }
-        public UdpCommunicator Communicator { get; }
+        private UdpCommunicator Communicator { get; }
         public ConcurrentQueue<Envelope> NewMessages { get; }
+        public ConcurrentQueue<Envelope> SentMessages { get; }
     }
 }

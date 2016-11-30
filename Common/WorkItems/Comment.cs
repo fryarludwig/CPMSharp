@@ -14,6 +14,6 @@ namespace Common.WorkItems
         }
 
         public string Body { get; set; }
-        public Identity Author { get; set; }
+        public User Author { get; set; }
     }
 }
