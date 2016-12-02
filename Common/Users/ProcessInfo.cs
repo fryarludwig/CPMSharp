@@ -9,10 +9,10 @@ namespace Common.Users
     public class ProcessInfo
     {
         public enum ProcessType { Unknown = 0, AuthenticationManager = 1, ContractManager = 2, Client = 3};
-        public enum StatusCode { Unknown = 0, NotInitialized = 1, Initializing = 2, Registered = 3, Idle = 4, Streaming = 5, Terminating = 6, Terminated = 7};
+        public enum StatusCode { Unknown = 0, NotInitialized = 1, Initializing = 2, Registered = 3, Terminating = 5, Terminated = 6};
 
         private StatusCode status;
-        private static readonly string[] statusNames = new string[] {"Unknown", "Not Initialized", "Initializing", "Registered", "Idle", "Streaming", "Terminating", "Terminated"};
+        private static readonly string[] statusNames = new string[] {"Unknown", "Not Initialized", "Initializing", "Registered", "Terminating", "Terminated"};
         private object myLock = new object();
 
         [DataMember]

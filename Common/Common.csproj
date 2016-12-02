@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alerts\Alert.cs" />
+    <Compile Include="Communication\BaseCommunicator.cs" />
     <Compile Include="Communication\RequestReplyInitiator.cs" />
     <Compile Include="Communication\RequestReplyResponder.cs" />
     <Compile Include="Communication\UdpCommunicator.cs" />

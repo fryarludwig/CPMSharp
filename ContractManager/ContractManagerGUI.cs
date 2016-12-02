@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,13 +30,13 @@ namespace ContractManager
         
         public void KillChildren()
         {
-            ContractService.Stop();
+            //ContractService.Stop();
         }
 
         protected void InitializeService()
         {
-            ContractService.SetAuthenticatorEndpoint(authenticatorAddressInput.Text, int.Parse(authenticatorPortInput.Text));
-            ContractService.SetLocalEndpoint(int.Parse(myPortInput.Text));
+            ContractService.LocalEndpoint = new IPEndPoint(IPAddress.Parse(myAddressInput.Text), int.Parse(myPortInput.Text));
+            ContractService.AuthenticatorEndpoint = new IPEndPoint(IPAddress.Parse(authenticatorAddressInput.Text), int.Parse(authenticatorPortInput.Text));
         }
 
         private void Connect_Clicked(object sender, EventArgs e)

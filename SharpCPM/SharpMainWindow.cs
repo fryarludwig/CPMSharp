@@ -30,14 +30,14 @@ namespace SharpCPM
 
         public void KillChildren()
         {
-            ClientService.Stop();
+            //ClientService.Stop();
         }
 
         protected void InitializeService()
         {
             string address = addressInput.Text;
             int port = int.Parse(portInput.Text);
-            ClientService.RegistryEndpoint = new IPEndPoint(IPAddress.Parse(address), port);
+            ClientService.RegistryEndPoint = new IPEndPoint(IPAddress.Parse(address), port);
         }
 
         private void Connect_Clicked(object sender, EventArgs e)
@@ -127,14 +127,14 @@ namespace SharpCPM
         {
             Logger.Trace("Calling Login function for player");
 
-            return Task.Factory.StartNew<bool>(ClientService.LoginHelper);
+            return Task.Factory.StartNew<bool>(ClientService.InitializeConnection);
         }
 
         private Task<bool> PerformLogout()
         {
             Logger.Trace("Requesting user log out");
 
-            return Task.Factory.StartNew<bool>(ClientService.LogoutHelper);
+            return Task.Factory.StartNew<bool>(ClientService.ShutdownProcess);
         }
 
         private void UpdateLoginStatus(bool loggedIn)

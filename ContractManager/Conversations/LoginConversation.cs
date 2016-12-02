@@ -19,6 +19,7 @@ namespace ContractManager.Conversations
         public LoginConversation() : base("Login Conv")
         {
         }
+
         protected override void BeginConversation()
         {
             WaitingForReply = true;
@@ -26,11 +27,11 @@ namespace ContractManager.Conversations
             LoginRequest request = new LoginRequest();
             request.ConvId = Id;
             request.MsgId = Id;
-            request.IdentityInfo = IdentityInfo;
-            request.ProcessLabel = Process.Label;
-            request.ProcessType = Process.Type;
-            request.PublicKey = new PublicKey();
-            Envelope toSend = new Envelope(Properties.AuthenticatorEndpoint, request);
+            //request.IdentityInfo = IdentityInfo;
+            //request.ProcessLabel = Process.Label;
+            //request.ProcessType = Process.Type;
+            //request.PublicKey = new PublicKey();
+            Envelope toSend = new Envelope(Properties.DistInstance.AuthenticatorEndpoint, request);
             SendMessage(toSend);
         }
 
@@ -40,7 +41,7 @@ namespace ContractManager.Conversations
             {
                 LoginReply replyMessage = (LoginReply)envelope.Message;
                 Logger.Info("Received Login response: " + replyMessage.Note);
-                Properties.Process = replyMessage.ProcessInfo;
+                Properties.DistInstance.MyProcess = replyMessage.ProcessInfo;
                 HandleConversationCompleted();
             }
             else
@@ -52,7 +53,7 @@ namespace ContractManager.Conversations
 
         protected override void HandleConversationCompleted()
         {
-            if (Properties.Process.Status == ProcessInfo.StatusCode.Registered)
+            if (Properties.DistInstance.MyProcess.Status == ProcessInfo.StatusCode.Registered)
             {
                 Logger.Info("Successfully connected");
             }

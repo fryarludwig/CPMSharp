@@ -10,20 +10,18 @@ using System.Threading.Tasks;
 
 namespace Common.Utilities
 {
-    public abstract class DistributedProcess : Threaded
+    public abstract class DistributedProcess
     {
-        public DistributedProcess(string name) : base(name)
+        public DistributedProcess(string name)
         {
+            Logger = new LogUtility(name);
             Properties = SharedProperties.Instance;
-            Properties.AuthenticatorEndpoint = Properties.LocalEndpoint;
-
+            Properties.DistInstance = this;
+            MyProcess = new ProcessInfo();
             ConversationHandler = new ConversationManager(GetValidConversations());
-
-
-            Logger.Trace("Initialized Authentication Manager");
         }
 
-        protected override void DerivedStop()
+        protected void DerivedShutdown()
         {
             Logger.Trace("Calling Derived Stop");
             ConversationHandler.Stop();
@@ -31,80 +29,77 @@ namespace Common.Utilities
 
         protected abstract Dictionary<Type, Type> GetValidConversations();
 
-
-
-        public bool InitializeConnection(IPEndPoint localEndpoint, IPEndPoint remoteEndpoint)
+        public virtual bool InitializeConnection()
         {
             Logger.Info("Starting Server");
-            ConversationHandler = new ConversationManager(GetValidConversations(), Properties);
             ConversationHandler.Start();
-            base.Start();
-            Thread.Sleep(1000);
-            return Properties.Process.Status == ProcessInfo.StatusCode.Idle;
-        }
-        
-        public bool ShutdownProcess()
-        {
-            Logger.Info("Shuttind down server");
-            if (base.ContinueThread)
+            // Wait for 5 seconds, or for a value of true
+            int checkCounter = 10;
+            while (MyProcess.Status != ProcessInfo.StatusCode.Registered && checkCounter-- > 0)
             {
-                base.Stop();
+                Logger.Trace("Attempting to log in");
+                Thread.Sleep(500);
             }
+            return MyProcess.Status == ProcessInfo.StatusCode.Registered;
+        }
+
+        public virtual bool ShutdownProcess()
+        {
+            Logger.Info("Shutting down");
+            DerivedShutdown();
 
             // Wait for 5 seconds, or for a value of true
             Logger.Trace("Waiting for shutdown messages to propogate");
             int checkCounter = 5;
-            while (Properties.Process != null && checkCounter-- > 0)
+            while (MyProcess != null && checkCounter-- > 0)
             {
                 Thread.Sleep(1000);
             }
 
-            return Properties.Process == null || Properties.Process.Status == ProcessInfo.StatusCode.Terminating;
-        }
-
-        public void SetLocalEndpoint(int port)
-        {
-            Properties.LocalEndpoint = new IPEndPoint(IPAddress.Any, port);
-            Properties.AuthenticatorEndpoint = Properties.LocalEndpoint;
+            return MyProcess.Status == ProcessInfo.StatusCode.Terminated || MyProcess.Status == ProcessInfo.StatusCode.Terminating;
         }
 
 
-        
-        protected override void Run()
-        {
-            Properties.Process.Status = ProcessInfo.StatusCode.Idle;
 
-            while (ContinueThread)
+        //protected abstract void 
+
+        // Auth
+        // Secure port, set as registered, wait
+        // For conversations, check credentials
+        // If valid, populate user info and send back reply
+        // If not valid, send back reply
+        // Conversations be like: Brain, let's try this.
+        // Brain be like, naw. Conversation be like, okay I'll tell them
+
+
+        public IPEndPoint LocalEndpoint
+        {
+            get
             {
-                // We have a status code. 
-                // We have an identity
-                // We want to generalize this
-
-                Logger.Info($"The deets: {Properties.Process.ToString()}");
-                if (Properties.Process.Status == ProcessInfo.StatusCode.Unknown || Properties.Process.Status == ProcessInfo.StatusCode.NotInitialized)
+                if (ConversationFactory.PrimaryCommunicator != null)
                 {
-                    //Login();
-                }
-                else if (Properties.Process.Status == ProcessInfo.StatusCode.Idle)
-                {
-                }
-                else if (Properties.Process.Status == ProcessInfo.StatusCode.Terminating)
-                {
-                    break;
+                    return ConversationFactory.PrimaryCommunicator.LocalEndpoint;
                 }
 
-                Thread.Sleep(500);
+                return null;
+            }
+            set
+            {
+                if (ConversationFactory.PrimaryCommunicator == null)
+                {
+                    ConversationFactory.PrimaryCommunicator = new UdpCommunicator();
+                }
+
+                ConversationFactory.PrimaryCommunicator.LocalEndpoint = value;
             }
 
-            Logger.Trace("Closing Connection");
-            Properties.Process.Status = ProcessInfo.StatusCode.Terminated;
         }
 
-        
-
+        public IPEndPoint ContractManagerEndpoint { get; set; }
+        public IPEndPoint AuthenticatorEndpoint { get; set; }
         public SharedProperties Properties { get; set; }
-
-
+        public ProcessInfo MyProcess { get; set; }
         protected ConversationManager ConversationHandler { get; set; }
+        protected LogUtility Logger { get; set; }
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 using Common.Utilities;
 using System.Collections.Concurrent;
+using System.Net;
 
 namespace AuthenticationManager
 {
@@ -25,17 +26,17 @@ namespace AuthenticationManager
             Logger.GuiOutput = true;
             Logger.FileOutput = true;
             Task.Factory.StartNew(RunLoop);
-            AuthenticationService = new AuthManager();
+            Authenticator = new AuthManager();
         }
 
         public void KillChildren()
         {
-            AuthenticationService.Stop();
+            //AuthenticationService();
         }
 
         protected void InitializeService()
         {
-            AuthenticationService.SetLocalEndpoint(int.Parse(portInput.Text));
+            Authenticator.LocalEndpoint = new IPEndPoint(IPAddress.Parse(addressInput.Text), int.Parse(portInput.Text));
         }
 
         private void StartServer_Clicked(object sender, EventArgs e)
@@ -123,12 +124,12 @@ namespace AuthenticationManager
         
         private Task<bool> InitializeServerConnection()
         {
-            return Task.Factory.StartNew<bool>(AuthenticationService.StartServerHelper);
+            return Task.Factory.StartNew<bool>(Authenticator.InitializeConnection);
         }
 
         private Task<bool> ShutdownServer()
         {
-            return Task.Factory.StartNew<bool>(AuthenticationService.ShutdownServerHelper);
+            return Task.Factory.StartNew<bool>(Authenticator.ShutdownProcess);
         }
 
         private void UpdateLoginStatus(bool loggedIn)
@@ -154,7 +155,7 @@ namespace AuthenticationManager
 
         protected ErrorProvider InputErrorProvider = new ErrorProvider();
         protected LogUtility Logger = new LogUtility("Auth Service");
-        protected AuthManager AuthenticationService { get; }
+        protected AuthManager Authenticator { get; }
         public static ConcurrentQueue<LogItem> GuiLogQueue = new ConcurrentQueue<LogItem>();
         public static ConcurrentDictionary<Level, bool> LogPrintDictionary = new ConcurrentDictionary<Level, bool>();
 

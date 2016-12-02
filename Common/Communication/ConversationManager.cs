@@ -11,17 +11,17 @@ using Common.Messages;
 using Common.Messages.Replies;
 using Common.Messages.Requests;
 using System.Reflection;
+using System.Net;
 
 namespace Common.Communication
 {
     public class ConversationManager : Threaded
     {
-        public ConversationManager(Dictionary<Type, Type> msgConvRegistry, SharedProperties properties) : base("ConversationManager")
+        public ConversationManager(Dictionary<Type, Type> msgConvRegistry) : base("ConversationManager")
         {
             Logger.Info("Creating conversation manager");
-            ConversationDictionary = new Dictionary<MessageNumber, Conversation>();
-            //Communicator = new UdpCommunicator(0);
-            Communicator = new UdpCommunicator(properties.LocalEndpoint.Port);
+            ConversationDictionary = new ConcurrentDictionary<MessageNumber, Conversation>();
+            Communicator = ConversationFactory.PrimaryCommunicator;
 
             foreach (Type messageType in msgConvRegistry.Keys)
             {
@@ -29,31 +29,24 @@ namespace Common.Communication
             }
         }
 
-        public ConversationManager(Dictionary<Type, Type> dictionary) : base("ConversationManager")
-        {
-            this.dictionary = dictionary;
-        }
-
         protected override void DerivedStop()
         {
-            lock (ConvQueueLock)
+            foreach (Conversation conversation in ConversationDictionary.Values)
             {
-                foreach (Conversation conversation in ConversationDictionary.Values)
+                if (conversation.IsActive())
                 {
                     conversation.Stop();
                 }
             }
 
             Communicator.Stop();
+            ConversationDictionary.Clear();
         }
 
         public void Execute(Conversation conv)
         {
-            lock (ConvQueueLock)
-            {
-                conv.Start();
-                ConversationDictionary[conv.Id] = conv;
-            }
+            conv.Start();
+            ConversationDictionary[conv.Id] = conv;
         }
 
         // TODO - Testing
@@ -86,7 +79,7 @@ namespace Common.Communication
                 }
                 else
                 {
-                    Thread.Sleep(1500);
+                    Thread.Sleep(250);
                 }
             }
 
@@ -108,10 +101,8 @@ namespace Common.Communication
             return success;
         }
 
-        private Dictionary<MessageNumber, Conversation> ConversationDictionary;
-        private UdpCommunicator Communicator;
-        private object ConvQueueLock = new object();
-        private Dictionary<Type, Type> dictionary;
+        private ConcurrentDictionary<MessageNumber, Conversation> ConversationDictionary;
+        private BaseCommunicator Communicator { get; set; }
         public event EventHandler ConversationCompleted = delegate { };
     }
 }

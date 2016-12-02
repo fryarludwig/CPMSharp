@@ -19,6 +19,7 @@ namespace Common.Communication
             Timeout = 1000;
             Properties = SharedProperties.Instance;
             ConversationTypes = new Dictionary<Type, Type>();
+            PrimaryCommunicator = new UdpCommunicator();
         }
 
         public static void RegisterNewConversationType(Type messageType, Type conversationType)
@@ -47,6 +48,8 @@ namespace Common.Communication
 
             return newConversation;
         }
+
+        public static BaseCommunicator PrimaryCommunicator { get; set; }
         
         #region Public member variables
         public static UInt32 Retries { get; set; }

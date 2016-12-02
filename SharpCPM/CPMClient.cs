@@ -23,15 +23,14 @@ namespace SharpCPM
     {
         public CPMClient() : base("CPMClient")
         {
-            Properties.Process.ProcessId = 0;
-            Properties.Process.Type = ProcessInfo.ProcessType.AuthenticationManager;
-            Properties.Process.Status = ProcessInfo.StatusCode.Initializing;
-            Properties.Process.AliveRetries = 5;
-            Properties.Process.AliveTimestamp = DateTime.Now;
-            Properties.Process.EndPoint = Properties.LocalEndpoint;
-            Properties.Process.Label = "Authentication Manager";
+            MyProcess.Type = ProcessInfo.ProcessType.Client;
+            MyProcess.Status = ProcessInfo.StatusCode.NotInitialized;
+            MyProcess.AliveRetries = 5;
+            MyProcess.AliveTimestamp = DateTime.Now;
+            //MyProcess.EndPoint = localEndpoint;
+            MyProcess.Label = "CPM Client";
 
-            Logger.Trace("Initialized Client");
+            
         }
 
         protected override Dictionary<Type, Type> GetValidConversations()
@@ -41,45 +40,33 @@ namespace SharpCPM
             typeMap[typeof(AliveRequest)] = typeof(HeartbeatConversation);
             return typeMap;
         }
+
+        //protected Dictionary<Type, 
         
+        public void LoginUpdated(object sender, EventArgs e)
+        {
+            
+        }
 
         public void Login()
         {
 
-            if (Process.Status != ProcessInfo.StatusCode.Initializing)
+            if (MyProcess.Status != ProcessInfo.StatusCode.Initializing)
             {
                 Logger.Info("Requesting a login");
-                Process.Status = ProcessInfo.StatusCode.Initializing;
-                //ConversationHandler.Execute(ConversationFactory.CreateType<LoginConversation>());
+                MyProcess.Status = ProcessInfo.StatusCode.Initializing;
+                //ConversationHandler.Execute(ConversationFactory.CreateNewConversation<LoginConversation>());
             }
             else
             {
-                Logger.Warn("Status is '" + Process.StatusString + "', waiting for login to complete");
+                Logger.Warn("Status is '" + MyProcess.StatusString + "', waiting for login to complete");
             }
         }
-
-        public bool LoginHelper()
-        {
-            Logger.Info("Attempting to log in");
-
-            base.Start();
-
-            // Wait for 5 seconds, or for a value of true
-            int checkCounter = 10;
-            while (Process.Status != ProcessInfo.StatusCode.Registered && checkCounter-- > 0)
-            {
-                Logger.Trace("Attempting to log in");
-                Thread.Sleep(500);
-            }
-
-            return Process.Status == ProcessInfo.StatusCode.Registered;
-        }
-
-
+        
         protected void Logout(int Timeout)
         {
             Logger.Info("Requesting logout");
-            Process.Status = ProcessInfo.StatusCode.Terminating;
+            MyProcess.Status = ProcessInfo.StatusCode.Terminating;
             //ConversationHandler.Execute(ConversationFactory.CreateType<LogoutConversation>());
 
             int timeSegement = Timeout / 5;
@@ -89,88 +76,10 @@ namespace SharpCPM
                 Timeout -= timeSegement;
             }
         }
+        
 
-        public bool LogoutHelper()
-        {
-            Logger.Info("Attempting to log out");
-            if (base.ContinueThread)
-            {
-                base.Stop();
-            }
-
-            // Wait for 5 seconds, or for a value of true
-            int checkCounter = 5;
-            while (Process != null && checkCounter-- > 0)
-            {
-                Logger.Trace("Attempting to log player out");
-                Thread.Sleep(1000);
-            }
-
-            return Process == null || Process.Status == ProcessInfo.StatusCode.Terminating;
-        }
-
-        protected override void Run()
-        {
-
-            while (ContinueThread)
-            {
-                if (Process.Status == ProcessInfo.StatusCode.Unknown || Process.Status == ProcessInfo.StatusCode.NotInitialized)
-                {
-                    Login();
-                }
-                else if (Process.Status == ProcessInfo.StatusCode.Registered)
-                {
-                }
-                else if (Process.Status == ProcessInfo.StatusCode.Terminating)
-                {
-                    break;
-                }
-
-                Thread.Sleep(250);
-            }
-
-            Logout(2000);
-        }
-
-        public void SetRegistryEndpoint(string ip, int port)
-        {
-            RegistryEndpoint = new IPEndPoint(IPAddress.Parse(ip), port);
-        }
-
-        #region Public Member Variables
-
-        public IPEndPoint RegistryEndpoint
-        {
-            get
-            {
-                return Properties.AuthenticatorEndpoint;
-            }
-            set
-            {
-                Properties.AuthenticatorEndpoint = value;
-            }
-        }
-
-        public User IdentityInfo
-        {
-            get
-            {
-                return Properties.IdentityInfo;
-            }
-        }
-        public ProcessInfo Process
-        {
-            get
-            {
-                return Properties.Process;
-            }
-        }
-        public SharedProperties Properties { get; }
-        #endregion
-
-        #region Protected and Private Member Variables
+        public IPEndPoint RegistryEndPoint { get; set; }
+        public IPEndPoint ContractManagerEndPoint { get; set; }
         protected int LoginRetries;
-        protected ConversationManager ConversationHandler;
-        #endregion
     }
 }

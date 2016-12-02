@@ -12,19 +12,17 @@ using Common.Utilities;
 
 namespace Common.Communication
 {
-    public class UdpCommunicator : Threaded
+    public class UdpCommunicator : BaseCommunicator
     {
-        public UdpCommunicator(int localPort) : base("Communicator")
+        public UdpCommunicator() : base("UDP Com")
         {
-            LocalPort = localPort;
-            InboundQueue = new ConcurrentQueue<Envelope>();
-            OutboundQueue = new ConcurrentQueue<Envelope>();
+            // Do nothing
         }
         
         protected override void Run()
         {
-            UdpClient socket = new UdpClient(new IPEndPoint(IPAddress.Any, LocalPort));
-            IPEndPoint recvEndpoint = new IPEndPoint(IPAddress.Any, LocalPort);
+            UdpClient socket = new UdpClient(LocalEndpoint);
+            IPEndPoint recvEndpoint = null;
             socket.Client.ReceiveTimeout = 2000;
 
             while (ContinueThread)
@@ -74,27 +72,5 @@ namespace Common.Communication
             socket.Close();
             Logger.Info("Closing down Network Manager");
         }
-
-        public void Send(Envelope envelope)
-        {
-            OutboundQueue.Enqueue(envelope);
-        }
-
-        public bool Receive(out Envelope envelope)
-        {
-            return InboundQueue.TryDequeue(out envelope);
-        }
-
-        public bool ReplyWaiting
-        {
-            get
-            {
-                return !InboundQueue.IsEmpty;
-            }
-        }
-
-        public int LocalPort { get; set; }
-        protected ConcurrentQueue<Envelope> InboundQueue { get; }
-        protected ConcurrentQueue<Envelope> OutboundQueue { get; }
     }
 }

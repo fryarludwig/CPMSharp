@@ -12,7 +12,7 @@ using System.Net;
 namespace TestCommon.Communication
 {
     [TestClass]
-    public class TestCommunicationService
+    public class TestUdpCommunicator
     {
         [TestMethod]
         public void SendAndReceive()
@@ -22,7 +22,8 @@ namespace TestCommon.Communication
             string testerAddress = "127.0.0.1";
             string comServiceAddress = "127.0.0.1";
             TestUdpSocket testerSocket = new TestUdpSocket(testerPort);
-            UdpCommunicator testComService = new UdpCommunicator(comServicePort);
+            UdpCommunicator testComService = new UdpCommunicator();
+            testComService.LocalEndpoint = new IPEndPoint(IPAddress.Any, comServicePort);
 
             testerSocket.Start();
             testComService.Start();
@@ -82,7 +83,8 @@ namespace TestCommon.Communication
             string testerAddress = "127.0.0.1";
             string comServiceAddress = "127.0.0.1";
             TestUdpSocket testerSocket = new TestUdpSocket(testerPort);
-            UdpCommunicator testComService = new UdpCommunicator(comServicePort);
+            UdpCommunicator testComService = new UdpCommunicator();
+            testComService.LocalEndpoint = new IPEndPoint(IPAddress.Any, comServicePort);
 
             testerSocket.Start();
             testComService.Start();

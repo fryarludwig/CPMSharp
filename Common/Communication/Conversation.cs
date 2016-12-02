@@ -20,13 +20,31 @@ namespace Common.Communication
             Timeout = 1000;
             MaxRetries = 5;
             Properties = SharedProperties.Instance;
+            Communicator = ConversationFactory.PrimaryCommunicator;
             NewMessages = new ConcurrentQueue<Envelope>();
             SentMessages = new ConcurrentQueue<Envelope>();
+        }
+        
+        protected virtual bool ValidateConversation()
+        {
+            return Communicator != null && Communicator.LocalEndpoint != null && Communicator.IsActive();
         }
 
         // Template method
         protected override void Run()
         {
+            if (Communicator.LocalEndpoint != null && !Communicator.IsActive())
+            {
+                Communicator.Start();
+            }
+
+            if (!ValidateConversation())
+            {
+                Stop();
+                Logger.Error("Unable to start Coversation due to invalid settings");
+                return;
+            }
+
             UInt32 availableRetries = MaxRetries;
             Envelope tempEnvelope;
 
@@ -109,27 +127,11 @@ namespace Common.Communication
         }
 
         protected bool WaitingForReply { get; set; }
-
         public MessageNumber Id { get; set; }
         public int Timeout { get; set; }
         public UInt32 MaxRetries { get; set; }
-
-        public User IdentityInfo
-        {
-            get
-            {
-                return Properties.IdentityInfo;
-            }
-        }
-        public ProcessInfo Process
-        {
-            get
-            {
-                return Properties.Process;
-            }
-        }
         public SharedProperties Properties { get; set; }
-        private UdpCommunicator Communicator { get; }
+        protected BaseCommunicator Communicator { get; set; }
         public ConcurrentQueue<Envelope> NewMessages { get; }
         public ConcurrentQueue<Envelope> SentMessages { get; }
     }

@@ -53,10 +53,13 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Communication\TestConversationFactory.cs" />
-    <Compile Include="Communication\TestCommunicationService.cs" />
+    <Compile Include="Communication\TestUdpCommunicator.cs" />
     <Compile Include="Communication\TestConversation.cs" />
+    <Compile Include="Communication\TestBaseCommunicator.cs" />
+    <Compile Include="Communication\TestRequestReplyConversation.cs" />
     <Compile Include="Messages\TestMessage.cs" />
     <Compile Include="TestObjects\TestConversationSimple.cs" />
+    <Compile Include="TestObjects\TestRequestReplyConv.cs" />
     <Compile Include="TestObjects\TestUdpSocket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -67,9 +70,21 @@
     <Folder Include="WorkItems\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AuthenticationManager\AuthenticationManager.csproj">
+      <Project>{5310041c-a44e-4606-8568-f937f9ec16ee}</Project>
+      <Name>AuthenticationManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{ce7d0a81-07b2-428d-9579-273e207e7376}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ContractManager\ContractManager.csproj">
+      <Project>{cbd46aaf-259a-407e-a436-151538c90641}</Project>
+      <Name>ContractManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpCPM\SharpCPM.csproj">
+      <Project>{513b97ba-0146-452a-8094-56cfb11dd9ed}</Project>
+      <Name>SharpCPM</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

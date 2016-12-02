@@ -15,29 +15,33 @@ using System.Threading;
 namespace TestCommon.TestObjects
 {
 
-    public class TestHeartbeatConversation : RequestReplyResponder
+    public class SimpleConversation : RequestReplyResponder
     {
-        public TestHeartbeatConversation() : base("Heartbeat")
+        public SimpleConversation() : base("Heartbeat")
         {
+            EventResponse = null;
+            ReceivedMessage = null;
+            SentMessage = null;
+            WaitingForReply = true;
         }
 
         protected override void ProcessMessage(Envelope envelope)
         {
-            if (envelope.Message.GetType() == typeof(AliveRequest))
-            {
-                AliveReply message = new AliveReply();
-                message.ConvId = Id;
-                message.MsgId = MessageNumber.Create();
-                message.Success = true;
-                message.Note = "Ah, ha, ha, ha, stayin' alive, stayin' alive";
-                Envelope toSend = new Envelope(envelope.Address, message);
-                WaitingForReply = false;
-                SendMessage(toSend);
-            }
-            else
-            {
-                Logger.Info("Received unexpected message: " + envelope.Message.ToString());
-            }
+            EventResponse = Updated?.Invoke("SimpleConversation");
+            ReceivedMessage = envelope;
+            SentMessage = new Envelope(new LoginReply());
         }
+
+        public delegate string MessageReceived(string something);
+        public event MessageReceived Updated;
+        
+        public virtual void OnUpdate()
+        {
+            ProcessMessage(new Envelope(new LoginRequest()));
+        }
+
+        public string EventResponse { get; set; }
+        public Envelope ReceivedMessage { get; set; }
+        public Envelope SentMessage { get; set; }
     }
 }
