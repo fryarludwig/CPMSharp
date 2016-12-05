@@ -61,5 +61,60 @@ namespace TestCommon.Communication
             Thread.Sleep(250);
             Assert.IsFalse(simple.IsActive());
         }
+
+        [TestMethod]
+        public void TestConversationNoCommunicator()
+        {
+            SimpleConversation simple = new SimpleConversation();
+            Assert.IsNotNull(simple);
+            Assert.IsNull(simple.EventResponse);
+            Assert.IsNull(simple.ReceivedMessage);
+            Assert.IsNull(simple.SentMessage);
+            Assert.IsNotNull(simple.Properties);
+
+            ConversationFactory.PrimaryCommunicator = null;
+
+            Assert.AreEqual(simple.Id.Pid, 0);
+            Assert.AreEqual(simple.MaxRetries, (UInt32)5);
+            Assert.AreEqual(simple.Timeout, 1000);
+
+            simple.Start();
+            Thread.Sleep(250);
+            Assert.IsTrue(simple.IsActive());
+            simple.Stop();
+            Thread.Sleep(250);
+            Assert.IsFalse(simple.IsActive());
+        }
+
+        [TestMethod]
+        public void ConversationSendAndReceive()
+        {
+            SimpleConversation convInitiator = new SimpleConversation();
+            IPEndPoint initiatorEndpoint = new IPEndPoint(IPAddress.Any, 6789);
+            convInitiator.Communicator = new UdpCommunicator();
+            convInitiator.Communicator.LocalEndpoint = initiatorEndpoint;
+
+            SimpleConversation convResponder = new SimpleConversation();
+            IPEndPoint responderEndpoint = new IPEndPoint(IPAddress.Any, 6788);
+            convResponder.Communicator = new UdpCommunicator();
+            convResponder.Communicator.LocalEndpoint = responderEndpoint;
+
+            Assert.IsFalse(convResponder.IsActive());
+            Assert.IsFalse(convInitiator.IsActive());
+
+            convResponder.Start();
+            convInitiator.Start();
+
+            Thread.Sleep(100);
+
+            Assert.IsTrue(convResponder.IsActive());
+            Assert.IsTrue(convInitiator.IsActive());
+
+            convInitiator.SendHeartbeatRequest(responderEndpoint);
+
+            Thread.Sleep(550);
+
+            Assert.IsNotNull(convResponder.ReceivedMessage);
+        }
     }
 }

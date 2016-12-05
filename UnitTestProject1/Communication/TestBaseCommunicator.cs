@@ -5,6 +5,7 @@ using Common.Communication;
 using Common.Messages;
 using Common.Users;
 using Common.Utilities;
+using System.Threading;
 
 namespace TestCommon.Communication
 {
@@ -32,6 +33,17 @@ namespace TestCommon.Communication
             TestCommunicator tester = new TestCommunicator();
             Assert.IsFalse(tester.HasRun);
             Assert.IsNotNull(tester.LocalEndpoint);
+
+            tester.Start();
+            Thread.Sleep(250);
+
+            Assert.IsTrue(tester.HasRun);
+            Assert.IsTrue(tester.IsActive());
+
+            tester.Stop();
+            Thread.Sleep(250);
+
+            Assert.IsFalse(tester.IsActive());
         }
     }
 }

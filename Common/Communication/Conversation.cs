@@ -27,22 +27,21 @@ namespace Common.Communication
         
         protected virtual bool ValidateConversation()
         {
-            return Communicator != null && Communicator.LocalEndpoint != null && Communicator.IsActive();
+            return Communicator != null && Communicator.LocalEndpoint != null;
         }
 
         // Template method
         protected override void Run()
         {
-            if (Communicator.LocalEndpoint != null && !Communicator.IsActive())
-            {
-                Communicator.Start();
-            }
-
             if (!ValidateConversation())
             {
                 Stop();
                 Logger.Error("Unable to start Coversation due to invalid settings");
                 return;
+            }
+            else if (!Communicator.IsActive())
+            {
+                Communicator.Start();
             }
 
             UInt32 availableRetries = MaxRetries;

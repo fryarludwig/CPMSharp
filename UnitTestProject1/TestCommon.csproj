@@ -62,11 +62,11 @@
     <Compile Include="TestObjects\TestRequestReplyConv.cs" />
     <Compile Include="TestObjects\TestUdpSocket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\TestDistributedProcess.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Alerts\" />
     <Folder Include="Users\" />
-    <Folder Include="Utilities\" />
     <Folder Include="WorkItems\" />
   </ItemGroup>
   <ItemGroup>

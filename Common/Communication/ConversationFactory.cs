@@ -49,7 +49,23 @@ namespace Common.Communication
             return newConversation;
         }
 
-        public static BaseCommunicator PrimaryCommunicator { get; set; }
+        private static BaseCommunicator _PrimaryCommunicator { get; set; }
+        public static BaseCommunicator PrimaryCommunicator
+        {
+            get
+            {
+                if (_PrimaryCommunicator == null)
+                {
+                    _PrimaryCommunicator = new UdpCommunicator();
+                }
+
+                return _PrimaryCommunicator;
+            }
+            set
+            {
+                _PrimaryCommunicator = value ?? new UdpCommunicator();
+            }
+        }
         
         #region Public member variables
         public static UInt32 Retries { get; set; }

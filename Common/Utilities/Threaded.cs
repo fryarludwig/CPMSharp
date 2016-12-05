@@ -47,6 +47,7 @@ namespace Common.Utilities
             }
             else
             {
+                ContinueThread = false;
                 Logger.Warn("Current thread is not running, cannot stop");
             }
         }

@@ -16,7 +16,7 @@ namespace Common.Communication
     {
         public UdpCommunicator() : base("UDP Com")
         {
-            // Do nothing
+            LocalEndpoint = new IPEndPoint(IPAddress.Any, 0);
         }
         
         protected override void Run()

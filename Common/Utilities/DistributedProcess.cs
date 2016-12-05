@@ -58,11 +58,7 @@ namespace Common.Utilities
 
             return MyProcess.Status == ProcessInfo.StatusCode.Terminated || MyProcess.Status == ProcessInfo.StatusCode.Terminating;
         }
-
-
-
-        //protected abstract void 
-
+        
         // Auth
         // Secure port, set as registered, wait
         // For conversations, check credentials

@@ -15,17 +15,18 @@ namespace TestCommon.Communication
     public class TestConversationFactory
     {
         [TestMethod]
-        public void SucessfulInstance()
+        public void ConvFactorySucessfulInstance()
         {
             ConversationFactory.RegisterNewConversationType(typeof(AliveRequest), typeof(SimpleConversation));
             Conversation testConv = ConversationFactory.CreateNewConversation(new Envelope(new AliveRequest()));
             Assert.IsNotNull(testConv);
             Assert.AreEqual(testConv.GetType(), typeof(SimpleConversation));
+            Assert.IsFalse(testConv.IsActive());
             testConv.Stop();
         }
 
         [TestMethod]
-        public void GracefulFailure()
+        public void ConvFactoryGracefulFailure()
         {
             ConversationFactory.RegisterNewConversationType(typeof(AliveRequest), typeof(SimpleConversation));
             Conversation testConv = ConversationFactory.CreateNewConversation(new Envelope(new AliveReply()));
@@ -33,7 +34,7 @@ namespace TestCommon.Communication
         }
 
         [TestMethod]
-        public void CommunicatorInstance()
+        public void ConvFactoryCommunicatorInstance()
         {
             ConversationFactory.RegisterNewConversationType(typeof(AliveRequest), typeof(SimpleConversation));
 
