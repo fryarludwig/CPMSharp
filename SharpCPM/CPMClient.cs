@@ -41,11 +41,33 @@ namespace SharpCPM
             return typeMap;
         }
 
-        //protected Dictionary<Type, 
-        
-        public void LoginUpdated(object sender, EventArgs e)
+        public override bool InitializeConnection()
         {
-            
+            Logger.Info("Starting Server");
+            ConversationManager.PrimaryCommunicator.Start();
+            LoginConversation loginConv = (LoginConversation)ConversationManager.CreateNewConversation(GetLoginMessage());
+            loginConv.OnLoginUpdated += new LoginConversation.LoginStatusUpdated(HandleLoginUpdated);
+            loginConv.Start();
+            // Wait for 5 seconds, or for a value of true
+            int checkCounter = 10;
+            while (MyProcess.Status != ProcessInfo.StatusCode.Registered && checkCounter-- > 0)
+            {
+                Logger.Trace("Attempting to log in");
+                Thread.Sleep(500);
+            }
+            return MyProcess.Status == ProcessInfo.StatusCode.Registered;
+        }
+
+        protected void HandleLoginUpdated(ProcessInfo myProcess)
+        {
+            MyProcess = myProcess;
+            Logger.Info("Login status updated!");
+        }
+
+        protected Envelope GetLoginMessage()
+        {
+            Envelope myEnvelope = new Envelope(AuthenticatorEndpoint, new LoginRequest());
+            return myEnvelope;
         }
 
         public void Login()
@@ -77,9 +99,7 @@ namespace SharpCPM
             }
         }
         
-
-        public IPEndPoint RegistryEndPoint { get; set; }
-        public IPEndPoint ContractManagerEndPoint { get; set; }
+        
         protected int LoginRetries;
     }
 }

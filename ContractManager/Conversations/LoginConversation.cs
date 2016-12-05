@@ -20,19 +20,27 @@ namespace ContractManager.Conversations
         {
         }
 
+        public delegate void LoginStatusUpdated(ProcessInfo process);
+        public event LoginStatusUpdated OnLoginUpdated;
+
         protected override void BeginConversation()
         {
             WaitingForReply = true;
-
-            LoginRequest request = new LoginRequest();
-            request.ConvId = Id;
-            request.MsgId = Id;
-            //request.IdentityInfo = IdentityInfo;
-            //request.ProcessLabel = Process.Label;
-            //request.ProcessType = Process.Type;
-            //request.PublicKey = new PublicKey();
-            Envelope toSend = new Envelope(Properties.DistInstance.AuthenticatorEndpoint, request);
-            SendMessage(toSend);
+            if (InitialMessage != null)
+            {
+                SendMessage(InitialMessage);
+            }
+            else
+            {
+                LoginRequest request = new LoginRequest();
+                request.ConvId = Id;
+                request.MsgId = Id;
+                request.ProcessLabel = "CPM Client";
+                request.ProcessType = ProcessInfo.ProcessType.Client;
+                request.PublicKey = new PublicKey();
+                Envelope toSend = new Envelope(Properties.DistInstance.AuthenticatorEndpoint, request);
+                SendMessage(toSend);
+            }
         }
 
         protected override void ProcessMessage(Envelope envelope)
@@ -41,13 +49,12 @@ namespace ContractManager.Conversations
             {
                 LoginReply replyMessage = (LoginReply)envelope.Message;
                 Logger.Info("Received Login response: " + replyMessage.Note);
-                Properties.DistInstance.MyProcess = replyMessage.ProcessInfo;
-                HandleConversationCompleted();
+                MyProcess = replyMessage.ProcessInfo;
+                WaitingForReply = false;
             }
             else
             {
                 Logger.Info("Received unexpected message: " + envelope.Message.ToString());
-                RetryMessage();
             }
         }
 
@@ -61,6 +68,10 @@ namespace ContractManager.Conversations
             {
                 Logger.Warn("Unable to log in");
             }
+
+            OnLoginUpdated(MyProcess);
         }
+
+        protected ProcessInfo MyProcess;
     }
 }

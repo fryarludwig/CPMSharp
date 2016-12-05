@@ -24,12 +24,13 @@ namespace Common.Communication
         protected void HandleReceivedMessage(Envelope envelope)
         {
             InboundQueue.Enqueue(envelope);
-            NewMessageToSend?.Invoke(envelope);
+            OnMessageReceived?.Invoke(envelope);
         }
 
         public void Send(Envelope envelope)
         {
             OutboundQueue.Enqueue(envelope);
+            OnSendMessage?.Invoke(envelope);
         }
 
         public bool Receive(out Envelope envelope)
@@ -65,8 +66,8 @@ namespace Common.Communication
 
 
         public delegate void MessageReceived(Envelope envelope);
-        public event MessageReceived NewMessageReceived;
+        public event MessageReceived OnMessageReceived;
         public delegate void SendMessageCallback(Envelope envelope);
-        public event SendMessageCallback NewMessageToSend;
+        public event SendMessageCallback OnSendMessage;
     }
 }

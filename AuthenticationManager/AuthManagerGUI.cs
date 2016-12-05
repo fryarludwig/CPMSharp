@@ -36,7 +36,7 @@ namespace AuthenticationManager
 
         protected void InitializeService()
         {
-            Authenticator.LocalEndpoint = new IPEndPoint(IPAddress.Parse(addressInput.Text), int.Parse(portInput.Text));
+            Authenticator.LocalEndpoint = new IPEndPoint(IPAddress.Any, int.Parse(portInput.Text));
         }
 
         private void StartServer_Clicked(object sender, EventArgs e)

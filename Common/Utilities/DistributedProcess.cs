@@ -21,7 +21,7 @@ namespace Common.Utilities
             ConversationManager.RegisterNewConversationTypes(GetValidConversations());
         }
 
-        protected void DerivedShutdown()
+        protected virtual void DerivedShutdown()
         {
             Logger.Trace("Calling Derived Stop");
             ConversationManager.ClearConversations();
@@ -32,7 +32,7 @@ namespace Common.Utilities
         public virtual bool InitializeConnection()
         {
             Logger.Info("Starting Server");
-            //ConversationHandler.Start();
+            ConversationManager.PrimaryCommunicator.Start();
             // Wait for 5 seconds, or for a value of true
             int checkCounter = 10;
             while (MyProcess.Status != ProcessInfo.StatusCode.Registered && checkCounter-- > 0)
@@ -59,15 +59,6 @@ namespace Common.Utilities
             return MyProcess.Status == ProcessInfo.StatusCode.Terminated || MyProcess.Status == ProcessInfo.StatusCode.Terminating;
         }
         
-        // Auth
-        // Secure port, set as registered, wait
-        // For conversations, check credentials
-        // If valid, populate user info and send back reply
-        // If not valid, send back reply
-        // Conversations be like: Brain, let's try this.
-        // Brain be like, naw. Conversation be like, okay I'll tell them
-
-
         public IPEndPoint LocalEndpoint
         {
             get
@@ -83,7 +74,6 @@ namespace Common.Utilities
 
                 ConversationManager.PrimaryCommunicator.LocalEndpoint = value;
             }
-
         }
 
         public IPEndPoint ContractManagerEndpoint { get; set; }

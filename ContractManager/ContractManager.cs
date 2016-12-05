@@ -29,7 +29,6 @@ namespace ContractManager
             MyProcess.AliveTimestamp = DateTime.Now;
             MyProcess.EndPoint = LocalEndpoint;
             MyProcess.Label = "Contract Manager";
-            //Properties.Process = MyProcess;
 
             ConversationManager.RegisterNewConversationTypes(GetValidConversations());
         }
@@ -43,44 +42,35 @@ namespace ContractManager
             return typeMap;
         }
 
-        
-        public bool LoginHelper()
+        public override bool InitializeConnection()
         {
-            Logger.Info("Attempting to connect");
-
+            Logger.Info("Starting Server");
+            ConversationManager.PrimaryCommunicator.Start();
+            LoginConversation loginConv = (LoginConversation)ConversationManager.CreateNewConversation(GetLoginMessage());
+            loginConv.OnLoginUpdated += new LoginConversation.LoginStatusUpdated(HandleLoginUpdated);
+            loginConv.Start();
             // Wait for 5 seconds, or for a value of true
             int checkCounter = 10;
             while (MyProcess.Status != ProcessInfo.StatusCode.Registered && checkCounter-- > 0)
             {
+                Logger.Trace("Attempting to log in");
                 Thread.Sleep(500);
             }
-
             return MyProcess.Status == ProcessInfo.StatusCode.Registered;
         }
 
-        public bool LogoutHelper()
+        protected Envelope GetLoginMessage()
         {
-            Logger.Info("Attempting to log out");
-
-            // Wait for 5 seconds, or for a value of true
-            int checkCounter = 5;
-            while (MyProcess != null && checkCounter-- > 0)
-            {
-                Logger.Trace("Attempting to log out");
-                Thread.Sleep(1000);
-            }
-
-            return MyProcess == null || MyProcess.Status == ProcessInfo.StatusCode.Terminating;
+            Envelope myEnvelope = new Envelope(AuthenticatorEndpoint, new LoginRequest());
+            return myEnvelope;
         }
 
-        public void SetLocalEndpoint(int port)
+        protected void HandleLoginUpdated(ProcessInfo myProcess)
         {
-            LocalEndpoint = new IPEndPoint(IPAddress.Any, port);
-            MyProcess.EndPoint = LocalEndpoint;
+            MyProcess = myProcess;
+            Logger.Info("Login status updated!");
         }
-        
-        public IPEndPoint AuthenticatorEndpoint { get; set; }
-        
+                
         protected void Register(int attempt)
         {
             if (MyProcess.Status != ProcessInfo.StatusCode.Initializing)

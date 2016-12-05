@@ -23,27 +23,33 @@ namespace TestCommon.TestObjects
             ReceivedMessage = null;
             SentMessage = null;
             WaitingForReply = true;
-            ConversationManager.RegisterCommunicatorCallback(base.Communicator);
         }
 
-        public SimpleConversation(MessageNumber msgNum = null) : base("Heartbeat", new UdpCommunicator(), msgNum)
+        public SimpleConversation(string name, MessageNumber msgNum = null) : base(name, new UdpCommunicator(), msgNum)
         {
             EventResponse = null;
             ReceivedMessage = null;
             SentMessage = null;
             WaitingForReply = true;
-            ConversationManager.RegisterCommunicatorCallback(base.Communicator);
         }
 
         public void SendHeartbeatRequest(IPEndPoint remoteEndpoint)
         {
-            SendMessage(new Envelope(remoteEndpoint, new AliveRequest()));
+            AliveRequest request = new AliveRequest();
+            request.ConvId = Id;
+            request.ConvId.Pid = 1;
+            SentMessage = new Envelope(remoteEndpoint, request);
+            SendMessage(SentMessage);
             WaitingForReply = true;
         }
 
         public void SendHeartbeatReply(IPEndPoint remoteEndpoint)
         {
-            SendMessage(new Envelope(remoteEndpoint, new AliveReply()));
+            AliveReply reply = new AliveReply();
+            reply.ConvId = Id;
+            reply.ConvId.Pid = 0;
+            SentMessage = new Envelope(remoteEndpoint, reply);
+            SendMessage(SentMessage);
             WaitingForReply = true;
         }
 
@@ -69,9 +75,22 @@ namespace TestCommon.TestObjects
 
         protected override void ProcessMessage(Envelope envelope)
         {
+            Logger.Info("Processing received message, boo yah!");
+
             EventResponse = Updated?.Invoke("SimpleConversation");
             ReceivedMessage = envelope;
-            SentMessage = new Envelope(new LoginReply());
+            if (ReceivedMessage.Message.GetType() == typeof(LoginRequest))
+            {
+                LoginReply reply = new LoginReply();
+                reply.ConvId = Id;
+                SentMessage = new Envelope(envelope.Address, reply);
+                SendMessage(SentMessage);
+                WaitingForReply = false;
+            }
+            else if (ReceivedMessage.Message.GetType() == typeof(AliveReply))
+            {
+                WaitingForReply = false;
+            }
         }
 
         public delegate string SimpleMessageReceived(string something);
@@ -95,7 +114,6 @@ namespace TestCommon.TestObjects
             {
                 base.Communicator = value;
                 ConversationManager.RegisterCommunicatorCallback(value);
-                //base.Communicator.NewMessage += new BaseCommunicator.MessageReceived(ProcessMessage);
             }
         }
         public string EventResponse { get; set; }

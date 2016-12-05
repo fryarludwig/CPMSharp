@@ -17,7 +17,7 @@ namespace Common.Communication
         public Conversation(string name, MessageNumber msgNum = null) : base(name)
         {
             Id = msgNum ?? new MessageNumber();
-            Timeout = 1000;
+            Timeout = 250;
             MaxRetries = 5;
             Properties = SharedProperties.Instance;
             Communicator = ConversationManager.PrimaryCommunicator;
@@ -28,7 +28,7 @@ namespace Common.Communication
         public Conversation(string name, BaseCommunicator communicator, MessageNumber msgNum = null) : base(name)
         {
             Id = msgNum ?? new MessageNumber();
-            Timeout = 1000;
+            Timeout = 250;
             MaxRetries = 5;
             Properties = SharedProperties.Instance;
             Communicator = communicator;
@@ -39,6 +39,7 @@ namespace Common.Communication
         public void Register()
         {
             ConversationManager.RegisterExistingConversation(this);
+            ConversationManager.RegisterCommunicatorCallback(Communicator);
         }
 
         protected virtual bool ValidateConversation()
@@ -55,7 +56,8 @@ namespace Common.Communication
                 Logger.Error("Unable to start Coversation due to invalid settings");
                 return;
             }
-            else if (!Communicator.IsActive())
+
+            if (!Communicator.IsActive())
             {
                 Communicator.Start();
             }
@@ -84,6 +86,7 @@ namespace Common.Communication
                 else if (!WaitingForReply)
                 {
                     HandleConversationCompleted();
+                    Stop();
                 }
             }
 
@@ -152,6 +155,7 @@ namespace Common.Communication
         public UInt32 MaxRetries { get; set; }
         public SharedProperties Properties { get; set; }
         protected BaseCommunicator Communicator { get; set; }
+        public Envelope InitialMessage { get; set; }
         public ConcurrentQueue<Envelope> NewMessages { get; }
         public ConcurrentQueue<Envelope> SentMessages { get; }
     }

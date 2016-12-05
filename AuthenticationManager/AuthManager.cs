@@ -28,8 +28,37 @@ namespace AuthenticationManager
             MyProcess.AliveTimestamp = DateTime.Now;
             //MyProcess.EndPoint = LocalEndpoint;
             MyProcess.Label = "Authentication Manager";
-            
+
             Logger.Trace("Initialized Authentication Manager");
+
+            ConversationManager.RegisterNewConversationTypes(GetValidConversations());
+        }
+
+        protected override void DerivedShutdown()
+        {
+            Logger.Trace("Calling Derived Stop");
+            ConversationManager.ClearConversations();
+            MyProcess.Status = ProcessInfo.StatusCode.Terminated;
+        }
+
+        public override bool InitializeConnection()
+        {
+            Logger.Info("Starting Server");
+            ConversationManager.PrimaryCommunicator.Start();
+            // Wait for 5 seconds, or for a value of true
+            int checkCounter = 10;
+            while (!ConversationManager.PrimaryCommunicator.IsActive() && checkCounter-- > 0)
+            {
+                Logger.Trace("Attempting to log in");
+                Thread.Sleep(500);
+            }
+
+            if (ConversationManager.PrimaryCommunicator.IsActive())
+            {
+                MyProcess.Status = ProcessInfo.StatusCode.Registered;
+            }
+
+            return MyProcess.Status == ProcessInfo.StatusCode.Registered;
         }
 
         protected override Dictionary<Type, Type> GetValidConversations()
@@ -57,7 +86,7 @@ namespace AuthenticationManager
             ProcessInfo processDetails = new ProcessInfo();
 
             processDetails.Label = user.Alias;
-            
+
             return processDetails;
         }
     }

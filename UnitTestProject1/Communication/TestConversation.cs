@@ -52,7 +52,7 @@ namespace TestCommon.Communication
 
             Assert.AreEqual(simple.Id.Pid, 0);
             Assert.AreEqual(simple.MaxRetries, (UInt32)5);
-            Assert.AreEqual(simple.Timeout, 1000);
+            Assert.AreEqual(simple.Timeout, 250);
 
             simple.Start();
             Thread.Sleep(250);
@@ -76,7 +76,7 @@ namespace TestCommon.Communication
 
             Assert.AreEqual(simple.Id.Pid, 0);
             Assert.AreEqual(simple.MaxRetries, (UInt32)5);
-            Assert.AreEqual(simple.Timeout, 1000);
+            Assert.AreEqual(simple.Timeout, 250);
 
             simple.Start();
             Thread.Sleep(250);
@@ -92,22 +92,23 @@ namespace TestCommon.Communication
             MessageNumber initiatorNumber = new MessageNumber();
             initiatorNumber.Pid = 0;
             initiatorNumber.Seq = 10;
-            SimpleConversation convInitiator = new SimpleConversation(initiatorNumber);
+            SimpleConversation convInitiator = new SimpleConversation("Initiator", initiatorNumber);
             IPEndPoint initiatorEndpoint = new IPEndPoint(IPAddress.Loopback, 6789);
             convInitiator.Communicator.LocalEndpoint = initiatorEndpoint;
+            convInitiator.Register();
 
             MessageNumber responderNumber = new MessageNumber();
             responderNumber.Pid = 1;
             responderNumber.Seq = 10;
-            SimpleConversation convResponder = new SimpleConversation(responderNumber);
+            SimpleConversation convResponder = new SimpleConversation("Responder", responderNumber);
             IPEndPoint responderEndpoint = new IPEndPoint(IPAddress.Loopback, 6788);
             convResponder.Communicator.LocalEndpoint = responderEndpoint;
+            convResponder.Register();
 
             Assert.AreNotEqual(convResponder.Id, convInitiator.Id);
-
-            //ConversationManager.ConversationDictionary[convInitiator.Id] = convInitiator;
-            //ConversationManager.ConversationDictionary[convResponder.Id] = convResponder;
-
+            Assert.IsTrue(ConversationManager.ConversationDictionary.ContainsKey(convInitiator.Id));
+            Assert.IsTrue(ConversationManager.ConversationDictionary.ContainsKey(convResponder.Id));
+            
             Assert.IsFalse(convResponder.IsActive());
             Assert.IsFalse(convInitiator.IsActive());
             Assert.AreNotEqual(convResponder.Communicator.LocalEndpoint, convInitiator.Communicator.LocalEndpoint);
@@ -128,8 +129,14 @@ namespace TestCommon.Communication
             Assert.IsNotNull(convResponder.ReceivedMessage);
 
             convResponder.SendHeartbeatReply(initiatorEndpoint);
-            Thread.Sleep(250);
+            Thread.Sleep(450);
             Assert.IsNotNull(convInitiator.ReceivedMessage);
         }
+
+        //[TestCleanup]
+        //public void CleanupConversations()
+        //{
+        //    ConversationManager.ClearConversations();
+        //}
     }
 }

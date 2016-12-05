@@ -58,5 +58,11 @@ namespace TestCommon.Communication
             Thread.Sleep(250);
             Assert.IsFalse(ConversationManager.PrimaryCommunicator.IsActive());
         }
+
+        [TestCleanup]
+        public void CleanupConversations()
+        {
+            ConversationManager.ClearConversations();
+        }
     }
 }

@@ -35,7 +35,6 @@ namespace ContractManager
 
         protected void InitializeService()
         {
-            ContractService.LocalEndpoint = new IPEndPoint(IPAddress.Parse(myAddressInput.Text), int.Parse(myPortInput.Text));
             ContractService.AuthenticatorEndpoint = new IPEndPoint(IPAddress.Parse(authenticatorAddressInput.Text), int.Parse(authenticatorPortInput.Text));
         }
 

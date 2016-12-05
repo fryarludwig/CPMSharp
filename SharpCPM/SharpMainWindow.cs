@@ -37,7 +37,7 @@ namespace SharpCPM
         {
             string address = addressInput.Text;
             int port = int.Parse(portInput.Text);
-            ClientService.RegistryEndPoint = new IPEndPoint(IPAddress.Parse(address), port);
+            ClientService.AuthenticatorEndpoint = new IPEndPoint(IPAddress.Parse(address), port);
         }
 
         private void Connect_Clicked(object sender, EventArgs e)
@@ -125,7 +125,7 @@ namespace SharpCPM
 
         private Task<bool> PerformLogin()
         {
-            Logger.Trace("Calling Login function for player");
+            Logger.Trace("Calling Login function for client");
 
             return Task.Factory.StartNew<bool>(ClientService.InitializeConnection);
         }
@@ -141,12 +141,12 @@ namespace SharpCPM
         {
             if (loggedIn)
             {
-                Logger.Trace("Player is logged in");
+                Logger.Trace("User is logged in");
                 ConnectButton.Text = "Disconnect";
             }
             else
             {
-                Logger.Trace("Player is logged out");
+                Logger.Trace("User is logged out");
                 ConnectButton.Text = "Connect";
             }
 

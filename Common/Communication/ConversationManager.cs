@@ -19,6 +19,7 @@ namespace Common.Communication
     {
         static ConversationManager()
         {
+            Logger = new LogUtility("ConversationManager");
             Retries = 5;
             Timeout = 1000;
             Properties = SharedProperties.Instance;
@@ -30,12 +31,12 @@ namespace Common.Communication
 
         public static void RegisterCommunicatorCallback(BaseCommunicator communicator)
         {
-            communicator.NewMessageReceived += new BaseCommunicator.MessageReceived(ReceiveMessage);
+            communicator.OnMessageReceived += new BaseCommunicator.MessageReceived(ReceiveMessage);
         }
 
         public static void RemoveCommunicatorCallback(BaseCommunicator communicator)
         {
-            communicator.NewMessageReceived -= new BaseCommunicator.MessageReceived(ReceiveMessage);
+            communicator.OnMessageReceived -= new BaseCommunicator.MessageReceived(ReceiveMessage);
         }
 
         public static void ClearConversations()
@@ -47,27 +48,10 @@ namespace Common.Communication
                     conversation.Stop();
                 }
             }
-
-            PrimaryCommunicator.Stop();
+            
             ConversationDictionary.Clear();
         }
-
-        public static bool InitiateConversation(Envelope envelope)
-        {
-            bool success = false;
-
-            Conversation newConversation = ConversationManager.CreateNewConversation(envelope);
-
-            if (newConversation != null)
-            {
-                ConversationDictionary[newConversation.Id] = newConversation;
-                newConversation.Start();
-                success = true;
-            }
-
-            return success;
-        }
-
+        
         public static void RegisterNewConversationTypes(Dictionary<Type, Type> msgConvRegistry)
         {
             foreach (Type messageType in msgConvRegistry.Keys)
@@ -105,6 +89,8 @@ namespace Common.Communication
                 {
                     newConversation = Activator.CreateInstance(ConversationTypes[envelope.Message.GetType()]) as Conversation;
                     newConversation.Id = envelope.Message.ConvId;
+                    newConversation.InitialMessage = envelope;
+                    RegisterExistingConversation(newConversation);
                 }
             }
 
@@ -113,16 +99,34 @@ namespace Common.Communication
 
         public static void ReceiveMessage(Envelope envelope)
         {
-            if (PrimaryCommunicator.Receive(out envelope) && envelope != null)
+            Logger.Info("Received message from communicator");
+
+            if (envelope != null)
             {
                 if (ConversationDictionary.ContainsKey(envelope.ConvId))
                 {
                     ConversationDictionary[envelope.ConvId].NewMessages.Enqueue(envelope);
+                    Logger.Info($"Message from {envelope.Address.ToString()} to {envelope.ConvId}");
                 }
-                else if (InitiateConversation(envelope))
+                else
                 {
-                    ConversationDictionary[envelope.ConvId].NewMessages.Enqueue(envelope);
+                    Conversation newConversation = CreateNewConversation(envelope);
+
+                    if (newConversation != null)
+                    {
+                        ConversationDictionary[envelope.ConvId].NewMessages.Enqueue(envelope);
+                        Logger.Info($"Started a new conversation as {envelope.ConvId}");
+                        newConversation.Start();
+                    }
+                    else
+                    {
+                        Logger.Warn($"Unable to process message from {envelope.Address.ToString()}");
+                    }
                 }
+            }
+            else
+            {
+                Logger.Warn("Invalid message!");
             }
         }
 
@@ -151,5 +155,7 @@ namespace Common.Communication
 
         private static Dictionary<Type, Type> ConversationTypes { get; set; }
         public static ConcurrentDictionary<MessageNumber, Conversation> ConversationDictionary;
+
+        private static LogUtility Logger { get; set; }
     }
 }
