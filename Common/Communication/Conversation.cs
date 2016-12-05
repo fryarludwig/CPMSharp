@@ -14,17 +14,33 @@ namespace Common.Communication
 {
     abstract public class Conversation : Threaded
     {
-        public Conversation(string name) : base(name)
+        public Conversation(string name, MessageNumber msgNum = null) : base(name)
         {
-            Id = MessageNumber.Create();
+            Id = msgNum ?? new MessageNumber();
             Timeout = 1000;
             MaxRetries = 5;
             Properties = SharedProperties.Instance;
-            Communicator = ConversationFactory.PrimaryCommunicator;
+            Communicator = ConversationManager.PrimaryCommunicator;
             NewMessages = new ConcurrentQueue<Envelope>();
             SentMessages = new ConcurrentQueue<Envelope>();
         }
-        
+
+        public Conversation(string name, BaseCommunicator communicator, MessageNumber msgNum = null) : base(name)
+        {
+            Id = msgNum ?? new MessageNumber();
+            Timeout = 1000;
+            MaxRetries = 5;
+            Properties = SharedProperties.Instance;
+            Communicator = communicator;
+            NewMessages = new ConcurrentQueue<Envelope>();
+            SentMessages = new ConcurrentQueue<Envelope>();
+        }
+
+        public void Register()
+        {
+            ConversationManager.RegisterExistingConversation(this);
+        }
+
         protected virtual bool ValidateConversation()
         {
             return Communicator != null && Communicator.LocalEndpoint != null;
@@ -123,6 +139,11 @@ namespace Common.Communication
         {
             Communicator.Send(envelope);
             SentMessages.Enqueue(envelope);
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
         }
 
         protected bool WaitingForReply { get; set; }

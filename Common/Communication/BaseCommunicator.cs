@@ -21,6 +21,12 @@ namespace Common.Communication
             OutboundQueue = new ConcurrentQueue<Envelope>();
         }
         
+        protected void HandleReceivedMessage(Envelope envelope)
+        {
+            InboundQueue.Enqueue(envelope);
+            NewMessageToSend?.Invoke(envelope);
+        }
+
         public void Send(Envelope envelope)
         {
             OutboundQueue.Enqueue(envelope);
@@ -56,5 +62,11 @@ namespace Common.Communication
         }
         protected ConcurrentQueue<Envelope> InboundQueue { get; }
         protected ConcurrentQueue<Envelope> OutboundQueue { get; }
+
+
+        public delegate void MessageReceived(Envelope envelope);
+        public event MessageReceived NewMessageReceived;
+        public delegate void SendMessageCallback(Envelope envelope);
+        public event SendMessageCallback NewMessageToSend;
     }
 }

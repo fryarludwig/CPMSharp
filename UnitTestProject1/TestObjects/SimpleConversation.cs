@@ -15,16 +15,24 @@ using System.Net;
 
 namespace TestCommon.TestObjects
 {
-
     public class SimpleConversation : Conversation
     {
-        public SimpleConversation() : base("Heartbeat")
+        public SimpleConversation() : base("Heartbeat", new UdpCommunicator())
         {
             EventResponse = null;
             ReceivedMessage = null;
             SentMessage = null;
             WaitingForReply = true;
-            Communicator = new UdpCommunicator();
+            ConversationManager.RegisterCommunicatorCallback(base.Communicator);
+        }
+
+        public SimpleConversation(MessageNumber msgNum = null) : base("Heartbeat", new UdpCommunicator(), msgNum)
+        {
+            EventResponse = null;
+            ReceivedMessage = null;
+            SentMessage = null;
+            WaitingForReply = true;
+            ConversationManager.RegisterCommunicatorCallback(base.Communicator);
         }
 
         public void SendHeartbeatRequest(IPEndPoint remoteEndpoint)
@@ -43,12 +51,20 @@ namespace TestCommon.TestObjects
         {
             HasCompleted = true;
             Stop();
-       }
+        }
 
         protected override void RetryMessage()
         {
-            AttemptedRetries++;
-            base.RetryMessage();
+            Envelope tempEnv;
+            if (Communicator.ReplyWaiting && Communicator.Receive(out tempEnv))
+            {
+                NewMessages.Enqueue(tempEnv);
+            }
+            else
+            {
+                AttemptedRetries++;
+                base.RetryMessage();
+            }
         }
 
         protected override void ProcessMessage(Envelope envelope)
@@ -58,9 +74,9 @@ namespace TestCommon.TestObjects
             SentMessage = new Envelope(new LoginReply());
         }
 
-        public delegate string MessageReceived(string something);
-        public event MessageReceived Updated;
-        
+        public delegate string SimpleMessageReceived(string something);
+        public event SimpleMessageReceived Updated;
+
         public virtual void OnUpdate()
         {
             ProcessMessage(new Envelope(new LoginRequest()));
@@ -69,7 +85,19 @@ namespace TestCommon.TestObjects
         public int AttemptedRetries = 0;
         public bool HasCompleted { get; set; }
 
-        public new BaseCommunicator Communicator { get; set; }
+        public new BaseCommunicator Communicator
+        {
+            get
+            {
+                return base.Communicator;
+            }
+            set
+            {
+                base.Communicator = value;
+                ConversationManager.RegisterCommunicatorCallback(value);
+                //base.Communicator.NewMessage += new BaseCommunicator.MessageReceived(ProcessMessage);
+            }
+        }
         public string EventResponse { get; set; }
         public Envelope ReceivedMessage { get; set; }
         public Envelope SentMessage { get; set; }

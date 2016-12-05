@@ -48,7 +48,6 @@
     <Compile Include="Communication\RequestReplyResponder.cs" />
     <Compile Include="Communication\UdpCommunicator.cs" />
     <Compile Include="Communication\Conversation.cs" />
-    <Compile Include="Communication\ConversationFactory.cs" />
     <Compile Include="Communication\ConversationManager.cs" />
     <Compile Include="Communication\Envelope.cs" />
     <Compile Include="Utilities\DistributedProcess.cs" />

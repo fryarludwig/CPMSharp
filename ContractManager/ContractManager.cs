@@ -31,7 +31,7 @@ namespace ContractManager
             MyProcess.Label = "Contract Manager";
             //Properties.Process = MyProcess;
 
-            ConversationHandler = new ConversationManager(GetValidConversations());
+            ConversationManager.RegisterNewConversationTypes(GetValidConversations());
         }
 
 
@@ -88,7 +88,7 @@ namespace ContractManager
                 Logger.Info("Requesting a login");
                 MyProcess.Status = ProcessInfo.StatusCode.Initializing;
                 Envelope envelope = new Envelope(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5555), new LoginRequest());
-                ConversationHandler.InitiateConversation(envelope);
+                //InitiateConversation(envelope);
             }
             else if (attempt > LoginRetries)
             {

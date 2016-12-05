@@ -58,7 +58,7 @@
     <Compile Include="Communication\TestBaseCommunicator.cs" />
     <Compile Include="Communication\TestRequestReplyConversation.cs" />
     <Compile Include="Messages\TestMessage.cs" />
-    <Compile Include="TestObjects\TestConversationSimple.cs" />
+    <Compile Include="TestObjects\SimpleConversation.cs" />
     <Compile Include="TestObjects\TestRequestReplyConv.cs" />
     <Compile Include="TestObjects\TestUdpSocket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

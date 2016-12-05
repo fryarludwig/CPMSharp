@@ -17,8 +17,8 @@ namespace TestCommon.Communication
         [TestMethod]
         public void ConvFactorySucessfulInstance()
         {
-            ConversationFactory.RegisterNewConversationType(typeof(AliveRequest), typeof(SimpleConversation));
-            Conversation testConv = ConversationFactory.CreateNewConversation(new Envelope(new AliveRequest()));
+            ConversationManager.RegisterNewConversationType(typeof(AliveRequest), typeof(SimpleConversation));
+            Conversation testConv = ConversationManager.CreateNewConversation(new Envelope(new AliveRequest()));
             Assert.IsNotNull(testConv);
             Assert.AreEqual(testConv.GetType(), typeof(SimpleConversation));
             Assert.IsFalse(testConv.IsActive());
@@ -28,34 +28,35 @@ namespace TestCommon.Communication
         [TestMethod]
         public void ConvFactoryGracefulFailure()
         {
-            ConversationFactory.RegisterNewConversationType(typeof(AliveRequest), typeof(SimpleConversation));
-            Conversation testConv = ConversationFactory.CreateNewConversation(new Envelope(new AliveReply()));
+            ConversationManager.RegisterNewConversationType(typeof(AliveRequest), typeof(SimpleConversation));
+            Conversation testConv = ConversationManager.CreateNewConversation(new Envelope(new AliveReply()));
             Assert.IsNull(testConv);
         }
 
         [TestMethod]
         public void ConvFactoryCommunicatorInstance()
         {
-            ConversationFactory.RegisterNewConversationType(typeof(AliveRequest), typeof(SimpleConversation));
+            ConversationManager.RegisterNewConversationType(typeof(AliveRequest), typeof(SimpleConversation));
 
-            Assert.IsNotNull(ConversationFactory.PrimaryCommunicator);
-            Assert.IsFalse(ConversationFactory.PrimaryCommunicator.IsActive());
+            Assert.IsNotNull(ConversationManager.PrimaryCommunicator);
+            Assert.IsFalse(ConversationManager.PrimaryCommunicator.IsActive());
 
-            Conversation testConv = ConversationFactory.CreateNewConversation(new Envelope(new AliveRequest()));
+            Conversation testConv = ConversationManager.CreateNewConversation(new Envelope(new AliveRequest()));
             Assert.IsNotNull(testConv);
             Assert.IsFalse(testConv.IsActive());
             Assert.AreEqual(testConv.GetType(), typeof(SimpleConversation));
+            Assert.IsTrue(ConversationManager.ConversationDictionary.ContainsKey(testConv.Id));
             testConv.Stop();
             testConv.Start();
             Thread.Sleep(250);
-            Assert.IsTrue(ConversationFactory.PrimaryCommunicator.IsActive());
-            ConversationFactory.PrimaryCommunicator.LocalEndpoint = new IPEndPoint(IPAddress.Any, 54345);
+            Assert.IsTrue(((SimpleConversation)testConv).Communicator.IsActive());
+            ((SimpleConversation)testConv).Communicator.LocalEndpoint = new IPEndPoint(IPAddress.Any, 54345);
             testConv.Stop();
             Thread.Sleep(250);
-            Assert.IsTrue(ConversationFactory.PrimaryCommunicator.IsActive());
-            ConversationFactory.PrimaryCommunicator.Stop();
+            Assert.IsTrue(((SimpleConversation)testConv).Communicator.IsActive());
+            ConversationManager.PrimaryCommunicator.Stop();
             Thread.Sleep(250);
-            Assert.IsFalse(ConversationFactory.PrimaryCommunicator.IsActive());
+            Assert.IsFalse(ConversationManager.PrimaryCommunicator.IsActive());
         }
     }
 }

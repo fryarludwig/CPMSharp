@@ -15,21 +15,30 @@ using System.Net;
 
 namespace Common.Communication
 {
-    public class ConversationManager : Threaded
+    public static class ConversationManager
     {
-        public ConversationManager(Dictionary<Type, Type> msgConvRegistry) : base("ConversationManager")
+        static ConversationManager()
         {
-            Logger.Info("Creating conversation manager");
+            Retries = 5;
+            Timeout = 1000;
+            Properties = SharedProperties.Instance;
+            ConversationTypes = new Dictionary<Type, Type>();
             ConversationDictionary = new ConcurrentDictionary<MessageNumber, Conversation>();
-            Communicator = ConversationFactory.PrimaryCommunicator;
-
-            foreach (Type messageType in msgConvRegistry.Keys)
-            {
-                ConversationFactory.RegisterNewConversationType(messageType, msgConvRegistry[messageType]);
-            }
+            PrimaryCommunicator = new UdpCommunicator();
+            RegisterCommunicatorCallback(PrimaryCommunicator);
         }
 
-        protected override void DerivedStop()
+        public static void RegisterCommunicatorCallback(BaseCommunicator communicator)
+        {
+            communicator.NewMessageReceived += new BaseCommunicator.MessageReceived(ReceiveMessage);
+        }
+
+        public static void RemoveCommunicatorCallback(BaseCommunicator communicator)
+        {
+            communicator.NewMessageReceived -= new BaseCommunicator.MessageReceived(ReceiveMessage);
+        }
+
+        public static void ClearConversations()
         {
             foreach (Conversation conversation in ConversationDictionary.Values)
             {
@@ -39,70 +48,108 @@ namespace Common.Communication
                 }
             }
 
-            Communicator.Stop();
+            PrimaryCommunicator.Stop();
             ConversationDictionary.Clear();
         }
 
-        public void Execute(Conversation conv)
-        {
-            conv.Start();
-            ConversationDictionary[conv.Id] = conv;
-        }
-
-        // TODO - Testing
-        // AWS as well
-        // Test derived classes independently
-        protected override void Run()
-        {
-            Envelope envelope = null;
-
-            while (ContinueThread)
-            {
-                if (Communicator.ReplyWaiting)
-                {
-                    Logger.Info("Message waiting - attempting to retrieve");
-                    if (Communicator.Receive(out envelope) && envelope != null)
-                    {
-                        if (ConversationDictionary.ContainsKey(envelope.ConvId))
-                        {
-                            ConversationDictionary[envelope.ConvId].NewMessages.Enqueue(envelope);
-                        }
-                        else if (InitiateConversation(envelope))
-                        {
-                            ConversationDictionary[envelope.ConvId].NewMessages.Enqueue(envelope);
-                        }
-                        else
-                        {
-                            Logger.Error("Received a message of unknown type. Cannot act on conversation " + envelope.ConvId.ToString());
-                        }
-                    }
-                }
-                else
-                {
-                    Thread.Sleep(250);
-                }
-            }
-
-            Logger.Info("Conversation manager has closed");
-        }
-
-        public bool InitiateConversation(Envelope envelope)
+        public static bool InitiateConversation(Envelope envelope)
         {
             bool success = false;
 
-            Conversation newConversation = ConversationFactory.CreateNewConversation(envelope);
+            Conversation newConversation = ConversationManager.CreateNewConversation(envelope);
 
             if (newConversation != null)
             {
-                Execute(newConversation);
+                ConversationDictionary[newConversation.Id] = newConversation;
+                newConversation.Start();
                 success = true;
             }
 
             return success;
         }
 
-        private ConcurrentDictionary<MessageNumber, Conversation> ConversationDictionary;
-        private BaseCommunicator Communicator { get; set; }
-        public event EventHandler ConversationCompleted = delegate { };
+        public static void RegisterNewConversationTypes(Dictionary<Type, Type> msgConvRegistry)
+        {
+            foreach (Type messageType in msgConvRegistry.Keys)
+            {
+                ConversationTypes[messageType] = msgConvRegistry[messageType];
+            }
+        }
+
+        public static void RegisterNewConversationType(Type messageType, Type conversationType)
+        {
+            ConversationTypes[messageType] = conversationType;
+        }
+
+        public static void RegisterExistingConversation(Conversation conversation)
+        {
+            if (!ConversationDictionary.ContainsKey(conversation.Id))
+            {
+                ConversationDictionary[conversation.Id] = conversation;
+            }
+        }
+
+        public static Conversation CreateNewConversation(Envelope envelope)
+        {
+            Conversation newConversation = null;
+
+            if (envelope != null && envelope.Message != null)
+            {
+                // May be true if we originate the message
+                if (envelope.Message.ConvId == null && envelope.Message.MsgId == null)
+                {
+                    envelope.Message.InitMessageAndConversationNumbers();
+                }
+
+                if (ConversationTypes.ContainsKey(envelope.Message.GetType()))
+                {
+                    newConversation = Activator.CreateInstance(ConversationTypes[envelope.Message.GetType()]) as Conversation;
+                    newConversation.Id = envelope.Message.ConvId;
+                }
+            }
+
+            return newConversation;
+        }
+
+        public static void ReceiveMessage(Envelope envelope)
+        {
+            if (PrimaryCommunicator.Receive(out envelope) && envelope != null)
+            {
+                if (ConversationDictionary.ContainsKey(envelope.ConvId))
+                {
+                    ConversationDictionary[envelope.ConvId].NewMessages.Enqueue(envelope);
+                }
+                else if (InitiateConversation(envelope))
+                {
+                    ConversationDictionary[envelope.ConvId].NewMessages.Enqueue(envelope);
+                }
+            }
+        }
+
+        private static BaseCommunicator _PrimaryCommunicator { get; set; }
+        public static BaseCommunicator PrimaryCommunicator
+        {
+            get
+            {
+                if (_PrimaryCommunicator == null)
+                {
+                    _PrimaryCommunicator = new UdpCommunicator();
+                }
+
+                return _PrimaryCommunicator;
+            }
+            set
+            {
+                _PrimaryCommunicator = value ?? new UdpCommunicator();
+                RegisterCommunicatorCallback(_PrimaryCommunicator);
+            }
+        }
+
+        public static UInt32 Retries { get; set; }
+        public static int Timeout { get; set; }
+        public static SharedProperties Properties { get; set; }
+
+        private static Dictionary<Type, Type> ConversationTypes { get; set; }
+        public static ConcurrentDictionary<MessageNumber, Conversation> ConversationDictionary;
     }
 }

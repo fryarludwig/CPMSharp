@@ -18,13 +18,13 @@ namespace Common.Utilities
             Properties = SharedProperties.Instance;
             Properties.DistInstance = this;
             MyProcess = new ProcessInfo();
-            ConversationHandler = new ConversationManager(GetValidConversations());
+            ConversationManager.RegisterNewConversationTypes(GetValidConversations());
         }
 
         protected void DerivedShutdown()
         {
             Logger.Trace("Calling Derived Stop");
-            ConversationHandler.Stop();
+            ConversationManager.ClearConversations();
         }
 
         protected abstract Dictionary<Type, Type> GetValidConversations();
@@ -32,7 +32,7 @@ namespace Common.Utilities
         public virtual bool InitializeConnection()
         {
             Logger.Info("Starting Server");
-            ConversationHandler.Start();
+            //ConversationHandler.Start();
             // Wait for 5 seconds, or for a value of true
             int checkCounter = 10;
             while (MyProcess.Status != ProcessInfo.StatusCode.Registered && checkCounter-- > 0)
@@ -72,21 +72,16 @@ namespace Common.Utilities
         {
             get
             {
-                if (ConversationFactory.PrimaryCommunicator != null)
-                {
-                    return ConversationFactory.PrimaryCommunicator.LocalEndpoint;
-                }
-
-                return null;
+                return ConversationManager.PrimaryCommunicator?.LocalEndpoint;
             }
             set
             {
-                if (ConversationFactory.PrimaryCommunicator == null)
+                if (ConversationManager.PrimaryCommunicator == null)
                 {
-                    ConversationFactory.PrimaryCommunicator = new UdpCommunicator();
+                    ConversationManager.PrimaryCommunicator = new UdpCommunicator();
                 }
 
-                ConversationFactory.PrimaryCommunicator.LocalEndpoint = value;
+                ConversationManager.PrimaryCommunicator.LocalEndpoint = value;
             }
 
         }
@@ -95,7 +90,6 @@ namespace Common.Utilities
         public IPEndPoint AuthenticatorEndpoint { get; set; }
         public SharedProperties Properties { get; set; }
         public ProcessInfo MyProcess { get; set; }
-        protected ConversationManager ConversationHandler { get; set; }
         protected LogUtility Logger { get; set; }
     }
 }

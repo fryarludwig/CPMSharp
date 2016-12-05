@@ -39,7 +39,5 @@ namespace Common.Communication
         public IPEndPoint Address { get; set; }
         public Message Message { get; set; }
     }
-
-
 }
 

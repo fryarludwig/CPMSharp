@@ -31,8 +31,6 @@ namespace Common.Communication
                 {
                     if (socket.Available > 0)
                     {
-                        //Logger.Info("Information is available on the socket");
-
                         byte[] bytesReceived = socket.Receive(ref recvEndpoint);
                         if (bytesReceived.Length > 0)
                         {
@@ -41,7 +39,7 @@ namespace Common.Communication
                             if (tempEnvelope.Message != null)
                             {
                                 Logger.Info("Received message, enqueuing.");
-                                InboundQueue.Enqueue(tempEnvelope);
+                                HandleReceivedMessage(tempEnvelope);
                             }
                         }
                     }
