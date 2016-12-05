@@ -1,0 +1,17 @@
+11:13:01.1: [INFO ]: ConversationManager - Creating conversation manager
+11:13:01.1: [TRACE]: Contract Manager - Initialized Authentication Manager
+11:13:06.6: [TRACE]: Contract GUI - Login information passed basic validation
+11:13:06.6: [INFO ]: Contract Manager - Attempting to connect
+11:13:06.6: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:13:07.7: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:13:08.8: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:13:09.9: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:13:10.10: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:13:11.11: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:13:12.12: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:13:13.13: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:13:14.14: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:13:15.15: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:13:16.16: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:13:17.17: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:13:18.18: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing

@@ -1,0 +1,10 @@
+09:36:14.14: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+09:36:14.14: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:15559
+09:36:14.14: [INFO ]: UDP Com - Received message, enqueuing.
+09:36:14.14: [INFO ]: UDP Com - Closing Thread
+09:36:15.15: [INFO ]: UDP Com - Closing down Network Manager
+09:36:15.15: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:45558
+09:36:15.15: [INFO ]: UDP Com - Sending outbound message of length 103 to 127.0.0.1:45558
+09:36:15.15: [INFO ]: UDP Com - Sending outbound message of length 151 to 127.0.0.1:45558
+09:36:15.15: [INFO ]: UDP Com - Received message, enqueuing.
+09:36:15.15: [INFO ]: UDP Com - Closing Thread

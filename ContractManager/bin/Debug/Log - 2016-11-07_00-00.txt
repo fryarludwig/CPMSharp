@@ -1,0 +1,29 @@
+12:00:43.43: [INFO ]: ConversationManager - Creating conversation manager
+12:00:43.43: [TRACE]: ConversationManager - Conversation manager is running
+12:00:43.43: [TRACE]: Contract Manager - Initialized Authentication Manager
+12:00:44.44: [TRACE]: ConversationManager - Conversation manager is running
+12:00:45.45: [TRACE]: ConversationManager - Conversation manager is running
+12:00:46.46: [TRACE]: ConversationManager - Conversation manager is running
+12:00:47.47: [TRACE]: ConversationManager - Conversation manager is running
+12:00:48.48: [TRACE]: ConversationManager - Conversation manager is running
+12:00:49.49: [TRACE]: ConversationManager - Conversation manager is running
+12:00:49.49: [TRACE]: Contract GUI - Login information passed basic validation
+12:00:49.49: [INFO ]: Contract Manager - Attempting to connect
+12:00:49.49: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:00:50.50: [TRACE]: ConversationManager - Conversation manager is running
+12:00:50.50: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:00:51.51: [TRACE]: ConversationManager - Conversation manager is running
+12:00:51.51: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:00:52.52: [TRACE]: ConversationManager - Conversation manager is running
+12:00:52.52: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:00:53.53: [TRACE]: ConversationManager - Conversation manager is running
+12:00:53.53: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:00:54.54: [TRACE]: ConversationManager - Conversation manager is running
+12:00:54.54: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:00:55.55: [TRACE]: ConversationManager - Conversation manager is running
+12:00:55.55: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:00:56.56: [TRACE]: ConversationManager - Conversation manager is running
+12:00:56.56: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:00:57.57: [TRACE]: ConversationManager - Conversation manager is running
+12:00:57.57: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:00:58.58: [TRACE]: ConversationManager - Conversation manager is running

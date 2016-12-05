@@ -1,0 +1,8 @@
+12:35:22.22: [INFO ]: Communicator - Sending outbound message of length 78 to 127.0.0.1:15559
+12:35:22.22: [INFO ]: Communicator - Received message, enqueuing.
+12:35:22.22: [INFO ]: Communicator - Closing Thread
+12:35:22.22: [INFO ]: Communicator - Closing down Network Manager
+12:35:22.22: [INFO ]: Communicator - Sending outbound message of length 78 to 127.0.0.1:45558
+12:35:22.22: [INFO ]: Communicator - Sending outbound message of length 103 to 127.0.0.1:45558
+12:35:22.22: [INFO ]: Communicator - Sending outbound message of length 151 to 127.0.0.1:45558
+12:35:22.22: [INFO ]: Communicator - Received message, enqueuing.

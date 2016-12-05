@@ -1,0 +1,36 @@
+11:26:59.59: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:26:59.59: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:26:59.59: [INFO ]: UDP Com - Closing Thread
+11:26:59.59: [INFO ]: UDP Com - Closing down Network Manager
+11:26:59.59: [INFO ]: Heartbeat - Closing Thread
+11:27:00.0: [INFO ]: Heartbeat - Ending conversation
+11:27:00.0: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:27:00.0: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:15559
+11:27:00.0: [INFO ]: UDP Com - Received message, enqueuing.
+11:27:01.1: [INFO ]: UDP Com - Closing Thread
+11:27:01.1: [INFO ]: UDP Com - Closing down Network Manager
+11:27:01.1: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:27:01.1: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:27:01.1: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:27:01.1: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:27:01.1: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:45558
+11:27:01.1: [INFO ]: UDP Com - Sending outbound message of length 103 to 127.0.0.1:45558
+11:27:01.1: [INFO ]: UDP Com - Sending outbound message of length 151 to 127.0.0.1:45558
+11:27:01.1: [INFO ]: UDP Com - Received message, enqueuing.
+11:27:01.1: [INFO ]: UDP Com - Closing Thread
+11:27:01.1: [INFO ]: UDP Com - Closing down Network Manager
+11:27:01.1: [INFO ]: Heartbeat - Processing received message, boo yah!
+11:27:01.1: [INFO ]: Heartbeat - Closing Thread
+11:27:02.2: [INFO ]: Heartbeat - Ending conversation
+11:27:02.2: [INFO ]: Heartbeat - Closing Thread
+11:27:03.3: [INFO ]: Heartbeat - Ending conversation
+11:27:03.3: [INFO ]: UDP Com - Sending outbound message of length 92 to 127.0.0.1:6788
+11:27:03.3: [INFO ]: UDP Com - Received message, enqueuing.
+11:27:03.3: [INFO ]: ConversationManager - Received message from communicator
+11:27:03.3: [INFO ]: ConversationManager - Message from 127.0.0.1:6789 to 0.10
+11:27:04.4: [INFO ]: Initiator - Received some kind of response
+11:27:04.4: [INFO ]: Initiator - Processing received message, boo yah!
+11:27:04.4: [INFO ]: Initiator - Closing Thread
+11:27:05.5: [INFO ]: Responder - Closing Thread
+11:27:05.5: [INFO ]: Responder - Ending conversation
+11:27:06.6: [WARN ]: Tester - Current thread is not running, cannot stop

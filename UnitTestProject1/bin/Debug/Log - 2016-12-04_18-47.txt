@@ -1,0 +1,30 @@
+06:47:55.55: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+06:47:55.55: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+06:47:55.55: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:15559
+06:47:55.55: [INFO ]: UDP Com - Received message, enqueuing.
+06:47:55.55: [INFO ]: UDP Com - Closing Thread
+06:47:55.55: [INFO ]: UDP Com - Closing down Network Manager
+06:47:55.55: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:45558
+06:47:55.55: [INFO ]: UDP Com - Sending outbound message of length 103 to 127.0.0.1:45558
+06:47:55.55: [INFO ]: UDP Com - Sending outbound message of length 151 to 127.0.0.1:45558
+06:47:55.55: [INFO ]: UDP Com - Received message, enqueuing.
+06:47:55.55: [INFO ]: UDP Com - Closing Thread
+06:47:55.55: [INFO ]: UDP Com - Closing down Network Manager
+06:47:55.55: [INFO ]: Heartbeat - Closing Thread
+06:47:56.56: [INFO ]: Heartbeat - Ending conversation
+06:47:57.57: [INFO ]: Heartbeat - Closing Thread
+06:47:57.57: [INFO ]: Heartbeat - Ending conversation
+06:47:58.58: [WARN ]: UDP Com - Current thread is not running, cannot stop
+06:47:58.58: [WARN ]: UDP Com - Current thread is not running, cannot stop
+06:47:58.58: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+06:47:58.58: [WARN ]: UDP Com - Current thread is not running, cannot stop
+06:47:58.58: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+06:47:58.58: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+06:47:58.58: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+06:47:58.58: [WARN ]: UDP Com - Current thread is not running, cannot stop
+06:47:58.58: [WARN ]: UDP Com - Current thread is not running, cannot stop
+06:47:58.58: [WARN ]: UDP Com - Current thread is not running, cannot stop
+06:47:58.58: [WARN ]: UDP Com - Current thread is not running, cannot stop
+06:47:58.58: [INFO ]: UDP Com - Sending outbound message of length 78 to 0.0.0.0:6788
+06:47:58.58: [ERROR]: UDP Com - UDP socket exception : The requested address is not valid in its context
+06:47:58.58: [WARN ]: Tester - Current thread is not running, cannot stop

@@ -1,0 +1,33 @@
+11:37:51.51: [TRACE]: AuthManager - Initialized Authentication Manager
+11:37:51.51: [ERROR]: Auth Service - The given key was not present in the dictionary.
+11:38:05.5: [TRACE]: Auth Service - Login information passed basic validation
+11:38:05.5: [TRACE]: Auth Service - Calling Login function for player
+11:38:05.5: [INFO ]: AuthManager - Attempting to log in
+11:38:05.5: [TRACE]: AuthManager - Attempting to log in
+11:38:05.5: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Initializing
+11:38:05.5: [TRACE]: AuthManager - Attempting to log in
+11:38:06.6: [TRACE]: AuthManager - Attempting to log in
+11:38:06.6: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Initializing
+11:38:06.6: [TRACE]: AuthManager - Attempting to log in
+11:38:07.7: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Initializing
+11:38:07.7: [TRACE]: AuthManager - Attempting to log in
+11:38:07.7: [TRACE]: AuthManager - Attempting to log in
+11:38:08.8: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Initializing
+11:38:08.8: [TRACE]: AuthManager - Attempting to log in
+11:38:08.8: [TRACE]: AuthManager - Attempting to log in
+11:38:09.9: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Initializing
+11:38:09.9: [TRACE]: AuthManager - Attempting to log in
+11:38:09.9: [TRACE]: AuthManager - Attempting to log in
+11:38:10.10: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Initializing
+11:38:10.10: [TRACE]: Auth Service - Server Stopped
+11:38:11.11: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Initializing
+11:38:12.12: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Initializing
+11:38:13.13: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Initializing
+11:38:14.14: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Initializing
+11:38:15.15: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Initializing
+11:38:16.16: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Initializing
+11:38:17.17: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Initializing
+11:38:18.18: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Initializing
+11:38:19.19: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Initializing
+11:38:20.20: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Initializing
+11:38:21.21: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Initializing

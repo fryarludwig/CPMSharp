@@ -1,0 +1,6 @@
+07:05:55.55: [INFO ]: ConversationManager - Creating conversation manager
+07:05:56.56: [INFO ]: ConversationManager - Creating conversation manager
+07:05:58.58: [TRACE]: Contract GUI - Login information passed basic validation
+07:05:58.58: [INFO ]: Contract Manager - Attempting to connect
+07:06:13.13: [TRACE]: Contract GUI - Login information passed basic validation
+07:06:13.13: [INFO ]: Contract Manager - Attempting to connect

@@ -1,0 +1,14 @@
+07:05:55.55: [INFO ]: ConversationManager - Creating conversation manager
+07:06:18.18: [TRACE]: SharpCPM GUI - Login information passed basic validation
+07:06:18.18: [TRACE]: SharpCPM GUI - Calling Login function for player
+07:06:18.18: [INFO ]: CPMClient - Starting Server
+07:06:18.18: [TRACE]: CPMClient - Attempting to log in
+07:06:18.18: [TRACE]: CPMClient - Attempting to log in
+07:06:19.19: [TRACE]: CPMClient - Attempting to log in
+07:06:19.19: [TRACE]: CPMClient - Attempting to log in
+07:06:20.20: [TRACE]: CPMClient - Attempting to log in
+07:06:20.20: [TRACE]: CPMClient - Attempting to log in
+07:06:21.21: [TRACE]: CPMClient - Attempting to log in
+07:06:21.21: [TRACE]: CPMClient - Attempting to log in
+07:06:22.22: [TRACE]: CPMClient - Attempting to log in
+07:06:22.22: [TRACE]: CPMClient - Attempting to log in

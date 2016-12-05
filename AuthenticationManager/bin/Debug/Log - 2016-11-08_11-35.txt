@@ -1,0 +1,19 @@
+11:35:14.14: [INFO ]: ConversationManager - Creating conversation manager
+11:35:15.15: [TRACE]: AuthManager - Initialized Authentication Manager
+11:36:11.11: [INFO ]: AuthManager - Starting Server
+11:36:11.11: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:36:12.12: [TRACE]: Auth Service - Server Started
+11:36:12.12: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:36:13.13: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:36:16.16: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:36:22.22: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:36:25.25: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:36:26.26: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:36:34.34: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:36:37.37: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:36:38.38: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:36:39.39: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:36:40.40: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:36:42.42: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:36:43.43: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:36:58.58: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle

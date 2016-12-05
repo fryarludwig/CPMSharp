@@ -1,0 +1,6 @@
+10:10:36.36: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+10:10:41.41: [INFO ]: UDP Com - Closing Thread
+10:10:41.41: [INFO ]: UDP Com - Closing down Network Manager
+10:10:41.41: [INFO ]: Heartbeat - Closing Thread
+10:10:41.41: [INFO ]: Heartbeat - Ending conversation
+10:10:42.42: [WARN ]: UDP Com - Current thread is not running, cannot stop

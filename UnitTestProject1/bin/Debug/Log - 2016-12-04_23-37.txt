@@ -1,0 +1,58 @@
+11:37:12.12: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:37:12.12: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:37:12.12: [INFO ]: UDP Com - Closing Thread
+11:37:12.12: [INFO ]: UDP Com - Closing down Network Manager
+11:37:12.12: [INFO ]: Heartbeat - Closing Thread
+11:37:12.12: [INFO ]: Heartbeat - Ending conversation
+11:37:12.12: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:37:13.13: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:15559
+11:37:13.13: [INFO ]: UDP Com - Received message, enqueuing.
+11:37:13.13: [INFO ]: UDP Com - Closing Thread
+11:37:13.13: [INFO ]: UDP Com - Closing down Network Manager
+11:37:13.13: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:37:13.13: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:37:13.13: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:37:13.13: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:37:13.13: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:45558
+11:37:13.13: [INFO ]: UDP Com - Sending outbound message of length 103 to 127.0.0.1:45558
+11:37:13.13: [INFO ]: UDP Com - Sending outbound message of length 151 to 127.0.0.1:45558
+11:37:13.13: [INFO ]: UDP Com - Received message, enqueuing.
+11:37:13.13: [INFO ]: UDP Com - Closing Thread
+11:37:13.13: [INFO ]: UDP Com - Closing down Network Manager
+11:37:13.13: [INFO ]: Heartbeat - Processing received message, boo yah!
+11:37:13.13: [INFO ]: UDP Com - Sending outbound message of length 92 to 127.0.0.1:6788
+11:37:13.13: [INFO ]: UDP Com - Received message, enqueuing.
+11:37:13.13: [INFO ]: ConversationManager - Received message from communicator
+11:37:13.13: [INFO ]: ConversationManager - Message from 127.0.0.1:6789 to 1.10
+11:37:13.13: [INFO ]: Responder - Received some kind of response
+11:37:13.13: [INFO ]: Responder - Processing received message, boo yah!
+11:37:13.13: [INFO ]: UDP Com - Sending outbound message of length 92 to 127.0.0.1:6788
+11:37:13.13: [INFO ]: UDP Com - Received message, enqueuing.
+11:37:13.13: [INFO ]: ConversationManager - Received message from communicator
+11:37:13.13: [INFO ]: ConversationManager - Message from 127.0.0.1:6789 to 1.10
+11:37:13.13: [INFO ]: UDP Com - Sending outbound message of length 117 to 127.0.0.1:6789
+11:37:14.14: [INFO ]: UDP Com - Received message, enqueuing.
+11:37:14.14: [INFO ]: ConversationManager - Received message from communicator
+11:37:14.14: [WARN ]: ConversationManager - Unable to process message from 127.0.0.1:6788
+11:37:14.14: [INFO ]: Responder - Received some kind of response
+11:37:14.14: [INFO ]: Responder - Processing received message, boo yah!
+11:37:14.14: [INFO ]: Responder - Received some kind of response
+11:37:14.14: [INFO ]: Responder - Processing received message, boo yah!
+11:37:14.14: [INFO ]: Responder - Received some kind of response
+11:37:14.14: [INFO ]: Responder - Processing received message, boo yah!
+11:37:14.14: [INFO ]: Initiator - Received some kind of response
+11:37:14.14: [INFO ]: Initiator - Processing received message, boo yah!
+11:37:14.14: [INFO ]: Initiator - Closing Thread
+11:37:14.14: [INFO ]: UDP Com - Sending outbound message of length 117 to 127.0.0.1:6789
+11:37:14.14: [INFO ]: UDP Com - Received message, enqueuing.
+11:37:14.14: [INFO ]: ConversationManager - Received message from communicator
+11:37:14.14: [WARN ]: ConversationManager - Unable to process message from 127.0.0.1:6788
+11:37:14.14: [INFO ]: UDP Com - Sending outbound message of length 117 to 127.0.0.1:6789
+11:37:14.14: [INFO ]: UDP Com - Received message, enqueuing.
+11:37:14.14: [INFO ]: ConversationManager - Received message from communicator
+11:37:14.14: [WARN ]: ConversationManager - Unable to process message from 127.0.0.1:6788
+11:37:14.14: [WARN ]: Tester - Current thread is not running, cannot stop
+11:37:14.14: [INFO ]: UDP Com - Sending outbound message of length 117 to 127.0.0.1:6789
+11:37:14.14: [INFO ]: UDP Com - Received message, enqueuing.
+11:37:14.14: [INFO ]: ConversationManager - Received message from communicator
+11:37:14.14: [WARN ]: ConversationManager - Unable to process message from 127.0.0.1:6788

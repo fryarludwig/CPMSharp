@@ -1,0 +1,1 @@
+C:\Users\fryar\Documents\Visual Studio 2015\Projects\SharpCPM\AuthenticationManager\bin\Release\AuthenticationManager.exe.config

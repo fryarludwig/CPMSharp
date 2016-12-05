@@ -1,0 +1,33 @@
+11:18:33.33: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:18:33.33: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:18:33.33: [INFO ]: UDP Com - Closing Thread
+11:18:34.34: [INFO ]: UDP Com - Closing down Network Manager
+11:18:34.34: [INFO ]: Heartbeat - Closing Thread
+11:18:34.34: [INFO ]: Heartbeat - Ending conversation
+11:18:35.35: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:18:35.35: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:18:35.35: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:18:35.35: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:18:35.35: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:15559
+11:18:35.35: [INFO ]: UDP Com - Received message, enqueuing.
+11:18:35.35: [INFO ]: UDP Com - Closing Thread
+11:18:35.35: [INFO ]: UDP Com - Closing down Network Manager
+11:18:35.35: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:45558
+11:18:35.35: [INFO ]: UDP Com - Sending outbound message of length 103 to 127.0.0.1:45558
+11:18:35.35: [INFO ]: UDP Com - Sending outbound message of length 151 to 127.0.0.1:45558
+11:18:35.35: [INFO ]: UDP Com - Received message, enqueuing.
+11:18:35.35: [INFO ]: UDP Com - Closing Thread
+11:18:35.35: [INFO ]: UDP Com - Closing down Network Manager
+11:18:35.35: [INFO ]: Heartbeat - Closing Thread
+11:18:36.36: [INFO ]: Heartbeat - Ending conversation
+11:18:37.37: [INFO ]: Heartbeat - Closing Thread
+11:18:37.37: [INFO ]: Heartbeat - Ending conversation
+11:18:38.38: [INFO ]: UDP Com - Sending outbound message of length 92 to 127.0.0.1:6788
+11:18:38.38: [INFO ]: UDP Com - Received message, enqueuing.
+11:18:38.38: [INFO ]: ConversationManager - Received message from communicator
+11:18:38.38: [INFO ]: ConversationManager - Message from 127.0.0.1:6789 to 0.10
+11:18:39.39: [INFO ]: Heartbeat - Received some kind of response
+11:18:39.39: [INFO ]: Heartbeat - Closing Thread
+11:18:39.39: [INFO ]: Heartbeat - Closing Thread
+11:18:40.40: [INFO ]: Heartbeat - Ending conversation
+11:18:40.40: [WARN ]: Tester - Current thread is not running, cannot stop

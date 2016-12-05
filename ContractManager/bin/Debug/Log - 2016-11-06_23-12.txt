@@ -1,0 +1,1 @@
+11:12:22.22: [TRACE]: Contract Manager - Initialized Authentication Manager

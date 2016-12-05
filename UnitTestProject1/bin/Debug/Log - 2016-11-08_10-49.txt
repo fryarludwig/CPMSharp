@@ -1,0 +1,2 @@
+10:49:26.26: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+10:49:43.43: [INFO ]: Communicator - Sending outbound message of length 78 to 127.0.0.1:15559

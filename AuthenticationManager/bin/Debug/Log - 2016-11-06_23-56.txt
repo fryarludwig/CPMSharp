@@ -1,0 +1,107 @@
+11:56:31.31: [INFO ]: ConversationManager - Creating conversation manager
+11:56:32.32: [TRACE]: AuthManager - Initialized Authentication Manager
+11:56:32.32: [TRACE]: ConversationManager - Conversation manager is running
+11:56:33.33: [TRACE]: ConversationManager - Conversation manager is running
+11:56:34.34: [TRACE]: ConversationManager - Conversation manager is running
+11:56:35.35: [TRACE]: ConversationManager - Conversation manager is running
+11:56:35.35: [INFO ]: AuthManager - Starting Server
+11:56:35.35: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:35.35: [TRACE]: Auth Service - Server Stopped
+11:56:36.36: [TRACE]: ConversationManager - Conversation manager is running
+11:56:36.36: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:37.37: [TRACE]: ConversationManager - Conversation manager is running
+11:56:37.37: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:38.38: [TRACE]: ConversationManager - Conversation manager is running
+11:56:38.38: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:39.39: [TRACE]: ConversationManager - Conversation manager is running
+11:56:39.39: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:40.40: [TRACE]: ConversationManager - Conversation manager is running
+11:56:40.40: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:41.41: [TRACE]: ConversationManager - Conversation manager is running
+11:56:41.41: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:42.42: [TRACE]: ConversationManager - Conversation manager is running
+11:56:42.42: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:43.43: [TRACE]: ConversationManager - Conversation manager is running
+11:56:43.43: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:44.44: [TRACE]: ConversationManager - Conversation manager is running
+11:56:44.44: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:45.45: [TRACE]: ConversationManager - Conversation manager is running
+11:56:45.45: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:46.46: [TRACE]: ConversationManager - Conversation manager is running
+11:56:46.46: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:47.47: [TRACE]: ConversationManager - Conversation manager is running
+11:56:47.47: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:48.48: [TRACE]: ConversationManager - Conversation manager is running
+11:56:48.48: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:49.49: [TRACE]: ConversationManager - Conversation manager is running
+11:56:49.49: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:50.50: [TRACE]: ConversationManager - Conversation manager is running
+11:56:50.50: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:51.51: [TRACE]: ConversationManager - Conversation manager is running
+11:56:51.51: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:52.52: [TRACE]: ConversationManager - Conversation manager is running
+11:56:52.52: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:53.53: [TRACE]: ConversationManager - Conversation manager is running
+11:56:53.53: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:54.54: [TRACE]: ConversationManager - Conversation manager is running
+11:56:54.54: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:55.55: [TRACE]: ConversationManager - Conversation manager is running
+11:56:55.55: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:56.56: [TRACE]: ConversationManager - Conversation manager is running
+11:56:56.56: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:57.57: [TRACE]: ConversationManager - Conversation manager is running
+11:56:57.57: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:58.58: [TRACE]: ConversationManager - Conversation manager is running
+11:56:58.58: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:56:59.59: [TRACE]: ConversationManager - Conversation manager is running
+11:56:59.59: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:00.0: [TRACE]: ConversationManager - Conversation manager is running
+11:57:00.0: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:01.1: [TRACE]: ConversationManager - Conversation manager is running
+11:57:01.1: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:02.2: [TRACE]: ConversationManager - Conversation manager is running
+11:57:02.2: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:03.3: [TRACE]: ConversationManager - Conversation manager is running
+11:57:03.3: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:04.4: [TRACE]: ConversationManager - Conversation manager is running
+11:57:04.4: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:05.5: [TRACE]: ConversationManager - Conversation manager is running
+11:57:05.5: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:06.6: [TRACE]: ConversationManager - Conversation manager is running
+11:57:06.6: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:07.7: [TRACE]: ConversationManager - Conversation manager is running
+11:57:07.7: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:08.8: [TRACE]: ConversationManager - Conversation manager is running
+11:57:08.8: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:09.9: [TRACE]: ConversationManager - Conversation manager is running
+11:57:09.9: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:10.10: [TRACE]: ConversationManager - Conversation manager is running
+11:57:10.10: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:11.11: [TRACE]: ConversationManager - Conversation manager is running
+11:57:11.11: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:12.12: [TRACE]: ConversationManager - Conversation manager is running
+11:57:12.12: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:13.13: [TRACE]: ConversationManager - Conversation manager is running
+11:57:13.13: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:14.14: [TRACE]: ConversationManager - Conversation manager is running
+11:57:14.14: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:15.15: [TRACE]: ConversationManager - Conversation manager is running
+11:57:15.15: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:16.16: [TRACE]: ConversationManager - Conversation manager is running
+11:57:16.16: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:17.17: [TRACE]: ConversationManager - Conversation manager is running
+11:57:17.17: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:18.18: [TRACE]: ConversationManager - Conversation manager is running
+11:57:18.18: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:19.19: [TRACE]: ConversationManager - Conversation manager is running
+11:57:19.19: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:20.20: [TRACE]: ConversationManager - Conversation manager is running
+11:57:20.20: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:21.21: [TRACE]: ConversationManager - Conversation manager is running
+11:57:21.21: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:22.22: [TRACE]: ConversationManager - Conversation manager is running
+11:57:22.22: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:23.23: [TRACE]: ConversationManager - Conversation manager is running
+11:57:23.23: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:57:24.24: [TRACE]: ConversationManager - Conversation manager is running
+11:57:24.24: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle

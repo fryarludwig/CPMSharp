@@ -1,0 +1,8 @@
+11:01:29.29: [TRACE]: AuthManager - Initialized Authentication Manager
+11:01:30.30: [ERROR]: Auth Service - The given key was not present in the dictionary.
+11:01:32.32: [INFO ]: AuthManager - Starting Server
+11:01:32.32: [TRACE]: Auth Service - Server Started
+11:02:08.8: [INFO ]: AuthManager - Shutting down
+11:02:08.8: [TRACE]: AuthManager - Calling Derived Stop
+11:02:08.8: [TRACE]: AuthManager - Waiting for shutdown messages to propogate
+11:02:13.13: [TRACE]: Auth Service - Server Started

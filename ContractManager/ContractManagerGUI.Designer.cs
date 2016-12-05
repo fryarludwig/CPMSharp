@@ -61,7 +61,7 @@
             this.authenticatorPortInput.Name = "authenticatorPortInput";
             this.authenticatorPortInput.Size = new System.Drawing.Size(100, 20);
             this.authenticatorPortInput.TabIndex = 15;
-            this.authenticatorPortInput.Text = "5555";
+            this.authenticatorPortInput.Text = "12034";
             // 
             // label3
             // 

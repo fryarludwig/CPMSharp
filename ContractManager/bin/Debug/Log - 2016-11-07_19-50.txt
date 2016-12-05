@@ -1,0 +1,6 @@
+07:50:53.53: [INFO ]: ConversationManager - Creating conversation manager
+07:50:53.53: [TRACE]: Contract Manager - Initialized Authentication Manager
+07:50:53.53: [TRACE]: ConversationManager - Conversation manager is running
+07:50:53.53: [ERROR]: Contract GUI - The given key was not present in the dictionary.
+07:50:54.54: [TRACE]: ConversationManager - Conversation manager is running
+07:50:55.55: [TRACE]: ConversationManager - Conversation manager is running

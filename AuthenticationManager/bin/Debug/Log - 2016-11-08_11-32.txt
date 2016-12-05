@@ -1,0 +1,9 @@
+11:32:58.58: [INFO ]: ConversationManager - Creating conversation manager
+11:32:58.58: [TRACE]: AuthManager - Initialized Authentication Manager
+11:32:58.58: [ERROR]: Auth Service - The given key was not present in the dictionary.
+11:33:01.1: [INFO ]: AuthManager - Starting Server
+11:33:01.1: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:33:02.2: [TRACE]: Auth Service - Server Started
+11:33:02.2: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:33:03.3: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:33:04.4: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle

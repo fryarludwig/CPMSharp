@@ -1,0 +1,8 @@
+07:29:42.42: [INFO ]: ConversationManager - Creating conversation manager
+07:29:42.42: [TRACE]: AuthManager - Initialized Authentication Manager
+07:29:42.42: [TRACE]: ConversationManager - Conversation manager is running
+07:29:43.43: [ERROR]: Auth Service - The given key was not present in the dictionary.
+07:29:43.43: [TRACE]: ConversationManager - Conversation manager is running
+07:29:44.44: [TRACE]: ConversationManager - Conversation manager is running
+07:29:45.45: [TRACE]: ConversationManager - Conversation manager is running
+07:29:46.46: [TRACE]: ConversationManager - Conversation manager is running

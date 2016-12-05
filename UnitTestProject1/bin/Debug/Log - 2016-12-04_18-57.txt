@@ -1,0 +1,37 @@
+06:57:36.36: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+06:57:36.36: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+06:57:36.36: [INFO ]: UDP Com - Closing Thread
+06:57:36.36: [INFO ]: UDP Com - Closing down Network Manager
+06:57:36.36: [INFO ]: Heartbeat - Closing Thread
+06:57:37.37: [INFO ]: Heartbeat - Ending conversation
+06:57:37.37: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:15559
+06:57:38.38: [INFO ]: UDP Com - Received message, enqueuing.
+06:57:38.38: [INFO ]: UDP Com - Closing Thread
+06:57:38.38: [INFO ]: UDP Com - Closing down Network Manager
+06:57:38.38: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:45558
+06:57:38.38: [INFO ]: UDP Com - Sending outbound message of length 103 to 127.0.0.1:45558
+06:57:38.38: [INFO ]: UDP Com - Sending outbound message of length 151 to 127.0.0.1:45558
+06:57:38.38: [INFO ]: UDP Com - Received message, enqueuing.
+06:57:38.38: [INFO ]: UDP Com - Closing Thread
+06:57:38.38: [INFO ]: UDP Com - Closing down Network Manager
+06:57:38.38: [INFO ]: Heartbeat - Closing Thread
+06:57:39.39: [INFO ]: Heartbeat - Ending conversation
+06:57:39.39: [INFO ]: Heartbeat - Closing Thread
+06:57:40.40: [INFO ]: Heartbeat - Ending conversation
+06:57:40.40: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+06:57:40.40: [WARN ]: UDP Com - Current thread is not running, cannot stop
+06:57:40.40: [WARN ]: UDP Com - Current thread is not running, cannot stop
+06:57:40.40: [WARN ]: UDP Com - Current thread is not running, cannot stop
+06:57:40.40: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+06:57:40.40: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+06:57:40.40: [WARN ]: UDP Com - Current thread is not running, cannot stop
+06:57:40.40: [WARN ]: UDP Com - Current thread is not running, cannot stop
+06:57:40.40: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+06:57:40.40: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+06:57:40.40: [WARN ]: UDP Com - Current thread is not running, cannot stop
+06:57:40.40: [WARN ]: UDP Com - Current thread is not running, cannot stop
+06:57:40.40: [INFO ]: UDP Com - Sending outbound message of length 78 to 0.0.0.0:6788
+06:57:40.40: [ERROR]: UDP Com - UDP socket exception : The requested address is not valid in its context
+06:57:41.41: [WARN ]: Tester - Current thread is not running, cannot stop
+06:57:41.41: [INFO ]: UDP Com - Sending outbound message of length 78 to 0.0.0.0:6788
+06:57:41.41: [ERROR]: UDP Com - UDP socket exception : The requested address is not valid in its context

@@ -1,0 +1,23 @@
+11:14:39.39: [TRACE]: AuthManager - Initialized Authentication Manager
+11:14:44.44: [INFO ]: AuthManager - Starting Server
+11:14:44.44: [TRACE]: Auth Service - Server Started
+11:14:47.47: [INFO ]: UDP Com - Received message, enqueuing.
+11:14:47.47: [INFO ]: ConversationManager - Received message from communicator
+11:14:47.47: [INFO ]: ConversationManager - Started a new conversation as 0.1
+11:14:47.47: [INFO ]: ConversationManager - Received message from communicator
+11:14:47.47: [INFO ]: ConversationManager - Message from 127.0.0.1:62035 to 0.1
+11:14:47.47: [INFO ]: UDP Com - Received message, enqueuing.
+11:14:47.47: [INFO ]: ConversationManager - Received message from communicator
+11:14:47.47: [INFO ]: ConversationManager - Message from 127.0.0.1:62035 to 0.1
+11:14:47.47: [INFO ]: ConversationManager - Received message from communicator
+11:14:47.47: [INFO ]: ConversationManager - Message from 127.0.0.1:62035 to 0.1
+11:14:47.47: [INFO ]: Auth - Login Conv - Received some kind of response
+11:14:47.47: [INFO ]: Auth - Login Conv - Received some kind of response
+11:14:47.47: [INFO ]: Auth - Login Conv - Received some kind of response
+11:14:47.47: [INFO ]: Auth - Login Conv - Received some kind of response
+11:14:47.47: [INFO ]: Auth - Login Conv - Closing Thread
+11:14:47.47: [INFO ]: UDP Com - Sending outbound message of length 234 to 127.0.0.1:62035
+11:14:47.47: [INFO ]: UDP Com - Sending outbound message of length 234 to 127.0.0.1:62035
+11:14:47.47: [INFO ]: UDP Com - Sending outbound message of length 234 to 127.0.0.1:62035
+11:14:47.47: [INFO ]: UDP Com - Sending outbound message of length 234 to 127.0.0.1:62035
+11:14:49.49: [INFO ]: Auth - Login Conv - Ending conversation

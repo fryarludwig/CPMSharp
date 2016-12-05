@@ -60,7 +60,7 @@
             this.portInput.Name = "portInput";
             this.portInput.Size = new System.Drawing.Size(100, 20);
             this.portInput.TabIndex = 15;
-            this.portInput.Text = "5555";
+            this.portInput.Text = "12034";
             // 
             // label2
             // 

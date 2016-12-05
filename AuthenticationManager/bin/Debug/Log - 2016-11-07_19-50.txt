@@ -1,0 +1,5 @@
+07:50:54.54: [INFO ]: ConversationManager - Creating conversation manager
+07:50:54.54: [TRACE]: AuthManager - Initialized Authentication Manager
+07:50:54.54: [TRACE]: ConversationManager - Conversation manager is running
+07:50:55.55: [TRACE]: ConversationManager - Conversation manager is running
+07:50:56.56: [TRACE]: ConversationManager - Conversation manager is running

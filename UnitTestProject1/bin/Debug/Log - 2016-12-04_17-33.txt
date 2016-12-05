@@ -1,0 +1,19 @@
+05:33:04.4: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+05:33:04.4: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+05:33:04.4: [INFO ]: Heartbeat - Closing Thread
+05:33:04.4: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:15559
+05:33:04.4: [INFO ]: UDP Com - Received message, enqueuing.
+05:33:04.4: [INFO ]: UDP Com - Closing Thread
+05:33:04.4: [INFO ]: UDP Com - Closing down Network Manager
+05:33:04.4: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:45558
+05:33:04.4: [INFO ]: UDP Com - Sending outbound message of length 103 to 127.0.0.1:45558
+05:33:04.4: [INFO ]: UDP Com - Sending outbound message of length 151 to 127.0.0.1:45558
+05:33:04.4: [INFO ]: UDP Com - Received message, enqueuing.
+05:33:04.4: [INFO ]: UDP Com - Closing Thread
+05:33:04.4: [INFO ]: UDP Com - Closing down Network Manager
+05:33:04.4: [INFO ]: Heartbeat - Closing Thread
+05:33:05.5: [INFO ]: Heartbeat - Closing Thread
+05:33:05.5: [INFO ]: Heartbeat - Closing Thread
+05:33:06.6: [ERROR]: Heartbeat - Unable to start Coversation due to invalid settings
+05:33:06.6: [ERROR]: Heartbeat - Unable to start Coversation due to invalid settings
+05:33:07.7: [ERROR]: Heartbeat - Unable to start Coversation due to invalid settings

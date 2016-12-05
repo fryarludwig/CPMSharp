@@ -1,0 +1,14 @@
+11:25:16.16: [INFO ]: ConversationManager - Creating conversation manager
+11:25:16.16: [TRACE]: AuthManager - Initialized Authentication Manager
+11:25:16.16: [ERROR]: Auth Service - The given key was not present in the dictionary.
+11:25:20.20: [INFO ]: AuthManager - Starting Server
+11:25:20.20: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:25:21.21: [TRACE]: Auth Service - Server Started
+11:25:21.21: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:25:22.22: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:25:23.23: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:25:24.24: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:25:25.25: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:25:26.26: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:25:27.27: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+11:25:28.28: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle

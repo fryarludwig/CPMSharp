@@ -1,0 +1,45 @@
+11:01:56.56: [TRACE]: SharpCPM GUI - Login information passed basic validation
+11:01:56.56: [TRACE]: SharpCPM GUI - Calling Login function for player
+11:01:56.56: [INFO ]: CPMClient - Starting Server
+11:01:56.56: [TRACE]: CPMClient - Attempting to log in
+11:01:56.56: [ERROR]: SharpCPM GUI - The given key was not present in the dictionary.
+11:01:57.57: [TRACE]: CPMClient - Attempting to log in
+11:01:57.57: [TRACE]: CPMClient - Attempting to log in
+11:01:58.58: [TRACE]: CPMClient - Attempting to log in
+11:01:58.58: [TRACE]: CPMClient - Attempting to log in
+11:01:59.59: [TRACE]: CPMClient - Attempting to log in
+11:01:59.59: [TRACE]: CPMClient - Attempting to log in
+11:02:00.0: [TRACE]: CPMClient - Attempting to log in
+11:02:00.0: [TRACE]: CPMClient - Attempting to log in
+11:02:01.1: [TRACE]: CPMClient - Attempting to log in
+11:02:01.1: [TRACE]: SharpCPM GUI - Player is logged out
+11:02:21.21: [TRACE]: SharpCPM GUI - Login information passed basic validation
+11:02:21.21: [TRACE]: SharpCPM GUI - Calling Login function for player
+11:02:21.21: [INFO ]: CPMClient - Starting Server
+11:02:21.21: [WARN ]: UDP Com - Cannot intiate thread, it is already active
+11:02:21.21: [TRACE]: CPMClient - Attempting to log in
+11:02:21.21: [TRACE]: CPMClient - Attempting to log in
+11:02:22.22: [TRACE]: CPMClient - Attempting to log in
+11:02:22.22: [TRACE]: CPMClient - Attempting to log in
+11:02:23.23: [TRACE]: CPMClient - Attempting to log in
+11:02:23.23: [TRACE]: CPMClient - Attempting to log in
+11:02:24.24: [TRACE]: CPMClient - Attempting to log in
+11:02:24.24: [TRACE]: CPMClient - Attempting to log in
+11:02:25.25: [TRACE]: CPMClient - Attempting to log in
+11:02:25.25: [TRACE]: CPMClient - Attempting to log in
+11:02:26.26: [TRACE]: SharpCPM GUI - Player is logged out
+11:02:28.28: [TRACE]: SharpCPM GUI - Login information passed basic validation
+11:02:28.28: [TRACE]: SharpCPM GUI - Calling Login function for player
+11:02:28.28: [INFO ]: CPMClient - Starting Server
+11:02:28.28: [WARN ]: UDP Com - Cannot intiate thread, it is already active
+11:02:28.28: [TRACE]: CPMClient - Attempting to log in
+11:02:29.29: [TRACE]: CPMClient - Attempting to log in
+11:02:29.29: [TRACE]: CPMClient - Attempting to log in
+11:02:30.30: [TRACE]: CPMClient - Attempting to log in
+11:02:30.30: [TRACE]: CPMClient - Attempting to log in
+11:02:31.31: [TRACE]: CPMClient - Attempting to log in
+11:02:31.31: [TRACE]: CPMClient - Attempting to log in
+11:02:32.32: [TRACE]: CPMClient - Attempting to log in
+11:02:32.32: [TRACE]: CPMClient - Attempting to log in
+11:02:33.33: [TRACE]: CPMClient - Attempting to log in
+11:02:33.33: [TRACE]: SharpCPM GUI - Player is logged out

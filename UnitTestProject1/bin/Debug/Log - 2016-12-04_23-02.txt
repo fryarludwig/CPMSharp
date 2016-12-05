@@ -1,0 +1,34 @@
+11:02:31.31: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:02:31.31: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:02:31.31: [INFO ]: UDP Com - Closing Thread
+11:02:31.31: [INFO ]: UDP Com - Closing down Network Manager
+11:02:31.31: [INFO ]: Heartbeat - Closing Thread
+11:02:32.32: [INFO ]: Heartbeat - Ending conversation
+11:02:32.32: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:02:32.32: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:02:32.32: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:02:32.32: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:02:32.32: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:15559
+11:02:32.32: [INFO ]: UDP Com - Received message, enqueuing.
+11:02:32.32: [INFO ]: UDP Com - Closing Thread
+11:02:33.33: [INFO ]: UDP Com - Closing down Network Manager
+11:02:33.33: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:45558
+11:02:33.33: [INFO ]: UDP Com - Sending outbound message of length 103 to 127.0.0.1:45558
+11:02:33.33: [INFO ]: UDP Com - Sending outbound message of length 151 to 127.0.0.1:45558
+11:02:33.33: [INFO ]: UDP Com - Received message, enqueuing.
+11:02:33.33: [INFO ]: UDP Com - Closing Thread
+11:02:33.33: [INFO ]: UDP Com - Closing down Network Manager
+11:02:33.33: [INFO ]: Heartbeat - Closing Thread
+11:02:34.34: [INFO ]: Heartbeat - Ending conversation
+11:02:34.34: [INFO ]: Heartbeat - Closing Thread
+11:02:35.35: [INFO ]: Heartbeat - Ending conversation
+11:02:35.35: [INFO ]: UDP Com - Sending outbound message of length 92 to 127.0.0.1:6788
+11:02:35.35: [INFO ]: UDP Com - Received message, enqueuing.
+11:02:35.35: [INFO ]: ConversationManager - Received message from communicator
+11:02:35.35: [INFO ]: ConversationManager - Message from 127.0.0.1:6789 to 0.10
+11:02:36.36: [WARN ]: Tester - Current thread is not running, cannot stop
+11:02:36.36: [INFO ]: Heartbeat - Received some kind of response
+11:02:36.36: [INFO ]: UDP Com - Sending outbound message of length 92 to 127.0.0.1:6788
+11:02:36.36: [INFO ]: UDP Com - Received message, enqueuing.
+11:02:36.36: [INFO ]: ConversationManager - Received message from communicator
+11:02:36.36: [INFO ]: ConversationManager - Message from 127.0.0.1:6789 to 0.10

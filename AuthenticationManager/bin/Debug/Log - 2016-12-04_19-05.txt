@@ -1,0 +1,15 @@
+07:05:55.55: [INFO ]: ConversationManager - Creating conversation manager
+07:05:55.55: [TRACE]: AuthManager - Initialized Authentication Manager
+07:05:56.56: [ERROR]: Auth Service - The given key was not present in the dictionary.
+07:06:16.16: [INFO ]: AuthManager - Starting Server
+07:06:16.16: [TRACE]: AuthManager - Attempting to log in
+07:06:16.16: [TRACE]: AuthManager - Attempting to log in
+07:06:17.17: [TRACE]: AuthManager - Attempting to log in
+07:06:17.17: [TRACE]: AuthManager - Attempting to log in
+07:06:18.18: [TRACE]: AuthManager - Attempting to log in
+07:06:19.19: [TRACE]: AuthManager - Attempting to log in
+07:06:19.19: [TRACE]: AuthManager - Attempting to log in
+07:06:20.20: [TRACE]: AuthManager - Attempting to log in
+07:06:20.20: [TRACE]: AuthManager - Attempting to log in
+07:06:21.21: [TRACE]: AuthManager - Attempting to log in
+07:06:21.21: [TRACE]: Auth Service - Server Stopped

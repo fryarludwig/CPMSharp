@@ -1,0 +1,16 @@
+10:43:03.3: [TRACE]: AuthManager - Initialized Authentication Manager
+10:43:03.3: [ERROR]: Auth Service - The given key was not present in the dictionary.
+10:43:07.7: [INFO ]: AuthManager - Starting Server
+10:43:08.8: [TRACE]: Auth Service - Server Started
+10:43:28.28: [INFO ]: AuthManager - Shutting down
+10:43:28.28: [TRACE]: AuthManager - Calling Derived Stop
+10:43:28.28: [TRACE]: AuthManager - Waiting for shutdown messages to propogate
+10:43:33.33: [TRACE]: Auth Service - Server Stopped
+10:43:42.42: [INFO ]: UDP Com - Closing Thread
+10:43:42.42: [INFO ]: UDP Com - Closing down Network Manager
+10:43:42.42: [INFO ]: AuthManager - Starting Server
+10:43:42.42: [WARN ]: UDP Com - Cannot intiate thread, it is already active
+10:43:42.42: [TRACE]: Auth Service - Server Started
+10:43:50.50: [INFO ]: AuthManager - Shutting down
+10:43:50.50: [TRACE]: AuthManager - Calling Derived Stop
+10:43:50.50: [TRACE]: AuthManager - Waiting for shutdown messages to propogate

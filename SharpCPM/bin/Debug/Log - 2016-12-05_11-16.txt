@@ -1,0 +1,48 @@
+11:16:30.30: [TRACE]: SharpCPM GUI - Login information passed basic validation
+11:16:30.30: [TRACE]: SharpCPM GUI - Calling Login function for client
+11:16:30.30: [INFO ]: CPMClient - Starting Server
+11:16:30.30: [TRACE]: CPMClient - Attempting to log in
+11:16:30.30: [ERROR]: SharpCPM GUI - The given key was not present in the dictionary.
+11:16:30.30: [INFO ]: UDP Com - Sending outbound message of length 177 to 127.0.0.1:5555
+11:16:30.30: [INFO ]: UDP Com - Sending outbound message of length 177 to 127.0.0.1:5555
+11:16:30.30: [INFO ]: UDP Com - Received message, enqueuing.
+11:16:30.30: [INFO ]: ConversationManager - Received message from communicator
+11:16:30.30: [INFO ]: ConversationManager - Message from 127.0.0.1:5555 to 0.1
+11:16:30.30: [INFO ]: ConversationManager - Received message from communicator
+11:16:30.30: [INFO ]: ConversationManager - Message from 127.0.0.1:5555 to 0.1
+11:16:30.30: [INFO ]: UDP Com - Received message, enqueuing.
+11:16:30.30: [INFO ]: ConversationManager - Received message from communicator
+11:16:30.30: [INFO ]: ConversationManager - Message from 127.0.0.1:5555 to 0.1
+11:16:30.30: [INFO ]: ConversationManager - Received message from communicator
+11:16:30.30: [INFO ]: ConversationManager - Message from 127.0.0.1:5555 to 0.1
+11:16:30.30: [INFO ]: UDP Com - Received message, enqueuing.
+11:16:30.30: [INFO ]: ConversationManager - Received message from communicator
+11:16:30.30: [INFO ]: ConversationManager - Message from 127.0.0.1:5555 to 0.1
+11:16:30.30: [INFO ]: ConversationManager - Received message from communicator
+11:16:30.30: [INFO ]: ConversationManager - Message from 127.0.0.1:5555 to 0.1
+11:16:30.30: [INFO ]: UDP Com - Received message, enqueuing.
+11:16:30.30: [INFO ]: ConversationManager - Received message from communicator
+11:16:30.30: [INFO ]: ConversationManager - Message from 127.0.0.1:5555 to 0.1
+11:16:30.30: [INFO ]: ConversationManager - Received message from communicator
+11:16:30.30: [INFO ]: ConversationManager - Message from 127.0.0.1:5555 to 0.1
+11:16:31.31: [INFO ]: Login Conv - Received some kind of response
+11:16:31.31: [INFO ]: Login Conv - Received Login response: Granted!
+11:16:31.31: [INFO ]: Login Conv - Received some kind of response
+11:16:31.31: [INFO ]: Login Conv - Received Login response: Granted!
+11:16:31.31: [INFO ]: Login Conv - Received some kind of response
+11:16:31.31: [INFO ]: Login Conv - Received Login response: Granted!
+11:16:31.31: [INFO ]: Login Conv - Received some kind of response
+11:16:31.31: [INFO ]: Login Conv - Received Login response: Granted!
+11:16:31.31: [INFO ]: Login Conv - Received some kind of response
+11:16:31.31: [INFO ]: Login Conv - Received Login response: Granted!
+11:16:31.31: [INFO ]: Login Conv - Received some kind of response
+11:16:31.31: [INFO ]: Login Conv - Received Login response: Granted!
+11:16:31.31: [INFO ]: Login Conv - Received some kind of response
+11:16:31.31: [INFO ]: Login Conv - Received Login response: Granted!
+11:16:31.31: [INFO ]: Login Conv - Received some kind of response
+11:16:31.31: [INFO ]: Login Conv - Received Login response: Granted!
+11:16:31.31: [WARN ]: Login Conv - Unable to log in
+11:16:31.31: [INFO ]: CPMClient - Login status updated!
+11:16:31.31: [INFO ]: Login Conv - Closing Thread
+11:16:31.31: [TRACE]: SharpCPM GUI - User is logged in
+11:16:33.33: [INFO ]: Login Conv - Ending conversation

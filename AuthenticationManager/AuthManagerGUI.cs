@@ -159,7 +159,10 @@ namespace AuthenticationManager
         public static ConcurrentQueue<LogItem> GuiLogQueue = new ConcurrentQueue<LogItem>();
         public static ConcurrentDictionary<Level, bool> LogPrintDictionary = new ConcurrentDictionary<Level, bool>();
 
+        private void portInput_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }
 

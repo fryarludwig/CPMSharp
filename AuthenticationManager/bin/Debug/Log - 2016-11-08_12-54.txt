@@ -1,0 +1,124 @@
+12:54:16.16: [TRACE]: AuthManager - Initialized Authentication Manager
+12:54:16.16: [ERROR]: Auth Service - The given key was not present in the dictionary.
+12:54:25.25: [INFO ]: AuthManager - Starting Server
+12:54:25.25: [INFO ]: ConversationManager - Creating conversation manager
+12:54:25.25: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:25.25: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:26.26: [TRACE]: Auth Service - Server Started
+12:54:26.26: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:26.26: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:27.27: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:27.27: [INFO ]: Communicator - Received message, enqueuing.
+12:54:27.27: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:28.28: [INFO ]: ConversationManager - Message waiting - attempting to retrieve
+12:54:28.28: [TRACE]: Auth - Login Conv - Conversation is active
+12:54:28.28: [INFO ]: Auth - Login Conv - Received some kind of response
+12:54:28.28: [INFO ]: Auth - Login Conv - Received Login response
+12:54:28.28: [INFO ]: Auth - Login Conv - Sender: Contract Manager
+12:54:28.28: [INFO ]: Auth - Login Conv - Closing Thread
+12:54:28.28: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:28.28: [INFO ]: Communicator - Sending outbound message of length 234 to 127.0.0.1:51844
+12:54:28.28: [INFO ]: Communicator - Received message, enqueuing.
+12:54:28.28: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:29.29: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:29.29: [INFO ]: Communicator - Received message, enqueuing.
+12:54:29.29: [INFO ]: ConversationManager - Message waiting - attempting to retrieve
+12:54:29.29: [INFO ]: ConversationManager - Message waiting - attempting to retrieve
+12:54:29.29: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:30.30: [INFO ]: Auth - Login Conv - Ending conversation
+12:54:30.30: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:30.30: [INFO ]: Communicator - Received message, enqueuing.
+12:54:30.30: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:31.31: [INFO ]: ConversationManager - Message waiting - attempting to retrieve
+12:54:31.31: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:31.31: [INFO ]: Communicator - Received message, enqueuing.
+12:54:31.31: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:32.32: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:32.32: [INFO ]: Communicator - Received message, enqueuing.
+12:54:32.32: [INFO ]: ConversationManager - Message waiting - attempting to retrieve
+12:54:32.32: [INFO ]: ConversationManager - Message waiting - attempting to retrieve
+12:54:32.32: [TRACE]: Auth - Login Conv - Conversation is active
+12:54:32.32: [INFO ]: Auth - Login Conv - Received some kind of response
+12:54:32.32: [INFO ]: Auth - Login Conv - Received Login response
+12:54:32.32: [INFO ]: Auth - Login Conv - Sender: Contract Manager
+12:54:32.32: [INFO ]: Auth - Login Conv - Closing Thread
+12:54:32.32: [INFO ]: Communicator - Sending outbound message of length 234 to 127.0.0.1:51844
+12:54:32.32: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:33.33: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:33.33: [INFO ]: Communicator - Received message, enqueuing.
+12:54:33.33: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:34.34: [INFO ]: ConversationManager - Message waiting - attempting to retrieve
+12:54:34.34: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:34.34: [INFO ]: Communicator - Received message, enqueuing.
+12:54:34.34: [INFO ]: Auth - Login Conv - Ending conversation
+12:54:35.35: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:35.35: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:35.35: [INFO ]: Communicator - Received message, enqueuing.
+12:54:35.35: [INFO ]: ConversationManager - Message waiting - attempting to retrieve
+12:54:35.35: [INFO ]: ConversationManager - Message waiting - attempting to retrieve
+12:54:36.36: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:36.36: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:36.36: [INFO ]: Communicator - Received message, enqueuing.
+12:54:37.37: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:37.37: [INFO ]: ConversationManager - Message waiting - attempting to retrieve
+12:54:37.37: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:37.37: [INFO ]: Communicator - Received message, enqueuing.
+12:54:38.38: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:38.38: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:38.38: [INFO ]: ConversationManager - Message waiting - attempting to retrieve
+12:54:38.38: [TRACE]: Auth - Login Conv - Conversation is active
+12:54:38.38: [INFO ]: Auth - Login Conv - Received some kind of response
+12:54:38.38: [INFO ]: Auth - Login Conv - Received Login response
+12:54:38.38: [INFO ]: Auth - Login Conv - Sender: Contract Manager
+12:54:38.38: [INFO ]: Auth - Login Conv - Closing Thread
+12:54:38.38: [INFO ]: Communicator - Received message, enqueuing.
+12:54:38.38: [INFO ]: Communicator - Sending outbound message of length 235 to 127.0.0.1:51844
+12:54:39.39: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:39.39: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:39.39: [INFO ]: Communicator - Received message, enqueuing.
+12:54:40.40: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:40.40: [INFO ]: ConversationManager - Message waiting - attempting to retrieve
+12:54:40.40: [INFO ]: ConversationManager - Message waiting - attempting to retrieve
+12:54:40.40: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:40.40: [INFO ]: Auth - Login Conv - Ending conversation
+12:54:40.40: [INFO ]: Communicator - Received message, enqueuing.
+12:54:41.41: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:41.41: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:41.41: [INFO ]: ConversationManager - Message waiting - attempting to retrieve
+12:54:41.41: [INFO ]: Communicator - Received message, enqueuing.
+12:54:42.42: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:42.42: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:42.42: [INFO ]: Communicator - Received message, enqueuing.
+12:54:43.43: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:43.43: [INFO ]: ConversationManager - Message waiting - attempting to retrieve
+12:54:43.43: [INFO ]: ConversationManager - Message waiting - attempting to retrieve
+12:54:43.43: [TRACE]: Auth - Login Conv - Conversation is active
+12:54:43.43: [INFO ]: Auth - Login Conv - Received some kind of response
+12:54:43.43: [INFO ]: Auth - Login Conv - Received Login response
+12:54:43.43: [INFO ]: Auth - Login Conv - Sender: Contract Manager
+12:54:43.43: [INFO ]: Auth - Login Conv - Closing Thread
+12:54:43.43: [INFO ]: Communicator - Sending outbound message of length 235 to 127.0.0.1:51844
+12:54:43.43: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:43.43: [INFO ]: AuthManager - Shuttind down server
+12:54:43.43: [INFO ]: AuthManager - Closing Thread
+12:54:43.43: [TRACE]: AuthManager - Calling Derived Stop
+12:54:43.43: [INFO ]: ConversationManager - Closing Thread
+12:54:43.43: [WARN ]: Auth - Login Conv - Current thread is not running, cannot stop
+12:54:43.43: [WARN ]: Auth - Login Conv - Current thread is not running, cannot stop
+12:54:43.43: [WARN ]: Auth - Login Conv - Current thread is not running, cannot stop
+12:54:43.43: [INFO ]: Auth - Login Conv - Closing Thread
+12:54:43.43: [INFO ]: Communicator - Received message, enqueuing.
+12:54:44.44: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:44.44: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:44.44: [INFO ]: ConversationManager - Message waiting - attempting to retrieve
+12:54:45.45: [INFO ]: Communicator - Received message, enqueuing.
+12:54:45.45: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:45.45: [INFO ]: Auth - Login Conv - Ending conversation
+12:54:45.45: [INFO ]: Communicator - Closing Thread
+12:54:45.45: [INFO ]: Communicator - Closing down Network Manager
+12:54:45.45: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:46.46: [INFO ]: AuthManager - The deets: Id=0, Label=Authentication Manager, Type=AuthenticationManager, EndPoint=0.0.0.0:5555, Status=Idle
+12:54:46.46: [INFO ]: ConversationManager - Conversation manager has closed
+12:54:46.46: [TRACE]: AuthManager - Closing Connection
+12:54:46.46: [TRACE]: AuthManager - Waiting for shutdown messages to propogate
+12:54:51.51: [TRACE]: Auth Service - Server Stopped

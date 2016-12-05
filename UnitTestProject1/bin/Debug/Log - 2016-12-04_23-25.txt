@@ -1,0 +1,9 @@
+11:25:40.40: [INFO ]: UDP Com - Sending outbound message of length 92 to 127.0.0.1:6788
+11:25:40.40: [INFO ]: UDP Com - Received message, enqueuing.
+11:25:40.40: [INFO ]: ConversationManager - Received message from communicator
+11:25:40.40: [INFO ]: ConversationManager - Message from 127.0.0.1:6789 to 0.10
+11:25:41.41: [INFO ]: Heartbeat - Received some kind of response
+11:25:41.41: [INFO ]: Heartbeat - Processing received message, boo yah!
+11:25:41.41: [INFO ]: Heartbeat - Closing Thread
+11:25:41.41: [INFO ]: Heartbeat - Closing Thread
+11:25:42.42: [INFO ]: Heartbeat - Ending conversation

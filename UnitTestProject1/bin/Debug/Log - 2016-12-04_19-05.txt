@@ -1,0 +1,29 @@
+07:05:04.4: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+07:05:04.4: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+07:05:04.4: [INFO ]: UDP Com - Closing Thread
+07:05:04.4: [INFO ]: UDP Com - Closing down Network Manager
+07:05:04.4: [INFO ]: Heartbeat - Closing Thread
+07:05:05.5: [INFO ]: Heartbeat - Ending conversation
+07:05:05.5: [WARN ]: UDP Com - Current thread is not running, cannot stop
+07:05:05.5: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+07:05:05.5: [WARN ]: UDP Com - Current thread is not running, cannot stop
+07:05:05.5: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+07:05:05.5: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:15559
+07:05:05.5: [INFO ]: UDP Com - Received message, enqueuing.
+07:05:05.5: [INFO ]: UDP Com - Closing Thread
+07:05:05.5: [INFO ]: UDP Com - Closing down Network Manager
+07:05:05.5: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:45558
+07:05:05.5: [INFO ]: UDP Com - Sending outbound message of length 103 to 127.0.0.1:45558
+07:05:05.5: [INFO ]: UDP Com - Sending outbound message of length 151 to 127.0.0.1:45558
+07:05:06.6: [INFO ]: UDP Com - Received message, enqueuing.
+07:05:06.6: [INFO ]: UDP Com - Closing Thread
+07:05:06.6: [INFO ]: UDP Com - Closing down Network Manager
+07:05:06.6: [INFO ]: Heartbeat - Closing Thread
+07:05:07.7: [INFO ]: Heartbeat - Ending conversation
+07:05:07.7: [INFO ]: Heartbeat - Closing Thread
+07:05:08.8: [INFO ]: Heartbeat - Ending conversation
+07:05:08.8: [INFO ]: UDP Com - Sending outbound message of length 78 to 0.0.0.0:6788
+07:05:08.8: [ERROR]: UDP Com - UDP socket exception : The requested address is not valid in its context
+07:05:09.9: [INFO ]: UDP Com - Sending outbound message of length 78 to 0.0.0.0:6788
+07:05:09.9: [ERROR]: UDP Com - UDP socket exception : The requested address is not valid in its context
+07:05:10.10: [WARN ]: Tester - Current thread is not running, cannot stop

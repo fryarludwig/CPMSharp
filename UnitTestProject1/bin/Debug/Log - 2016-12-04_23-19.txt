@@ -1,0 +1,35 @@
+11:19:38.38: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:19:38.38: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:19:38.38: [INFO ]: UDP Com - Closing Thread
+11:19:38.38: [INFO ]: UDP Com - Closing down Network Manager
+11:19:38.38: [INFO ]: Heartbeat - Closing Thread
+11:19:39.39: [INFO ]: Heartbeat - Ending conversation
+11:19:39.39: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:19:40.40: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:15559
+11:19:40.40: [INFO ]: UDP Com - Received message, enqueuing.
+11:19:40.40: [INFO ]: UDP Com - Closing Thread
+11:19:40.40: [INFO ]: UDP Com - Closing down Network Manager
+11:19:40.40: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:45558
+11:19:40.40: [INFO ]: UDP Com - Sending outbound message of length 103 to 127.0.0.1:45558
+11:19:40.40: [INFO ]: UDP Com - Sending outbound message of length 151 to 127.0.0.1:45558
+11:19:40.40: [INFO ]: UDP Com - Received message, enqueuing.
+11:19:40.40: [INFO ]: UDP Com - Closing Thread
+11:19:40.40: [INFO ]: UDP Com - Closing down Network Manager
+11:19:40.40: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:19:40.40: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:19:40.40: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:19:40.40: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:19:40.40: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:19:40.40: [INFO ]: Heartbeat - Closing Thread
+11:19:41.41: [INFO ]: Heartbeat - Ending conversation
+11:19:41.41: [INFO ]: Heartbeat - Closing Thread
+11:19:42.42: [INFO ]: Heartbeat - Ending conversation
+11:19:43.43: [INFO ]: UDP Com - Sending outbound message of length 92 to 127.0.0.1:6788
+11:19:43.43: [INFO ]: UDP Com - Received message, enqueuing.
+11:19:43.43: [INFO ]: ConversationManager - Received message from communicator
+11:19:43.43: [INFO ]: ConversationManager - Message from 127.0.0.1:6789 to 0.10
+11:19:43.43: [INFO ]: Heartbeat - Received some kind of response
+11:19:43.43: [INFO ]: Heartbeat - Closing Thread
+11:19:44.44: [INFO ]: Heartbeat - Closing Thread
+11:19:44.44: [INFO ]: Heartbeat - Ending conversation
+11:19:45.45: [WARN ]: Tester - Current thread is not running, cannot stop

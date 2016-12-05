@@ -1,0 +1,16 @@
+11:37:51.51: [TRACE]: Contract Manager - Initialized Authentication Manager
+11:37:51.51: [ERROR]: Contract GUI - The given key was not present in the dictionary.
+11:38:08.8: [TRACE]: Contract GUI - Login information passed basic validation
+11:38:08.8: [TRACE]: Contract GUI - Calling Login function for player
+11:38:08.8: [INFO ]: Contract Manager - Attempting to log in
+11:38:08.8: [TRACE]: Contract Manager - Attempting to log in
+11:38:09.9: [TRACE]: Contract Manager - Attempting to log in
+11:38:09.9: [TRACE]: Contract Manager - Attempting to log in
+11:38:10.10: [TRACE]: Contract Manager - Attempting to log in
+11:38:10.10: [TRACE]: Contract Manager - Attempting to log in
+11:38:11.11: [TRACE]: Contract Manager - Attempting to log in
+11:38:11.11: [TRACE]: Contract Manager - Attempting to log in
+11:38:12.12: [TRACE]: Contract Manager - Attempting to log in
+11:38:12.12: [TRACE]: Contract Manager - Attempting to log in
+11:38:13.13: [TRACE]: Contract Manager - Attempting to log in
+11:38:13.13: [TRACE]: Contract GUI - Player is logged out

@@ -1,0 +1,63 @@
+11:33:35.35: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:33:35.35: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:33:35.35: [INFO ]: UDP Com - Closing Thread
+11:33:35.35: [INFO ]: UDP Com - Closing down Network Manager
+11:33:35.35: [INFO ]: Heartbeat - Closing Thread
+11:33:35.35: [INFO ]: Heartbeat - Ending conversation
+11:33:35.35: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:33:36.36: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:15559
+11:33:36.36: [INFO ]: UDP Com - Received message, enqueuing.
+11:33:36.36: [INFO ]: UDP Com - Closing Thread
+11:33:36.36: [INFO ]: UDP Com - Closing down Network Manager
+11:33:36.36: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:45558
+11:33:36.36: [INFO ]: UDP Com - Sending outbound message of length 103 to 127.0.0.1:45558
+11:33:36.36: [INFO ]: UDP Com - Sending outbound message of length 151 to 127.0.0.1:45558
+11:33:36.36: [INFO ]: UDP Com - Received message, enqueuing.
+11:33:36.36: [INFO ]: UDP Com - Closing Thread
+11:33:36.36: [INFO ]: UDP Com - Closing down Network Manager
+11:33:36.36: [INFO ]: Heartbeat - Processing received message, boo yah!
+11:33:36.36: [INFO ]: UDP Com - Sending outbound message of length 92 to 127.0.0.1:6788
+11:33:36.36: [INFO ]: UDP Com - Received message, enqueuing.
+11:33:36.36: [INFO ]: ConversationManager - Received message from communicator
+11:33:36.36: [INFO ]: ConversationManager - Message from 127.0.0.1:6789 to 1.10
+11:33:36.36: [INFO ]: Responder - Received some kind of response
+11:33:36.36: [INFO ]: Responder - Processing received message, boo yah!
+11:33:36.36: [INFO ]: UDP Com - Sending outbound message of length 92 to 127.0.0.1:6788
+11:33:36.36: [INFO ]: UDP Com - Received message, enqueuing.
+11:33:36.36: [INFO ]: ConversationManager - Received message from communicator
+11:33:36.36: [INFO ]: ConversationManager - Message from 127.0.0.1:6789 to 1.10
+11:33:36.36: [INFO ]: UDP Com - Sending outbound message of length 117 to 127.0.0.1:6789
+11:33:37.37: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:33:37.37: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:33:37.37: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:33:37.37: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:33:37.37: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:33:37.37: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:33:37.37: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:33:37.37: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:33:37.37: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:33:37.37: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+11:33:37.37: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:33:37.37: [WARN ]: UDP Com - Current thread is not running, cannot stop
+11:33:37.37: [INFO ]: UDP Com - Received message, enqueuing.
+11:33:37.37: [INFO ]: ConversationManager - Received message from communicator
+11:33:37.37: [WARN ]: ConversationManager - Unable to process message from 127.0.0.1:6788
+11:33:37.37: [INFO ]: Responder - Received some kind of response
+11:33:37.37: [INFO ]: Responder - Processing received message, boo yah!
+11:33:37.37: [INFO ]: Responder - Received some kind of response
+11:33:37.37: [INFO ]: Responder - Processing received message, boo yah!
+11:33:37.37: [INFO ]: Responder - Received some kind of response
+11:33:37.37: [INFO ]: Responder - Processing received message, boo yah!
+11:33:37.37: [INFO ]: Initiator - Received some kind of response
+11:33:37.37: [INFO ]: Initiator - Processing received message, boo yah!
+11:33:37.37: [INFO ]: UDP Com - Sending outbound message of length 117 to 127.0.0.1:6789
+11:33:37.37: [INFO ]: UDP Com - Received message, enqueuing.
+11:33:37.37: [INFO ]: ConversationManager - Received message from communicator
+11:33:37.37: [WARN ]: ConversationManager - Unable to process message from 127.0.0.1:6788
+11:33:37.37: [INFO ]: UDP Com - Sending outbound message of length 92 to 127.0.0.1:6788
+11:33:37.37: [INFO ]: UDP Com - Received message, enqueuing.
+11:33:37.37: [INFO ]: ConversationManager - Received message from communicator
+11:33:37.37: [INFO ]: ConversationManager - Started a new conversation as 1.10
+11:33:37.37: [INFO ]: Heartbeat - Received some kind of response
+11:33:37.37: [INFO ]: Heartbeat - Processing received message, boo yah!
+11:33:37.37: [WARN ]: Tester - Current thread is not running, cannot stop

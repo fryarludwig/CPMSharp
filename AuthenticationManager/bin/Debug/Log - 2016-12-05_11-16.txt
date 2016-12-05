@@ -1,0 +1,24 @@
+11:16:24.24: [TRACE]: AuthManager - Initialized Authentication Manager
+11:16:29.29: [INFO ]: AuthManager - Starting Server
+11:16:29.29: [TRACE]: Auth Service - Server Started
+11:16:30.30: [INFO ]: UDP Com - Received message, enqueuing.
+11:16:30.30: [INFO ]: ConversationManager - Received message from communicator
+11:16:30.30: [INFO ]: ConversationManager - Started a new conversation as 0.1
+11:16:30.30: [INFO ]: ConversationManager - Received message from communicator
+11:16:30.30: [INFO ]: ConversationManager - Message from 127.0.0.1:55291 to 0.1
+11:16:30.30: [INFO ]: UDP Com - Received message, enqueuing.
+11:16:30.30: [INFO ]: ConversationManager - Received message from communicator
+11:16:30.30: [INFO ]: ConversationManager - Message from 127.0.0.1:55291 to 0.1
+11:16:30.30: [INFO ]: ConversationManager - Received message from communicator
+11:16:30.30: [INFO ]: ConversationManager - Message from 127.0.0.1:55291 to 0.1
+11:16:30.30: [INFO ]: Auth - Login Conv - Received some kind of response
+11:16:30.30: [INFO ]: Auth - Login Conv - Received some kind of response
+11:16:30.30: [INFO ]: Auth - Login Conv - Received some kind of response
+11:16:30.30: [INFO ]: Auth - Login Conv - Received some kind of response
+11:16:30.30: [INFO ]: Auth - Login Conv - Closing Thread
+11:16:30.30: [INFO ]: UDP Com - Sending outbound message of length 234 to 127.0.0.1:55291
+11:16:30.30: [INFO ]: UDP Com - Sending outbound message of length 234 to 127.0.0.1:55291
+11:16:30.30: [INFO ]: UDP Com - Sending outbound message of length 234 to 127.0.0.1:55291
+11:16:30.30: [INFO ]: UDP Com - Sending outbound message of length 234 to 127.0.0.1:55291
+11:16:32.32: [INFO ]: Auth - Login Conv - Closing Thread
+11:16:34.34: [INFO ]: Auth - Login Conv - Ending conversation

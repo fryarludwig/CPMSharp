@@ -1,0 +1,2 @@
+09:27:45.45: [INFO ]: DSoak GUI - User entered invalid information
+09:27:46.46: [ERROR]: DSoak GUI - The given key was not present in the dictionary.

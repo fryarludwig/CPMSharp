@@ -1,0 +1,99 @@
+11:19:52.52: [INFO ]: ConversationManager - Creating conversation manager
+11:19:52.52: [TRACE]: Contract Manager - Initialized Authentication Manager
+11:20:01.1: [TRACE]: Contract GUI - Login information passed basic validation
+11:20:01.1: [INFO ]: Contract Manager - Attempting to connect
+11:20:01.1: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Unknown
+11:20:01.1: [INFO ]: Contract Manager - Requesting a login
+11:20:01.1: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:01.1: [INFO ]: Communicator - Sending outbound message of length 292 to 127.0.0.1:5555
+11:20:01.1: [ERROR]: Communicator - UDP socket exception : An existing connection was forcibly closed by the remote host
+11:20:01.1: [INFO ]: Communicator - Closing down Network Manager
+11:20:02.2: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:02.2: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:03.3: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:03.3: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:04.4: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:04.4: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:05.5: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:05.5: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:06.6: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:06.6: [WARN ]: Login Conv - Failed to log in
+11:20:06.6: [INFO ]: Login Conv - Closing Thread
+11:20:07.7: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Not Initialized
+11:20:07.7: [INFO ]: Contract Manager - Requesting a login
+11:20:07.7: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:08.8: [INFO ]: Login Conv - Ending conversation
+11:20:08.8: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:08.8: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:09.9: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:09.9: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:10.10: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:10.10: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:11.11: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:11.11: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:12.12: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:12.12: [WARN ]: Login Conv - Failed to log in
+11:20:12.12: [INFO ]: Login Conv - Closing Thread
+11:20:13.13: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Not Initialized
+11:20:13.13: [INFO ]: Contract Manager - Requesting a login
+11:20:13.13: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:14.14: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:14.14: [INFO ]: Login Conv - Ending conversation
+11:20:14.14: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:15.15: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:15.15: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:16.16: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:16.16: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:17.17: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:17.17: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:18.18: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:18.18: [WARN ]: Login Conv - Failed to log in
+11:20:18.18: [INFO ]: Login Conv - Closing Thread
+11:20:19.19: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Not Initialized
+11:20:19.19: [INFO ]: Contract Manager - Requesting a login
+11:20:19.19: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:20.20: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:20.20: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:20.20: [INFO ]: Login Conv - Ending conversation
+11:20:21.21: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:21.21: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:22.22: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:22.22: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:23.23: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:23.23: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:24.24: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:24.24: [WARN ]: Login Conv - Failed to log in
+11:20:24.24: [INFO ]: Login Conv - Closing Thread
+11:20:25.25: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Not Initialized
+11:20:25.25: [INFO ]: Contract Manager - Requesting a login
+11:20:25.25: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:26.26: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:26.26: [INFO ]: Login Conv - Ending conversation
+11:20:26.26: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:27.27: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:27.27: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:28.28: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:28.28: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:29.29: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:29.29: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:30.30: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:30.30: [WARN ]: Login Conv - Failed to log in
+11:20:30.30: [INFO ]: Login Conv - Closing Thread
+11:20:31.31: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Not Initialized
+11:20:31.31: [INFO ]: Contract Manager - Requesting a login
+11:20:31.31: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:32.32: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:32.32: [INFO ]: Login Conv - Ending conversation
+11:20:32.32: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:33.33: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:33.33: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:34.34: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:34.34: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:35.35: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:35.35: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+11:20:36.36: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+11:20:36.36: [WARN ]: Login Conv - Failed to log in
+11:20:36.36: [INFO ]: Login Conv - Closing Thread
+11:20:37.37: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Not Initialized
+11:20:37.37: [INFO ]: Contract Manager - Requesting a login
+11:20:37.37: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555

@@ -1,0 +1,31 @@
+11:24:54.54: [TRACE]: Contract Manager - Initialized Authentication Manager
+11:24:54.54: [ERROR]: Contract GUI - The given key was not present in the dictionary.
+11:25:00.0: [TRACE]: Contract GUI - Login information passed basic validation
+11:25:00.0: [TRACE]: Contract GUI - Calling Login function for player
+11:25:00.0: [INFO ]: Contract Manager - Attempting to log in
+11:25:00.0: [TRACE]: Contract Manager - Attempting to log in
+11:25:00.0: [TRACE]: Contract Manager - Attempting to log in
+11:25:01.1: [TRACE]: Contract Manager - Attempting to log in
+11:25:01.1: [TRACE]: Contract Manager - Attempting to log in
+11:25:02.2: [TRACE]: Contract Manager - Attempting to log in
+11:25:02.2: [TRACE]: Contract Manager - Attempting to log in
+11:25:03.3: [TRACE]: Contract Manager - Attempting to log in
+11:25:03.3: [TRACE]: Contract Manager - Attempting to log in
+11:25:04.4: [TRACE]: Contract Manager - Attempting to log in
+11:25:04.4: [TRACE]: Contract Manager - Attempting to log in
+11:25:05.5: [TRACE]: Contract GUI - Player is logged out
+11:25:16.16: [TRACE]: Contract GUI - Login information passed basic validation
+11:25:16.16: [TRACE]: Contract GUI - Calling Login function for player
+11:25:16.16: [INFO ]: Contract Manager - Attempting to log in
+11:25:16.16: [WARN ]: Contract Manager - Cannot intiate thread, it is already active
+11:25:16.16: [TRACE]: Contract Manager - Attempting to log in
+11:25:17.17: [TRACE]: Contract Manager - Attempting to log in
+11:25:17.17: [TRACE]: Contract Manager - Attempting to log in
+11:25:18.18: [TRACE]: Contract Manager - Attempting to log in
+11:25:18.18: [TRACE]: Contract Manager - Attempting to log in
+11:25:19.19: [TRACE]: Contract Manager - Attempting to log in
+11:25:19.19: [TRACE]: Contract Manager - Attempting to log in
+11:25:20.20: [TRACE]: Contract Manager - Attempting to log in
+11:25:20.20: [TRACE]: Contract Manager - Attempting to log in
+11:25:21.21: [TRACE]: Contract Manager - Attempting to log in
+11:25:21.21: [TRACE]: Contract GUI - Player is logged out

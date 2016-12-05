@@ -1,0 +1,7 @@
+11:25:17.17: [INFO ]: ConversationManager - Creating conversation manager
+11:25:17.17: [TRACE]: Contract Manager - Initialized Authentication Manager
+11:25:28.28: [TRACE]: Contract GUI - Login information passed basic validation
+11:25:28.28: [INFO ]: Contract Manager - Attempting to connect
+11:25:28.28: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Unknown
+11:25:28.28: [INFO ]: Contract Manager - Requesting a login
+11:25:28.28: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555

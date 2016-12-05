@@ -1,0 +1,63 @@
+12:43:39.39: [INFO ]: ConversationManager - Creating conversation manager
+12:43:39.39: [TRACE]: Contract Manager - Initialized Authentication Manager
+12:43:39.39: [ERROR]: Contract GUI - The given key was not present in the dictionary.
+12:43:51.51: [TRACE]: Contract GUI - Login information passed basic validation
+12:43:51.51: [INFO ]: Contract Manager - Attempting to connect
+12:43:51.51: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Unknown
+12:43:51.51: [INFO ]: Contract Manager - Requesting a login
+12:43:51.51: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+12:43:51.51: [INFO ]: Communicator - Sending outbound message of length 292 to 127.0.0.1:5555
+12:43:52.52: [INFO ]: Communicator - Received message, enqueuing.
+12:43:52.52: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:43:52.52: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+12:43:52.52: [INFO ]: Communicator - Sending outbound message of length 292 to 127.0.0.1:5555
+12:43:53.53: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+12:43:53.53: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:43:53.53: [INFO ]: Communicator - Sending outbound message of length 292 to 127.0.0.1:5555
+12:43:54.54: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+12:43:54.54: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:43:54.54: [INFO ]: Communicator - Sending outbound message of length 292 to 127.0.0.1:5555
+12:43:55.55: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+12:43:55.55: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:43:55.55: [INFO ]: Communicator - Sending outbound message of length 292 to 127.0.0.1:5555
+12:43:56.56: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:43:56.56: [WARN ]: Login Conv - Failed to log in
+12:43:56.56: [INFO ]: Login Conv - Closing Thread
+12:43:57.57: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Not Initialized
+12:43:57.57: [INFO ]: Contract Manager - Requesting a login
+12:43:57.57: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+12:43:57.57: [INFO ]: Communicator - Sending outbound message of length 292 to 127.0.0.1:5555
+12:43:58.58: [INFO ]: Communicator - Received message, enqueuing.
+12:43:58.58: [INFO ]: Login Conv - Ending conversation
+12:43:58.58: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:43:58.58: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+12:43:59.59: [INFO ]: Communicator - Sending outbound message of length 292 to 127.0.0.1:5555
+12:43:59.59: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+12:43:59.59: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:44:00.0: [INFO ]: Communicator - Sending outbound message of length 292 to 127.0.0.1:5555
+12:44:00.0: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+12:44:00.0: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:44:00.0: [INFO ]: Communicator - Sending outbound message of length 292 to 127.0.0.1:5555
+12:44:01.1: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+12:44:01.1: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:44:02.2: [INFO ]: Communicator - Sending outbound message of length 292 to 127.0.0.1:5555
+12:44:02.2: [TRACE]: Contract GUI - Login information passed basic validation
+12:44:02.2: [INFO ]: Contract Manager - Attempting to connect
+12:44:02.2: [WARN ]: Contract Manager - Cannot intiate thread, it is already active
+12:44:02.2: [WARN ]: Login Conv - Failed to log in
+12:44:02.2: [INFO ]: Login Conv - Closing Thread
+12:44:02.2: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:44:02.2: [INFO ]: Contract Manager - Requesting a login
+12:44:02.2: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+12:44:03.3: [INFO ]: Communicator - Sending outbound message of length 294 to 127.0.0.1:5555
+12:44:04.4: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+12:44:04.4: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:44:04.4: [INFO ]: Communicator - Sending outbound message of length 294 to 127.0.0.1:5555
+12:44:04.4: [INFO ]: Communicator - Received message, enqueuing.
+12:44:04.4: [INFO ]: Login Conv - Ending conversation
+12:44:05.5: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+12:44:05.5: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:44:05.5: [INFO ]: Communicator - Sending outbound message of length 294 to 127.0.0.1:5555
+12:44:06.6: [INFO ]: Login Conv - Sending login request to 127.0.0.1:5555
+12:44:06.6: [INFO ]: Contract Manager - The deets: Id=0, Label=Contract Manager, Type=ContractManager, EndPoint=0.0.0.0:5556, Status=Initializing
+12:44:06.6: [INFO ]: Communicator - Sending outbound message of length 294 to 127.0.0.1:5555

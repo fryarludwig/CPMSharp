@@ -1,0 +1,31 @@
+06:10:24.24: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+06:10:24.24: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+06:10:24.24: [INFO ]: UDP Com - Closing Thread
+06:10:24.24: [INFO ]: UDP Com - Closing down Network Manager
+06:10:24.24: [INFO ]: Heartbeat - Closing Thread
+06:10:25.25: [INFO ]: Heartbeat - Ending conversation
+06:10:25.25: [INFO ]: UDP Com - Closing Thread
+06:10:25.25: [INFO ]: UDP Com - Closing down Network Manager
+06:10:26.26: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:15559
+06:10:26.26: [INFO ]: UDP Com - Received message, enqueuing.
+06:10:26.26: [INFO ]: UDP Com - Closing Thread
+06:10:26.26: [INFO ]: UDP Com - Closing down Network Manager
+06:10:26.26: [INFO ]: UDP Com - Sending outbound message of length 78 to 127.0.0.1:45558
+06:10:26.26: [INFO ]: UDP Com - Sending outbound message of length 103 to 127.0.0.1:45558
+06:10:26.26: [INFO ]: UDP Com - Sending outbound message of length 151 to 127.0.0.1:45558
+06:10:26.26: [INFO ]: UDP Com - Received message, enqueuing.
+06:10:26.26: [INFO ]: UDP Com - Closing Thread
+06:10:26.26: [INFO ]: UDP Com - Closing down Network Manager
+06:10:26.26: [INFO ]: Heartbeat - Closing Thread
+06:10:27.27: [WARN ]: UDP Com - Current thread is not running, cannot stop
+06:10:27.27: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+06:10:27.27: [WARN ]: UDP Com - Current thread is not running, cannot stop
+06:10:27.27: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+06:10:27.27: [WARN ]: Heartbeat - Current thread is not running, cannot stop
+06:10:27.27: [WARN ]: UDP Com - Current thread is not running, cannot stop
+06:10:27.27: [WARN ]: UDP Com - Current thread is not running, cannot stop
+06:10:27.27: [WARN ]: UDP Com - Current thread is not running, cannot stop
+06:10:27.27: [INFO ]: Heartbeat - Ending conversation
+06:10:28.28: [INFO ]: Heartbeat - Closing Thread
+06:10:28.28: [INFO ]: Heartbeat - Ending conversation
+06:10:29.29: [WARN ]: Tester - Current thread is not running, cannot stop
