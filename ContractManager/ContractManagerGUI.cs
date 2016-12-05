@@ -113,17 +113,10 @@ namespace ContractManager
             }
 
             int throwaway = 0;
-            if (!int.TryParse(myPortInput.Text, out throwaway))
-            {
-                validInformation = false;
-                InputErrorProvider.SetError(myPortInput, "Please enter a valid port number");
-            }
-
-            throwaway = 0;
             if (!int.TryParse(authenticatorPortInput.Text, out throwaway))
             {
                 validInformation = false;
-                InputErrorProvider.SetError(myPortInput, "Please enter a valid port number");
+                InputErrorProvider.SetError(authenticatorPortInput, "Please enter a valid port number");
             }
 
             return validInformation;
@@ -131,12 +124,12 @@ namespace ContractManager
 
         private Task<bool> PerformLogin()
         {
-            return Task.Factory.StartNew<bool>(ContractService.LoginHelper);
+            return Task.Factory.StartNew<bool>(ContractService.InitializeConnection);
         }
 
         private Task<bool> PerformLogout()
         {
-            return Task.Factory.StartNew<bool>(ContractService.LogoutHelper);
+            return Task.Factory.StartNew<bool>(ContractService.ShutdownProcess);
         }
 
         private void UpdateLoginStatus(bool loggedIn)

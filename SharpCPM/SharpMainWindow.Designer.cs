@@ -77,7 +77,7 @@
             this.addressInput.Name = "addressInput";
             this.addressInput.Size = new System.Drawing.Size(100, 20);
             this.addressInput.TabIndex = 13;
-            this.addressInput.Text = "127.0.0.1";
+            this.addressInput.Text = "35.164.184.119";
             // 
             // label1
             // 
