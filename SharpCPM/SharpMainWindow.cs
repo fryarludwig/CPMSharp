@@ -163,5 +163,6 @@ namespace SharpCPM
         protected CPMClient ClientService { get; }
         public static ConcurrentQueue<LogItem> GuiLogQueue = new ConcurrentQueue<LogItem>();
         public static ConcurrentDictionary<Level, bool> LogPrintDictionary = new ConcurrentDictionary<Level, bool>();
+    
     }
 }
