@@ -41,6 +41,7 @@ namespace Common.Forms
         }
     }
 
+    [TypeDescriptionProvider(typeof(AbstractControlDescriptionProvider<BaseWindowForm, Form>))]
     public abstract partial class BaseWindowForm : Form
     {
         public BaseWindowForm(string name, DistributedProcess process)
@@ -55,51 +56,29 @@ namespace Common.Forms
             ProcessInstance.OnStatusChanged += ProcessStatusChanged;
         }
 
-        protected Task<bool> StartConnection()
-        {
-            return Task.Factory.StartNew<bool>(ProcessInstance.InitializeConnection);
-        }
-
-        protected Task<bool> CloseConnection()
-        {
-            return Task.Factory.StartNew<bool>(ProcessInstance.ShutdownProcess);
-        }
-
         public void PrintLogMessage(LogItem message)
         {
             if (InvokeRequired)
             {
                 this.BeginInvoke(new OnLogMessageReceived(PrintLogMessage), new object[] { message });
             }
-            else if (LoggerOutput != null)
+            else if (LoggerOutput != null && Logger.CanPrintLevel(message.LogLevel))
             {
-                int NumberOfItems = LoggerOutput.ClientSize.Height / LoggerOutput.ItemHeight;
-                if (Logger.CanPrintLevel(message.LogLevel))
-                {
-                    LoggerOutput.Items.Add(message);
-                    if (LoggerOutput.TopIndex == LoggerOutput.Items.Count - NumberOfItems - 1)
-                    {
-                        LoggerOutput.TopIndex = LoggerOutput.Items.Count - NumberOfItems + 1;
-                    }
-                }
+                int numVisible = LoggerOutput.ClientSize.Height / LoggerOutput.ItemHeight;
+                LoggerOutput.Items.Add(message);
+                LoggerOutput.TopIndex += (LoggerOutput.TopIndex == LoggerOutput.Items.Count - numVisible - 1) ? 1 : 0;
+                //    if (LoggerOutput.TopIndex == LoggerOutput.Items.Count - numVisible - 1)
+                //{
+                //    LoggerOutput.TopIndex = LoggerOutput.Items.Count - numVisible + 1;
+                //}
             }
         }
-
-        //public void Logging_OnPrint(object sender, LogPrintEventArgs e)
-        //{
-        //    e.DrawEvent.DrawBackground();
-        //    Graphics g = e.DrawEvent.Graphics;
-        //    g.FillRectangle(new SolidBrush(LogLevelMapper.ColorFromLevel(e.LogMessage.LogLevel)), e.DrawEvent.Bounds);
-        //    g.DrawString(e.LogMessage.LogMessage, e.DrawEvent.Font, new SolidBrush(e.DrawEvent.ForeColor), new PointF(e.DrawEvent.Bounds.X, e.DrawEvent.Bounds.Y));
-        //    e.DrawEvent.DrawFocusRectangle();
-        //}
 
         protected void LoggerOutput_DrawItem(object sender, DrawItemEventArgs e)
         {
             LogItem item = (LogItem)LoggerOutput.Items[e.Index];
             e.DrawBackground();
             Graphics g = e.Graphics;
-            //g.FillRectangle(new SolidBrush(Color.Pink), e.Bounds);
             g.FillRectangle(new SolidBrush(LogLevelMapper.ColorFromLevel(item.LogLevel)), e.Bounds);
             g.DrawString(item.LogMessage, e.Font, new SolidBrush(e.ForeColor), new PointF(e.Bounds.X, e.Bounds.Y));
             e.DrawFocusRectangle();
@@ -128,7 +107,13 @@ namespace Common.Forms
             }
             set
             {
+                if (_LoggerOutput != null)
+                {
+                    _LoggerOutput.DrawItem -= LoggerOutput_DrawItem;
+                }
+
                 _LoggerOutput = value;
+                LoggerOutput.DrawMode = DrawMode.OwnerDrawVariable;
                 _LoggerOutput.DrawItem += LoggerOutput_DrawItem;
             }
         }

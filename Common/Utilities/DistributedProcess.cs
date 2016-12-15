@@ -26,46 +26,30 @@ namespace Common.Utilities
         {
             OnStatusChanged?.Invoke(MyProcess);
         }
-
-        protected virtual void DerivedShutdown()
-        {
-            Logger.Trace("Calling Derived Stop");
-            ConversationManager.ClearConversations();
-        }
-
+        
         protected abstract Dictionary<Type, Type> GetValidConversations();
 
-        public virtual bool InitializeConnection()
+        public virtual bool StartConnection()
         {
-            Logger.Info("Starting Server");
+            Logger.Info("Starting network conncetion");
             ConversationManager.PrimaryCommunicator.Start();
-            // Wait for 5 seconds, or for a value of true
-            int checkCounter = 10;
+            int checkCounter = 6;
             while (MyProcess.Status != ProcessInfo.StatusCode.Registered && checkCounter-- > 0)
             {
-                Logger.Trace("Attempting to log in");
                 Thread.Sleep(500);
             }
 
             return MyProcess.Status == ProcessInfo.StatusCode.Registered;
         }
 
-        public virtual bool ShutdownProcess()
+        public virtual bool CloseConnection()
         {
-            Logger.Info("Shutting down");
-            DerivedShutdown();
-
-            // Wait for 5 seconds, or for a value of true
-            Logger.Trace("Waiting for shutdown messages to propogate");
-            int checkCounter = 5;
-            while (MyProcess != null && checkCounter-- > 0)
-            {
-                Thread.Sleep(1000);
-            }
-
+            Logger.Warn("Shutting down network processes immediately");
+            ConversationManager.ClearConversations();
+            MyProcess.Status = ProcessInfo.StatusCode.Terminated;
             return MyProcess.Status == ProcessInfo.StatusCode.Terminated || MyProcess.Status == ProcessInfo.StatusCode.Terminating;
         }
-        
+                
         public IPEndPoint LocalEndpoint
         {
             get

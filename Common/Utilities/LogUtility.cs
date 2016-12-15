@@ -34,10 +34,10 @@ namespace Common.Utilities
             LevelDictionary["Warn"] = Level.WARN;
             LevelDictionary["Info"] = Level.INFO;
             LevelDictionary["Trace"] = Level.TRACE;
-            LevelColoring[Level.TRACE] = Color.LightGray;
-            LevelColoring[Level.INFO] = Color.WhiteSmoke;
+            LevelColoring[Level.TRACE] = Color.White;
+            LevelColoring[Level.INFO] = Color.NavajoWhite;
             LevelColoring[Level.WARN] = Color.LightYellow;
-            LevelColoring[Level.ERROR] = Color.PaleVioletRed;
+            LevelColoring[Level.ERROR] = Color.LightSalmon;
         }
 
         public static Level LevelFromString(string levelString)
@@ -67,12 +67,7 @@ namespace Common.Utilities
     {
         public LogUtility(string loggerName)
         {
-            if (loggerName == null)
-            {
-                loggerName = "UNKNOWN";
-            }
-
-            LogSource = loggerName;
+            LogSource = loggerName ?? "UNKNOWN";
         }
 
         public void Trace(string logMessage)

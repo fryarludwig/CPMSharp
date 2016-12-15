@@ -126,12 +126,12 @@ namespace ContractManager
 
         private Task<bool> PerformLogin()
         {
-            return Task.Factory.StartNew<bool>(ContractService.InitializeConnection);
+            return Task.Factory.StartNew<bool>(ContractService.StartConnection);
         }
 
         private Task<bool> PerformLogout()
         {
-            return Task.Factory.StartNew<bool>(ContractService.ShutdownProcess);
+            return Task.Factory.StartNew<bool>(ContractService.CloseConnection);
         }
 
         private void UpdateLoginStatus(bool loggedIn)

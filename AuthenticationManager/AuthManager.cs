@@ -28,27 +28,18 @@ namespace AuthenticationManager
             MyProcess.AliveTimestamp = DateTime.Now;
             MyProcess.Label = "Authentication Manager";
 
-            Logger.Trace("Initialized Authentication Manager");
-
             ConversationManager.RegisterNewConversationTypes(GetValidConversations());
+
+            Logger.Trace("Initialized Authentication Manager");
         }
 
-        protected override void DerivedShutdown()
+        public override bool StartConnection()
         {
-            Logger.Trace("Calling Derived Stop");
-            ConversationManager.ClearConversations();
-            MyProcess.Status = ProcessInfo.StatusCode.Terminated;
-        }
-
-        public override bool InitializeConnection()
-        {
-            Logger.Info("Starting Server");
+            Logger.Info("Starting Authentication Server");
             ConversationManager.PrimaryCommunicator.Start();
-            // Wait for 5 seconds, or for a value of true
-            int checkCounter = 10;
+            int checkCounter = 6;
             while (!ConversationManager.PrimaryCommunicator.IsActive() && checkCounter-- > 0)
             {
-                Logger.Trace("Attempting to log in");
                 Thread.Sleep(500);
             }
 

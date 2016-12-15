@@ -9,7 +9,7 @@ namespace Common.Users
     public class ProcessInfo
     {
         public enum ProcessType { Unknown = 0, AuthenticationManager = 1, ContractManager = 2, Client = 3 };
-        public enum StatusCode { Unknown = 0, NotInitialized = 1, Initializing = 2, Registered = 3, Terminating = 5, Terminated = 6 };
+        public enum StatusCode { Unknown = 0, NotInitialized = 1, Initializing = 2, Registered = 3, Terminating = 4, Terminated = 5 };
 
         private StatusCode status;
         private static readonly string[] statusNames = new string[] { "Unknown", "Not Initialized", "Initializing", "Registered", "Terminating", "Terminated" };

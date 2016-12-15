@@ -23,9 +23,7 @@ namespace AuthenticationManager
         {
             InitializeComponent();
             LoggerOutput = GuiLogOutput;
-            LoggerOutput.DrawMode = DrawMode.OwnerDrawVariable;
-            LoggerOutput.DrawItem += LoggerOutput_DrawItem;
-            ProcessInstance.OnStatusChanged += ProcessStatusChanged;
+            StartButton.Text = START_TEXT;
             Logger.Trace("Started Authentication Manager Interface");
         }
 
@@ -63,11 +61,12 @@ namespace AuthenticationManager
             if (StartButton.Text == START_TEXT && ValidateLoginInformation())
             {
                 PrepopulateProcessValues();
-                StartConnection().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
+                ProcessInstance.StartConnection();
             }
             else if (StartButton.Text == STOP_TEXT)
             {
-                CloseConnection().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
+                Logger.Trace("Waiting for shutdown messages to propogate");
+                ProcessInstance.CloseConnection();
             }
             else
             {
@@ -99,15 +98,6 @@ namespace AuthenticationManager
             }
 
             return validInformation;
-        }
-        
-        private void UpdateLoginStatus(bool loggedIn)
-        {
-        }
-        
-        public void UpdateGuiStatus()
-        {
-
         }
 
         private const string START_TEXT = "Start";

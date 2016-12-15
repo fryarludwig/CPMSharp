@@ -41,7 +41,7 @@ namespace SharpCPM
             return typeMap;
         }
 
-        public override bool InitializeConnection()
+        public override bool StartConnection()
         {
             Logger.Info("Starting Server");
             ConversationManager.PrimaryCommunicator.Start();

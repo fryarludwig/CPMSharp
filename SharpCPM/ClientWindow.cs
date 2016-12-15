@@ -128,14 +128,14 @@ namespace SharpCPM
         {
             Logger.Trace("Calling Login function for client");
 
-            return Task.Factory.StartNew<bool>(ClientService.InitializeConnection);
+            return Task.Factory.StartNew<bool>(ClientService.StartConnection);
         }
 
         private Task<bool> PerformLogout()
         {
             Logger.Trace("Requesting user log out");
 
-            return Task.Factory.StartNew<bool>(ClientService.ShutdownProcess);
+            return Task.Factory.StartNew<bool>(ClientService.CloseConnection);
         }
 
         private void UpdateLoginStatus(bool loggedIn)
