@@ -13,21 +13,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Common.Forms;
+using Common.Users;
 
 namespace ContractManager
 {
-    public partial class ContractWindow : Form
+    public partial class ContractWindow : BaseWindowForm
     {
-        public ContractWindow()
+        public ContractWindow() : base("ContractGui", new ContractManager())
         {
             InitializeComponent();
-            //PersonMatcher.OnMatchFound += new MatchMaker.MatchEvent(OnMatchFound_Trigger);
-            //Logger.RegisterGuiCallback(this);
-            Logger.ConsoleOutput = true;
-            Logger.GuiOutput = true;
-            Logger.FileOutput = true;
-            Task.Factory.StartNew(RunLoop);
-            ContractService = new ContractManager();
+            LoggerOutput = GuiLogOutput;
+            ConnectButton.Text = START_TEXT;
         }
         
         public void KillChildren()
@@ -35,69 +31,48 @@ namespace ContractManager
             //ContractService.Stop();
         }
 
+        protected override void ProcessStatusChanged(ProcessInfo processInfo)
+        {
+            Logger.Trace(processInfo.StatusString);
+
+            if (processInfo.Status == ProcessInfo.StatusCode.Registered)
+            {
+                Logger.Trace("Server started successfull");
+                ConnectButton.Text = STOP_TEXT;
+            }
+            else
+            {
+                Logger.Trace($"Server status is {processInfo.StatusString}");
+                ConnectButton.Text = START_TEXT;
+            }
+        }
+
         protected void InitializeService()
         {
-            ContractService.AuthenticatorEndpoint = new IPEndPoint(IPAddress.Parse(authenticatorAddressInput.Text), int.Parse(authenticatorPortInput.Text));
+            ProcessInstance.AuthenticatorEndpoint = new IPEndPoint(IPAddress.Parse(authenticatorAddressInput.Text), int.Parse(authenticatorPortInput.Text));
         }
 
         private void Connect_Clicked(object sender, EventArgs e)
         {
             ConnectButton.Enabled = false;
-            if (ConnectButton.Text == "Connect" && ValidateLoginInformation())
+            if (ConnectButton.Text == START_TEXT && ValidateLoginInformation())
             {
-                Logger.Trace("Login information passed basic validation");
-                InitializeService();
-                PerformLogin().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
+                PrepopulateProcessValues();
+                ProcessInstance.StartConnection();
             }
-            else if (ConnectButton.Text == "Disconnect")
+            else if (ConnectButton.Text == STOP_TEXT)
             {
-                PerformLogout().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
+                Logger.Trace("Waiting for shutdown messages to propogate");
+                ProcessInstance.CloseConnection();
             }
             else
             {
-                Logger.Info("User entered invalid information");
+                Logger.Error("User entered invalid information");
                 ConnectButton.Enabled = true;
             }
         }
 
-
-        protected void RunLoop()
-        {
-            int NumberOfItems = GuiLogOutput.ClientSize.Height / GuiLogOutput.ItemHeight;
-            bool keepGoing = true;
-            LogItem message;
-
-            while (keepGoing)
-            {
-                if (!GuiLogQueue.IsEmpty && GuiLogQueue.TryDequeue(out message))
-                {
-                    Invoke((MethodInvoker)delegate
-                    {
-                        try
-                        {
-                            if (LogPrintDictionary[message.LogLevel])
-                            {
-                                GuiLogOutput.Items.Add(message.LogMessage);
-                                if (GuiLogOutput.TopIndex == GuiLogOutput.Items.Count - NumberOfItems - 1)
-                                {
-                                    //The item at the top when you can just see the bottom item
-                                    GuiLogOutput.TopIndex = GuiLogOutput.Items.Count - NumberOfItems + 1;
-                                }
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            Logger.GuiOutput = false;
-                            Logger.ConsoleOutput = true;
-                            Logger.Error(e.Message);
-                            keepGoing = false;
-                        }
-                    });
-                }
-
-                Thread.Sleep(100);
-            }
-        }
+        
 
         private bool ValidateLoginInformation()
         {
@@ -123,50 +98,15 @@ namespace ContractManager
 
             return validInformation;
         }
-
-        private Task<bool> PerformLogin()
-        {
-            return Task.Factory.StartNew<bool>(ContractService.StartConnection);
-        }
-
-        private Task<bool> PerformLogout()
-        {
-            return Task.Factory.StartNew<bool>(ContractService.CloseConnection);
-        }
-
-        private void UpdateLoginStatus(bool loggedIn)
-        {
-            if (loggedIn)
-            {
-                ConnectButton.Text = "Disconnect";
-            }
-            else
-            {
-                ConnectButton.Text = "Connect";
-            }
-
-            ConnectButton.Enabled = true;
-        }
+        
 
         public void UpdateGuiStatus()
         {
             // Call a method to update the gui
         }
+        
 
-        protected ErrorProvider InputErrorProvider = new ErrorProvider();
-        protected LogUtility Logger = new LogUtility("Contract GUI");
-        protected ContractManager ContractService { get; }
-        public static ConcurrentQueue<LogItem> GuiLogQueue = new ConcurrentQueue<LogItem>();
-        public static ConcurrentDictionary<Level, bool> LogPrintDictionary = new ConcurrentDictionary<Level, bool>();
-
-        private void portInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
+        private const string START_TEXT = "Connect";
+        private const string STOP_TEXT = "Disconnect";
     }
 }
