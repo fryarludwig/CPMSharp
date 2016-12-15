@@ -18,7 +18,13 @@ namespace Common.Utilities
             Properties = SharedProperties.Instance;
             Properties.DistInstance = this;
             MyProcess = new ProcessInfo();
+            MyProcess.OnStatusChanged += new ProcessInfo.StatusUpdateEvent(HandleStatusChange);
             ConversationManager.RegisterNewConversationTypes(GetValidConversations());
+        }
+
+        public virtual void HandleStatusChange(ProcessInfo.StatusCode status)
+        {
+            OnStatusChanged?.Invoke(MyProcess);
         }
 
         protected virtual void DerivedShutdown()
@@ -40,6 +46,7 @@ namespace Common.Utilities
                 Logger.Trace("Attempting to log in");
                 Thread.Sleep(500);
             }
+
             return MyProcess.Status == ProcessInfo.StatusCode.Registered;
         }
 
@@ -75,6 +82,9 @@ namespace Common.Utilities
                 ConversationManager.PrimaryCommunicator.LocalEndpoint = value;
             }
         }
+
+        public delegate void ProcessStatusChanged(ProcessInfo processInfo);
+        public event ProcessStatusChanged OnStatusChanged;
 
         public IPEndPoint ContractManagerEndpoint { get; set; }
         public IPEndPoint AuthenticatorEndpoint { get; set; }

@@ -3,61 +3,63 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Net;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Common.Forms;
 using Common.Utilities;
 using System.Collections.Concurrent;
-using System.Net;
+using System.Threading;
 
-namespace AuthenticationManager
+namespace SharpCPM
 {
-    public partial class AuthManagerGUI : Form
+    public partial class ClientWindow : Form
     {
-        public AuthManagerGUI()
+        public ClientWindow()
         {
             InitializeComponent();
             WindowLoggingAdapter.LogMessageQueue = GuiLogQueue;
-
+            ClientService = new CPMClient();
             Logger.ConsoleOutput = true;
             Logger.GuiOutput = true;
             Logger.FileOutput = true;
             Task.Factory.StartNew(RunLoop);
-            Authenticator = new AuthManager();
         }
 
         public void KillChildren()
         {
-            //AuthenticationService();
+            //ClientService.Stop();
         }
 
         protected void InitializeService()
         {
-            Authenticator.LocalEndpoint = new IPEndPoint(IPAddress.Any, int.Parse(portInput.Text));
+            string address = addressInput.Text;
+            int port = int.Parse(portInput.Text);
+            ClientService.AuthenticatorEndpoint = new IPEndPoint(IPAddress.Parse(address), port);
         }
 
-        private void StartServer_Clicked(object sender, EventArgs e)
+        private void Connect_Clicked(object sender, EventArgs e)
         {
-            StartButton.Enabled = false;
-            if (StartButton.Text == "Start Server" && ValidateLoginInformation())
+            ConnectButton.Enabled = false;
+            if (ConnectButton.Text == "Connect" && ValidateLoginInformation())
             {
+                Logger.Trace("Login information passed basic validation");
                 InitializeService();
-                InitializeServerConnection().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
+                PerformLogin().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
             }
-            else if (StartButton.Text == "Stop Server")
+            else if (ConnectButton.Text == "Disconnect")
             {
-                ShutdownServer().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
+                PerformLogout().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
             }
             else
             {
                 Logger.Info("User entered invalid information");
-                StartButton.Enabled = true;
+                ConnectButton.Enabled = true;
             }
         }
-
         
         protected void RunLoop()
         {
@@ -121,48 +123,47 @@ namespace AuthenticationManager
 
             return validInformation;
         }
-        
-        private Task<bool> InitializeServerConnection()
+
+        private Task<bool> PerformLogin()
         {
-            return Task.Factory.StartNew<bool>(Authenticator.InitializeConnection);
+            Logger.Trace("Calling Login function for client");
+
+            return Task.Factory.StartNew<bool>(ClientService.InitializeConnection);
         }
 
-        private Task<bool> ShutdownServer()
+        private Task<bool> PerformLogout()
         {
-            return Task.Factory.StartNew<bool>(Authenticator.ShutdownProcess);
+            Logger.Trace("Requesting user log out");
+
+            return Task.Factory.StartNew<bool>(ClientService.ShutdownProcess);
         }
 
         private void UpdateLoginStatus(bool loggedIn)
         {
             if (loggedIn)
             {
-                Logger.Trace("Server Started");
-                StartButton.Text = "Stop Server";
+                Logger.Trace("User is logged in");
+                ConnectButton.Text = "Disconnect";
             }
             else
             {
-                Logger.Trace("Server Stopped");
-                StartButton.Text = "Start Server";
+                Logger.Trace("User is logged out");
+                ConnectButton.Text = "Connect";
             }
 
-            StartButton.Enabled = true;
+            ConnectButton.Enabled = true;
         }
-        
+
         public void UpdateGuiStatus()
         {
             // Call a method to update the gui
         }
 
         protected ErrorProvider InputErrorProvider = new ErrorProvider();
-        protected LogUtility Logger = new LogUtility("Auth Service");
-        protected AuthManager Authenticator { get; }
+        protected LogUtility Logger = new LogUtility("SharpCPM GUI");
+        protected CPMClient ClientService { get; }
         public static ConcurrentQueue<LogItem> GuiLogQueue = new ConcurrentQueue<LogItem>();
         public static ConcurrentDictionary<Level, bool> LogPrintDictionary = new ConcurrentDictionary<Level, bool>();
-
-        private void portInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+    
     }
 }
-

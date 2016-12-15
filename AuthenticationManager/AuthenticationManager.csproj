@@ -47,19 +47,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthManager.cs" />
-    <Compile Include="AuthManagerGUI.cs">
+    <Compile Include="AuthenticatorGui.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AuthManagerGUI.Designer.cs">
-      <DependentUpon>AuthManagerGUI.cs</DependentUpon>
+    <Compile Include="AuthenticatorGui.Designer.cs">
+      <DependentUpon>AuthenticatorGui.cs</DependentUpon>
     </Compile>
     <Compile Include="Conversations\DiscoveryConversation.cs" />
     <Compile Include="Conversations\HeartbeatConversation.cs" />
     <Compile Include="Conversations\LoginConversation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AuthManagerGUI.resx">
-      <DependentUpon>AuthManagerGUI.cs</DependentUpon>
+    <EmbeddedResource Include="AuthenticatorGui.resx">
+      <DependentUpon>AuthenticatorGui.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

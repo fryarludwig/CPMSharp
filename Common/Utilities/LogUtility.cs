@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
-using System.Linq;
-using System.Text;
+using System.Drawing;
 using System.Threading;
+
+using Common.Forms;
 
 namespace Common.Utilities
 {
@@ -15,9 +16,13 @@ namespace Common.Utilities
             LogMessage = message;
         }
 
+        public override string ToString()
+        {
+            return LogMessage ?? "null";
+        }
+
         public Level LogLevel { get; set; }
         public string LogMessage { get; set; }
-
     }
 
     public static class LogLevelMapper
@@ -29,19 +34,24 @@ namespace Common.Utilities
             LevelDictionary["Warn"] = Level.WARN;
             LevelDictionary["Info"] = Level.INFO;
             LevelDictionary["Trace"] = Level.TRACE;
+            LevelColoring[Level.TRACE] = Color.LightGray;
+            LevelColoring[Level.INFO] = Color.WhiteSmoke;
+            LevelColoring[Level.WARN] = Color.LightYellow;
+            LevelColoring[Level.ERROR] = Color.PaleVioletRed;
         }
 
         public static Level LevelFromString(string levelString)
         {
-            Level result = Level.NONE;
-            if (LevelDictionary.ContainsKey(levelString))
-            {
-                result = LevelDictionary[levelString];
-            }
-            return result;
+            return (LevelDictionary.ContainsKey(levelString)) ? LevelDictionary[levelString] : Level.NONE;
+        }
+
+        public static Color ColorFromLevel(Level level)
+        {
+            return (LevelColoring.ContainsKey(level))? LevelColoring[level] : Color.White;
         }
 
         private static Dictionary<string, Level> LevelDictionary = new Dictionary<string, Level>();
+        private static Dictionary<Level, Color> LevelColoring = new Dictionary<Level, Color>();
     }
 
     public enum Level
@@ -57,7 +67,12 @@ namespace Common.Utilities
     {
         public LogUtility(string loggerName)
         {
-            LogSource = loggerName ?? "UNKNOWN";
+            if (loggerName == null)
+            {
+                loggerName = "UNKNOWN";
+            }
+
+            LogSource = loggerName;
         }
 
         public void Trace(string logMessage)
@@ -78,6 +93,11 @@ namespace Common.Utilities
         public void Error(string logMessage)
         {
             LogUtilityHelper.Log(Level.ERROR, LogSource, logMessage);
+        }
+
+        public bool CanPrintLevel(Level level)
+        {
+            return level <= LogUtilityHelper.GlobalLogLevel;
         }
 
         public string LogSource
@@ -120,6 +140,16 @@ namespace Common.Utilities
             {
                 LogUtilityHelper.GlobalLogLevel = value;
             }
+        }
+
+        public void RegisterGuiCallback(BaseWindowForm winForm)
+        {
+            LogUtilityHelper.OnGuiLogPrint += new LogHelper.GuiLogPrintEvent(winForm.PrintLogMessage);
+        }
+
+        public void RemoveGuiCallback(BaseWindowForm winForm)
+        {
+            LogUtilityHelper.OnGuiLogPrint -= new LogHelper.GuiLogPrintEvent(winForm.PrintLogMessage);
         }
     }
 
@@ -169,9 +199,9 @@ namespace Common.Utilities
                 {
                     LogQueue.Enqueue(logMessageLine);
                 }
-                if (GuiOutput && WindowLoggingAdapter.LogMessageQueue != null)
+                if (GuiOutput)
                 {
-                    WindowLoggingAdapter.LogMessageQueue.Enqueue(new LogItem(logLevel, logMessageLine));
+                    OnGuiLogPrint?.Invoke(new LogItem(logLevel, logMessageLine));
                 }
             }
             catch (KeyNotFoundException e)
@@ -186,25 +216,22 @@ namespace Common.Utilities
 
             while (ContinueThread || !LogQueue.IsEmpty)
             {
-                if (LogQueue.IsEmpty)
+                string message;
+                if (!LogQueue.IsEmpty && LogQueue.TryDequeue(out message))
                 {
-                    Thread.Sleep(50);
+                    if (PrintToConsole)
+                    {
+                        Console.WriteLine(message);
+                    }
+                    if (WriteToFile)
+                    {
+                        logFile.WriteLine(message);
+                        logFile.Flush();
+                    }
                 }
                 else
                 {
-                    string message;
-                    if (LogQueue.TryDequeue(out message))
-                    {
-                        if (PrintToConsole)
-                        {
-                            Console.WriteLine(message);
-                        }
-                        if (WriteToFile)
-                        {
-                            logFile.WriteLine(message);
-                            logFile.Flush();
-                        }
-                    }
+                    Thread.Sleep(50);
                 }
             }
         }
@@ -219,6 +246,9 @@ namespace Common.Utilities
         public bool GuiOutput { get; set; }
         public bool WriteToFile { get; set; }
         public string LogFileName { get; set; }
+
+        public delegate void GuiLogPrintEvent(LogItem message);
+        public event GuiLogPrintEvent OnGuiLogPrint;
 
         private ConcurrentQueue<string> LogQueue = new ConcurrentQueue<string>();
         private volatile bool ContinueThread = false;

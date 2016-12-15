@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -50,6 +51,10 @@
     <Compile Include="Communication\Conversation.cs" />
     <Compile Include="Communication\ConversationManager.cs" />
     <Compile Include="Communication\Envelope.cs" />
+    <Compile Include="Forms\BaseWindowForm.cs" />
+    <Compile Include="Forms\BaseWindowForm.Designer.cs">
+      <DependentUpon>BaseWindowForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\DistributedProcess.cs" />
     <Compile Include="Messages\MessageNumber.cs" />
     <Compile Include="Utilities\PublicKey.cs" />
@@ -62,7 +67,7 @@
     <Compile Include="Messages\Requests\Request.cs" />
     <Compile Include="Users\ProcessInfo.cs" />
     <Compile Include="Users\SharedProperties.cs" />
-    <Compile Include="Utilities\WindowLoggingAdapter.cs" />
+    <Compile Include="Forms\WindowLoggingAdapter.cs" />
     <Compile Include="Utilities\Threaded.cs" />
     <Compile Include="Utilities\LogUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

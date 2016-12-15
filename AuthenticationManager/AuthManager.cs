@@ -26,7 +26,6 @@ namespace AuthenticationManager
             MyProcess.Status = ProcessInfo.StatusCode.NotInitialized;
             MyProcess.AliveRetries = 5;
             MyProcess.AliveTimestamp = DateTime.Now;
-            //MyProcess.EndPoint = LocalEndpoint;
             MyProcess.Label = "Authentication Manager";
 
             Logger.Trace("Initialized Authentication Manager");

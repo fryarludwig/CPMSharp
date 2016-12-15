@@ -16,10 +16,10 @@ namespace ContractManager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            MainWindow = new ContractManagerGUI();
+            MainWindow = new ContractWindow();
             Application.Run(MainWindow);
         }
 
-        public static ContractManagerGUI MainWindow;
+        public static ContractWindow MainWindow;
     }
 }

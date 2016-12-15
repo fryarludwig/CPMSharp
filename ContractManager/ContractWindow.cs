@@ -12,15 +12,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Common.Forms;
+
 namespace ContractManager
 {
-    public partial class ContractManagerGUI : Form
+    public partial class ContractWindow : Form
     {
-        public ContractManagerGUI()
+        public ContractWindow()
         {
             InitializeComponent();
-            WindowLoggingAdapter.LogMessageQueue = GuiLogQueue;
-
+            //PersonMatcher.OnMatchFound += new MatchMaker.MatchEvent(OnMatchFound_Trigger);
+            //Logger.RegisterGuiCallback(this);
             Logger.ConsoleOutput = true;
             Logger.GuiOutput = true;
             Logger.FileOutput = true;

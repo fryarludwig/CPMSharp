@@ -16,10 +16,10 @@ namespace AuthenticationManager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            MainWindow = new AuthManagerGUI();
+            MainWindow = new AuthenticatorGui();
             Application.Run(MainWindow);
         }
 
-        public static AuthManagerGUI MainWindow;
+        public static AuthenticatorGui MainWindow;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace SharpCPM
 {
-    partial class SharpMainWindow
+    partial class ClientWindow
     {
         /// <summary>
         /// Required designer variable.

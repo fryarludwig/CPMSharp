@@ -16,10 +16,10 @@ namespace SharpCPM
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            MainWindow = new SharpMainWindow();
+            MainWindow = new ClientWindow();
             Application.Run(MainWindow);
         }
 
-        public static SharpMainWindow MainWindow;
+        public static ClientWindow MainWindow;
     }
 }

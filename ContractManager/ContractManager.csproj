@@ -49,16 +49,16 @@
     <Compile Include="Conversations\HeartbeatConversation.cs" />
     <Compile Include="Conversations\LoginConversation.cs" />
     <Compile Include="ContractManager.cs" />
-    <Compile Include="ContractManagerGUI.cs">
+    <Compile Include="ContractWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ContractManagerGUI.Designer.cs">
-      <DependentUpon>ContractManagerGUI.cs</DependentUpon>
+    <Compile Include="ContractWindow.Designer.cs">
+      <DependentUpon>ContractWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ContractManagerGUI.resx">
-      <DependentUpon>ContractManagerGUI.cs</DependentUpon>
+    <EmbeddedResource Include="ContractWindow.resx">
+      <DependentUpon>ContractWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

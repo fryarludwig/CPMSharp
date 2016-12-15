@@ -1,6 +1,6 @@
 ﻿namespace ContractManager
 {
-    partial class ContractManagerGUI
+    partial class ContractWindow
     {
         /// <summary>
         /// Required designer variable.

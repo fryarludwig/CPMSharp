@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Utilities
+using Common.Utilities;
+
+namespace Common.Forms
 {
     public static class WindowLoggingAdapter
     {
