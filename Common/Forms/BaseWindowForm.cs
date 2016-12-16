@@ -51,6 +51,15 @@ namespace Common.Forms
             ProcessInstance.OnStatusChanged += ProcessStatusChanged;
         }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if (ProcessInstance.MyProcessInfo.Status == ProcessInfo.StatusCode.Registered)
+            {
+                ProcessInstance.CloseConnection();
+            }
+            base.OnClosing(e);
+        }
+
         public void PrintLogMessage(LogItem message)
         {
             if (InvokeRequired)
@@ -64,7 +73,7 @@ namespace Common.Forms
                 LoggerOutput.TopIndex += (LoggerOutput.TopIndex == LoggerOutput.Items.Count - numVisible - 1) ? 1 : 0;
             }
         }
-
+        
         protected void LoggerOutput_DrawItem(object sender, DrawItemEventArgs e)
         {
             LogItem item = (LogItem)LoggerOutput.Items[e.Index];
@@ -75,6 +84,11 @@ namespace Common.Forms
             e.DrawFocusRectangle();
         }
 
+        protected bool ValidateInteger(string value)
+        {
+            int throwaway;
+            return int.TryParse(value, out throwaway);
+        }
 
         protected virtual void PrepopulateProcessValues()
         {
@@ -85,9 +99,7 @@ namespace Common.Forms
 
         public delegate void OnLogMessageReceived(LogItem message);
         public delegate void OnProcessStatusChanged(ProcessInfo processInfo);
-
-        public event EventHandler<LogPrintEventArgs> Logger_OnPrint;
-
+        
         private ListBox _LoggerOutput;
         protected ListBox LoggerOutput
         {
@@ -111,16 +123,5 @@ namespace Common.Forms
         protected LogUtility Logger { get; set; }
         protected DistributedProcess ProcessInstance { get; set; }
         protected ErrorProvider InputErrorProvider = new ErrorProvider();
-    }
-
-    public class LogPrintEventArgs : EventArgs
-    {
-        public LogItem LogMessage { get; set; }
-        public DrawItemEventArgs DrawEvent { get; set; }
-        public LogPrintEventArgs(LogItem logItem, DrawItemEventArgs e = null)
-        {
-            LogMessage = logItem;
-            DrawEvent = e;
-        }
     }
 }

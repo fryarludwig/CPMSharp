@@ -29,10 +29,6 @@ namespace AuthenticationManager
             Logger.Trace("Started Authentication Manager Interface");
         }
 
-        public void KillChildren()
-        {
-            //AuthenticationService();
-        }
 
         protected void ProcessRegistrationUpdate(ProcessInfo processInfo)
         {
@@ -52,17 +48,24 @@ namespace AuthenticationManager
 
         protected override void ProcessStatusChanged(ProcessInfo processInfo)
         {
-            StatusDisplay.Text = processInfo.StatusString;
-            StartButton.Enabled = true;
-            if (processInfo.Status == ProcessInfo.StatusCode.Registered)
+            if (InvokeRequired)
             {
-                Logger.Trace("Server started successfull");
-                StartButton.Text = STOP_TEXT;
+                this.BeginInvoke(new OnProcessStatusChanged(ProcessStatusChanged), new object[] { processInfo });
             }
             else
             {
-                Logger.Trace($"Server status is {processInfo.StatusString}");
-                StartButton.Text = START_TEXT;
+                StatusDisplay.Text = processInfo.StatusString;
+                StartButton.Enabled = true;
+                if (processInfo.Status == ProcessInfo.StatusCode.Registered)
+                {
+                    Logger.Trace("Server started successfull");
+                    StartButton.Text = STOP_TEXT;
+                }
+                else
+                {
+                    Logger.Trace($"Server status is {processInfo.StatusString}");
+                    StartButton.Text = START_TEXT;
+                }
             }
         }
 

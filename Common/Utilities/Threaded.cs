@@ -28,6 +28,7 @@ namespace Common.Utilities
         {
             if (!ActiveThread.IsAlive)
             {
+                Setup();
                 ContinueThread = true;
                 ActiveThread = new Thread(Run);
                 ActiveThread.IsBackground = true;
@@ -47,6 +48,7 @@ namespace Common.Utilities
                 DerivedStop();
                 ContinueThread = false;
                 ActiveThread.Join(2000);
+                Cleanup();
             }
             else
             {
@@ -54,6 +56,9 @@ namespace Common.Utilities
                 Logger?.Warn("Current thread is not running, cannot stop");
             }
         }
+
+        protected virtual void Setup() { }
+        protected virtual void Cleanup() { }
 
         protected abstract void Run();
 

@@ -92,7 +92,7 @@
             this.StatusDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.StatusDisplay.UseCompatibleTextRendering = true;
             // 
-            // KnownProcesses
+            // ProcessesDisplay
             // 
             this.ProcessesDisplay.CheckBoxes = true;
             this.ProcessesDisplay.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -101,9 +101,9 @@
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5});
-            this.ProcessesDisplay.Location = new System.Drawing.Point(12, 66);
-            this.ProcessesDisplay.Name = "KnownProcesses";
-            this.ProcessesDisplay.Size = new System.Drawing.Size(540, 130);
+            this.ProcessesDisplay.Location = new System.Drawing.Point(12, 51);
+            this.ProcessesDisplay.Name = "ProcessesDisplay";
+            this.ProcessesDisplay.Size = new System.Drawing.Size(540, 145);
             this.ProcessesDisplay.TabIndex = 9;
             this.ProcessesDisplay.UseCompatibleStateImageBehavior = false;
             this.ProcessesDisplay.View = System.Windows.Forms.View.Details;

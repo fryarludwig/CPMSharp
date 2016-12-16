@@ -19,8 +19,9 @@ namespace Common.Communication
             _LocalEndpoint = new IPEndPoint(IPAddress.Any, 0);
             InboundQueue = new ConcurrentQueue<Envelope>();
             OutboundQueue = new ConcurrentQueue<Envelope>();
+            State = STATE.STOPPED;
         }
-        
+
         protected void HandleReceivedMessage(Envelope envelope)
         {
             InboundQueue.Enqueue(envelope);
@@ -38,13 +39,7 @@ namespace Common.Communication
             return InboundQueue.TryDequeue(out envelope);
         }
 
-        public bool ReplyWaiting
-        {
-            get
-            {
-                return !InboundQueue.IsEmpty;
-            }
-        }
+        public bool ReplyWaiting { get { return !InboundQueue.IsEmpty; } }
 
         protected IPEndPoint _LocalEndpoint { get; set; }
         public IPEndPoint LocalEndpoint
@@ -53,7 +48,6 @@ namespace Common.Communication
             set
             {
                 _LocalEndpoint = value ?? new IPEndPoint(IPAddress.Any, 0);
-
                 if (IsActive())
                 {
                     Stop();
@@ -61,10 +55,51 @@ namespace Common.Communication
                 }
             }
         }
+
+        protected override void Setup()
+        {
+            State = STATE.READY;
+        }
+
+        protected override void Cleanup()
+        {
+            State = STATE.STOPPED;
+        }
+
+        public enum STATE
+        {
+            ERROR,
+            STOPPED,
+            READY,
+            BUSY
+        }
+        
         protected ConcurrentQueue<Envelope> InboundQueue { get; }
         protected ConcurrentQueue<Envelope> OutboundQueue { get; }
+        private STATE _State { get; set; }
+        public STATE State
+        {
+            get
+            {
+                if (LOCK_STATE != null)
+                    lock (LOCK_STATE) { return _State; }
+                else
+                    return _State;
+            }
+            set
+            {
+                if (LOCK_STATE != null)
+                    lock (LOCK_STATE) { _State = value; }
+                else
+                    _State = value;
+                State_OnChanged?.Invoke(State);
+            }
+        }
 
+        private object LOCK_STATE = new object();
 
+        public delegate void StateChanged(STATE state);
+        public event StateChanged State_OnChanged;
         public delegate void MessageReceived(Envelope envelope);
         public event MessageReceived OnMessageReceived;
         public delegate void SendMessageCallback(Envelope envelope);

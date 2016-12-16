@@ -48,11 +48,12 @@ namespace SharpCPM
             {
                 Logger.Trace("Login information passed basic validation");
                 InitializeService();
-                PerformLogin().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
+                //ProcessInst
+                //PerformLogin().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
             }
             else if (ConnectButton.Text == "Disconnect")
             {
-                PerformLogout().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
+                //PerformLogout().ContinueWith((t) => UpdateLoginStatus(t.Result), TaskScheduler.FromCurrentSynchronizationContext());
             }
             else
             {
@@ -123,21 +124,7 @@ namespace SharpCPM
 
             return validInformation;
         }
-
-        private Task<bool> PerformLogin()
-        {
-            Logger.Trace("Calling Login function for client");
-
-            return Task.Factory.StartNew<bool>(ClientService.StartConnection);
-        }
-
-        private Task<bool> PerformLogout()
-        {
-            Logger.Trace("Requesting user log out");
-
-            return Task.Factory.StartNew<bool>(ClientService.CloseConnection);
-        }
-
+        
         private void UpdateLoginStatus(bool loggedIn)
         {
             if (loggedIn)

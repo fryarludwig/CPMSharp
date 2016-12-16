@@ -29,26 +29,18 @@ namespace Common.Utilities
         
         protected abstract Dictionary<Type, Type> GetValidConversations();
 
-        public virtual bool StartConnection()
+        public virtual void StartConnection()
         {
             Logger.Info("Starting network conncetion");
             ConversationManager.PrimaryCommunicator.Start();
             MyProcessInfo.EndPoint = ConversationManager.PrimaryCommunicator.LocalEndpoint;
-            int checkCounter = 6;
-            while (MyProcessInfo.Status != ProcessInfo.StatusCode.Registered && checkCounter-- > 0)
-            {
-                Thread.Sleep(500);
-            }
-
-            return MyProcessInfo.Status == ProcessInfo.StatusCode.Registered;
         }
 
-        public virtual bool CloseConnection()
+        public virtual void CloseConnection()
         {
             Logger.Warn("Shutting down network processes immediately");
             ConversationManager.ClearConversations();
             MyProcessInfo.Status = ProcessInfo.StatusCode.Terminated;
-            return MyProcessInfo.Status == ProcessInfo.StatusCode.Terminated || MyProcessInfo.Status == ProcessInfo.StatusCode.Terminating;
         }
                 
         public IPEndPoint LocalEndpoint

@@ -16,11 +16,7 @@ namespace Common.Utilities
             LogMessage = message;
         }
 
-        public override string ToString()
-        {
-            return LogMessage ?? "null";
-        }
-
+        public override string ToString() { return LogMessage ?? "null"; } 
         public Level LogLevel { get; set; }
         public string LogMessage { get; set; }
     }
@@ -104,37 +100,13 @@ namespace Common.Utilities
         private string _name = "";
         private static LogHelper LogUtilityHelper = new LogHelper();
 
-        public bool ConsoleOutput
-        {
-            set
-            {
-                LogUtilityHelper.PrintToConsole = value;
-            }
-        }
-        public bool FileOutput
-        {
-            set
-            {
-                LogUtilityHelper.WriteToFile = value;
-            }
-        }
-        public bool GuiOutput
-        {
-            set
-            {
-                LogUtilityHelper.GuiOutput = value;
-            }
-        }
+        public bool ConsoleOutput { set { LogUtilityHelper.PrintToConsole = value; } }
+        public bool FileOutput { set { LogUtilityHelper.WriteToFile = value; } }
+        public bool GuiOutput { set { LogUtilityHelper.GuiOutput = value; } }
         public Level LogLevel
         {
-            get
-            {
-                return LogUtilityHelper.GlobalLogLevel;
-            }
-            set
-            {
-                LogUtilityHelper.GlobalLogLevel = value;
-            }
+            get { return LogUtilityHelper.GlobalLogLevel; }
+            set { LogUtilityHelper.GlobalLogLevel = value; }
         }
 
         public void RegisterGuiCallback(BaseWindowForm winForm)

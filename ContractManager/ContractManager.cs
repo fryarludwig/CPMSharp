@@ -12,6 +12,7 @@ using Common.Messages.Requests;
 using ContractManager.Conversations;
 using System.Threading;
 using System.Net;
+using Common.Messages;
 
 namespace ContractManager
 {
@@ -20,15 +21,13 @@ namespace ContractManager
         public ContractManager() : base("Contract Manager")
         {
             MyProcessInfo.Type = ProcessInfo.ProcessType.ContractManager;
-            MyProcessInfo.Status = ProcessInfo.StatusCode.Unknown;
+            MyProcessInfo.Status = ProcessInfo.StatusCode.NotInitialized;
             MyProcessInfo.AliveRetries = 5;
             MyProcessInfo.AliveTimestamp = DateTime.Now;
             MyProcessInfo.EndPoint = LocalEndpoint;
             MyProcessInfo.Label = "Contract Manager";
-
             ConversationManager.RegisterNewConversationTypes(GetValidConversations());
         }
-
 
         protected override Dictionary<Type, Type> GetValidConversations()
         {
@@ -38,21 +37,17 @@ namespace ContractManager
             return typeMap;
         }
 
-        public override bool StartConnection()
+        public override void StartConnection()
         {
-            Logger.Info("Starting Server");
+            Logger.Info("Attempting to authenticate application");
             ConversationManager.PrimaryCommunicator.Start();
             LoginConversation loginConv = (LoginConversation)ConversationManager.CreateNewConversation(GetLoginMessage());
             loginConv.OnLoginUpdated += new LoginConversation.LoginStatusUpdated(HandleLoginUpdated);
             loginConv.Start();
             // Wait for 5 seconds, or for a value of true
-            int checkCounter = 10;
-            while (MyProcessInfo.Status != ProcessInfo.StatusCode.Registered && checkCounter-- > 0)
-            {
-                Logger.Trace("Attempting to log in");
-                Thread.Sleep(500);
-            }
-            return MyProcessInfo.Status == ProcessInfo.StatusCode.Registered;
+            //int checkCounter = 10;
+            //while (MyProcessInfo.Status != ProcessInfo.StatusCode.Registered && checkCounter-- > 0) { Thread.Sleep(500); }
+            //return MyProcessInfo.Status == ProcessInfo.StatusCode.Registered;
         }
 
         protected Envelope GetLoginMessage()

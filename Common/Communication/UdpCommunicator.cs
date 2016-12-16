@@ -24,7 +24,7 @@ namespace Common.Communication
             UdpClient socket = new UdpClient(LocalEndpoint);
             IPEndPoint recvEndpoint = null;
             socket.Client.ReceiveTimeout = 2000;
-
+            State = (socket != null) ? STATE.READY : STATE.ERROR;
             while (ContinueThread)
             {
                 try
@@ -63,6 +63,7 @@ namespace Common.Communication
                 }
                 catch (Exception exc)
                 {
+                    State = STATE.ERROR;
                     Logger.Error("UDP socket exception : " + exc.Message);
                 }
             }

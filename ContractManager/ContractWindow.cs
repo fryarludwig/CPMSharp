@@ -25,7 +25,7 @@ namespace ContractManager
             LoggerOutput = GuiLogOutput;
             ConnectButton.Text = START_TEXT;
         }
-        
+
         public void KillChildren()
         {
             //ContractService.Stop();
@@ -33,16 +33,15 @@ namespace ContractManager
 
         protected override void ProcessStatusChanged(ProcessInfo processInfo)
         {
-            Logger.Trace(processInfo.StatusString);
-
+            ConnectButton.Enabled = true;
             if (processInfo.Status == ProcessInfo.StatusCode.Registered)
             {
-                Logger.Trace("Server started successfull");
+                Logger.Trace("Contractor started successfull");
                 ConnectButton.Text = STOP_TEXT;
             }
             else
             {
-                Logger.Trace($"Server status is {processInfo.StatusString}");
+                Logger.Trace($"Contractor status is {processInfo.StatusString}");
                 ConnectButton.Text = START_TEXT;
             }
         }
@@ -72,8 +71,6 @@ namespace ContractManager
             }
         }
 
-        
-
         private bool ValidateLoginInformation()
         {
             bool validInformation = true;
@@ -88,9 +85,8 @@ namespace ContractManager
                     validInformation = false;
                 }
             }
-
-            int throwaway = 0;
-            if (!int.TryParse(authenticatorPortInput.Text, out throwaway))
+            
+            if (!ValidateInteger(authenticatorPortInput.Text))
             {
                 validInformation = false;
                 InputErrorProvider.SetError(authenticatorPortInput, "Please enter a valid port number");
@@ -98,13 +94,19 @@ namespace ContractManager
 
             return validInformation;
         }
-        
 
         public void UpdateGuiStatus()
         {
             // Call a method to update the gui
         }
-        
+
+        public ContractManager Contractor
+        {
+            get
+            {
+                return (ContractManager)ProcessInstance;
+            }
+        }
 
         private const string START_TEXT = "Connect";
         private const string STOP_TEXT = "Disconnect";

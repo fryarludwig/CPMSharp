@@ -29,29 +29,43 @@ namespace AuthenticationManager
             ConversationManager.RegisterNewConversationTypes(GetValidConversations());
         }
 
-        public override bool StartConnection()
+        public override void StartConnection()
         {
             Logger.Info("Starting Authentication Server");
+            ConversationManager.PrimaryCommunicator.State_OnChanged += CommunicatorState_OnChanged;
             ConversationManager.PrimaryCommunicator.Start();
-            int checkCounter = 10;
-            while (!ConversationManager.PrimaryCommunicator.IsActive() && checkCounter-- > 0)
-            {
-                Thread.Sleep(250);
-            }
-
-            if (ConversationManager.PrimaryCommunicator.IsActive())
-            {
-                MyProcessInfo.Status = ProcessInfo.StatusCode.Registered;
-                MyProcessInfo.EndPoint = ConversationManager.PrimaryCommunicator.LocalEndpoint;
-            }
-            else
-            {
-                MyProcessInfo.Status = ProcessInfo.StatusCode.NotInitialized;
-            }
-
-            Logger.Info("Completed connection process, status is " + MyProcessInfo.StatusString);
             Registration_OnChange?.Invoke(MyProcessInfo);
-            return MyProcessInfo.Status == ProcessInfo.StatusCode.Registered;
+        }
+
+        private void CommunicatorState_OnChanged(BaseCommunicator.STATE state)
+        {
+            Logger.Trace("Communicator state has changed to " + state.ToString());
+
+            switch (state)
+            {
+                case BaseCommunicator.STATE.READY:
+                    if (MyProcessInfo.Status != ProcessInfo.StatusCode.Registered && ConversationManager.PrimaryCommunicator.IsActive())
+                    {
+                        MyProcessInfo.Status = ProcessInfo.StatusCode.Registered;
+                        MyProcessInfo.EndPoint = ConversationManager.PrimaryCommunicator.LocalEndpoint;
+                    }
+                    break;
+
+                case BaseCommunicator.STATE.ERROR:
+                    Logger.Error("Communicator encountered an error state, no can continue");
+                    break;
+
+                case BaseCommunicator.STATE.BUSY:
+                    Logger.Error("There's no use case for this log statement yet.");
+                    break;
+
+                case BaseCommunicator.STATE.STOPPED:
+                    if (MyProcessInfo.Status == ProcessInfo.StatusCode.Terminating)
+                    {
+                        MyProcessInfo.Status = ProcessInfo.StatusCode.Terminated;
+                    }
+                    break;
+            }
         }
 
         protected override Dictionary<Type, Type> GetValidConversations()
@@ -74,11 +88,12 @@ namespace AuthenticationManager
             return ValidateUser(new User());
         }
 
+        // TODO - this, a lot
         public ProcessInfo ValidateUser(User user)
         {
             ProcessInfo processDetails = new ProcessInfo();
             int index = KnownProcesses.IndexOf(processDetails);
-            
+
             if (index >= 0)
             {
                 KnownProcesses[index] = processDetails;
@@ -89,10 +104,9 @@ namespace AuthenticationManager
             Registration_OnChange?.Invoke(MyProcessInfo);
             return processDetails;
         }
-        
+
         public delegate void RegistrationChanged(ProcessInfo processInfo);
         public event RegistrationChanged Registration_OnChange;
-
         private List<ProcessInfo> KnownProcesses { get; set; }
     }
 }

@@ -5,9 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-using Common.Messages;
-
-namespace Common.Communication
+namespace Common.Messages
 {
     public class Envelope
     {
@@ -29,13 +27,7 @@ namespace Common.Communication
             Message = tempMessage;
         }
 
-        public MessageNumber ConvId
-        {
-            get
-            {
-                return Message.ConvId;
-            }
-        }
+        public MessageNumber ConvId { get { return Message.ConvId; } }
         public IPEndPoint Address { get; set; }
         public Message Message { get; set; }
     }

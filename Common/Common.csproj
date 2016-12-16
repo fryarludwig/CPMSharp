@@ -50,7 +50,7 @@
     <Compile Include="Communication\UdpCommunicator.cs" />
     <Compile Include="Communication\Conversation.cs" />
     <Compile Include="Communication\ConversationManager.cs" />
-    <Compile Include="Communication\Envelope.cs" />
+    <Compile Include="Messages\Envelope.cs" />
     <Compile Include="Forms\BaseWindowForm.cs" />
     <Compile Include="Forms\BaseWindowForm.Designer.cs">
       <DependentUpon>BaseWindowForm.cs</DependentUpon>

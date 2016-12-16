@@ -27,10 +27,7 @@ namespace SharpCPM
             MyProcessInfo.Status = ProcessInfo.StatusCode.NotInitialized;
             MyProcessInfo.AliveRetries = 5;
             MyProcessInfo.AliveTimestamp = DateTime.Now;
-            //MyProcess.EndPoint = localEndpoint;
             MyProcessInfo.Label = "CPM Client";
-
-            
         }
 
         protected override Dictionary<Type, Type> GetValidConversations()
@@ -41,7 +38,7 @@ namespace SharpCPM
             return typeMap;
         }
 
-        public override bool StartConnection()
+        public override void StartConnection()
         {
             Logger.Info("Starting Server");
             ConversationManager.PrimaryCommunicator.Start();
@@ -55,7 +52,7 @@ namespace SharpCPM
                 Logger.Trace("Attempting to log in");
                 Thread.Sleep(500);
             }
-            return MyProcessInfo.Status == ProcessInfo.StatusCode.Registered;
+            //return MyProcessInfo.Status == ProcessInfo.StatusCode.Registered;
         }
 
         protected void HandleLoginUpdated(ProcessInfo myProcess)
