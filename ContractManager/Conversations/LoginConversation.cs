@@ -60,7 +60,7 @@ namespace ContractManager.Conversations
 
         protected override void HandleConversationCompleted()
         {
-            if (Properties.DistInstance.MyProcess.Status == ProcessInfo.StatusCode.Registered)
+            if (Properties.DistInstance.MyProcessInfo.Status == ProcessInfo.StatusCode.Registered)
             {
                 Logger.Info("Successfully connected");
             }

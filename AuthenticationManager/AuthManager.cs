@@ -20,35 +20,38 @@ namespace AuthenticationManager
         public AuthManager() : base("AuthManager")
         {
             Properties = SharedProperties.Instance;
-            ProcessInfo MyProcess = new ProcessInfo();
-            MyProcess.ProcessId = 0;
-            MyProcess.Type = ProcessInfo.ProcessType.AuthenticationManager;
-            MyProcess.Status = ProcessInfo.StatusCode.NotInitialized;
-            MyProcess.AliveRetries = 5;
-            MyProcess.AliveTimestamp = DateTime.Now;
-            MyProcess.Label = "Authentication Manager";
-
+            MyProcessInfo.ProcessId = 0;
+            MyProcessInfo.Type = ProcessInfo.ProcessType.AuthenticationManager;
+            MyProcessInfo.Status = ProcessInfo.StatusCode.NotInitialized;
+            MyProcessInfo.AliveRetries = 5;
+            MyProcessInfo.AliveTimestamp = DateTime.Now;
+            MyProcessInfo.Label = "Authentication Manager";
             ConversationManager.RegisterNewConversationTypes(GetValidConversations());
-
-            Logger.Trace("Initialized Authentication Manager");
         }
 
         public override bool StartConnection()
         {
             Logger.Info("Starting Authentication Server");
             ConversationManager.PrimaryCommunicator.Start();
-            int checkCounter = 6;
+            int checkCounter = 10;
             while (!ConversationManager.PrimaryCommunicator.IsActive() && checkCounter-- > 0)
             {
-                Thread.Sleep(500);
+                Thread.Sleep(250);
             }
 
             if (ConversationManager.PrimaryCommunicator.IsActive())
             {
-                MyProcess.Status = ProcessInfo.StatusCode.Registered;
+                MyProcessInfo.Status = ProcessInfo.StatusCode.Registered;
+                MyProcessInfo.EndPoint = ConversationManager.PrimaryCommunicator.LocalEndpoint;
+            }
+            else
+            {
+                MyProcessInfo.Status = ProcessInfo.StatusCode.NotInitialized;
             }
 
-            return MyProcess.Status == ProcessInfo.StatusCode.Registered;
+            Logger.Info("Completed connection process, status is " + MyProcessInfo.StatusString);
+            Registration_OnChange?.Invoke(MyProcessInfo);
+            return MyProcessInfo.Status == ProcessInfo.StatusCode.Registered;
         }
 
         protected override Dictionary<Type, Type> GetValidConversations()
@@ -74,10 +77,22 @@ namespace AuthenticationManager
         public ProcessInfo ValidateUser(User user)
         {
             ProcessInfo processDetails = new ProcessInfo();
+            int index = KnownProcesses.IndexOf(processDetails);
+            
+            if (index >= 0)
+            {
+                KnownProcesses[index] = processDetails;
+            }
 
             processDetails.Label = user.Alias;
 
+            Registration_OnChange?.Invoke(MyProcessInfo);
             return processDetails;
         }
+        
+        public delegate void RegistrationChanged(ProcessInfo processInfo);
+        public event RegistrationChanged Registration_OnChange;
+
+        private List<ProcessInfo> KnownProcesses { get; set; }
     }
 }

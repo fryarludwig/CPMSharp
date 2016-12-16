@@ -9,3 +9,14 @@ C:\Users\fryar\Documents\Visual Studio 2015\Projects\SharpCPM\ContractManager\ob
 C:\Users\fryar\Documents\Visual Studio 2015\Projects\SharpCPM\ContractManager\obj\Debug\ContractManager.exe
 C:\Users\fryar\Documents\Visual Studio 2015\Projects\SharpCPM\ContractManager\obj\Debug\ContractManager.pdb
 C:\Users\fryar\Documents\Visual Studio 2015\Projects\SharpCPM\ContractManager\obj\Debug\ContractManager.ContractWindow.resources
+C:\Users\fryarludwig\projects\CPMSharp\ContractManager\bin\Debug\ContractManager.exe.config
+C:\Users\fryarludwig\projects\CPMSharp\ContractManager\bin\Debug\ContractManager.exe
+C:\Users\fryarludwig\projects\CPMSharp\ContractManager\bin\Debug\ContractManager.pdb
+C:\Users\fryarludwig\projects\CPMSharp\ContractManager\bin\Debug\Common.dll
+C:\Users\fryarludwig\projects\CPMSharp\ContractManager\bin\Debug\Common.pdb
+C:\Users\fryarludwig\projects\CPMSharp\ContractManager\obj\Debug\ContractManager.csprojResolveAssemblyReference.cache
+C:\Users\fryarludwig\projects\CPMSharp\ContractManager\obj\Debug\ContractManager.ContractWindow.resources
+C:\Users\fryarludwig\projects\CPMSharp\ContractManager\obj\Debug\ContractManager.Properties.Resources.resources
+C:\Users\fryarludwig\projects\CPMSharp\ContractManager\obj\Debug\ContractManager.csproj.GenerateResource.Cache
+C:\Users\fryarludwig\projects\CPMSharp\ContractManager\obj\Debug\ContractManager.exe
+C:\Users\fryarludwig\projects\CPMSharp\ContractManager\obj\Debug\ContractManager.pdb

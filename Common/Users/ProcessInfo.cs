@@ -2,6 +2,7 @@
 using System.Net;
 using System.Text;
 using System.Runtime.Serialization;
+using System.Collections.Generic;
 
 namespace Common.Users
 {
@@ -12,6 +13,7 @@ namespace Common.Users
         public enum StatusCode { Unknown = 0, NotInitialized = 1, Initializing = 2, Registered = 3, Terminating = 4, Terminated = 5 };
 
         private StatusCode status;
+        private static readonly string[] typeNames = new string[] { "Unknown", "AuthenticationManager", "ContractManager", "Client" };
         private static readonly string[] statusNames = new string[] { "Unknown", "Not Initialized", "Initializing", "Registered", "Terminating", "Terminated" };
         private object myLock = new object();
 
@@ -54,6 +56,7 @@ namespace Common.Users
         }
 
         public string StatusString { get { return statusNames[(int)Status]; } }
+        public string TypeString { get { return typeNames[(int)Type]; } }
 
         public DateTime? AliveTimestamp { get; set; }
         public Int32 AliveRetries { get; set; }
@@ -79,6 +82,11 @@ namespace Common.Users
                     ProcessId, Label, Type,
                     (EndPoint == null) ? string.Empty : EndPoint.ToString(),
                     StatusString);
+        }
+
+        public override int GetHashCode()
+        {
+            return (LabelAndId.GetHashCode() << 16) | ((int)Type & 0xFFFF);
         }
 
         public delegate void StatusUpdateEvent(StatusCode status);

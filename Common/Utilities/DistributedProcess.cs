@@ -17,14 +17,14 @@ namespace Common.Utilities
             Logger = new LogUtility(name);
             Properties = SharedProperties.Instance;
             Properties.DistInstance = this;
-            MyProcess = new ProcessInfo();
-            MyProcess.OnStatusChanged += new ProcessInfo.StatusUpdateEvent(HandleStatusChange);
+            MyProcessInfo = new ProcessInfo();
+            MyProcessInfo.OnStatusChanged += new ProcessInfo.StatusUpdateEvent(HandleStatusChange);
             ConversationManager.RegisterNewConversationTypes(GetValidConversations());
         }
 
         public virtual void HandleStatusChange(ProcessInfo.StatusCode status)
         {
-            OnStatusChanged?.Invoke(MyProcess);
+            OnStatusChanged?.Invoke(MyProcessInfo);
         }
         
         protected abstract Dictionary<Type, Type> GetValidConversations();
@@ -33,21 +33,22 @@ namespace Common.Utilities
         {
             Logger.Info("Starting network conncetion");
             ConversationManager.PrimaryCommunicator.Start();
+            MyProcessInfo.EndPoint = ConversationManager.PrimaryCommunicator.LocalEndpoint;
             int checkCounter = 6;
-            while (MyProcess.Status != ProcessInfo.StatusCode.Registered && checkCounter-- > 0)
+            while (MyProcessInfo.Status != ProcessInfo.StatusCode.Registered && checkCounter-- > 0)
             {
                 Thread.Sleep(500);
             }
 
-            return MyProcess.Status == ProcessInfo.StatusCode.Registered;
+            return MyProcessInfo.Status == ProcessInfo.StatusCode.Registered;
         }
 
         public virtual bool CloseConnection()
         {
             Logger.Warn("Shutting down network processes immediately");
             ConversationManager.ClearConversations();
-            MyProcess.Status = ProcessInfo.StatusCode.Terminated;
-            return MyProcess.Status == ProcessInfo.StatusCode.Terminated || MyProcess.Status == ProcessInfo.StatusCode.Terminating;
+            MyProcessInfo.Status = ProcessInfo.StatusCode.Terminated;
+            return MyProcessInfo.Status == ProcessInfo.StatusCode.Terminated || MyProcessInfo.Status == ProcessInfo.StatusCode.Terminating;
         }
                 
         public IPEndPoint LocalEndpoint
@@ -73,7 +74,7 @@ namespace Common.Utilities
         public IPEndPoint ContractManagerEndpoint { get; set; }
         public IPEndPoint AuthenticatorEndpoint { get; set; }
         public SharedProperties Properties { get; set; }
-        public ProcessInfo MyProcess { get; set; }
+        public ProcessInfo MyProcessInfo { get; set; }
         protected LogUtility Logger { get; set; }
     }
 }

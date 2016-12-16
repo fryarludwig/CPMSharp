@@ -23,12 +23,12 @@ namespace SharpCPM
     {
         public CPMClient() : base("CPMClient")
         {
-            MyProcess.Type = ProcessInfo.ProcessType.Client;
-            MyProcess.Status = ProcessInfo.StatusCode.NotInitialized;
-            MyProcess.AliveRetries = 5;
-            MyProcess.AliveTimestamp = DateTime.Now;
+            MyProcessInfo.Type = ProcessInfo.ProcessType.Client;
+            MyProcessInfo.Status = ProcessInfo.StatusCode.NotInitialized;
+            MyProcessInfo.AliveRetries = 5;
+            MyProcessInfo.AliveTimestamp = DateTime.Now;
             //MyProcess.EndPoint = localEndpoint;
-            MyProcess.Label = "CPM Client";
+            MyProcessInfo.Label = "CPM Client";
 
             
         }
@@ -50,17 +50,17 @@ namespace SharpCPM
             loginConv.Start();
             // Wait for 5 seconds, or for a value of true
             int checkCounter = 10;
-            while (MyProcess.Status != ProcessInfo.StatusCode.Registered && checkCounter-- > 0)
+            while (MyProcessInfo.Status != ProcessInfo.StatusCode.Registered && checkCounter-- > 0)
             {
                 Logger.Trace("Attempting to log in");
                 Thread.Sleep(500);
             }
-            return MyProcess.Status == ProcessInfo.StatusCode.Registered;
+            return MyProcessInfo.Status == ProcessInfo.StatusCode.Registered;
         }
 
         protected void HandleLoginUpdated(ProcessInfo myProcess)
         {
-            MyProcess = myProcess;
+            MyProcessInfo = myProcess;
             Logger.Info("Login status updated!");
         }
 
@@ -73,22 +73,22 @@ namespace SharpCPM
         public void Login()
         {
 
-            if (MyProcess.Status != ProcessInfo.StatusCode.Initializing)
+            if (MyProcessInfo.Status != ProcessInfo.StatusCode.Initializing)
             {
                 Logger.Info("Requesting a login");
-                MyProcess.Status = ProcessInfo.StatusCode.Initializing;
+                MyProcessInfo.Status = ProcessInfo.StatusCode.Initializing;
                 //ConversationHandler.Execute(ConversationFactory.CreateNewConversation<LoginConversation>());
             }
             else
             {
-                Logger.Warn("Status is '" + MyProcess.StatusString + "', waiting for login to complete");
+                Logger.Warn("Status is '" + MyProcessInfo.StatusString + "', waiting for login to complete");
             }
         }
         
         protected void Logout(int Timeout)
         {
             Logger.Info("Requesting logout");
-            MyProcess.Status = ProcessInfo.StatusCode.Terminating;
+            MyProcessInfo.Status = ProcessInfo.StatusCode.Terminating;
             //ConversationHandler.Execute(ConversationFactory.CreateType<LogoutConversation>());
 
             int timeSegement = Timeout / 5;

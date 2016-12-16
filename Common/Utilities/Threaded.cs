@@ -9,13 +9,16 @@ namespace Common.Utilities
 {
     public abstract class Threaded
     {
-        public Threaded(string loggerName)
+        public Threaded(string name)
         {
-            Logger = new LogUtility(loggerName);
+            ContinueThread = false;
+            Logger = (name != "LogHelper") ? new LogUtility(name) : null;
             ActiveThread = new Thread(Run);
             ActiveThread.IsBackground = true;
-            ContinueThread = false;
+            try { ActiveThread.Name = name; }
+            catch (InvalidOperationException e) { Logger?.Warn($"Unable to name thread due to exception {e.ToString()}"); }
         }
+
         ~Threaded()
         {
             Stop();
@@ -32,7 +35,7 @@ namespace Common.Utilities
             }
             else
             {
-                Logger.Warn("Cannot intiate thread, it is already active");
+                Logger?.Warn("Cannot intiate thread, it is already active");
             }
         }
 
@@ -40,7 +43,7 @@ namespace Common.Utilities
         {
             if (ActiveThread.IsAlive)
             {
-                Logger.Info("Closing Thread");
+                Logger?.Info("Closing Thread");
                 DerivedStop();
                 ContinueThread = false;
                 ActiveThread.Join(2000);
@@ -48,7 +51,7 @@ namespace Common.Utilities
             else
             {
                 ContinueThread = false;
-                Logger.Warn("Current thread is not running, cannot stop");
+                Logger?.Warn("Current thread is not running, cannot stop");
             }
         }
 

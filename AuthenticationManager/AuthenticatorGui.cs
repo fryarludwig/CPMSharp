@@ -23,7 +23,9 @@ namespace AuthenticationManager
         {
             InitializeComponent();
             LoggerOutput = GuiLogOutput;
+            Authenticator.Registration_OnChange += ProcessRegistrationUpdate;
             StartButton.Text = START_TEXT;
+            StatusDisplay.Text = "Not Started";
             Logger.Trace("Started Authentication Manager Interface");
         }
 
@@ -32,10 +34,26 @@ namespace AuthenticationManager
             //AuthenticationService();
         }
 
+        protected void ProcessRegistrationUpdate(ProcessInfo processInfo)
+        {
+            if (ProcessesDisplay.Items.ContainsKey(processInfo.LabelAndId))
+            {
+                ProcessesDisplay.Items.RemoveByKey(processInfo.LabelAndId);
+            }
+            Logger.Trace($"Registration updated for process {processInfo.ToString()}");
+            ListViewItem listItem = new ListViewItem(processInfo.ProcessId.ToString());
+            listItem.Name = processInfo.LabelAndId;
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, (processInfo.TypeString)));
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, (processInfo.Label ?? "None")));
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, ((processInfo.EndPoint != null) ? processInfo.EndPoint.ToString() : "None")));
+            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, (processInfo.StatusString)));
+            ProcessesDisplay.Items.Add(listItem);
+        }
+
         protected override void ProcessStatusChanged(ProcessInfo processInfo)
         {
-            Logger.Trace(processInfo.StatusString);
-
+            StatusDisplay.Text = processInfo.StatusString;
+            StartButton.Enabled = true;
             if (processInfo.Status == ProcessInfo.StatusCode.Registered)
             {
                 Logger.Trace("Server started successfull");
@@ -46,8 +64,6 @@ namespace AuthenticationManager
                 Logger.Trace($"Server status is {processInfo.StatusString}");
                 StartButton.Text = START_TEXT;
             }
-
-            StartButton.Enabled = true;
         }
 
         protected override void PrepopulateProcessValues()
@@ -102,6 +118,13 @@ namespace AuthenticationManager
 
         private const string START_TEXT = "Start";
         private const string STOP_TEXT = "Stop";
+        protected AuthManager Authenticator
+        {
+            get
+            {
+                return (AuthManager)ProcessInstance;
+            }
+        }
 
         //public void OnMatchFound_Trigger(MatchResult result)
         //{

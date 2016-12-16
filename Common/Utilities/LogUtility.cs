@@ -34,8 +34,8 @@ namespace Common.Utilities
             LevelDictionary["Warn"] = Level.WARN;
             LevelDictionary["Info"] = Level.INFO;
             LevelDictionary["Trace"] = Level.TRACE;
-            LevelColoring[Level.TRACE] = Color.White;
-            LevelColoring[Level.INFO] = Color.NavajoWhite;
+            LevelColoring[Level.TRACE] = Color.FloralWhite;
+            LevelColoring[Level.INFO] = Color.AntiqueWhite;
             LevelColoring[Level.WARN] = Color.LightYellow;
             LevelColoring[Level.ERROR] = Color.LightSalmon;
         }
@@ -148,9 +148,9 @@ namespace Common.Utilities
         }
     }
 
-    public class LogHelper
+    public class LogHelper : Threaded
     {
-        public LogHelper()
+        public LogHelper() : base("Logger")
         {
             LabelDictionary = new Dictionary<Level, string>();
             LabelDictionary[Level.TRACE] = "[TRACE]: ";
@@ -165,25 +165,9 @@ namespace Common.Utilities
             LogFileName = "Log - " + DateTime.Now.ToString("yyyy-MM-dd_HH-mm") + ".txt";
 
             ContinueThread = true;
-            LogThread = new Thread(Run);
-            LogThread.IsBackground = true;
-            LogThread.Start();
+            Start();
         }
-
-        ~LogHelper()
-        {
-            StopLogging();
-        }
-
-        public void StopLogging()
-        {
-            if (ContinueThread || LogThread.IsAlive)
-            {
-                ContinueThread = false;
-                LogThread.Join(1000);
-            }
-        }
-
+        
         public void Log(Level logLevel, string source, string message)
         {
             try
@@ -205,7 +189,7 @@ namespace Common.Utilities
             }
         }
 
-        private void Run()
+        protected override void Run()
         {
             System.IO.StreamWriter logFile = new System.IO.StreamWriter(LogFileName);
 
@@ -230,12 +214,7 @@ namespace Common.Utilities
                 }
             }
         }
-
-        public bool IsActive()
-        {
-            return ContinueThread;
-        }
-
+        
         public Level GlobalLogLevel { get; set; }
         public bool PrintToConsole { get; set; }
         public bool GuiOutput { get; set; }
@@ -246,8 +225,6 @@ namespace Common.Utilities
         public event GuiLogPrintEvent OnGuiLogPrint;
 
         private ConcurrentQueue<string> LogQueue = new ConcurrentQueue<string>();
-        private volatile bool ContinueThread = false;
-        private Thread LogThread;
         private Dictionary<Level, string> LabelDictionary;
     }
 }

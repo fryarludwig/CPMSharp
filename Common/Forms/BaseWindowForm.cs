@@ -19,16 +19,12 @@ namespace Common.Forms
 {
     public class AbstractControlDescriptionProvider<TAbstract, TBase> : TypeDescriptionProvider
     {
-        public AbstractControlDescriptionProvider()
-            : base(TypeDescriptor.GetProvider(typeof(TAbstract)))
-        {
-        }
+        public AbstractControlDescriptionProvider() : base(TypeDescriptor.GetProvider(typeof(TAbstract))) { }
 
         public override Type GetReflectionType(Type objectType, object instance)
         {
             if (objectType == typeof(TAbstract))
                 return typeof(TBase);
-
             return base.GetReflectionType(objectType, instance);
         }
 
@@ -36,7 +32,6 @@ namespace Common.Forms
         {
             if (objectType == typeof(TAbstract))
                 objectType = typeof(TBase);
-
             return base.CreateInstance(provider, objectType, argTypes, args);
         }
     }
@@ -44,7 +39,7 @@ namespace Common.Forms
     [TypeDescriptionProvider(typeof(AbstractControlDescriptionProvider<BaseWindowForm, Form>))]
     public abstract partial class BaseWindowForm : Form
     {
-        public BaseWindowForm(string name, DistributedProcess process)
+        protected BaseWindowForm(string name, DistributedProcess process)
         {
             InitializeComponent();
             Logger = new LogUtility(name);
@@ -67,10 +62,6 @@ namespace Common.Forms
                 int numVisible = LoggerOutput.ClientSize.Height / LoggerOutput.ItemHeight;
                 LoggerOutput.Items.Add(message);
                 LoggerOutput.TopIndex += (LoggerOutput.TopIndex == LoggerOutput.Items.Count - numVisible - 1) ? 1 : 0;
-                //    if (LoggerOutput.TopIndex == LoggerOutput.Items.Count - numVisible - 1)
-                //{
-                //    LoggerOutput.TopIndex = LoggerOutput.Items.Count - numVisible + 1;
-                //}
             }
         }
 
@@ -96,7 +87,6 @@ namespace Common.Forms
         public delegate void OnProcessStatusChanged(ProcessInfo processInfo);
 
         public event EventHandler<LogPrintEventArgs> Logger_OnPrint;
-
 
         private ListBox _LoggerOutput;
         protected ListBox LoggerOutput

@@ -19,16 +19,12 @@ namespace ContractManager
     {
         public ContractManager() : base("Contract Manager")
         {
-
-
-            ProcessInfo MyProcess = new ProcessInfo();
-            MyProcess.ProcessId = 0;
-            MyProcess.Type = ProcessInfo.ProcessType.ContractManager;
-            MyProcess.Status = ProcessInfo.StatusCode.Unknown;
-            MyProcess.AliveRetries = 5;
-            MyProcess.AliveTimestamp = DateTime.Now;
-            MyProcess.EndPoint = LocalEndpoint;
-            MyProcess.Label = "Contract Manager";
+            MyProcessInfo.Type = ProcessInfo.ProcessType.ContractManager;
+            MyProcessInfo.Status = ProcessInfo.StatusCode.Unknown;
+            MyProcessInfo.AliveRetries = 5;
+            MyProcessInfo.AliveTimestamp = DateTime.Now;
+            MyProcessInfo.EndPoint = LocalEndpoint;
+            MyProcessInfo.Label = "Contract Manager";
 
             ConversationManager.RegisterNewConversationTypes(GetValidConversations());
         }
@@ -51,12 +47,12 @@ namespace ContractManager
             loginConv.Start();
             // Wait for 5 seconds, or for a value of true
             int checkCounter = 10;
-            while (MyProcess.Status != ProcessInfo.StatusCode.Registered && checkCounter-- > 0)
+            while (MyProcessInfo.Status != ProcessInfo.StatusCode.Registered && checkCounter-- > 0)
             {
                 Logger.Trace("Attempting to log in");
                 Thread.Sleep(500);
             }
-            return MyProcess.Status == ProcessInfo.StatusCode.Registered;
+            return MyProcessInfo.Status == ProcessInfo.StatusCode.Registered;
         }
 
         protected Envelope GetLoginMessage()
@@ -67,27 +63,27 @@ namespace ContractManager
 
         protected void HandleLoginUpdated(ProcessInfo myProcess)
         {
-            MyProcess = myProcess;
+            MyProcessInfo = myProcess;
             Logger.Info("Login status updated!");
         }
                 
         protected void Register(int attempt)
         {
-            if (MyProcess.Status != ProcessInfo.StatusCode.Initializing)
+            if (MyProcessInfo.Status != ProcessInfo.StatusCode.Initializing)
             {
                 Logger.Info("Requesting a login");
-                MyProcess.Status = ProcessInfo.StatusCode.Initializing;
+                MyProcessInfo.Status = ProcessInfo.StatusCode.Initializing;
                 Envelope envelope = new Envelope(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5555), new LoginRequest());
                 //InitiateConversation(envelope);
             }
             else if (attempt > LoginRetries)
             {
                 Logger.Warn("Login attempt failed.");
-                MyProcess.Status = ProcessInfo.StatusCode.Terminating;
+                MyProcessInfo.Status = ProcessInfo.StatusCode.Terminating;
             }
             else
             {
-                Logger.Warn("Status is '" + MyProcess.StatusString + "', waiting for login to complete");
+                Logger.Warn("Status is '" + MyProcessInfo.StatusString + "', waiting for login to complete");
             }
         }
 

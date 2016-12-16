@@ -11,3 +11,16 @@ C:\Users\fryar\Documents\Visual Studio 2015\Projects\SharpCPM\UnitTestProject1\b
 C:\Users\fryar\Documents\Visual Studio 2015\Projects\SharpCPM\UnitTestProject1\bin\Debug\SharpCPM.exe
 C:\Users\fryar\Documents\Visual Studio 2015\Projects\SharpCPM\UnitTestProject1\bin\Debug\ContractManager.pdb
 C:\Users\fryar\Documents\Visual Studio 2015\Projects\SharpCPM\UnitTestProject1\bin\Debug\SharpCPM.pdb
+C:\Users\fryarludwig\projects\CPMSharp\UnitTestProject1\bin\Debug\TestCommon.dll
+C:\Users\fryarludwig\projects\CPMSharp\UnitTestProject1\bin\Debug\TestCommon.pdb
+C:\Users\fryarludwig\projects\CPMSharp\UnitTestProject1\bin\Debug\AuthenticationManager.exe
+C:\Users\fryarludwig\projects\CPMSharp\UnitTestProject1\bin\Debug\Common.dll
+C:\Users\fryarludwig\projects\CPMSharp\UnitTestProject1\bin\Debug\ContractManager.exe
+C:\Users\fryarludwig\projects\CPMSharp\UnitTestProject1\bin\Debug\SharpCPM.exe
+C:\Users\fryarludwig\projects\CPMSharp\UnitTestProject1\bin\Debug\AuthenticationManager.pdb
+C:\Users\fryarludwig\projects\CPMSharp\UnitTestProject1\bin\Debug\Common.pdb
+C:\Users\fryarludwig\projects\CPMSharp\UnitTestProject1\bin\Debug\ContractManager.pdb
+C:\Users\fryarludwig\projects\CPMSharp\UnitTestProject1\bin\Debug\SharpCPM.pdb
+C:\Users\fryarludwig\projects\CPMSharp\UnitTestProject1\obj\Debug\TestCommon.csprojResolveAssemblyReference.cache
+C:\Users\fryarludwig\projects\CPMSharp\UnitTestProject1\obj\Debug\TestCommon.dll
+C:\Users\fryarludwig\projects\CPMSharp\UnitTestProject1\obj\Debug\TestCommon.pdb
