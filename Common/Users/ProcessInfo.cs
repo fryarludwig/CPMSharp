@@ -3,6 +3,7 @@ using System.Net;
 using System.Text;
 using System.Runtime.Serialization;
 using System.Collections.Generic;
+using System.Timers;
 
 namespace Common.Users
 {
@@ -57,9 +58,9 @@ namespace Common.Users
 
         public string StatusString { get { return statusNames[(int)Status]; } }
         public string TypeString { get { return typeNames[(int)Type]; } }
-
-        public DateTime? AliveTimestamp { get; set; }
+        
         public Int32 AliveRetries { get; set; }
+        public Timer HeartbeatTimer { get; set; }
 
         public ProcessInfo Clone()
         {
@@ -88,7 +89,7 @@ namespace Common.Users
         {
             return (LabelAndId.GetHashCode() << 16) | ((int)Type & 0xFFFF);
         }
-
+        
         public delegate void StatusUpdateEvent(StatusCode status);
         public event StatusUpdateEvent OnStatusChanged;
     }

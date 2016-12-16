@@ -32,7 +32,7 @@ namespace TestCommon.TestObjects
             WaitingForReply = true;
         }
 
-        protected override void ProcessMessage(Envelope envelope)
+        protected override void ProcessResponse(Envelope envelope)
         {
             ReceivedMessage = envelope;
         }

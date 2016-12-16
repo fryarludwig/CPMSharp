@@ -16,9 +16,10 @@ namespace Common.Utilities
             LogMessage = message;
         }
 
-        public override string ToString() { return LogMessage ?? "null"; } 
+        public override string ToString() { return LogMessage ?? "null"; }
         public Level LogLevel { get; set; }
         public string LogMessage { get; set; }
+        public Color Coloring { get { return LogLevelMapper.ColorFromLevel(LogLevel); } }
     }
 
     public static class LogLevelMapper
@@ -34,6 +35,10 @@ namespace Common.Utilities
             LevelColoring[Level.INFO] = Color.AntiqueWhite;
             LevelColoring[Level.WARN] = Color.LightYellow;
             LevelColoring[Level.ERROR] = Color.LightSalmon;
+            LabelDictionary[Level.TRACE] = "[TRACE]: ";
+            LabelDictionary[Level.INFO] = "[INFO ]: ";
+            LabelDictionary[Level.WARN] = "[WARN ]: ";
+            LabelDictionary[Level.ERROR] = "[ERROR]: ";
         }
 
         public static Level LevelFromString(string levelString)
@@ -43,11 +48,17 @@ namespace Common.Utilities
 
         public static Color ColorFromLevel(Level level)
         {
-            return (LevelColoring.ContainsKey(level))? LevelColoring[level] : Color.White;
+            return (LevelColoring.ContainsKey(level)) ? LevelColoring[level] : Color.White;
+        }
+
+        public static string LevelString(Level level)
+        {
+            return (LabelDictionary.ContainsKey(level)) ? LabelDictionary[level] : "[NONE ]: ";
         }
 
         private static Dictionary<string, Level> LevelDictionary = new Dictionary<string, Level>();
         private static Dictionary<Level, Color> LevelColoring = new Dictionary<Level, Color>();
+        private static Dictionary<Level, string> LabelDictionary = new Dictionary<Level, string>();
     }
 
     public enum Level
@@ -124,11 +135,6 @@ namespace Common.Utilities
     {
         public LogHelper() : base("Logger")
         {
-            LabelDictionary = new Dictionary<Level, string>();
-            LabelDictionary[Level.TRACE] = "[TRACE]: ";
-            LabelDictionary[Level.INFO] = "[INFO ]: ";
-            LabelDictionary[Level.WARN] = "[WARN ]: ";
-            LabelDictionary[Level.ERROR] = "[ERROR]: ";
 
             GlobalLogLevel = Level.TRACE;
             PrintToConsole = true;
@@ -139,21 +145,15 @@ namespace Common.Utilities
             ContinueThread = true;
             Start();
         }
-        
+
         public void Log(Level logLevel, string source, string message)
         {
             try
             {
                 string currentTime = DateTime.Now.ToString("hh:mm:ss.s: ");
-                string logMessageLine = currentTime + LabelDictionary[logLevel] + source + " - " + message;
-                if ((int)logLevel <= (int)GlobalLogLevel)
-                {
-                    LogQueue.Enqueue(logMessageLine);
-                }
-                if (GuiOutput)
-                {
-                    OnGuiLogPrint?.Invoke(new LogItem(logLevel, logMessageLine));
-                }
+                string logMessageLine = currentTime + LogLevelMapper.LevelString(logLevel) + source + " - " + message;
+                if ((int)logLevel <= (int)GlobalLogLevel) { LogQueue.Enqueue(logMessageLine); }
+                if (GuiOutput) { OnGuiLogPrint?.Invoke(new LogItem(logLevel, logMessageLine)); }
             }
             catch (KeyNotFoundException e)
             {
@@ -186,7 +186,7 @@ namespace Common.Utilities
                 }
             }
         }
-        
+
         public Level GlobalLogLevel { get; set; }
         public bool PrintToConsole { get; set; }
         public bool GuiOutput { get; set; }
@@ -197,6 +197,5 @@ namespace Common.Utilities
         public event GuiLogPrintEvent OnGuiLogPrint;
 
         private ConcurrentQueue<string> LogQueue = new ConcurrentQueue<string>();
-        private Dictionary<Level, string> LabelDictionary;
     }
 }

@@ -14,6 +14,7 @@ using Common.Forms;
 using System.Collections.Concurrent;
 using System.Net;
 using Common.Users;
+using System.Timers;
 
 namespace AuthenticationManager
 {
@@ -28,8 +29,7 @@ namespace AuthenticationManager
             StatusDisplay.Text = "Not Started";
             Logger.Trace("Started Authentication Manager Interface");
         }
-
-
+        
         protected void ProcessRegistrationUpdate(ProcessInfo processInfo)
         {
             if (ProcessesDisplay.Items.ContainsKey(processInfo.LabelAndId))
@@ -45,6 +45,7 @@ namespace AuthenticationManager
             listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, (processInfo.StatusString)));
             ProcessesDisplay.Items.Add(listItem);
         }
+
 
         protected override void ProcessStatusChanged(ProcessInfo processInfo)
         {
@@ -118,16 +119,10 @@ namespace AuthenticationManager
 
             return validInformation;
         }
-
+        
         private const string START_TEXT = "Start";
         private const string STOP_TEXT = "Stop";
-        protected AuthManager Authenticator
-        {
-            get
-            {
-                return (AuthManager)ProcessInstance;
-            }
-        }
+        protected AuthManager Authenticator { get { return (AuthManager)ProcessInstance; } }
 
         //public void OnMatchFound_Trigger(MatchResult result)
         //{

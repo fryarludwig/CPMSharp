@@ -23,7 +23,6 @@ namespace ContractManager
             MyProcessInfo.Type = ProcessInfo.ProcessType.ContractManager;
             MyProcessInfo.Status = ProcessInfo.StatusCode.NotInitialized;
             MyProcessInfo.AliveRetries = 5;
-            MyProcessInfo.AliveTimestamp = DateTime.Now;
             MyProcessInfo.EndPoint = LocalEndpoint;
             MyProcessInfo.Label = "Contract Manager";
             ConversationManager.RegisterNewConversationTypes(GetValidConversations());

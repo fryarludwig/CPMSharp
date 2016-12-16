@@ -26,7 +26,6 @@ namespace SharpCPM
             MyProcessInfo.Type = ProcessInfo.ProcessType.Client;
             MyProcessInfo.Status = ProcessInfo.StatusCode.NotInitialized;
             MyProcessInfo.AliveRetries = 5;
-            MyProcessInfo.AliveTimestamp = DateTime.Now;
             MyProcessInfo.Label = "CPM Client";
         }
 

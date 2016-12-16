@@ -23,7 +23,7 @@ namespace AuthenticationManager.Conversations
             throw new NotImplementedException();
         }
 
-        protected override void ProcessMessage(Envelope envelope)
+        protected override void ProcessResponse(Envelope envelope)
         {
             throw new NotImplementedException();
         }

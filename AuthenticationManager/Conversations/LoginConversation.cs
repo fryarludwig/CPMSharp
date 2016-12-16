@@ -19,29 +19,46 @@ namespace AuthenticationManager.Conversations
     {
         public LoginConversation() : base("Auth - Login Conv")
         {
+            RemoteProcess = null;
+            RemoteUser = null;
         }
 
-        protected override void ProcessMessage(Envelope envelope)
+        public override void RegisterConversationCallbacks(DistributedProcess process)
         {
-            if (envelope.Message != null && envelope.Message.GetType() == typeof(LoginRequest))
+            if (process.GetType() == typeof(AuthManager))
             {
-                LoginReply reply = new LoginReply();
-                reply.ConvId = Id;
-                reply.MsgId = MessageNumber.Create();
-                reply.Note = "Granted!";
-                reply.Success = true;
-                reply.ProcessInfo = new ProcessInfo();
-                reply.ProcessInfo.Status = ProcessInfo.StatusCode.Registered;
-                reply.ProcessInfo.Type = ProcessInfo.ProcessType.ContractManager;
-
-                OnLoginUpdated?.Invoke(reply.ProcessInfo);
-
-                Envelope env = new Envelope(envelope.Address, reply);
-                SendMessage(env);
+                AuthManager manager = (AuthManager)process;
+                
             }
-            else
+        }
+
+        protected override void ProcessResponse(Envelope envelope)
+        {
+            if (envelope.Message != null)
             {
-                Logger.Info("Received unexpected message: " + envelope.Message);
+                if (envelope.Message.GetType() == typeof(LoginRequest))
+                {
+                    LoginRequest received = (LoginRequest)envelope.Message;
+                    ProcessInfo newInfo = new ProcessInfo();
+                    newInfo.EndPoint = envelope.Address;
+                    newInfo.Label = received.ProcessLabel;
+                    newInfo.Type = received.ProcessType;
+                    newInfo = OnLoginUpdated?.Invoke(newInfo);
+                    
+                    LoginReply reply = new LoginReply();
+                    reply.ConvId = Id;
+                    reply.MsgId = MessageNumber.Create();
+                    reply.Note = (newInfo != null)? "Granted!" : "Bad request";
+                    reply.Success = (newInfo != null);
+                    reply.ProcessInfo = newInfo ?? new ProcessInfo();
+
+                    Envelope env = new Envelope(newInfo.EndPoint, reply);
+                    SendMessage(env);
+                }
+                else
+                {
+                    Logger.Info("Received unexpected message: " + envelope.Message);
+                }
             }
 
             WaitingForReply = false;
@@ -49,5 +66,8 @@ namespace AuthenticationManager.Conversations
 
         public delegate ProcessInfo LoginResponseEvent(ProcessInfo newProcess);
         public event LoginResponseEvent OnLoginUpdated;
+
+        protected ProcessInfo RemoteProcess { get; set; }
+        protected User RemoteUser { get; set; }
     }
 }

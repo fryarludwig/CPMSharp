@@ -73,10 +73,9 @@ namespace TestCommon.TestObjects
             }
         }
 
-        protected override void ProcessMessage(Envelope envelope)
+        protected override void ProcessResponse(Envelope envelope)
         {
             Logger.Info("Processing received message, boo yah!");
-
             EventResponse = Updated?.Invoke("SimpleConversation");
             ReceivedMessage = envelope;
             if (ReceivedMessage.Message.GetType() == typeof(LoginRequest))
@@ -98,7 +97,7 @@ namespace TestCommon.TestObjects
 
         public virtual void OnUpdate()
         {
-            ProcessMessage(new Envelope(new LoginRequest()));
+            ProcessResponse(new Envelope(new LoginRequest()));
         }
 
         public int AttemptedRetries = 0;
@@ -123,18 +122,16 @@ namespace TestCommon.TestObjects
 }
 
 /*
- * Estimated time:   16-24 hours
-
+ * 
 Objectives
 Gain experience with public/private keys
 Gain experience with security using public/private keys
 Overview
-During this assignment, you finish implementing and testing your system, and implement some security for at least one communication protocol.  The security must use public/private keys to either a) authenticate a remote process, b) encrypt messages, c) authenticate message or shared resources, or d) some combination of these things.
 
-You will need to ensure that your requirement definition, architectural design, and communication protocol specifications accurate describe your system.
-
-You will also extend your unit test cases to verify the correctness of the new (and previous) functionality.
-
-As with previous assignments, your execution environment will be a virtual machine in a cloud environment.
+Finish Implementing system
+Security Protocol (1) Auth Proc / Auth Msg / Encrypt / Combo
+Update Documentation (requirement definition, architectural design, and communication protocol)
+Expand unit tests
+Put in the cloud
  * 
  * */

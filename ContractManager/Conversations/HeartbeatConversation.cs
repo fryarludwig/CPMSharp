@@ -20,7 +20,7 @@ namespace ContractManager.Conversations
 
         }
                 
-        protected override void ProcessMessage(Envelope envelope)
+        protected override void ProcessResponse(Envelope envelope)
         {
             if (envelope.Message.GetType() == typeof(AliveRequest))
             {

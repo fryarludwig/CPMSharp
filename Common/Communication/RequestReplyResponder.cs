@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Messages;
+using Common.Utilities;
 
 namespace Common.Communication
 {
@@ -19,6 +20,11 @@ namespace Common.Communication
             // Do nothing
         }
 
-        protected abstract override void ProcessMessage(Envelope envelope);
+        public new virtual void RegisterConversationCallbacks(DistributedProcess process)
+        {
+            // Do nothing
+        }
+
+        protected abstract override void ProcessResponse(Envelope envelope);
     }
 }

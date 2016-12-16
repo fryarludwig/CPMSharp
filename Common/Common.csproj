@@ -55,6 +55,7 @@
     <Compile Include="Forms\BaseWindowForm.Designer.cs">
       <DependentUpon>BaseWindowForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Messages\Requests\ShutdownRequest.cs" />
     <Compile Include="Utilities\DistributedProcess.cs" />
     <Compile Include="Messages\MessageNumber.cs" />
     <Compile Include="Utilities\PublicKey.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Users\ProcessInfo.cs" />
     <Compile Include="Users\SharedProperties.cs" />
     <Compile Include="Forms\WindowLoggingAdapter.cs" />
+    <Compile Include="Utilities\Scheduler.cs" />
     <Compile Include="Utilities\Threaded.cs" />
     <Compile Include="Utilities\LogUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
