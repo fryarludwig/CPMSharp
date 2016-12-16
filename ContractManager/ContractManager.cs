@@ -46,7 +46,15 @@ namespace ContractManager
             loginConv.RegisterConversationCallbacks(this);
             loginConv.Start();
         }
-        
+
+        public override void CloseConnection()
+        {
+            Logger.Info("Attempting to authenticate application");
+            MyProcessInfo.Status = ProcessInfo.StatusCode.Terminating;
+            
+            ConversationManager.PrimaryCommunicator.Stop();
+        }
+
         public void HandleLoginUpdated(ProcessInfo myProcess)
         {
             Logger.Trace("Received login response");

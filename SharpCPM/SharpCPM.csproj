@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="ClientConversation\HeartbeatConversation.cs" />
     <Compile Include="ClientConversation\LoginConversation.cs" />
+    <Compile Include="ClientConversation\ShutdownConversation.cs" />
     <Compile Include="CPMClient.cs" />
     <Compile Include="Dialogs\LoginDialog.cs">
       <SubType>Form</SubType>

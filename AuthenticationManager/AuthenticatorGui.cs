@@ -82,6 +82,7 @@ namespace AuthenticationManager
             ProcessInstance.LocalEndpoint = new IPEndPoint(IPAddress.Any, int.Parse(portInput.Text));
             Authenticator.HeartbeatIntervalMs = int.Parse(intervalInput.Text);
         }
+
         protected void StartConnection(object sender, EventArgs e)
         {
             if (ValidateLoginInformation())
