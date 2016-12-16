@@ -22,11 +22,6 @@ namespace Common.Communication
             Destination = target;
         }
 
-        public new virtual void RegisterConversationCallbacks(DistributedProcess process)
-        {
-            // Do nothing
-        }
-
         protected abstract override void BeginConversation();
 
         protected abstract override void ProcessResponse(Envelope envelope);

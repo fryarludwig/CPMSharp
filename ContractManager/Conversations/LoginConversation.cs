@@ -11,6 +11,7 @@ using Common.Messages;
 using Common.Users;
 using Common.Utilities;
 using System.Threading;
+using System.Net;
 
 namespace ContractManager.Conversations
 {
@@ -18,29 +19,48 @@ namespace ContractManager.Conversations
     {
         public LoginConversation() : base("Login Conv")
         {
+            WaitingForReply = true;
+            AllowRepeats = false;
+            CallbacksRegistered = false;
         }
 
-        public delegate void LoginStatusUpdated(ProcessInfo process);
-        public event LoginStatusUpdated OnLoginUpdated;
-
-        protected override void BeginConversation()
+        public override void RegisterConversationCallbacks(DistributedProcess process)
         {
-            WaitingForReply = true;
-            if (InitialMessage != null)
+            if (!CallbacksRegistered && process.GetType() == typeof(ContractManager))
             {
-                SendMessage(InitialMessage);
+                ContractManager manager = (ContractManager)process;
+                OnLoginUpdated += manager.HandleLoginUpdated;
+                CallbacksRegistered = true;
+                Logger.Info("Callbacks are now registered");
+            }
+            else if (CallbacksRegistered)
+            {
+                Logger.Info("Callbacks have already been registered");
             }
             else
             {
-                LoginRequest request = new LoginRequest();
-                request.ConvId = Id;
-                request.MsgId = Id;
-                request.ProcessLabel = "CPM Client";
-                request.ProcessType = ProcessInfo.ProcessType.Client;
-                request.PublicKey = new PublicKey();
-                Envelope toSend = new Envelope(Properties.DistInstance.AuthenticatorEndpoint, request);
-                SendMessage(toSend);
+                Logger.Warn("Unable to assign unknown dist process to event");
             }
+        }
+
+        public LoginConversation(IPEndPoint target, ProcessInfo myProcess) : base("Login Conv")
+        {
+            WaitingForReply = true;
+            Destination = target;
+            Register();
+
+            WaitingForReply = true;
+            LoginRequest request = new LoginRequest();
+            request.ConvId = MessageNumber.Create();
+            request.ProcessLabel = myProcess.Label;
+            request.ProcessType = myProcess.Type;
+            request.PublicKey = new PublicKey();
+            InitialMessage = new Envelope(target, request);
+        }
+
+        protected override void BeginConversation()
+        {
+            SendMessage(InitialMessage);
         }
 
         protected override void ProcessResponse(Envelope envelope)
@@ -49,7 +69,7 @@ namespace ContractManager.Conversations
             {
                 LoginReply replyMessage = (LoginReply)envelope.Message;
                 Logger.Info("Received Login response: " + replyMessage.Note);
-                MyProcess = replyMessage.ProcessInfo;
+                OnLoginUpdated?.Invoke(ProcessInfo.DeepCopy(replyMessage.ProcessInfo));
                 WaitingForReply = false;
             }
             else
@@ -57,21 +77,8 @@ namespace ContractManager.Conversations
                 Logger.Info("Received unexpected message: " + envelope.Message.ToString());
             }
         }
-
-        protected override void HandleConversationCompleted()
-        {
-            if (Properties.DistInstance.MyProcessInfo.Status == ProcessInfo.StatusCode.Registered)
-            {
-                Logger.Info("Successfully connected");
-            }
-            else
-            {
-                Logger.Warn("Unable to log in");
-            }
-
-            OnLoginUpdated(MyProcess);
-        }
-
-        protected ProcessInfo MyProcess;
+        
+        public delegate void LoginStatusUpdated(ProcessInfo process);
+        public event LoginStatusUpdated OnLoginUpdated;
     }
 }

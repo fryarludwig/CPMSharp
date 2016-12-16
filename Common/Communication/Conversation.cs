@@ -9,38 +9,43 @@ using System.Threading.Tasks;
 using Common.Messages;
 using Common.Users;
 using Common.Utilities;
+using System.Net;
 
 namespace Common.Communication
 {
     abstract public class Conversation : Threaded
     {
-        public Conversation(string name, MessageNumber msgNum = null) : base(name)
+        public Conversation(string name, MessageNumber convId = null) : base(name)
         {
-            Id = msgNum ?? MessageNumber.Create();
-            Timeout = 250;
+            Id = convId ?? MessageNumber.Create();
+            Timeout = 1000;
             MaxRetries = 5;
             Properties = SharedProperties.Instance;
             Communicator = ConversationManager.PrimaryCommunicator;
             NewMessages = new ConcurrentQueue<Envelope>();
             SentMessages = new ConcurrentQueue<Envelope>();
+            ReceivedMessages = new ConcurrentDictionary<Message, IPEndPoint>();
+            CallbacksRegistered = false;
+            AllowRepeats = false;
             Register();
         }
 
-        public Conversation(string name, BaseCommunicator communicator, MessageNumber msgNum = null) : base(name)
+        public Conversation(string name, BaseCommunicator communicator, MessageNumber convId = null) : base(name)
         {
-            Id = msgNum ?? MessageNumber.Create();
-            Timeout = 250;
+            Id = convId ?? MessageNumber.Create();
+            Timeout = 1000;
             MaxRetries = 5;
             Properties = SharedProperties.Instance;
             Communicator = communicator;
             NewMessages = new ConcurrentQueue<Envelope>();
             SentMessages = new ConcurrentQueue<Envelope>();
+            CallbacksRegistered = false;
             Register();
         }
 
         public virtual void RegisterConversationCallbacks(DistributedProcess process)
         {
-            // Do nothing
+            CallbacksRegistered = true;
         }
 
         public void Register()
@@ -62,23 +67,39 @@ namespace Common.Communication
             }
         }
 
+        protected bool AllowReceive(Envelope envelope)
+        {
+            if (envelope != null && envelope.Address != null && envelope.Message != null)
+            {
+                if ((!ReceivedMessages.ContainsKey(envelope.Message))
+                    || (ReceivedMessages.ContainsKey(envelope.Message) && AllowRepeats))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         // Template method
         protected override void Run()
         {
-            if (!ValidateConversation())
+            if (ValidateConversation())
             {
                 UInt32 availableRetries = MaxRetries;
-                Envelope tempEnvelope;
+                Envelope inbound;
                 BeginConversation();
 
-                while (ContinueThread)
+                while (ContinueThread && WaitingForReply)
                 {
-                    if (!NewMessages.IsEmpty && NewMessages.TryDequeue(out tempEnvelope))
+                    if (!NewMessages.IsEmpty && NewMessages.TryDequeue(out inbound) && 
+                        AllowReceive(inbound))
                     {
-                        Logger.Info("Received some kind of response");
-                        ProcessResponse(tempEnvelope);
+                            Logger.Info("Received some kind of response");
+                            ReceivedMessages[inbound.Message] = inbound.Address;
+                            ProcessResponse(inbound);
                     }
-                    else if (WaitingForReply && availableRetries-- > 0)
+                    else if (availableRetries-- > 0)
                     {
                         RetryMessage();
                         Thread.Sleep(Timeout);
@@ -87,7 +108,7 @@ namespace Common.Communication
                     {
                         HandleNoResponse();
                     }
-                    else if (!WaitingForReply)
+                    else
                     {
                         HandleConversationCompleted();
                         Stop();
@@ -106,9 +127,9 @@ namespace Common.Communication
 
         protected virtual void RetryMessage()
         {
-            if (LastMessage != null)
+            if (LastSentEnvelope != null)
             {
-                Communicator.Send(LastMessage);
+                Communicator.Send(LastSentEnvelope);
             }
         }
 
@@ -134,22 +155,22 @@ namespace Common.Communication
             RetryMessage();
         }
 
-        protected Envelope LastMessage
+        protected Envelope LastSentEnvelope
         {
             get
             {
-                return (SentMessages.Count == 0)? null : SentMessages.Last();
+                return (SentMessages.Count == 0) ? null : SentMessages.Last();
             }
         }
 
         protected void SendMessage(Envelope envelope)
         {
-            if (envelope.Address != null && envelope.Message != null)
+            if (envelope != null && envelope.Address != null && envelope.Message != null)
             {
                 Communicator.Send(envelope);
                 SentMessages.Enqueue(envelope);
             }
-            else if (envelope.Message != null)
+            else if (envelope != null && envelope.Message != null)
             {
                 Logger.Error($"Null Address: Cannot send message {envelope.Message.ToString()}");
             }
@@ -164,6 +185,8 @@ namespace Common.Communication
             return Id.GetHashCode();
         }
 
+        public bool AllowRepeats { get; set; }
+        public bool CallbacksRegistered { get; set; }
         protected bool WaitingForReply { get; set; }
         public MessageNumber Id { get; set; }
         public int Timeout { get; set; }
@@ -173,5 +196,6 @@ namespace Common.Communication
         public Envelope InitialMessage { get; set; }
         public ConcurrentQueue<Envelope> NewMessages { get; }
         public ConcurrentQueue<Envelope> SentMessages { get; }
+        public ConcurrentDictionary<Message, IPEndPoint> ReceivedMessages { get; set; }
     }
 }

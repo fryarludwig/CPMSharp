@@ -67,6 +67,18 @@ namespace Common.Users
             return MemberwiseClone() as ProcessInfo;
         }
 
+        public static ProcessInfo DeepCopy(ProcessInfo process)
+        {
+            ProcessInfo copy = new ProcessInfo();
+            copy.ProcessId = process.ProcessId;
+            copy.Type = process.Type;
+            copy.EndPoint = process.EndPoint;
+            copy.Label = process.Label;
+            copy.Status = process.Status;
+            copy.AliveRetries = process.AliveRetries;
+            return copy;
+        }
+
         public string LabelAndId
         {
             get

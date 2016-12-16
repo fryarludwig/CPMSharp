@@ -76,12 +76,15 @@ namespace Common.Forms
         
         protected void LoggerOutput_DrawItem(object sender, DrawItemEventArgs e)
         {
-            LogItem item = (LogItem)LoggerOutput.Items[e.Index];
-            e.DrawBackground();
-            Graphics g = e.Graphics;
-            g.FillRectangle(new SolidBrush(LogLevelMapper.ColorFromLevel(item.LogLevel)), e.Bounds);
-            g.DrawString(item.LogMessage, e.Font, new SolidBrush(e.ForeColor), new PointF(e.Bounds.X, e.Bounds.Y));
-            e.DrawFocusRectangle();
+            if (e != null && e.Index >= 0)
+            {
+                LogItem item = (LogItem)LoggerOutput.Items[e.Index];
+                e.DrawBackground();
+                Graphics g = e.Graphics;
+                g.FillRectangle(new SolidBrush(LogLevelMapper.ColorFromLevel(item.LogLevel)), e.Bounds);
+                g.DrawString(item.LogMessage, e.Font, new SolidBrush(e.ForeColor), new PointF(e.Bounds.X, e.Bounds.Y));
+                e.DrawFocusRectangle();
+            }
         }
 
         protected bool ValidateInteger(string value)
@@ -115,7 +118,7 @@ namespace Common.Forms
                 }
 
                 _LoggerOutput = value;
-                LoggerOutput.DrawMode = DrawMode.OwnerDrawVariable;
+                _LoggerOutput.DrawMode = DrawMode.OwnerDrawVariable;
                 _LoggerOutput.DrawItem += LoggerOutput_DrawItem;
             }
         }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.portInput = new System.Windows.Forms.TextBox();
+            this.intervalInput = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.StartButton = new System.Windows.Forms.Button();
             this.GuiLogOutput = new System.Windows.Forms.ListBox();
@@ -49,6 +50,14 @@
             this.portInput.TabIndex = 3;
             this.portInput.Text = "12034";
             // 
+            // intervalInput
+            // 
+            this.intervalInput.Location = new System.Drawing.Point(267, 18);
+            this.intervalInput.Name = "intervalInput";
+            this.intervalInput.Size = new System.Drawing.Size(52, 20);
+            this.intervalInput.TabIndex = 20;
+            this.intervalInput.Text = "30000";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -66,7 +75,7 @@
             this.StartButton.TabIndex = 4;
             this.StartButton.Text = "Start Server";
             this.StartButton.UseVisualStyleBackColor = true;
-            this.StartButton.Click += new System.EventHandler(this.StartServer_Clicked);
+            this.StartButton.Click += new System.EventHandler(this.StartConnection);
             // 
             // GuiLogOutput
             // 
@@ -143,6 +152,7 @@
             this.Controls.Add(this.GuiLogOutput);
             this.Controls.Add(this.StartButton);
             this.Controls.Add(this.portInput);
+            this.Controls.Add(this.intervalInput);
             this.Controls.Add(this.label2);
             this.Name = "AuthenticatorGui";
             this.Text = "Authentication Manager";
@@ -153,6 +163,7 @@
 
         #endregion
         private System.Windows.Forms.TextBox portInput;
+        private System.Windows.Forms.TextBox intervalInput;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button StartButton;
         private System.Windows.Forms.ListBox GuiLogOutput;

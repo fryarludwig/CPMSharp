@@ -18,12 +18,19 @@ namespace Common.Communication
         {
             LocalEndpoint = new IPEndPoint(IPAddress.Any, 0);
         }
-        
+
+        public UdpCommunicator(int port) : base("UDP Com")
+        {
+            LocalEndpoint = new IPEndPoint(IPAddress.Any, port);
+        }
+
         protected override void Run()
         {
             UdpClient socket = new UdpClient(LocalEndpoint);
-            IPEndPoint recvEndpoint = null;
+            int port = ((IPEndPoint)socket.Client.LocalEndPoint).Port;
             socket.Client.ReceiveTimeout = 2000;
+            Logger.Trace("Listening on port " + port.ToString());
+            IPEndPoint recvEndpoint = null;
             State = (socket != null) ? STATE.READY : STATE.ERROR;
             while (ContinueThread)
             {

@@ -21,16 +21,13 @@ namespace Common.Messages
         {
             Register(typeof(Message));
             Register(typeof(LoginReply));
-            //Register(typeof(PublicKeyReply));
             Register(typeof(Reply));
             Register(typeof(AliveReply));
 
             Register(typeof(AliveRequest));
-            //Register(typeof(DeadProcessNotification));
             Register(typeof(LoginRequest));
-            //Register(typeof(LogoutRequest));
-            //Register(typeof(ShutdownRequest));
-            //Register(typeof(Routing));
+            Register(typeof(ShutdownRequest));
+            Register(typeof(Request));
         }
 
         private static readonly LogUtility Logger = new LogUtility("Message");
@@ -121,5 +118,9 @@ namespace Common.Messages
             return result;
         }
 
+        public override int GetHashCode()
+        {
+            return MsgId.GetHashCode() ^ (ConvId.GetHashCode() << 16) | (ConvId.GetHashCode() >> (32 - 16));
+        }
     }
 }

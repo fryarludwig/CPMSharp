@@ -67,9 +67,15 @@ namespace Common.Communication
 
         public static void RegisterExistingConversation(Conversation conversation)
         {
+            conversation.RegisterConversationCallbacks(Properties.DistInstance);
+
             if (!ConversationDictionary.ContainsKey(conversation.Id))
             {
                 ConversationDictionary[conversation.Id] = conversation;
+            }
+            else
+            {
+                Logger.Warn("Conversation already exists, cannot register it");
             }
         }
 
@@ -79,18 +85,11 @@ namespace Common.Communication
 
             if (envelope != null && envelope.Message != null)
             {
-                // May be true if we originate the message
-                if (envelope.Message.ConvId == null && envelope.Message.MsgId == null)
-                {
-                    envelope.Message.InitMessageAndConversationNumbers();
-                }
-
                 if (ConversationTypes.ContainsKey(envelope.Message.GetType()))
                 {
                     newConversation = Activator.CreateInstance(ConversationTypes[envelope.Message.GetType()]) as Conversation;
-                    newConversation.Id = envelope.Message.ConvId;
-                    newConversation.InitialMessage = envelope;
-                    RegisterExistingConversation(newConversation);
+                    newConversation.Id = envelope.ConvId;
+                    newConversation.NewMessages.Enqueue(envelope);
                 }
             }
 
@@ -101,7 +100,7 @@ namespace Common.Communication
         {
             Logger.Info("Received message from communicator");
 
-            if (envelope != null)
+            if (envelope != null && envelope.Message != null && envelope.Address != null)
             {
                 if (ConversationDictionary.ContainsKey(envelope.ConvId))
                 {
@@ -111,6 +110,7 @@ namespace Common.Communication
                 else
                 {
                     Conversation newConversation = CreateNewConversation(envelope);
+                    RegisterExistingConversation(newConversation);
 
                     if (newConversation != null)
                     {

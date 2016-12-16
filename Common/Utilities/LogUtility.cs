@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Threading;
 
 using Common.Forms;
+using Common.Users;
 
 namespace Common.Utilities
 {
@@ -32,8 +33,8 @@ namespace Common.Utilities
             LevelDictionary["Info"] = Level.INFO;
             LevelDictionary["Trace"] = Level.TRACE;
             LevelColoring[Level.TRACE] = Color.FloralWhite;
-            LevelColoring[Level.INFO] = Color.AntiqueWhite;
-            LevelColoring[Level.WARN] = Color.LightYellow;
+            LevelColoring[Level.INFO] = Color.LightYellow;
+            LevelColoring[Level.WARN] = Color.AntiqueWhite;
             LevelColoring[Level.ERROR] = Color.LightSalmon;
             LabelDictionary[Level.TRACE] = "[TRACE]: ";
             LabelDictionary[Level.INFO] = "[INFO ]: ";
@@ -104,10 +105,25 @@ namespace Common.Utilities
 
         public string LogSource
         {
-            get { return _name.Length > 0 ? _name : "UNKNOWN"; }
+            get { return (_name.Length > 0) ? ProcType + _name : "UNKNOWN"; }
             set { _name = value; }
         }
 
+        private string FindThatName()
+        {
+            SharedProperties prop = SharedProperties.Instance;
+            if (prop.DistInstance != null && prop.DistInstance.MyProcessInfo != null)
+            {
+                _procType = prop.DistInstance.MyProcessInfo.Label?.Substring(0, 4);
+                _procType += "# ";
+            }
+
+            return _procType ?? "NONE# ";
+        }
+
+        private string ProcType { get { return _procType ?? FindThatName(); } }
+
+        private string _procType = null;
         private string _name = "";
         private static LogHelper LogUtilityHelper = new LogHelper();
 

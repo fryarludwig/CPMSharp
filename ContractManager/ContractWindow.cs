@@ -23,7 +23,9 @@ namespace ContractManager
         {
             InitializeComponent();
             LoggerOutput = GuiLogOutput;
-            ConnectButton.Text = START_TEXT;
+            ProcessInstance.OnStatusChanged += ProcessStatusChanged;
+            Contractor.Registration_OnChange += ProcessStatusChanged;
+            StartButton.Text = START_TEXT;
         }
 
         public void KillChildren()
@@ -33,41 +35,51 @@ namespace ContractManager
 
         protected override void ProcessStatusChanged(ProcessInfo processInfo)
         {
-            ConnectButton.Enabled = true;
-            if (processInfo.Status == ProcessInfo.StatusCode.Registered)
+            if (InvokeRequired)
             {
-                Logger.Trace("Contractor started successfull");
-                ConnectButton.Text = STOP_TEXT;
+                this.BeginInvoke(new StatusChanged_Update(ProcessStatusChanged), new object[] { processInfo });
             }
             else
             {
-                Logger.Trace($"Contractor status is {processInfo.StatusString}");
-                ConnectButton.Text = START_TEXT;
+                StartButton.Enabled = true;
+                if (processInfo.Status == ProcessInfo.StatusCode.Registered)
+                {
+                    Logger.Trace("Contractor started successfull");
+                    StartButton.Text = STOP_TEXT;
+                }
+                else
+                {
+                    Logger.Trace($"Contractor status is {processInfo.StatusString}");
+                    StartButton.Text = START_TEXT;
+                }
             }
         }
 
-        protected void InitializeService()
+        protected override void PrepopulateProcessValues()
         {
             ProcessInstance.AuthenticatorEndpoint = new IPEndPoint(IPAddress.Parse(authenticatorAddressInput.Text), int.Parse(authenticatorPortInput.Text));
         }
 
         private void Connect_Clicked(object sender, EventArgs e)
         {
-            ConnectButton.Enabled = false;
-            if (ConnectButton.Text == START_TEXT && ValidateLoginInformation())
+            if (ValidateLoginInformation())
             {
-                PrepopulateProcessValues();
-                ProcessInstance.StartConnection();
-            }
-            else if (ConnectButton.Text == STOP_TEXT)
-            {
-                Logger.Trace("Waiting for shutdown messages to propogate");
-                ProcessInstance.CloseConnection();
+                StartButton.Enabled = false;
+                if (StartButton.Text == START_TEXT)
+                {
+                    PrepopulateProcessValues();
+                    ProcessInstance.StartConnection();
+                }
+                else if (StartButton.Text == STOP_TEXT)
+                {
+                    Logger.Trace("Waiting for shutdown messages to propogate");
+                    ProcessInstance.CloseConnection();
+                }
             }
             else
             {
                 Logger.Error("User entered invalid information");
-                ConnectButton.Enabled = true;
+                StartButton.Enabled = true;
             }
         }
 
@@ -95,20 +107,9 @@ namespace ContractManager
             return validInformation;
         }
 
-        public void UpdateGuiStatus()
-        {
-            // Call a method to update the gui
-        }
-
-        public ContractManager Contractor
-        {
-            get
-            {
-                return (ContractManager)ProcessInstance;
-            }
-        }
-
         private const string START_TEXT = "Connect";
         private const string STOP_TEXT = "Disconnect";
+        public ContractManager Contractor { get { return (ContractManager)ProcessInstance; } }
+        public delegate void StatusChanged_Update(ProcessInfo processInfo);
     }
 }

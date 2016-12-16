@@ -29,21 +29,28 @@ namespace AuthenticationManager
             StatusDisplay.Text = "Not Started";
             Logger.Trace("Started Authentication Manager Interface");
         }
-        
+
         protected void ProcessRegistrationUpdate(ProcessInfo processInfo)
         {
-            if (ProcessesDisplay.Items.ContainsKey(processInfo.LabelAndId))
+            if (InvokeRequired)
             {
-                ProcessesDisplay.Items.RemoveByKey(processInfo.LabelAndId);
+                this.BeginInvoke(new RegistrationChanged(ProcessRegistrationUpdate), new object[] { processInfo });
             }
-            Logger.Trace($"Registration updated for process {processInfo.ToString()}");
-            ListViewItem listItem = new ListViewItem(processInfo.ProcessId.ToString());
-            listItem.Name = processInfo.LabelAndId;
-            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, (processInfo.TypeString)));
-            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, (processInfo.Label ?? "None")));
-            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, ((processInfo.EndPoint != null) ? processInfo.EndPoint.ToString() : "None")));
-            listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, (processInfo.StatusString)));
-            ProcessesDisplay.Items.Add(listItem);
+            else
+            {
+                if (ProcessesDisplay.Items.ContainsKey(processInfo.LabelAndId))
+                {
+                    ProcessesDisplay.Items.RemoveByKey(processInfo.LabelAndId);
+                }
+                Logger.Trace($"Registration updated for process {processInfo.ToString()}");
+                ListViewItem listItem = new ListViewItem(processInfo.ProcessId.ToString());
+                listItem.Name = processInfo.LabelAndId;
+                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, (processInfo.TypeString)));
+                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, (processInfo.Label ?? "None")));
+                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, ((processInfo.EndPoint != null) ? processInfo.EndPoint.ToString() : "None")));
+                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, (processInfo.StatusString)));
+                ProcessesDisplay.Items.Add(listItem);
+            }
         }
 
 
@@ -73,20 +80,23 @@ namespace AuthenticationManager
         protected override void PrepopulateProcessValues()
         {
             ProcessInstance.LocalEndpoint = new IPEndPoint(IPAddress.Any, int.Parse(portInput.Text));
+            Authenticator.HeartbeatIntervalMs = int.Parse(intervalInput.Text);
         }
-
-        private void StartServer_Clicked(object sender, EventArgs e)
+        protected void StartConnection(object sender, EventArgs e)
         {
-            StartButton.Enabled = false;
-            if (StartButton.Text == START_TEXT && ValidateLoginInformation())
+            if (ValidateLoginInformation())
             {
-                PrepopulateProcessValues();
-                ProcessInstance.StartConnection();
-            }
-            else if (StartButton.Text == STOP_TEXT)
-            {
-                Logger.Trace("Waiting for shutdown messages to propogate");
-                ProcessInstance.CloseConnection();
+                StartButton.Enabled = false;
+                if (StartButton.Text == START_TEXT)
+                {
+                    PrepopulateProcessValues();
+                    ProcessInstance.StartConnection();
+                }
+                else if (StartButton.Text == STOP_TEXT)
+                {
+                    Logger.Trace("Waiting for shutdown messages to propogate");
+                    ProcessInstance.CloseConnection();
+                }
             }
             else
             {
@@ -117,28 +127,19 @@ namespace AuthenticationManager
                 InputErrorProvider.SetError(portInput, "Please enter a valid port number");
             }
 
+            if (!int.TryParse(intervalInput.Text, out throwaway))
+            {
+                validInformation = false;
+                InputErrorProvider.SetError(intervalInput, "Please enter a valid number");
+            }
+
             return validInformation;
         }
-        
+
         private const string START_TEXT = "Start";
         private const string STOP_TEXT = "Stop";
         protected AuthManager Authenticator { get { return (AuthManager)ProcessInstance; } }
-
-        //public void OnMatchFound_Trigger(MatchResult result)
-        //{
-        //    Logger.Info("Match found!");
-
-        //    if (InvokeRequired)
-        //    {
-        //        this.BeginInvoke(new OnMatchFound_GuiUpdate(OnMatchFound_Trigger), new object[] { result });
-        //    }
-        //    else
-        //    {
-        //        MatchResultsListBox.Items.Add("     " + result.ToString());
-        //    }
-        //}
-
-        //public delegate void OnMatchFound_GuiUpdate(MatchResult result);
+        public delegate void RegistrationChanged(ProcessInfo processInfo);
     }
 }
 

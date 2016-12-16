@@ -19,12 +19,7 @@ namespace Common.Communication
         {
             // Do nothing
         }
-
-        public new virtual void RegisterConversationCallbacks(DistributedProcess process)
-        {
-            // Do nothing
-        }
-
+        
         protected abstract override void ProcessResponse(Envelope envelope);
     }
 }

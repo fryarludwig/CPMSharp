@@ -52,7 +52,7 @@ namespace TestCommon.Communication
 
             Assert.AreEqual(simple.Id.Pid, 0);
             Assert.AreEqual(simple.MaxRetries, (UInt32)5);
-            Assert.AreEqual(simple.Timeout, 250);
+            Assert.AreEqual(simple.Timeout, 500);
 
             simple.Start();
             Thread.Sleep(250);
@@ -76,7 +76,7 @@ namespace TestCommon.Communication
 
             Assert.AreEqual(simple.Id.Pid, 0);
             Assert.AreEqual(simple.MaxRetries, (UInt32)5);
-            Assert.AreEqual(simple.Timeout, 250);
+            Assert.AreEqual(simple.Timeout, 500);
 
             simple.Start();
             Thread.Sleep(250);
@@ -92,16 +92,17 @@ namespace TestCommon.Communication
             MessageNumber initiatorNumber = new MessageNumber();
             initiatorNumber.Pid = 0;
             initiatorNumber.Seq = 10;
-            SimpleConversation convInitiator = new SimpleConversation("Initiator", initiatorNumber);
-            IPEndPoint initiatorEndpoint = new IPEndPoint(IPAddress.Loopback, 6789);
-            convInitiator.Communicator.LocalEndpoint = initiatorEndpoint;
-            convInitiator.Register();
-
             MessageNumber responderNumber = new MessageNumber();
             responderNumber.Pid = 1;
             responderNumber.Seq = 10;
-            SimpleConversation convResponder = new SimpleConversation("Responder", responderNumber);
+
+            IPEndPoint initiatorEndpoint = new IPEndPoint(IPAddress.Loopback, 6789);
             IPEndPoint responderEndpoint = new IPEndPoint(IPAddress.Loopback, 6788);
+
+            SimpleConversation convInitiator = new SimpleConversation("Initiator", initiatorNumber, initiatorEndpoint.Port);
+            convInitiator.Communicator.LocalEndpoint = initiatorEndpoint;
+            convInitiator.Register();
+            SimpleConversation convResponder = new SimpleConversation("Responder", responderNumber, responderEndpoint.Port);
             convResponder.Communicator.LocalEndpoint = responderEndpoint;
             convResponder.Register();
 
@@ -125,18 +126,18 @@ namespace TestCommon.Communication
             Assert.IsTrue(convResponder.Communicator.IsActive());
 
             convInitiator.SendHeartbeatRequest(responderEndpoint);
-            Thread.Sleep(250);
+            Thread.Sleep(500);
             Assert.IsNotNull(convResponder.ReceivedMessage);
 
             convResponder.SendHeartbeatReply(initiatorEndpoint);
-            Thread.Sleep(450);
+            Thread.Sleep(1000);
             Assert.IsNotNull(convInitiator.ReceivedMessage);
         }
 
-        //[TestCleanup]
-        //public void CleanupConversations()
-        //{
-        //    ConversationManager.ClearConversations();
-        //}
+        [TestCleanup]
+        public void CleanupConversations()
+        {
+            ConversationManager.ClearConversations();
+        }
     }
 }

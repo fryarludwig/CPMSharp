@@ -19,14 +19,25 @@ namespace TestCommon.TestObjects
     {
         public SimpleConversation() : base("Heartbeat", new UdpCommunicator())
         {
+            Timeout = 500;
             EventResponse = null;
             ReceivedMessage = null;
             SentMessage = null;
             WaitingForReply = true;
         }
 
-        public SimpleConversation(string name, MessageNumber msgNum = null) : base(name, new UdpCommunicator(), msgNum)
+        public SimpleConversation(string name, MessageNumber msgNum) : base(name, new UdpCommunicator(), msgNum)
         {
+            Timeout = 500;
+            EventResponse = null;
+            ReceivedMessage = null;
+            SentMessage = null;
+            WaitingForReply = true;
+        }
+
+        public SimpleConversation(string name, MessageNumber msgNum, int port) : base(name, new UdpCommunicator(port), msgNum)
+        {
+            Timeout = 500;
             EventResponse = null;
             ReceivedMessage = null;
             SentMessage = null;

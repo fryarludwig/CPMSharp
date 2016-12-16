@@ -20,8 +20,9 @@ namespace AuthenticationManager
     {
         public AuthManager() : base("AuthManager")
         {
+            MessageNumber.SetSeqNumber(84);
+            HeartbeatIntervalMs = 30000;
             KnownClients = new Dictionary<ProcessInfo, ProcessInfo>();
-            Properties = SharedProperties.Instance;
             MyProcessInfo.ProcessId = 0;
             MyProcessInfo.Type = ProcessInfo.ProcessType.AuthenticationManager;
             MyProcessInfo.Status = ProcessInfo.StatusCode.NotInitialized;
@@ -36,7 +37,6 @@ namespace AuthenticationManager
             HeartbeatConversation conversation = new HeartbeatConversation(process.EndPoint);
             conversation.Heartbeat_OnUpdate += UpdateProcessStatus;
             conversation.Start();
-            PendingHeartbeatReplies[conversation.Id] = process;
             Console.WriteLine("The Elapsed event was raised at {0}", e.SignalTime);
         }
 
@@ -109,19 +109,21 @@ namespace AuthenticationManager
             return typeMap;
         }
 
-        public ProcessInfo ValidateProcess(ProcessInfo processDetails)
+        public ProcessInfo ValidateProcess(ProcessInfo newProcess)
         {
-            bool success = true;
+            if (newProcess == null) { return newProcess; }
 
-            switch (processDetails.Type)
+            Logger.Trace("Received login request from a process");
+            bool success = true;
+            switch (newProcess.Type)
             {
                 case ProcessInfo.ProcessType.Client:
-                    processDetails.ProcessId = NewProcessId;
-                    KnownClients[processDetails] = processDetails;
+                    newProcess.ProcessId = NewProcessId;
+                    KnownClients[newProcess] = newProcess;
                     break;
                 case ProcessInfo.ProcessType.ContractManager:
-                    processDetails.ProcessId = 1;
-                    ContractManagerInfo = processDetails;
+                    newProcess.ProcessId = 1;
+                    ContractManagerInfo = newProcess;
                     break;
                 default:
                     success = false;
@@ -130,25 +132,26 @@ namespace AuthenticationManager
 
             if (success)
             {
-                processDetails.Status = ProcessInfo.StatusCode.Registered;
-                processDetails.HeartbeatTimer = Scheduler.GetIntervalTimerMinutes(HB_INTERVAL);
-                processDetails.HeartbeatTimer.Elapsed += (sender, e) => OnHeartbeatExpired(sender, e, processDetails);
-                processDetails.HeartbeatTimer.Enabled = true;
+                newProcess.Status = ProcessInfo.StatusCode.Registered;
+                newProcess.HeartbeatTimer = Scheduler.GetIntervalTimerMillis(HeartbeatIntervalMs);
+                newProcess.HeartbeatTimer.Elapsed += (sender, e) => OnHeartbeatExpired(sender, e, newProcess);
+                newProcess.HeartbeatTimer.Enabled = true;
+                Registration_OnChange?.Invoke(ProcessInfo.DeepCopy(newProcess));
             }
             else
             {
-                processDetails = null;
-                Logger.Info($"Cannot register {processDetails.LabelAndId} registered");
+                newProcess.Status = ProcessInfo.StatusCode.Terminated;
+                Logger.Info($"Cannot register {newProcess.LabelAndId} registered");
             }
 
-            return processDetails;
+            return ProcessInfo.DeepCopy(newProcess);
         }
 
         public delegate void RegistrationChanged(ProcessInfo processInfo);
         public event RegistrationChanged Registration_OnChange;
 
         protected Timer HeartbeatTimer { get; set; }
-        private const int HB_INTERVAL = 5;
+        public int HeartbeatIntervalMs { get; set; }
         private Dictionary<MessageNumber, ProcessInfo> PendingHeartbeatReplies { get; set; }
         private Dictionary<ProcessInfo, ProcessInfo> KnownClients { get; set; }
         private int NewProcessId { get { return KnownClients.Count + 2; } }

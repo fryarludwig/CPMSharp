@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.GuiLogOutput = new System.Windows.Forms.ListBox();
-            this.ConnectButton = new System.Windows.Forms.Button();
+            this.StartButton = new System.Windows.Forms.Button();
             this.authenticatorPortInput = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.authenticatorAddressInput = new System.Windows.Forms.TextBox();
@@ -47,13 +47,13 @@
             // 
             // ConnectButton
             // 
-            this.ConnectButton.Location = new System.Drawing.Point(346, 23);
-            this.ConnectButton.Name = "ConnectButton";
-            this.ConnectButton.Size = new System.Drawing.Size(75, 23);
-            this.ConnectButton.TabIndex = 10;
-            this.ConnectButton.Text = "Connect";
-            this.ConnectButton.UseVisualStyleBackColor = true;
-            this.ConnectButton.Click += new System.EventHandler(this.Connect_Clicked);
+            this.StartButton.Location = new System.Drawing.Point(346, 23);
+            this.StartButton.Name = "ConnectButton";
+            this.StartButton.Size = new System.Drawing.Size(75, 23);
+            this.StartButton.TabIndex = 10;
+            this.StartButton.Text = "Connect";
+            this.StartButton.UseVisualStyleBackColor = true;
+            this.StartButton.Click += new System.EventHandler(this.Connect_Clicked);
             // 
             // authenticatorPortInput
             // 
@@ -109,7 +109,7 @@
             this.Controls.Add(this.authenticatorAddressInput);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.GuiLogOutput);
-            this.Controls.Add(this.ConnectButton);
+            this.Controls.Add(this.StartButton);
             this.Name = "ContractManagerGUI";
             this.Text = "Contract Manager";
             this.ResumeLayout(false);
@@ -120,7 +120,7 @@
         #endregion
 
         private System.Windows.Forms.ListBox GuiLogOutput;
-        private System.Windows.Forms.Button ConnectButton;
+        private System.Windows.Forms.Button StartButton;
         private System.Windows.Forms.TextBox authenticatorPortInput;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox authenticatorAddressInput;
