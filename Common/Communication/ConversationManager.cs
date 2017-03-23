@@ -48,10 +48,10 @@ namespace Common.Communication
                     conversation.Stop();
                 }
             }
-            
+
             ConversationDictionary.Clear();
         }
-        
+
         public static void RegisterNewConversationTypes(Dictionary<Type, Type> msgConvRegistry)
         {
             foreach (Type messageType in msgConvRegistry.Keys)
@@ -83,11 +83,11 @@ namespace Common.Communication
         {
             Conversation newConversation = null;
 
-            if (envelope != null && envelope.Message != null)
+            if (envelope?.Message != null && ConversationTypes.ContainsKey(envelope.Message.GetType()))
             {
-                if (ConversationTypes.ContainsKey(envelope.Message.GetType()))
+                newConversation = Activator.CreateInstance(ConversationTypes[envelope.Message.GetType()]) as Conversation;
+                if (newConversation != null)
                 {
-                    newConversation = Activator.CreateInstance(ConversationTypes[envelope.Message.GetType()]) as Conversation;
                     newConversation.Id = envelope.ConvId;
                     newConversation.NewMessages.Enqueue(envelope);
                 }
@@ -100,7 +100,7 @@ namespace Common.Communication
         {
             Logger.Info("Received message from communicator");
 
-            if (envelope != null && envelope.Message != null && envelope.Address != null)
+            if (envelope?.Message != null && envelope.Address != null)
             {
                 if (ConversationDictionary.ContainsKey(envelope.ConvId))
                 {
@@ -133,15 +133,7 @@ namespace Common.Communication
         private static BaseCommunicator _PrimaryCommunicator { get; set; }
         public static BaseCommunicator PrimaryCommunicator
         {
-            get
-            {
-                if (_PrimaryCommunicator == null)
-                {
-                    _PrimaryCommunicator = new UdpCommunicator();
-                }
-
-                return _PrimaryCommunicator;
-            }
+            get { return _PrimaryCommunicator ?? (_PrimaryCommunicator = new UdpCommunicator()); }
             set
             {
                 _PrimaryCommunicator = value ?? new UdpCommunicator();
@@ -149,7 +141,7 @@ namespace Common.Communication
             }
         }
 
-        public static UInt32 Retries { get; set; }
+        public static uint Retries { get; set; }
         public static int Timeout { get; set; }
         public static SharedProperties Properties { get; set; }
 

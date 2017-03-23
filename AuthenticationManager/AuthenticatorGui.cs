@@ -47,7 +47,7 @@ namespace AuthenticationManager
                 listItem.Name = processInfo.LabelAndId;
                 listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, (processInfo.TypeString)));
                 listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, (processInfo.Label ?? "None")));
-                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, ((processInfo.EndPoint != null) ? processInfo.EndPoint.ToString() : "None")));
+                listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, processInfo.EndPoint?.ToString() ?? "None"));
                 listItem.SubItems.Add(new ListViewItem.ListViewSubItem(listItem, (processInfo.StatusString)));
                 ProcessesDisplay.Items.Add(listItem);
             }

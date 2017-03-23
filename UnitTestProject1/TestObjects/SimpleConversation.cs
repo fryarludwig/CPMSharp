@@ -56,8 +56,7 @@ namespace TestCommon.TestObjects
 
         public void SendHeartbeatReply(IPEndPoint remoteEndpoint)
         {
-            AliveReply reply = new AliveReply();
-            reply.ConvId = Id;
+            AliveReply reply = new AliveReply {ConvId = Id};
             reply.ConvId.Pid = 0;
             SentMessage = new Envelope(remoteEndpoint, reply);
             SendMessage(SentMessage);
@@ -91,8 +90,7 @@ namespace TestCommon.TestObjects
             ReceivedMessage = envelope;
             if (ReceivedMessage.Message.GetType() == typeof(LoginRequest))
             {
-                LoginReply reply = new LoginReply();
-                reply.ConvId = Id;
+                LoginReply reply = new LoginReply {ConvId = Id};
                 SentMessage = new Envelope(envelope.Address, reply);
                 SendMessage(SentMessage);
                 WaitingForReply = false;

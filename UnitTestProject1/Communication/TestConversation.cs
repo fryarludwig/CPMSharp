@@ -51,7 +51,7 @@ namespace TestCommon.Communication
             ConversationManager.PrimaryCommunicator.LocalEndpoint = new IPEndPoint(IPAddress.Any, 0);
 
             Assert.AreEqual(simple.Id.Pid, 0);
-            Assert.AreEqual(simple.MaxRetries, (UInt32)5);
+            Assert.AreEqual(simple.MaxRetries, (uint)5);
             Assert.AreEqual(simple.Timeout, 500);
 
             simple.Start();
@@ -75,7 +75,7 @@ namespace TestCommon.Communication
             ConversationManager.PrimaryCommunicator = null;
 
             Assert.AreEqual(simple.Id.Pid, 0);
-            Assert.AreEqual(simple.MaxRetries, (UInt32)5);
+            Assert.AreEqual(simple.MaxRetries, (uint)5);
             Assert.AreEqual(simple.Timeout, 500);
 
             simple.Start();
@@ -89,12 +89,16 @@ namespace TestCommon.Communication
         [TestMethod]
         public void ConversationSendAndReceive()
         {
-            MessageNumber initiatorNumber = new MessageNumber();
-            initiatorNumber.Pid = 0;
-            initiatorNumber.Seq = 10;
-            MessageNumber responderNumber = new MessageNumber();
-            responderNumber.Pid = 1;
-            responderNumber.Seq = 10;
+            MessageNumber initiatorNumber = new MessageNumber
+            {
+                Pid = 0,
+                Seq = 10
+            };
+            MessageNumber responderNumber = new MessageNumber
+            {
+                Pid = 1,
+                Seq = 10
+            };
 
             IPEndPoint initiatorEndpoint = new IPEndPoint(IPAddress.Loopback, 6789);
             IPEndPoint responderEndpoint = new IPEndPoint(IPAddress.Loopback, 6788);
@@ -119,7 +123,7 @@ namespace TestCommon.Communication
             convResponder.Start();
             convInitiator.Start();
 
-            Thread.Sleep(100);
+            Thread.Sleep(500);
             Assert.IsTrue(convResponder.IsActive());
             Assert.IsTrue(convInitiator.IsActive());
             Assert.IsTrue(convInitiator.Communicator.IsActive());

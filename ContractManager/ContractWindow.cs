@@ -57,6 +57,7 @@ namespace ContractManager
 
         protected override void PrepopulateProcessValues()
         {
+            ProcessInstance.LocalEndpoint = new IPEndPoint(IPAddress.Any, 12099);
             ProcessInstance.AuthenticatorEndpoint = new IPEndPoint(IPAddress.Parse(authenticatorAddressInput.Text), int.Parse(authenticatorPortInput.Text));
         }
 

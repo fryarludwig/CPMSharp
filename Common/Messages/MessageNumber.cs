@@ -8,17 +8,17 @@ namespace Common.Messages
     public class MessageNumber
     {
         #region Private Properties
-        private static Int32 _nextSeqNumber;                     // Start with message #1
+        private static int _nextSeqNumber;                     // Start with message #1
         private static readonly object MyLock = new object();
         #endregion
 
         #region Public Properties
-        public static Int32 LocalProcessId { get; set; }            // Local process Id -- set once when the
+        public static int LocalProcessId { get; set; }            // Local process Id -- set once when the
                                                                     // process logins to the distributed application
         [DataMember]
-        public Int32 Pid { get; set; }
+        public int Pid { get; set; }
         [DataMember]
-        public Int32 Seq { get; set; }
+        public int Seq { get; set; }
 
         #endregion
 
@@ -56,11 +56,11 @@ namespace Common.Messages
         #endregion
 
         #region Private Methods
-        private static Int32 GetNextSeqNumber()
+        private static int GetNextSeqNumber()
         {
             lock (MyLock)
             {
-                if (_nextSeqNumber == Int32.MaxValue)
+                if (_nextSeqNumber == int.MaxValue)
                     _nextSeqNumber = 0;
                 ++_nextSeqNumber;
             }

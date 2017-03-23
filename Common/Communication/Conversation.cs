@@ -13,7 +13,7 @@ using System.Net;
 
 namespace Common.Communication
 {
-    abstract public class Conversation : Threaded
+    public abstract class Conversation : Threaded
     {
         public Conversation(string name, MessageNumber convId = null) : base(name)
         {
@@ -39,6 +39,7 @@ namespace Common.Communication
             Communicator = communicator;
             NewMessages = new ConcurrentQueue<Envelope>();
             SentMessages = new ConcurrentQueue<Envelope>();
+            ReceivedMessages = new ConcurrentDictionary<Message, IPEndPoint>();
             CallbacksRegistered = false;
             Register();
         }
@@ -56,7 +57,7 @@ namespace Common.Communication
 
         protected virtual bool ValidateConversation()
         {
-            if (Communicator != null && Communicator.LocalEndpoint != null)
+            if (Communicator?.LocalEndpoint != null)
             {
                 if (!Communicator.IsActive()) { Communicator.Start(); }
                 return true;
@@ -69,7 +70,7 @@ namespace Common.Communication
 
         protected bool AllowReceive(Envelope envelope)
         {
-            if (envelope != null && envelope.Address != null && envelope.Message != null)
+            if (envelope?.Address != null && envelope.Message != null)
             {
                 if ((!ReceivedMessages.ContainsKey(envelope.Message))
                     || (ReceivedMessages.ContainsKey(envelope.Message) && AllowRepeats))
@@ -86,12 +87,12 @@ namespace Common.Communication
         {
             if (ValidateConversation())
             {
-                UInt32 availableRetries = MaxRetries;
-                Envelope inbound;
+                uint availableRetries = MaxRetries;
                 BeginConversation();
 
                 while (ContinueThread && WaitingForReply)
                 {
+                    Envelope inbound;
                     if (!NewMessages.IsEmpty && NewMessages.TryDequeue(out inbound) && 
                         AllowReceive(inbound))
                     {
@@ -155,22 +156,16 @@ namespace Common.Communication
             RetryMessage();
         }
 
-        protected Envelope LastSentEnvelope
-        {
-            get
-            {
-                return (SentMessages.Count == 0) ? null : SentMessages.Last();
-            }
-        }
+        protected Envelope LastSentEnvelope => (SentMessages.Count == 0) ? null : SentMessages.Last();
 
         protected void SendMessage(Envelope envelope)
         {
-            if (envelope != null && envelope.Address != null && envelope.Message != null)
+            if (envelope?.Address != null && envelope.Message != null)
             {
                 Communicator.Send(envelope);
                 SentMessages.Enqueue(envelope);
             }
-            else if (envelope != null && envelope.Message != null)
+            else if (envelope?.Message != null)
             {
                 Logger.Error($"Null Address: Cannot send message {envelope.Message.ToString()}");
             }
@@ -190,7 +185,7 @@ namespace Common.Communication
         protected bool WaitingForReply { get; set; }
         public MessageNumber Id { get; set; }
         public int Timeout { get; set; }
-        public UInt32 MaxRetries { get; set; }
+        public uint MaxRetries { get; set; }
         public SharedProperties Properties { get; set; }
         protected BaseCommunicator Communicator { get; set; }
         public Envelope InitialMessage { get; set; }

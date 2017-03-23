@@ -19,7 +19,7 @@ namespace Common.Users
         private object myLock = new object();
 
         [DataMember]
-        public Int32 ProcessId { get; set; }
+        public int ProcessId { get; set; }
         [DataMember]
         public ProcessType Type { get; set; }
         [DataMember]
@@ -59,7 +59,7 @@ namespace Common.Users
         public string StatusString { get { return statusNames[(int)Status]; } }
         public string TypeString { get { return typeNames[(int)Type]; } }
         
-        public Int32 AliveRetries { get; set; }
+        public int AliveRetries { get; set; }
         public Timer HeartbeatTimer { get; set; }
 
         public ProcessInfo Clone()

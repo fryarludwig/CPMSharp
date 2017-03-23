@@ -27,7 +27,7 @@ namespace Common.Messages
             Message = tempMessage;
         }
 
-        public MessageNumber ConvId { get { return Message?.ConvId; } }
+        public MessageNumber ConvId => Message?.ConvId;
         public IPEndPoint Address { get; set; }
         public Message Message { get; set; }
     }

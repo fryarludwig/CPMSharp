@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Common</RootNamespace>
     <AssemblyName>Common</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,6 +51,7 @@
     <Compile Include="Communication\UdpCommunicator.cs" />
     <Compile Include="Communication\Conversation.cs" />
     <Compile Include="Communication\ConversationManager.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Messages\Envelope.cs" />
     <Compile Include="Forms\BaseWindowForm.cs" />
     <Compile Include="Forms\BaseWindowForm.Designer.cs">
@@ -79,6 +81,9 @@
     <Compile Include="WorkItems\Phase.cs" />
     <Compile Include="WorkItems\Task.cs" />
     <Compile Include="WorkItems\WorkItem.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

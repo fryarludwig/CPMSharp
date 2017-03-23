@@ -24,3 +24,6 @@ C:\Users\fryarludwig\projects\CPMSharp\UnitTestProject1\bin\Debug\SharpCPM.pdb
 C:\Users\fryarludwig\projects\CPMSharp\UnitTestProject1\obj\Debug\TestCommon.csprojResolveAssemblyReference.cache
 C:\Users\fryarludwig\projects\CPMSharp\UnitTestProject1\obj\Debug\TestCommon.dll
 C:\Users\fryarludwig\projects\CPMSharp\UnitTestProject1\obj\Debug\TestCommon.pdb
+C:\Users\fryar\Documents\Visual Studio 2015\Projects\SharpCPM\UnitTestProject1\bin\Debug\AuthenticationManager.exe.config
+C:\Users\fryar\Documents\Visual Studio 2015\Projects\SharpCPM\UnitTestProject1\bin\Debug\ContractManager.exe.config
+C:\Users\fryar\Documents\Visual Studio 2015\Projects\SharpCPM\UnitTestProject1\bin\Debug\SharpCPM.exe.config
