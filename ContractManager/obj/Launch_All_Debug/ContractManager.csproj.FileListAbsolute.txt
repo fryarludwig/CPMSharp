@@ -1,0 +1,11 @@
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\bin\Launch_All_Debug\ContractManager.exe.config
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\bin\Launch_All_Debug\ContractManager.exe
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\bin\Launch_All_Debug\ContractManager.pdb
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\bin\Launch_All_Debug\Common.dll
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\bin\Launch_All_Debug\Common.pdb
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\obj\Launch_All_Debug\ContractManager.csprojResolveAssemblyReference.cache
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\obj\Launch_All_Debug\ContractManager.ContractWindow.resources
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\obj\Launch_All_Debug\ContractManager.Properties.Resources.resources
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\obj\Launch_All_Debug\ContractManager.csproj.GenerateResource.Cache
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\obj\Launch_All_Debug\ContractManager.exe
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\obj\Launch_All_Debug\ContractManager.pdb

@@ -15,8 +15,10 @@ namespace Common.Utilities
         {
             LogLevel = level;
             LogMessage = message;
+            //TimeRegistered = DateTime.Now;
         }
 
+        //public DateTime TimeRegistered { get; }
         public override string ToString() { return LogMessage ?? "null"; }
         public Level LogLevel { get; set; }
         public string LogMessage { get; set; }
@@ -141,9 +143,19 @@ namespace Common.Utilities
             LogUtilityHelper.OnGuiLogPrint += new LogHelper.GuiLogPrintEvent(winForm.PrintLogMessage);
         }
 
+        public void RegisterFloatingGuiCallback(LoggingUtilityForm logForm)
+        {
+            LogUtilityHelper.OnGuiLogPrint += new LogHelper.GuiLogPrintEvent(logForm.PrintLogMessage);
+        }
+
         public void RemoveGuiCallback(BaseWindowForm winForm)
         {
             LogUtilityHelper.OnGuiLogPrint -= new LogHelper.GuiLogPrintEvent(winForm.PrintLogMessage);
+        }
+
+        public void RemoveFloatingGuiCallback(LoggingUtilityForm logForm)
+        {
+            LogUtilityHelper.OnGuiLogPrint -= new LogHelper.GuiLogPrintEvent(logForm.PrintLogMessage);
         }
     }
 

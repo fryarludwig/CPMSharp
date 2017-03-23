@@ -20,3 +20,14 @@ C:\Users\fryarludwig\projects\CPMSharp\ContractManager\obj\Debug\ContractManager
 C:\Users\fryarludwig\projects\CPMSharp\ContractManager\obj\Debug\ContractManager.csproj.GenerateResource.Cache
 C:\Users\fryarludwig\projects\CPMSharp\ContractManager\obj\Debug\ContractManager.exe
 C:\Users\fryarludwig\projects\CPMSharp\ContractManager\obj\Debug\ContractManager.pdb
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\bin\Debug\ContractManager.exe.config
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\bin\Debug\ContractManager.exe
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\bin\Debug\ContractManager.pdb
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\bin\Debug\Common.dll
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\bin\Debug\Common.pdb
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\obj\Debug\ContractManager.csprojResolveAssemblyReference.cache
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\obj\Debug\ContractManager.ContractWindow.resources
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\obj\Debug\ContractManager.Properties.Resources.resources
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\obj\Debug\ContractManager.csproj.GenerateResource.Cache
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\obj\Debug\ContractManager.exe
+C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\obj\Debug\ContractManager.pdb

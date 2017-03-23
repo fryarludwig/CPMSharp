@@ -1,0 +1,11 @@
+C:\Users\fryar\Source\Repos\CPMSharp\AuthenticationManager\bin\Launch_All_Debug\AuthenticationManager.exe.config
+C:\Users\fryar\Source\Repos\CPMSharp\AuthenticationManager\bin\Launch_All_Debug\AuthenticationManager.exe
+C:\Users\fryar\Source\Repos\CPMSharp\AuthenticationManager\bin\Launch_All_Debug\AuthenticationManager.pdb
+C:\Users\fryar\Source\Repos\CPMSharp\AuthenticationManager\bin\Launch_All_Debug\Common.dll
+C:\Users\fryar\Source\Repos\CPMSharp\AuthenticationManager\bin\Launch_All_Debug\Common.pdb
+C:\Users\fryar\Source\Repos\CPMSharp\AuthenticationManager\obj\Launch_All_Debug\AuthenticationManager.csprojResolveAssemblyReference.cache
+C:\Users\fryar\Source\Repos\CPMSharp\AuthenticationManager\obj\Launch_All_Debug\AuthenticationManager.AuthenticatorGui.resources
+C:\Users\fryar\Source\Repos\CPMSharp\AuthenticationManager\obj\Launch_All_Debug\AuthenticationManager.Properties.Resources.resources
+C:\Users\fryar\Source\Repos\CPMSharp\AuthenticationManager\obj\Launch_All_Debug\AuthenticationManager.csproj.GenerateResource.Cache
+C:\Users\fryar\Source\Repos\CPMSharp\AuthenticationManager\obj\Launch_All_Debug\AuthenticationManager.exe
+C:\Users\fryar\Source\Repos\CPMSharp\AuthenticationManager\obj\Launch_All_Debug\AuthenticationManager.pdb
