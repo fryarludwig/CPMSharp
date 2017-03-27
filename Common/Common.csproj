@@ -60,6 +60,12 @@
     <Compile Include="Communication\UdpCommunicator.cs" />
     <Compile Include="Communication\Conversation.cs" />
     <Compile Include="Communication\ConversationManager.cs" />
+    <Compile Include="Forms\BaseLoggingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BaseLoggingForm.Designer.cs">
+      <DependentUpon>BaseLoggingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\LoggingUtilityForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,9 @@
     <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\BaseLoggingForm.resx">
+      <DependentUpon>BaseLoggingForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoggingUtilityForm.resx">
       <DependentUpon>LoggingUtilityForm.cs</DependentUpon>
     </EmbeddedResource>

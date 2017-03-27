@@ -11,40 +11,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 using Common.Utilities;
 using Common.Users;
 
 namespace Common.Forms
 {
-    public class AbstractControlDescriptionProvider<TAbstract, TBase> : TypeDescriptionProvider
+    public partial class BaseLoggingForm : Form
     {
-        public AbstractControlDescriptionProvider() : base(TypeDescriptor.GetProvider(typeof(TAbstract))) { }
-
-        public override Type GetReflectionType(Type objectType, object instance)
-        {
-            if (objectType == typeof(TAbstract))
-                return typeof(TBase);
-            return base.GetReflectionType(objectType, instance);
-        }
-
-        public override object CreateInstance(IServiceProvider provider, Type objectType, Type[] argTypes, object[] args)
-        {
-            if (objectType == typeof(TAbstract))
-                objectType = typeof(TBase);
-            return base.CreateInstance(provider, objectType, argTypes, args);
-        }
-    }
-
-    [TypeDescriptionProvider(typeof(AbstractControlDescriptionProvider<BaseWindowForm, Form>))]
-    public abstract partial class BaseWindowForm : Form
-    {
-        protected BaseWindowForm()
+        public BaseLoggingForm()
         {
             InitializeComponent();
         }
 
-        protected BaseWindowForm(string name, DistributedProcess process)
+        public BaseLoggingForm(string name, DistributedProcess process)
         {
             InitializeComponent();
             InitializeLogger(name);
@@ -54,6 +33,7 @@ namespace Common.Forms
 
         protected void InitializeLogger(string name)
         {
+            LoggerOutput = GuiLogOutput;
             LevelMap = new ConcurrentDictionary<Level, bool>();
             LevelMap[Level.ERROR] = true;
             LevelMap[Level.WARN] = true;
@@ -67,8 +47,9 @@ namespace Common.Forms
             };
 
             Logger.RegisterGuiCallback(this);
+            SetupLoggingCallbacks();
         }
-        
+
         protected override void OnClosing(CancelEventArgs e)
         {
             if (ProcessInstance.MyProcessInfo.Status == ProcessInfo.StatusCode.Registered)
@@ -78,19 +59,12 @@ namespace Common.Forms
             base.OnClosing(e);
         }
 
-        protected bool SetupLoggingCallbacks(CheckBox info, CheckBox trace, CheckBox warnings, CheckBox errors)
+        protected void SetupLoggingCallbacks()
         {
-            ShowErrorsCheckBox = errors;
-            ShowWarningsCheckBox = warnings;
-            ShowTraceCheckBox = trace;
-            ShowInfoCheckBox = info;
-
-            if (ShowInfoCheckBox != null) { ShowInfoCheckBox.CheckedChanged += new EventHandler(this.ShowInfoInput_CheckedChanged); }
-            if (ShowTraceCheckBox != null) { ShowTraceCheckBox.CheckedChanged += new EventHandler(this.ShowTraceInput_CheckedChanged); }
-            if (ShowWarningsCheckBox != null) { ShowWarningsCheckBox.CheckedChanged += new EventHandler(this.ShowWarnings_CheckedChanged); }
-            if (ShowErrorsCheckBox != null) { ShowErrorsCheckBox.CheckedChanged += new EventHandler(this.ShowErrorsInput_CheckedChanged); }
-
-            return ShowInfoCheckBox != null && ShowTraceCheckBox != null && ShowWarningsCheckBox != null && ShowErrorsCheckBox != null;
+            ShowInfoInput.CheckedChanged += new EventHandler(this.ShowInfoInput_CheckedChanged);
+            ShowTraceInput.CheckedChanged += new EventHandler(this.ShowTraceInput_CheckedChanged);
+            ShowWarningsInput.CheckedChanged += new EventHandler(this.ShowWarnings_CheckedChanged);
+            ShowErrorsInput.CheckedChanged += new EventHandler(this.ShowErrorsInput_CheckedChanged); 
         }
 
         public void PrintLogMessage(LogItem message)
@@ -106,7 +80,7 @@ namespace Common.Forms
                 LoggerOutput.TopIndex += (LoggerOutput.TopIndex == LoggerOutput.Items.Count - numVisible - 1) ? 1 : 0;
             }
         }
-        
+
         protected void LoggerOutput_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e != null && e.Index >= 0)
@@ -131,11 +105,14 @@ namespace Common.Forms
             // Do nothing
         }
 
-        protected abstract void ProcessStatusChanged(ProcessInfo processInfo);
+        protected virtual void ProcessStatusChanged(ProcessInfo processInfo)
+        {
+            throw new Exception();
+        }
 
         public delegate void OnLogMessageReceived(LogItem message);
         public delegate void OnProcessStatusChanged(ProcessInfo processInfo);
-        
+
         private ListBox _LoggerOutput;
         protected ListBox LoggerOutput
         {
@@ -155,36 +132,30 @@ namespace Common.Forms
                 _LoggerOutput.DrawItem += LoggerOutput_DrawItem;
             }
         }
-        
+
         protected LogUtility Logger { get; set; }
         protected DistributedProcess ProcessInstance { get; set; }
         protected ErrorProvider InputErrorProvider = new ErrorProvider();
         protected ConcurrentDictionary<Level, bool> LevelMap;
-
-
-        protected CheckBox ShowErrorsCheckBox;
-        protected CheckBox ShowWarningsCheckBox;
-        protected CheckBox ShowTraceCheckBox;
-        protected CheckBox ShowInfoCheckBox;
-
+        
         protected void ShowErrorsInput_CheckedChanged(object sender, EventArgs e)
         {
-            LevelMap[Level.ERROR] = ShowErrorsCheckBox.Checked;
+            LevelMap[Level.ERROR] = ShowErrorsInput.Checked;
         }
 
         protected void ShowWarnings_CheckedChanged(object sender, EventArgs e)
         {
-            LevelMap[Level.WARN] = ShowWarningsCheckBox.Checked;
+            LevelMap[Level.WARN] = ShowWarningsInput.Checked;
         }
 
         protected void ShowInfoInput_CheckedChanged(object sender, EventArgs e)
         {
-            LevelMap[Level.INFO] = ShowInfoCheckBox.Checked;
+            LevelMap[Level.INFO] = ShowInfoInput.Checked;
         }
 
         protected void ShowTraceInput_CheckedChanged(object sender, EventArgs e)
         {
-            LevelMap[Level.TRACE] = ShowTraceCheckBox.Checked;
+            LevelMap[Level.TRACE] = ShowTraceInput.Checked;
         }
     }
 }

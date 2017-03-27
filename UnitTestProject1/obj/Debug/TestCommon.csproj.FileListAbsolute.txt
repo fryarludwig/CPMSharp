@@ -43,3 +43,19 @@ C:\Users\fryar\Source\Repos\CPMSharp\UnitTestProject1\bin\Debug\SharpCPM.exe.con
 C:\Users\fryar\Source\Repos\CPMSharp\UnitTestProject1\obj\Debug\TestCommon.csprojResolveAssemblyReference.cache
 C:\Users\fryar\Source\Repos\CPMSharp\UnitTestProject1\obj\Debug\TestCommon.dll
 C:\Users\fryar\Source\Repos\CPMSharp\UnitTestProject1\obj\Debug\TestCommon.pdb
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\UnitTestProject1\bin\Debug\TestCommon.dll
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\UnitTestProject1\bin\Debug\TestCommon.pdb
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\UnitTestProject1\bin\Debug\AuthenticationManager.exe
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\UnitTestProject1\bin\Debug\Common.dll
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\UnitTestProject1\bin\Debug\ContractManager.exe
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\UnitTestProject1\bin\Debug\SharpCPM.exe
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\UnitTestProject1\bin\Debug\AuthenticationManager.pdb
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\UnitTestProject1\bin\Debug\AuthenticationManager.exe.config
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\UnitTestProject1\bin\Debug\Common.pdb
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\UnitTestProject1\bin\Debug\ContractManager.pdb
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\UnitTestProject1\bin\Debug\ContractManager.exe.config
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\UnitTestProject1\bin\Debug\SharpCPM.pdb
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\UnitTestProject1\bin\Debug\SharpCPM.exe.config
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\UnitTestProject1\obj\Debug\TestCommon.csprojResolveAssemblyReference.cache
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\UnitTestProject1\obj\Debug\TestCommon.dll
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\UnitTestProject1\obj\Debug\TestCommon.pdb

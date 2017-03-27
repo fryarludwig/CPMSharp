@@ -32,7 +32,6 @@
             this.intervalInput = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.StartButton = new System.Windows.Forms.Button();
-            this.GuiLogOutput = new System.Windows.Forms.ListBox();
             this.StatusDisplay = new System.Windows.Forms.Label();
             this.ProcessesDisplay = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -40,7 +39,28 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            ((System.ComponentModel.ISupportInitialize)(this.InputErrorProvider)).BeginInit();
             this.SuspendLayout();
+            // 
+            // ShowTraceInput
+            // 
+            this.ShowTraceInput.Location = new System.Drawing.Point(470, 207);
+            // 
+            // ShowInfoInput
+            // 
+            this.ShowInfoInput.Location = new System.Drawing.Point(420, 207);
+            // 
+            // ShowWarningsInput
+            // 
+            this.ShowWarningsInput.Location = new System.Drawing.Point(362, 207);
+            // 
+            // ShowErrorsInput
+            // 
+            this.ShowErrorsInput.Location = new System.Drawing.Point(308, 206);
+            // 
+            // GuiLogOutput
+            // 
+            this.GuiLogOutput.Location = new System.Drawing.Point(12, 230);
             // 
             // portInput
             // 
@@ -77,14 +97,6 @@
             this.StartButton.UseVisualStyleBackColor = true;
             this.StartButton.Click += new System.EventHandler(this.StartConnection);
             // 
-            // GuiLogOutput
-            // 
-            this.GuiLogOutput.FormattingEnabled = true;
-            this.GuiLogOutput.Location = new System.Drawing.Point(13, 202);
-            this.GuiLogOutput.Name = "GuiLogOutput";
-            this.GuiLogOutput.Size = new System.Drawing.Size(541, 160);
-            this.GuiLogOutput.TabIndex = 5;
-            // 
             // StatusDisplay
             // 
             this.StatusDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -92,7 +104,7 @@
             this.StatusDisplay.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.StatusDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.StatusDisplay.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StatusDisplay.Location = new System.Drawing.Point(435, 19);
+            this.StatusDisplay.Location = new System.Drawing.Point(441, 19);
             this.StatusDisplay.Margin = new System.Windows.Forms.Padding(5);
             this.StatusDisplay.Name = "StatusDisplay";
             this.StatusDisplay.Size = new System.Drawing.Size(117, 24);
@@ -146,16 +158,27 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(566, 380);
+            this.ClientSize = new System.Drawing.Size(572, 401);
             this.Controls.Add(this.ProcessesDisplay);
             this.Controls.Add(this.StatusDisplay);
-            this.Controls.Add(this.GuiLogOutput);
             this.Controls.Add(this.StartButton);
             this.Controls.Add(this.portInput);
             this.Controls.Add(this.intervalInput);
             this.Controls.Add(this.label2);
             this.Name = "AuthenticatorGui";
             this.Text = "Authentication Manager";
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.intervalInput, 0);
+            this.Controls.SetChildIndex(this.portInput, 0);
+            this.Controls.SetChildIndex(this.StartButton, 0);
+            this.Controls.SetChildIndex(this.GuiLogOutput, 0);
+            this.Controls.SetChildIndex(this.StatusDisplay, 0);
+            this.Controls.SetChildIndex(this.ProcessesDisplay, 0);
+            this.Controls.SetChildIndex(this.ShowErrorsInput, 0);
+            this.Controls.SetChildIndex(this.ShowWarningsInput, 0);
+            this.Controls.SetChildIndex(this.ShowInfoInput, 0);
+            this.Controls.SetChildIndex(this.ShowTraceInput, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.InputErrorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -166,7 +189,6 @@
         private System.Windows.Forms.TextBox intervalInput;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button StartButton;
-        private System.Windows.Forms.ListBox GuiLogOutput;
         private System.Windows.Forms.Label StatusDisplay;
         private System.Windows.Forms.ListView ProcessesDisplay;
         private System.Windows.Forms.ColumnHeader columnHeader1;

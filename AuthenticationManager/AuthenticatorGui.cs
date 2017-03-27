@@ -18,31 +18,17 @@ using System.Timers;
 
 namespace AuthenticationManager
 {
-    public partial class AuthenticatorGui : Form
+    public partial class AuthenticatorGui : BaseLoggingForm
     {
-        public AuthenticatorGui() : base()
+        public AuthenticatorGui() : base("AuthGui", new AuthManager())
         {
             InitializeComponent();
-            SetupLoggingWindow();
-            ProcessInstance = new AuthManager();
             Authenticator.Registration_OnChange += ProcessRegistrationUpdate;
             StartButton.Text = START_TEXT;
             StatusDisplay.Text = "Not Started";
-            Logger = new LogUtility("AuthenticGui")
-            {
-                ConsoleOutput = true,
-                GuiOutput = true,
-                FileOutput = true
-            };
             Logger.Trace("Started Authentication Manager Interface");
         }
-
-        protected void SetupLoggingWindow()
-        {
-            LoggingUtilityForm LoggingForm = new LoggingUtilityForm("Authenticator");
-            LoggingForm.Show();
-        }
-
+        
         protected void ProcessRegistrationUpdate(ProcessInfo processInfo)
         {
             if (InvokeRequired)
@@ -65,11 +51,8 @@ namespace AuthenticationManager
                 ProcessesDisplay.Items.Add(listItem);
             }
         }
-        
-        public delegate void OnLogMessageReceived(LogItem message);
-        public delegate void OnProcessStatusChanged(ProcessInfo processInfo);
 
-        protected void ProcessStatusChanged(ProcessInfo processInfo)
+        protected override void ProcessStatusChanged(ProcessInfo processInfo)
         {
             if (InvokeRequired)
             {
@@ -92,7 +75,7 @@ namespace AuthenticationManager
             }
         }
 
-        protected void PrepopulateProcessValues()
+        protected override void PrepopulateProcessValues()
         {
             ProcessInstance.LocalEndpoint = new IPEndPoint(IPAddress.Any, int.Parse(portInput.Text));
             Authenticator.HeartbeatIntervalMs = int.Parse(intervalInput.Text);
@@ -156,12 +139,7 @@ namespace AuthenticationManager
         private const string STOP_TEXT = "Stop";
 
         protected AuthManager Authenticator { get { return (AuthManager)ProcessInstance; } }
-        protected DistributedProcess ProcessInstance { get; set; }
-        protected LogUtility Logger { get; set; }
-        protected LoggingUtilityForm LoggingForm { get; }
-
         public delegate void RegistrationChanged(ProcessInfo processInfo);
-        protected ErrorProvider InputErrorProvider = new ErrorProvider();
     }
 }
 

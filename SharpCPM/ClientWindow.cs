@@ -16,24 +16,15 @@ using System.Threading;
 
 namespace SharpCPM
 {
-    public partial class ClientWindow : Form
+    public partial class ClientWindow : BaseLoggingForm
     {
-        public ClientWindow()
+        public ClientWindow() : base("ClientGui", new CPMClient())
         {
             InitializeComponent();
-            WindowLoggingAdapter.LogMessageQueue = GuiLogQueue;
-            ClientService = new CPMClient();
-            Logger.ConsoleOutput = true;
-            Logger.GuiOutput = true;
-            Logger.FileOutput = true;
-            Task.Factory.StartNew(RunLoop);
+            //ClientService.Registration_OnChange += ProcessRegistrationUpdate;
+            Logger.Trace("Client window initialized successfully");
         }
-
-        public void KillChildren()
-        {
-            //ClientService.Stop();
-        }
-
+        
         protected void InitializeService()
         {
             string address = addressInput.Text;
@@ -62,44 +53,6 @@ namespace SharpCPM
             }
         }
         
-        protected void RunLoop()
-        {
-            int NumberOfItems = GuiLogOutput.ClientSize.Height / GuiLogOutput.ItemHeight;
-            bool keepGoing = true;
-            LogItem message;
-
-            while (keepGoing)
-            {
-                if (!GuiLogQueue.IsEmpty && GuiLogQueue.TryDequeue(out message))
-                {
-                    Invoke((MethodInvoker)delegate
-                    {
-                        try
-                        {
-                            if (LogPrintDictionary[message.LogLevel])
-                            {
-                                GuiLogOutput.Items.Add(message.LogMessage);
-                                if (GuiLogOutput.TopIndex == GuiLogOutput.Items.Count - NumberOfItems - 1)
-                                {
-                                    //The item at the top when you can just see the bottom item
-                                    GuiLogOutput.TopIndex = GuiLogOutput.Items.Count - NumberOfItems + 1;
-                                }
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            Logger.GuiOutput = false;
-                            Logger.ConsoleOutput = true;
-                            Logger.Error(e.Message);
-                            keepGoing = false;
-                        }
-                    });
-                }
-
-                Thread.Sleep(100);
-            }
-        }
-
         private bool ValidateLoginInformation()
         {
             bool validInformation = true;
@@ -145,12 +98,8 @@ namespace SharpCPM
         {
             // Call a method to update the gui
         }
+        
+        protected CPMClient ClientService { get { return (CPMClient)ProcessInstance; } }
 
-        protected ErrorProvider InputErrorProvider = new ErrorProvider();
-        protected LogUtility Logger = new LogUtility("SharpCPM GUI");
-        protected CPMClient ClientService { get; }
-        public static ConcurrentQueue<LogItem> GuiLogQueue = new ConcurrentQueue<LogItem>();
-        public static ConcurrentDictionary<Level, bool> LogPrintDictionary = new ConcurrentDictionary<Level, bool>();
-    
     }
 }

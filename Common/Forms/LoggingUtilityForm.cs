@@ -60,7 +60,7 @@ namespace Common.Forms
                 e.DrawFocusRectangle();
             }
         }
-        
+       
         public delegate void OnLogMessageReceived(LogItem message);
 
         private ListBox _LoggerOutput;

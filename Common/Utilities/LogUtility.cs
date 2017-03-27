@@ -143,6 +143,11 @@ namespace Common.Utilities
             LogUtilityHelper.OnGuiLogPrint += new LogHelper.GuiLogPrintEvent(winForm.PrintLogMessage);
         }
 
+        public void RegisterGuiCallback(BaseLoggingForm winForm)
+        {
+            LogUtilityHelper.OnGuiLogPrint += new LogHelper.GuiLogPrintEvent(winForm.PrintLogMessage);
+        }
+
         public void RegisterFloatingGuiCallback(LoggingUtilityForm logForm)
         {
             LogUtilityHelper.OnGuiLogPrint += new LogHelper.GuiLogPrintEvent(logForm.PrintLogMessage);

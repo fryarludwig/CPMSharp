@@ -1,5 +1,4 @@
-﻿using Common.Utilities;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,27 +11,24 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Common.Utilities;
 using Common.Forms;
 using Common.Users;
+using System.Timers;
 
 namespace ContractManager
 {
-    public partial class ContractWindow : BaseWindowForm
+    public partial class ContractWindow : BaseLoggingForm
     {
         public ContractWindow() : base("ContractGui", new ContractManager())
         {
             InitializeComponent();
-            LoggerOutput = GuiLogOutput;
             ProcessInstance.OnStatusChanged += ProcessStatusChanged;
             Contractor.Registration_OnChange += ProcessStatusChanged;
             StartButton.Text = START_TEXT;
+            Logger.Trace("Started Contract Manager Interface");
         }
-
-        public void KillChildren()
-        {
-            //ContractService.Stop();
-        }
-
+        
         protected override void ProcessStatusChanged(ProcessInfo processInfo)
         {
             if (InvokeRequired)
@@ -83,7 +79,7 @@ namespace ContractManager
                 StartButton.Enabled = true;
             }
         }
-
+        
         private bool ValidateLoginInformation()
         {
             bool validInformation = true;
@@ -110,7 +106,8 @@ namespace ContractManager
 
         private const string START_TEXT = "Connect";
         private const string STOP_TEXT = "Disconnect";
-        public ContractManager Contractor { get { return (ContractManager)ProcessInstance; } }
+
+        protected ContractManager Contractor { get { return (ContractManager)ProcessInstance; } }
         public delegate void StatusChanged_Update(ProcessInfo processInfo);
     }
 }

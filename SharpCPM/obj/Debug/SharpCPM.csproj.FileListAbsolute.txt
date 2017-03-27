@@ -34,3 +34,15 @@ C:\Users\fryar\Source\Repos\CPMSharp\SharpCPM\obj\Debug\SharpCPM.ClientWindow.re
 C:\Users\fryar\Source\Repos\CPMSharp\SharpCPM\obj\Debug\SharpCPM.csproj.GenerateResource.Cache
 C:\Users\fryar\Source\Repos\CPMSharp\SharpCPM\obj\Debug\SharpCPM.exe
 C:\Users\fryar\Source\Repos\CPMSharp\SharpCPM\obj\Debug\SharpCPM.pdb
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\bin\Debug\SharpCPM.exe.config
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\bin\Debug\SharpCPM.exe
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\bin\Debug\SharpCPM.pdb
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\bin\Debug\Common.dll
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\bin\Debug\Common.pdb
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\SharpCPM.csprojResolveAssemblyReference.cache
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\SharpCPM.Dialogs.LoginDialog.resources
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\SharpCPM.Properties.Resources.resources
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\SharpCPM.ClientWindow.resources
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\SharpCPM.csproj.GenerateResource.Cache
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\SharpCPM.exe
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\SharpCPM.pdb

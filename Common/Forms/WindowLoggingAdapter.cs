@@ -11,7 +11,6 @@ namespace Common.Forms
 {
     public static class WindowLoggingAdapter
     {
-
         public static ConcurrentQueue<LogItem> LogMessageQueue { get; set; }
     }
 }
