@@ -138,29 +138,15 @@ namespace Common.Utilities
             set { LogUtilityHelper.GlobalLogLevel = value; }
         }
 
-        public void RegisterGuiCallback(BaseWindowForm winForm)
-        {
-            LogUtilityHelper.OnGuiLogPrint += new LogHelper.GuiLogPrintEvent(winForm.PrintLogMessage);
-        }
 
         public void RegisterGuiCallback(BaseLoggingForm winForm)
         {
             LogUtilityHelper.OnGuiLogPrint += new LogHelper.GuiLogPrintEvent(winForm.PrintLogMessage);
         }
 
-        public void RegisterFloatingGuiCallback(LoggingUtilityForm logForm)
-        {
-            LogUtilityHelper.OnGuiLogPrint += new LogHelper.GuiLogPrintEvent(logForm.PrintLogMessage);
-        }
-
-        public void RemoveGuiCallback(BaseWindowForm winForm)
+        public void RemoveGuiCallback(BaseLoggingForm winForm)
         {
             LogUtilityHelper.OnGuiLogPrint -= new LogHelper.GuiLogPrintEvent(winForm.PrintLogMessage);
-        }
-
-        public void RemoveFloatingGuiCallback(LoggingUtilityForm logForm)
-        {
-            LogUtilityHelper.OnGuiLogPrint -= new LogHelper.GuiLogPrintEvent(logForm.PrintLogMessage);
         }
     }
 

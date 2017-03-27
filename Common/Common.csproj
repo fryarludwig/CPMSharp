@@ -66,18 +66,8 @@
     <Compile Include="Forms\BaseLoggingForm.Designer.cs">
       <DependentUpon>BaseLoggingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LoggingUtilityForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\LoggingUtilityForm.Designer.cs">
-      <DependentUpon>LoggingUtilityForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Messages\Envelope.cs" />
-    <Compile Include="Forms\BaseWindowForm.cs" />
-    <Compile Include="Forms\BaseWindowForm.Designer.cs">
-      <DependentUpon>BaseWindowForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Messages\Requests\ShutdownRequest.cs" />
     <Compile Include="Utilities\DistributedProcess.cs" />
     <Compile Include="Messages\MessageNumber.cs" />
@@ -91,7 +81,6 @@
     <Compile Include="Messages\Requests\Request.cs" />
     <Compile Include="Users\ProcessInfo.cs" />
     <Compile Include="Users\SharedProperties.cs" />
-    <Compile Include="Forms\WindowLoggingAdapter.cs" />
     <Compile Include="Utilities\Scheduler.cs" />
     <Compile Include="Utilities\Threaded.cs" />
     <Compile Include="Utilities\LogUtility.cs" />
@@ -109,9 +98,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Forms\BaseLoggingForm.resx">
       <DependentUpon>BaseLoggingForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LoggingUtilityForm.resx">
-      <DependentUpon>LoggingUtilityForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
