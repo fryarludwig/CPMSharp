@@ -19,3 +19,4 @@ C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\Common\obj\Debug\C
 C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\Common\obj\Debug\Common.dll
 C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\Common\obj\Debug\Common.pdb
 C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\Common\obj\Debug\Common.Forms.BaseLoggingForm.resources
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache

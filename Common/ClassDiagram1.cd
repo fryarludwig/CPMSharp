@@ -182,7 +182,7 @@
       <FileName>Utilities\LogUtility.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Common.Utilities.LogUtility" Collapsed="true">
+  <Class Name="Common.Utilities.LogUtility">
     <Position X="19" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAYAAABBAAAUAAAAAAAAAACAAAABOAAAgQDEAAQAA=</HashCode>

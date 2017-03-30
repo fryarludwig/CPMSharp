@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpCPM", "SharpCPM\SharpCPM.csproj", "{513B97BA-0146-452A-8094-56CFB11DD9ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPMClient", "SharpCPM\CPMClient.csproj", "{513B97BA-0146-452A-8094-56CFB11DD9ED}"
 	ProjectSection(ProjectDependencies) = postProject
 		{CE7D0A81-07B2-428D-9579-273E207E7376} = {CE7D0A81-07B2-428D-9579-273E207E7376}
 	EndProjectSection

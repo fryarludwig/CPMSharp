@@ -92,9 +92,9 @@
       <Project>{cbd46aaf-259a-407e-a436-151538c90641}</Project>
       <Name>ContractManager</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SharpCPM\SharpCPM.csproj">
+    <ProjectReference Include="..\SharpCPM\CPMClient.csproj">
       <Project>{513b97ba-0146-452a-8094-56cfb11dd9ed}</Project>
-      <Name>SharpCPM</Name>
+      <Name>CPMClient</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
