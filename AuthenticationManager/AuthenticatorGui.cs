@@ -140,6 +140,16 @@ namespace AuthenticationManager
 
         protected AuthManager Authenticator { get { return (AuthManager)ProcessInstance; } }
         public delegate void RegistrationChanged(ProcessInfo processInfo);
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

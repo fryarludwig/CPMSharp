@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Common.Users
@@ -17,6 +18,14 @@ namespace Common.Users
         public string Alias { get; set; }
         [DataMember]
         public string UserID { get; set; }
+        [DataMember]
+        public string Phone { get; set; }
+        [DataMember]
+        public List<int> ContractList { get; set; }
+        [DataMember]
+        public List<int> PhaseList { get; set; }
+        [DataMember]
+        public List<int> TaskList { get; set; }
 
         public User Clone()
         {

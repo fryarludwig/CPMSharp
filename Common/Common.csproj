@@ -88,8 +88,11 @@
     <Compile Include="Users\User.cs" />
     <Compile Include="WorkItems\Comment.cs" />
     <Compile Include="WorkItems\Contract.cs" />
+    <Compile Include="WorkItems\Effort.cs" />
+    <Compile Include="WorkItems\Material.cs" />
     <Compile Include="WorkItems\Phase.cs" />
     <Compile Include="WorkItems\Task.cs" />
+    <Compile Include="WorkItems\TimeCard.cs" />
     <Compile Include="WorkItems\WorkItem.cs" />
   </ItemGroup>
   <ItemGroup>

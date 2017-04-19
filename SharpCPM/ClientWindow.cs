@@ -18,7 +18,7 @@ namespace SharpCPM
 {
     public partial class ClientWindow : BaseLoggingForm
     {
-        public ClientWindow() : base("ClientGui", new CPMClient())
+        public ClientWindow() : base("ClientUI", new CPMClient())
         {
             InitializeComponent();
             //ClientService.Registration_OnChange += ProcessRegistrationUpdate;
@@ -101,5 +101,24 @@ namespace SharpCPM
         
         protected CPMClient ClientService { get { return (CPMClient)ProcessInstance; } }
 
+        private void ClientWindow_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Task_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Phase_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Contract_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -40,7 +40,7 @@
             this.ShowTraceInput.AutoSize = true;
             this.ShowTraceInput.Checked = true;
             this.ShowTraceInput.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ShowTraceInput.Location = new System.Drawing.Point(520, 23);
+            this.ShowTraceInput.Location = new System.Drawing.Point(724, 325);
             this.ShowTraceInput.Name = "ShowTraceInput";
             this.ShowTraceInput.Size = new System.Drawing.Size(54, 17);
             this.ShowTraceInput.TabIndex = 29;
@@ -52,7 +52,7 @@
             this.ShowInfoInput.AutoSize = true;
             this.ShowInfoInput.Checked = true;
             this.ShowInfoInput.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ShowInfoInput.Location = new System.Drawing.Point(470, 23);
+            this.ShowInfoInput.Location = new System.Drawing.Point(674, 325);
             this.ShowInfoInput.Name = "ShowInfoInput";
             this.ShowInfoInput.Size = new System.Drawing.Size(44, 17);
             this.ShowInfoInput.TabIndex = 28;
@@ -64,7 +64,7 @@
             this.ShowWarningsInput.AutoSize = true;
             this.ShowWarningsInput.Checked = true;
             this.ShowWarningsInput.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ShowWarningsInput.Location = new System.Drawing.Point(412, 23);
+            this.ShowWarningsInput.Location = new System.Drawing.Point(616, 325);
             this.ShowWarningsInput.Name = "ShowWarningsInput";
             this.ShowWarningsInput.Size = new System.Drawing.Size(52, 17);
             this.ShowWarningsInput.TabIndex = 27;
@@ -76,7 +76,7 @@
             this.ShowErrorsInput.AutoSize = true;
             this.ShowErrorsInput.Checked = true;
             this.ShowErrorsInput.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ShowErrorsInput.Location = new System.Drawing.Point(358, 22);
+            this.ShowErrorsInput.Location = new System.Drawing.Point(562, 324);
             this.ShowErrorsInput.Name = "ShowErrorsInput";
             this.ShowErrorsInput.Size = new System.Drawing.Size(48, 17);
             this.ShowErrorsInput.TabIndex = 26;
@@ -86,7 +86,7 @@
             // GuiLogOutput
             // 
             this.GuiLogOutput.FormattingEnabled = true;
-            this.GuiLogOutput.Location = new System.Drawing.Point(34, 44);
+            this.GuiLogOutput.Location = new System.Drawing.Point(238, 346);
             this.GuiLogOutput.Name = "GuiLogOutput";
             this.GuiLogOutput.Size = new System.Drawing.Size(541, 160);
             this.GuiLogOutput.TabIndex = 25;
@@ -95,12 +95,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(595, 225);
-            this.Controls.Add(this.ShowTraceInput);
-            this.Controls.Add(this.ShowInfoInput);
-            this.Controls.Add(this.ShowWarningsInput);
-            this.Controls.Add(this.ShowErrorsInput);
+            this.ClientSize = new System.Drawing.Size(791, 518);
             this.Controls.Add(this.GuiLogOutput);
+            this.Controls.Add(this.ShowTraceInput);
+            this.Controls.Add(this.ShowErrorsInput);
+            this.Controls.Add(this.ShowWarningsInput);
+            this.Controls.Add(this.ShowInfoInput);
             this.Name = "BaseLoggingForm";
             this.Text = "BaseLoggingForm";
             this.ResumeLayout(false);
