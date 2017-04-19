@@ -24,7 +24,7 @@ namespace Common.WorkItems
         {
             if (EffortList.ContainsKey(effortId) && EffortList[effortId].StopEffort())
             {
-                return EffortList[effortId].HoursWorked;
+                return EffortList[effortId].TimeElapsed;
             }
             else
             {
@@ -39,7 +39,7 @@ namespace Common.WorkItems
                 TimeSpan sum = new TimeSpan(0);
                 foreach (Effort effort in EffortList.Values)
                 {
-                    sum += effort.HoursWorked;
+                    sum += effort.TimeElapsed;
                 }
                 return sum;
             }

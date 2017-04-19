@@ -13,7 +13,8 @@ namespace Common.WorkItems
         private Effort(int userId, int contractId, int phaseId, int taskId)
         {
             StartTime = DateTime.Now;
-            EndTime = DateTime.Now;
+            EndTime = StartTime;
+            TotalDuration = EndTime - StartTime;
             IsActive = false;
 
             UserId = userId;
@@ -51,6 +52,7 @@ namespace Common.WorkItems
             {
                 EndTime = DateTime.Now;
                 IsActive = false;
+                TotalDuration += EndTime - StartTime;
                 return true;
             }
         }
@@ -59,14 +61,17 @@ namespace Common.WorkItems
         private bool IsActive { get; set; }
 
         [DataMember]
+        private TimeSpan TotalDuration { get; set; }
+
+        [DataMember]
         protected DateTime StartTime { get; set; }
         [DataMember]
         protected DateTime EndTime { get; set; }
-        public TimeSpan HoursWorked
+        public TimeSpan TimeElapsed
         {
             get
             {
-                return EndTime - StartTime;
+                return TotalDuration;
             }
         }
 

@@ -71,6 +71,7 @@
     <Compile Include="Messages\Requests\ShutdownRequest.cs" />
     <Compile Include="Utilities\DistributedProcess.cs" />
     <Compile Include="Messages\MessageNumber.cs" />
+    <Compile Include="Utilities\PersistenceHandler.cs" />
     <Compile Include="Utilities\PublicKey.cs" />
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Messages\Replies\AliveReply.cs" />
@@ -92,7 +93,6 @@
     <Compile Include="WorkItems\Material.cs" />
     <Compile Include="WorkItems\Phase.cs" />
     <Compile Include="WorkItems\Task.cs" />
-    <Compile Include="WorkItems\TimeCard.cs" />
     <Compile Include="WorkItems\WorkItem.cs" />
   </ItemGroup>
   <ItemGroup>

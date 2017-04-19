@@ -73,11 +73,18 @@
     <Compile Include="TestObjects\TestUdpSocket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\TestDistributedProcess.cs" />
+    <Compile Include="Utilities\TestPersistenceHandler.cs" />
+    <Compile Include="WorkItems\TestComment.cs" />
+    <Compile Include="WorkItems\TestContract.cs" />
+    <Compile Include="WorkItems\TestEffort.cs" />
+    <Compile Include="WorkItems\TestMaterial.cs" />
+    <Compile Include="WorkItems\TestPhase.cs" />
+    <Compile Include="WorkItems\TestTask.cs" />
+    <Compile Include="WorkItems\TestWorkItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Alerts\" />
     <Folder Include="Users\" />
-    <Folder Include="WorkItems\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AuthenticationManager\AuthenticationManager.csproj">

@@ -3,11 +3,20 @@ using System.Text;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
+using Common.WorkItems;
+
 namespace Common.Users
 {
     [DataContract]
     public class User
     {
+        public User()
+        {
+            ContractList = new List<int>();
+            PhaseList = new List<int>();
+            TaskList = new List<int>();
+        }
+
         [DataMember]
         public string UserName { get; set; }
         [DataMember]

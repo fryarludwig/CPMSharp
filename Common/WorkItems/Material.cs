@@ -23,9 +23,7 @@ namespace Common.WorkItems
         public string Description { get; set; }
         [DataMember]
         public string Units { get; set; }
-
-        [DataMember]
-        public static double TotalStock { get; set; }
+        
         [DataMember]
         public double UnitsReserved { get; set; }
         [DataMember]
