@@ -65,9 +65,9 @@ namespace Common.Communication
             ConversationTypes[messageType] = conversationType;
         }
 
-        public static void RegisterExistingConversation(Conversation conversation)
+        public static void RegisterConversation(Conversation conversation)
         {
-            conversation.RegisterConversationCallbacks(Properties.DistInstance);
+            conversation?.RegisterDistributedProcessCallbacks(Properties?.DistInstance);
 
             if (!ConversationDictionary.ContainsKey(conversation.Id))
             {
@@ -79,7 +79,7 @@ namespace Common.Communication
             }
         }
 
-        public static Conversation CreateNewConversation(Envelope envelope)
+        public static Conversation CreateNewConversation(Envelope envelope, bool registerConversation = true)
         {
             Conversation newConversation = null;
 
@@ -89,7 +89,7 @@ namespace Common.Communication
                 if (newConversation != null)
                 {
                     newConversation.Id = envelope.ConvId;
-                    newConversation.NewMessages.Enqueue(envelope);
+                    newConversation.MessageInbox.Enqueue(envelope);
                 }
             }
 
@@ -102,19 +102,20 @@ namespace Common.Communication
 
             if (envelope?.Message != null && envelope.Address != null)
             {
+                Logger.Info($"Message from {envelope.Address.ToString()} to {envelope.ConvId}");
+
                 if (ConversationDictionary.ContainsKey(envelope.ConvId))
                 {
-                    ConversationDictionary[envelope.ConvId].NewMessages.Enqueue(envelope);
-                    Logger.Info($"Message from {envelope.Address.ToString()} to {envelope.ConvId}");
+                    ConversationDictionary[envelope.ConvId].MessageInbox.Enqueue(envelope);
                 }
                 else
                 {
                     Conversation newConversation = CreateNewConversation(envelope);
-                    RegisterExistingConversation(newConversation);
+                    RegisterConversation(newConversation);
 
                     if (newConversation != null)
                     {
-                        ConversationDictionary[envelope.ConvId].NewMessages.Enqueue(envelope);
+                        ConversationDictionary[envelope.ConvId].MessageInbox.Enqueue(envelope);
                         Logger.Info($"Started a new conversation as {envelope.ConvId}");
                         newConversation.Start();
                     }
@@ -143,6 +144,7 @@ namespace Common.Communication
 
         public static uint Retries { get; set; }
         public static int Timeout { get; set; }
+        public static int CommunicatorPort { get { return PrimaryCommunicator.LocalEndpoint.Port; } }
         public static SharedProperties Properties { get; set; }
 
         private static Dictionary<Type, Type> ConversationTypes { get; set; }

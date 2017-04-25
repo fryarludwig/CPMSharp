@@ -20,11 +20,11 @@ namespace AuthenticationManager.Conversations
         public LoginConversation() : base("Auth - Login Conv")
         {
             WaitingForReply = true;
-            AllowRepeats = false;
+            AllowInboundMessages = false;
             CallbacksRegistered = false;
         }
 
-        public override void RegisterConversationCallbacks(DistributedProcess process)
+        public override void RegisterDistributedProcessCallbacks(DistributedProcess process)
         {
             if (!CallbacksRegistered && process.GetType() == typeof(AuthManager))
             {

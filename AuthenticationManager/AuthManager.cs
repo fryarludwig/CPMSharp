@@ -52,7 +52,7 @@ namespace AuthenticationManager
                     process.Status = ProcessInfo.StatusCode.Terminated;
                     process.HeartbeatTimer.Stop();
                     KillProcessConversation conv = new KillProcessConversation(process.ProcessId, process.EndPoint);
-                    conv.Register();
+                    conv.RegisterWithConversationManager();
                     conv.Start();
                 }
             }

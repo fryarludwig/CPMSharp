@@ -43,7 +43,7 @@ namespace ContractManager
             MyProcessInfo.Status = ProcessInfo.StatusCode.Initializing;
             ConversationManager.PrimaryCommunicator.Start();
             LoginConversation loginConv = new LoginConversation(AuthenticatorEndpoint, MyProcessInfo);
-            loginConv.RegisterConversationCallbacks(this);
+            loginConv.RegisterDistributedProcessCallbacks(this);
             loginConv.Start();
         }
 

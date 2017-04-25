@@ -18,40 +18,44 @@ namespace Common.Communication
         public Conversation(string name, MessageNumber convId = null) : base(name)
         {
             Id = convId ?? MessageNumber.Create();
-            Timeout = 1000;
+            Timeout = 2000;
             MaxRetries = 5;
             Properties = SharedProperties.Instance;
             Communicator = ConversationManager.PrimaryCommunicator;
-            NewMessages = new ConcurrentQueue<Envelope>();
+            MessageInbox = new ConcurrentQueue<Envelope>();
             SentMessages = new ConcurrentQueue<Envelope>();
             ReceivedMessages = new ConcurrentDictionary<Message, IPEndPoint>();
             CallbacksRegistered = false;
-            AllowRepeats = false;
-            Register();
+            AllowInboundMessages = true;
+            WaitingForReply = true;
+
+            RegisterWithConversationManager();
         }
 
         public Conversation(string name, BaseCommunicator communicator, MessageNumber convId = null) : base(name)
         {
             Id = convId ?? MessageNumber.Create();
-            Timeout = 1000;
+            Timeout = 2000;
             MaxRetries = 5;
             Properties = SharedProperties.Instance;
             Communicator = communicator;
-            NewMessages = new ConcurrentQueue<Envelope>();
+            Communicator.OnMessageReceived += new BaseCommunicator.MessageReceived(ReceiveDirectMessage);
+            MessageInbox = new ConcurrentQueue<Envelope>();
             SentMessages = new ConcurrentQueue<Envelope>();
             ReceivedMessages = new ConcurrentDictionary<Message, IPEndPoint>();
             CallbacksRegistered = false;
-            Register();
+            AllowInboundMessages = true;
+            WaitingForReply = true;
         }
 
-        public virtual void RegisterConversationCallbacks(DistributedProcess process)
+        public virtual void RegisterDistributedProcessCallbacks(DistributedProcess process)
         {
             CallbacksRegistered = true;
         }
 
-        public void Register()
+        public void RegisterWithConversationManager()
         {
-            ConversationManager.RegisterExistingConversation(this);
+            ConversationManager.RegisterConversation(this);
             ConversationManager.RegisterCommunicatorCallback(Communicator);
         }
 
@@ -68,17 +72,20 @@ namespace Common.Communication
             }
         }
 
-        protected bool AllowReceive(Envelope envelope)
+        protected bool VerifyReceivePermissions(Envelope envelope)
         {
+            Logger.Trace("Verifying permissions to receive envelope");
             if (envelope?.Address != null && envelope.Message != null)
             {
-                if ((!ReceivedMessages.ContainsKey(envelope.Message))
-                    || (ReceivedMessages.ContainsKey(envelope.Message) && AllowRepeats))
+                if (AllowInboundMessages &&(!ReceivedMessages.ContainsKey(envelope.Message))
+                    || (ReceivedMessages.ContainsKey(envelope.Message)))
                 {
+                    Logger.Trace("Permission to receive is granted");
                     return true;
                 }
             }
 
+            Logger.Trace("We are not allow to receive this envelope");
             return false;
         }
 
@@ -87,25 +94,25 @@ namespace Common.Communication
         {
             if (ValidateConversation())
             {
-                uint availableRetries = MaxRetries;
                 BeginConversation();
 
                 while (ContinueThread && WaitingForReply)
                 {
                     Envelope inbound;
-                    if (!NewMessages.IsEmpty && NewMessages.TryDequeue(out inbound) && 
-                        AllowReceive(inbound))
+                    if (!MessageInbox.IsEmpty && MessageInbox.TryDequeue(out inbound) && 
+                        VerifyReceivePermissions(inbound))
                     {
                             Logger.Info("Received some kind of response");
                             ReceivedMessages[inbound.Message] = inbound.Address;
                             ProcessResponse(inbound);
                     }
-                    else if (availableRetries-- > 0)
+                    else if (WaitingForReply && AttemptedRetries < MaxRetries)
                     {
                         RetryMessage();
+                        AttemptedRetries++;
                         Thread.Sleep(Timeout);
                     }
-                    else if (WaitingForReply && availableRetries <= 0)
+                    else if (WaitingForReply)
                     {
                         HandleNoResponse();
                     }
@@ -175,21 +182,37 @@ namespace Common.Communication
             }
         }
 
+        protected void ReceiveDirectMessage(Envelope envelope)
+        {
+            Logger.Info("Received message from my personal communicator");
+            MessageInbox.Enqueue(envelope);
+
+            if (envelope?.Message != null && envelope.Address != null)
+            {
+                Logger.Info($"Message from {envelope.Address.ToString()} to {envelope.ConvId}");
+            }
+            else
+            {
+                Logger.Warn("Invalid message!");
+            }
+        }
+
         public override int GetHashCode()
         {
             return Id.GetHashCode();
         }
 
-        public bool AllowRepeats { get; set; }
+        public bool AllowInboundMessages { get; set; }
         public bool CallbacksRegistered { get; set; }
         protected bool WaitingForReply { get; set; }
         public MessageNumber Id { get; set; }
         public int Timeout { get; set; }
         public uint MaxRetries { get; set; }
+        public uint AttemptedRetries { get; set; }
         public SharedProperties Properties { get; set; }
         protected BaseCommunicator Communicator { get; set; }
         public Envelope InitialMessage { get; set; }
-        public ConcurrentQueue<Envelope> NewMessages { get; }
+        public ConcurrentQueue<Envelope> MessageInbox { get; }
         public ConcurrentQueue<Envelope> SentMessages { get; }
         public ConcurrentDictionary<Message, IPEndPoint> ReceivedMessages { get; set; }
     }

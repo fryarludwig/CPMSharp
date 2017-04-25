@@ -18,33 +18,12 @@ namespace TestCommon.Communication
     [TestClass]
     public class TestConversation
     {
-        public string SCCallback(string something)
-        {
-            return "Loud and clear, " + something;
-        }
-
-        [TestMethod]
-        public void TestConversationEvents()
-        {
-            SimpleConversation simple = new SimpleConversation();
-            Assert.IsNotNull(simple);
-            Assert.IsNull(simple.EventResponse);
-            Assert.IsNull(simple.ReceivedMessage);
-            Assert.IsNull(simple.SentMessage);
-            simple.Updated += new SimpleConversation.SimpleMessageReceived(SCCallback);
-            simple.OnUpdate();
-            Assert.AreEqual("Loud and clear, SimpleConversation", simple.EventResponse);
-            Assert.AreEqual(typeof(LoginRequest), simple.ReceivedMessage.Message.GetType());
-            Assert.AreEqual(typeof(LoginReply), simple.SentMessage.Message.GetType());
-        }
-
         [TestMethod]
         public void TestConversationDefaults()
         {
-            SimpleConversation simple = new SimpleConversation();
+            SimpleRequestReplyInitiator simple = new SimpleRequestReplyInitiator();
             Assert.IsNotNull(simple);
             Assert.IsNull(simple.EventResponse);
-            Assert.IsNull(simple.ReceivedMessage);
             Assert.IsNull(simple.SentMessage);
             Assert.IsNotNull(simple.Properties);
 
@@ -52,7 +31,7 @@ namespace TestCommon.Communication
 
             Assert.AreEqual(simple.Id.Pid, 0);
             Assert.AreEqual(simple.MaxRetries, (uint)5);
-            Assert.AreEqual(simple.Timeout, 500);
+            Assert.AreEqual(simple.Timeout, 2000);
 
             simple.Start();
             Thread.Sleep(250);
@@ -65,10 +44,9 @@ namespace TestCommon.Communication
         [TestMethod]
         public void TestConversationNoCommunicator()
         {
-            SimpleConversation simple = new SimpleConversation();
+            SimpleRequestReplyInitiator simple = new SimpleRequestReplyInitiator();
             Assert.IsNotNull(simple);
             Assert.IsNull(simple.EventResponse);
-            Assert.IsNull(simple.ReceivedMessage);
             Assert.IsNull(simple.SentMessage);
             Assert.IsNotNull(simple.Properties);
 
@@ -76,7 +54,7 @@ namespace TestCommon.Communication
 
             Assert.AreEqual(simple.Id.Pid, 0);
             Assert.AreEqual(simple.MaxRetries, (uint)5);
-            Assert.AreEqual(simple.Timeout, 500);
+            Assert.AreEqual(simple.Timeout, 2000);
 
             simple.Start();
             Thread.Sleep(250);
@@ -103,39 +81,32 @@ namespace TestCommon.Communication
             IPEndPoint initiatorEndpoint = new IPEndPoint(IPAddress.Loopback, 6789);
             IPEndPoint responderEndpoint = new IPEndPoint(IPAddress.Loopback, 6788);
 
-            SimpleConversation convInitiator = new SimpleConversation("Initiator", initiatorNumber, initiatorEndpoint.Port);
-            convInitiator.Communicator.LocalEndpoint = initiatorEndpoint;
-            convInitiator.Register();
-            SimpleConversation convResponder = new SimpleConversation("Responder", responderNumber, responderEndpoint.Port);
-            convResponder.Communicator.LocalEndpoint = responderEndpoint;
-            convResponder.Register();
+            UdpCommunicator initiatorCommunicator = new UdpCommunicator(initiatorEndpoint.Port);
+            UdpCommunicator responderCommunicator = new UdpCommunicator(responderEndpoint.Port);
+
+            SimpleRequestReplyInitiator convInitiator = new SimpleRequestReplyInitiator(initiatorCommunicator, responderEndpoint);
+            SimpleRequestReplyResponder convResponder = new SimpleRequestReplyResponder(responderCommunicator);
 
             Assert.AreNotEqual(convResponder.Id, convInitiator.Id);
-            Assert.IsTrue(ConversationManager.ConversationDictionary.ContainsKey(convInitiator.Id));
-            Assert.IsTrue(ConversationManager.ConversationDictionary.ContainsKey(convResponder.Id));
-            
+            Assert.IsFalse(ConversationManager.ConversationDictionary.ContainsKey(convInitiator.Id));
+            Assert.IsFalse(ConversationManager.ConversationDictionary.ContainsKey(convResponder.Id));
             Assert.IsFalse(convResponder.IsActive());
             Assert.IsFalse(convInitiator.IsActive());
-            Assert.AreNotEqual(convResponder.Communicator.LocalEndpoint, convInitiator.Communicator.LocalEndpoint);
-            Assert.AreNotEqual(ConversationManager.PrimaryCommunicator.LocalEndpoint, convInitiator.Communicator.LocalEndpoint);
-            Assert.AreNotEqual(convResponder.Communicator.LocalEndpoint, ConversationManager.PrimaryCommunicator.LocalEndpoint);
 
             convResponder.Start();
             convInitiator.Start();
 
-            Thread.Sleep(500);
+            Thread.Sleep(5000);
             Assert.IsTrue(convResponder.IsActive());
             Assert.IsTrue(convInitiator.IsActive());
-            Assert.IsTrue(convInitiator.Communicator.IsActive());
-            Assert.IsTrue(convResponder.Communicator.IsActive());
-
-            convInitiator.SendHeartbeatRequest(responderEndpoint);
-            Thread.Sleep(500);
+            Assert.IsNotNull(convInitiator.SentMessage);
             Assert.IsNotNull(convResponder.ReceivedMessage);
+            Assert.AreNotEqual(convResponder.ReceivedMessages.Count, 0);
 
-            convResponder.SendHeartbeatReply(initiatorEndpoint);
-            Thread.Sleep(1000);
+            Thread.Sleep(5000);
+            Assert.IsNotNull(convResponder.SentMessage);
             Assert.IsNotNull(convInitiator.ReceivedMessage);
+            Assert.AreNotEqual(convInitiator.ReceivedMessages.Count, 0);
         }
 
         [TestCleanup]

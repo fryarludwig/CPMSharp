@@ -15,119 +15,117 @@ using System.Net;
 
 namespace TestCommon.TestObjects
 {
-    public class SimpleConversation : Conversation
+    public class SimpleRequestReplyInitiator : RequestReplyInitiator
     {
-        public SimpleConversation() : base("Heartbeat", new UdpCommunicator())
+
+        public SimpleRequestReplyInitiator() : base("SimpleInitiator")
         {
-            Timeout = 500;
             EventResponse = null;
-            ReceivedMessage = null;
-            SentMessage = null;
-            WaitingForReply = true;
         }
 
-        public SimpleConversation(string name, MessageNumber msgNum) : base(name, new UdpCommunicator(), msgNum)
+        public SimpleRequestReplyInitiator(IPEndPoint target) : base("SimpleInitiator")
         {
-            Timeout = 500;
-            EventResponse = null;
-            ReceivedMessage = null;
-            SentMessage = null;
-            WaitingForReply = true;
+            Destination = target;
         }
 
-        public SimpleConversation(string name, MessageNumber msgNum, int port) : base(name, new UdpCommunicator(port), msgNum)
+        public SimpleRequestReplyInitiator(BaseCommunicator communicator, IPEndPoint target) : base("SimpleInitiator", communicator)
         {
-            Timeout = 500;
-            EventResponse = null;
-            ReceivedMessage = null;
-            SentMessage = null;
-            WaitingForReply = true;
+            Destination = target;
         }
 
-        public void SendHeartbeatRequest(IPEndPoint remoteEndpoint)
+        protected override void BeginConversation()
         {
             AliveRequest request = new AliveRequest();
-            request.ConvId = Id;
-            request.ConvId.Pid = 1;
-            SentMessage = new Envelope(remoteEndpoint, request);
-            SendMessage(SentMessage);
+            request.InitMessageAndConversationNumbers();
+            Envelope toSend = new Envelope(Destination, request);
             WaitingForReply = true;
-        }
-
-        public void SendHeartbeatReply(IPEndPoint remoteEndpoint)
-        {
-            AliveReply reply = new AliveReply {ConvId = Id};
-            reply.ConvId.Pid = 0;
-            SentMessage = new Envelope(remoteEndpoint, reply);
-            SendMessage(SentMessage);
-            WaitingForReply = true;
-        }
-
-        protected override void HandleConversationCompleted()
-        {
-            HasCompleted = true;
-            Stop();
-        }
-
-        protected override void RetryMessage()
-        {
-            Envelope tempEnv;
-            if (Communicator.ReplyWaiting && Communicator.Receive(out tempEnv))
-            {
-                NewMessages.Enqueue(tempEnv);
-            }
-            else
-            {
-                AttemptedRetries++;
-                base.RetryMessage();
-            }
+            SendMessage(toSend);
         }
 
         protected override void ProcessResponse(Envelope envelope)
         {
-            Logger.Info("Processing received message, boo yah!");
-            EventResponse = Updated?.Invoke("SimpleConversation");
-            ReceivedMessage = envelope;
-            if (ReceivedMessage.Message.GetType() == typeof(LoginRequest))
-            {
-                LoginReply reply = new LoginReply {ConvId = Id};
-                SentMessage = new Envelope(envelope.Address, reply);
-                SendMessage(SentMessage);
-                WaitingForReply = false;
-            }
-            else if (ReceivedMessage.Message.GetType() == typeof(AliveReply))
+            EventResponse = Updated?.Invoke("SimpleConversationInitiator");
+            if (envelope?.Message?.GetType() == typeof(AliveReply))
             {
                 WaitingForReply = false;
+                ReceivedMessage = envelope;
             }
         }
+
+        protected override void HandleConversationCompleted()
+        {
+            Logger.Info("Simple initiator completed conversation");
+            //Heartbeat_OnUpdate?.Invoke(Id, ResponseReceived);
+            base.HandleConversationCompleted();
+        }
+
+        protected override void RetryMessage()
+        {
+            AttemptedRetries++;
+            base.RetryMessage();
+        }
+
+        public delegate void HeartbeatUpdated(MessageNumber ConvId, bool alive);
+        public event HeartbeatUpdated Heartbeat_OnUpdate;
+        public bool HasCompleted { get; set; }
+
+        public string EventResponse { get; set; }
+        public Envelope SentMessage
+        {
+            get { return LastSentEnvelope; }
+        }
+        public Envelope ReceivedMessage { get; set; }
 
         public delegate string SimpleMessageReceived(string something);
         public event SimpleMessageReceived Updated;
+    }
 
-        public virtual void OnUpdate()
+    public class SimpleRequestReplyResponder : RequestReplyResponder
+    {
+        public SimpleRequestReplyResponder() : base("SimpleResponder")
         {
-            ProcessResponse(new Envelope(new LoginRequest()));
         }
 
-        public int AttemptedRetries = 0;
+        public SimpleRequestReplyResponder(BaseCommunicator communicator) : base("SimpleResponder", communicator)
+        {
+        }
+
+        protected override void ProcessResponse(Envelope envelope)
+        {
+            EventResponse = Updated?.Invoke("SimpleConversationResponder");
+            if (envelope?.Message?.GetType() == typeof(AliveRequest))
+            {
+                Id = envelope.ConvId;
+                ReceivedMessage = envelope;
+                AliveReply reply = new AliveReply { };
+                SendMessage(new Envelope(envelope.Address, reply));
+                WaitingForReply = false;
+            }
+        }
+
+        protected override void HandleConversationCompleted()
+        {
+            Conversation_Responded?.Invoke(Id, ResponseReceived);
+        }
+
+        public delegate void OnSendConversationResponse(MessageNumber ConvId, bool alive);
+        public event OnSendConversationResponse Conversation_Responded;
+        private bool ResponseReceived { get; set; }
+        
         public bool HasCompleted { get; set; }
 
-        public new BaseCommunicator Communicator
-        {
-            get
-            {
-                return base.Communicator;
-            }
-            set
-            {
-                base.Communicator = value;
-                ConversationManager.RegisterCommunicatorCallback(value);
-            }
-        }
         public string EventResponse { get; set; }
+        public Envelope SentMessage
+        {
+            get { return LastSentEnvelope; }
+        }
         public Envelope ReceivedMessage { get; set; }
-        public Envelope SentMessage { get; set; }
+
+        public delegate string SimpleMessageReceived(string something);
+        public event SimpleMessageReceived Updated;
     }
+
+
 }
 
 /*

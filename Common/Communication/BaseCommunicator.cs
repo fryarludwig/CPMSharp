@@ -51,6 +51,7 @@ namespace Common.Communication
                 if (IsActive())
                 {
                     Stop();
+                    Thread.Sleep(500);
                     Start();
                 }
             }

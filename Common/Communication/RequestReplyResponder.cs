@@ -12,9 +12,12 @@ namespace Common.Communication
     {
         public RequestReplyResponder(string name) : base(name)
         {
-            WaitingForReply = false;
         }
-        
+
+        public RequestReplyResponder(string name, BaseCommunicator communicator) : base(name, communicator)
+        {
+        }
+
         protected override void BeginConversation()
         {
             // Do nothing

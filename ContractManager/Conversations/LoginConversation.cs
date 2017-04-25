@@ -20,11 +20,11 @@ namespace ContractManager.Conversations
         public LoginConversation() : base("Login Conv")
         {
             WaitingForReply = true;
-            AllowRepeats = false;
+            AllowInboundMessages = false;
             CallbacksRegistered = false;
         }
 
-        public override void RegisterConversationCallbacks(DistributedProcess process)
+        public override void RegisterDistributedProcessCallbacks(DistributedProcess process)
         {
             if (!CallbacksRegistered && process.GetType() == typeof(ContractManager))
             {
@@ -47,7 +47,7 @@ namespace ContractManager.Conversations
         {
             WaitingForReply = true;
             Destination = target;
-            Register();
+            RegisterWithConversationManager();
 
             WaitingForReply = true;
             LoginRequest request = new LoginRequest();

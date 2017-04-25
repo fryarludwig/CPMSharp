@@ -13,12 +13,19 @@ namespace Common.Communication
     {
         public RequestReplyInitiator(string name) : base(name)
         {
-            WaitingForReply = false;
+        }
+
+        public RequestReplyInitiator(string name, BaseCommunicator communicator) : base(name, communicator)
+        {
         }
 
         public RequestReplyInitiator(string name, IPEndPoint target) : base(name)
         {
-            WaitingForReply = false;
+            Destination = target;
+        }
+
+        public RequestReplyInitiator(string name, BaseCommunicator communicator, IPEndPoint target) : base(name, communicator)
+        {
             Destination = target;
         }
 
