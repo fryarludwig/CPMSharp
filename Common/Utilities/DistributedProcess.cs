@@ -45,10 +45,7 @@ namespace Common.Utilities
                 
         public IPEndPoint LocalEndpoint
         {
-            get
-            {
-                return ConversationManager.PrimaryCommunicator?.LocalEndpoint;
-            }
+            get => ConversationManager.PrimaryCommunicator?.LocalEndpoint;
             set
             {
                 if (ConversationManager.PrimaryCommunicator == null)
@@ -59,7 +56,7 @@ namespace Common.Utilities
                 ConversationManager.PrimaryCommunicator.LocalEndpoint = value;
             }
         }
-
+        
         public delegate void ProcessStatusChanged(ProcessInfo processInfo);
         public event ProcessStatusChanged OnStatusChanged;
 

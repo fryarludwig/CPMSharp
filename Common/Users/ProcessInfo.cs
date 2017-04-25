@@ -56,9 +56,7 @@ namespace Common.Users
             }
         }
 
-        public string StatusString { get { return statusNames[(int)Status]; } }
-        public string TypeString { get { return typeNames[(int)Type]; } }
-        
+        public string StatusString => statusNames[(int)Status]; public string TypeString => typeNames[(int)Type];
         public int AliveRetries { get; set; }
         public Timer HeartbeatTimer { get; set; }
 
@@ -69,13 +67,15 @@ namespace Common.Users
 
         public static ProcessInfo DeepCopy(ProcessInfo process)
         {
-            ProcessInfo copy = new ProcessInfo();
-            copy.ProcessId = process.ProcessId;
-            copy.Type = process.Type;
-            copy.EndPoint = process.EndPoint;
-            copy.Label = process.Label;
-            copy.Status = process.Status;
-            copy.AliveRetries = process.AliveRetries;
+            ProcessInfo copy = new ProcessInfo
+            {
+                ProcessId = process.ProcessId,
+                Type = process.Type,
+                EndPoint = process.EndPoint,
+                Label = process.Label,
+                Status = process.Status,
+                AliveRetries = process.AliveRetries
+            };
             return copy;
         }
 
@@ -93,7 +93,7 @@ namespace Common.Users
         {
             return string.Format("Id={0}, Label={1}, Type={2}, EndPoint={3}, Status={4}",
                     ProcessId, Label, Type,
-                    (EndPoint == null) ? string.Empty : EndPoint.ToString(),
+                    EndPoint?.ToString() ?? string.Empty,
                     StatusString);
         }
 

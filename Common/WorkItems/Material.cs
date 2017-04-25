@@ -29,12 +29,6 @@ namespace Common.WorkItems
         [DataMember]
         public double UnitsUsed { get; set; }
 
-        public double ReservedUnitsRemaining
-        {
-            get
-            {
-                return UnitsReserved - UnitsUsed;
-            }
-        }
+        public double ReservedUnitsRemaining => UnitsReserved - UnitsUsed;
     }
 }

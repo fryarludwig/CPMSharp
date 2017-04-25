@@ -1,4 +1,4 @@
-﻿namespace SharpCPM
+﻿namespace CPMClient
 {
     partial class ClientWindow
     {
@@ -48,21 +48,26 @@
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
+            // ShowDebugInput
+            // 
+            this.ShowDebugInput.Location = new System.Drawing.Point(1242, 8);
+            this.ShowDebugInput.CheckedChanged += new System.EventHandler(this.ShowDebugInput_CheckedChanged_1);
+            // 
             // ShowTraceInput
             // 
-            this.ShowTraceInput.Location = new System.Drawing.Point(1246, 8);
+            this.ShowTraceInput.Location = new System.Drawing.Point(1182, 9);
             // 
             // ShowInfoInput
             // 
-            this.ShowInfoInput.Location = new System.Drawing.Point(1196, 8);
+            this.ShowInfoInput.Location = new System.Drawing.Point(1132, 9);
             // 
             // ShowWarningsInput
             // 
-            this.ShowWarningsInput.Location = new System.Drawing.Point(1138, 8);
+            this.ShowWarningsInput.Location = new System.Drawing.Point(1074, 9);
             // 
             // ShowErrorsInput
             // 
-            this.ShowErrorsInput.Location = new System.Drawing.Point(1084, 7);
+            this.ShowErrorsInput.Location = new System.Drawing.Point(1020, 8);
             // 
             // GuiLogOutput
             // 
@@ -189,7 +194,7 @@
             // 
             // detailsGroupBox
             // 
-            this.detailsGroupBox.Location = new System.Drawing.Point(12, 308);
+            this.detailsGroupBox.Location = new System.Drawing.Point(12, 307);
             this.detailsGroupBox.Name = "detailsGroupBox";
             this.detailsGroupBox.Size = new System.Drawing.Size(775, 369);
             this.detailsGroupBox.TabIndex = 38;
@@ -225,6 +230,7 @@
             this.Name = "ClientWindow";
             this.Text = "CPM Client";
             this.Load += new System.EventHandler(this.ClientWindow_Load);
+            this.Controls.SetChildIndex(this.ShowDebugInput, 0);
             this.Controls.SetChildIndex(this.ShowInfoInput, 0);
             this.Controls.SetChildIndex(this.ShowWarningsInput, 0);
             this.Controls.SetChildIndex(this.ShowErrorsInput, 0);

@@ -20,8 +20,18 @@ namespace ContractManager.Conversations
         public LoginConversation() : base("Login Conv")
         {
             WaitingForReply = true;
-            AllowInboundMessages = false;
-            CallbacksRegistered = false;
+        }
+
+        public LoginConversation(IPEndPoint target, ProcessInfo myProcess) : base("Login Conv", target)
+        {
+            WaitingForReply = true;
+            LoginRequest request = new LoginRequest
+            {
+                ProcessLabel = myProcess.Label,
+                ProcessType = myProcess.Type,
+                PublicKey = new PublicKey()
+            };
+            InitialMessage = new Envelope(target, request);
         }
 
         public override void RegisterDistributedProcessCallbacks(DistributedProcess process)
@@ -43,38 +53,30 @@ namespace ContractManager.Conversations
             }
         }
 
-        public LoginConversation(IPEndPoint target, ProcessInfo myProcess) : base("Login Conv")
-        {
-            WaitingForReply = true;
-            Destination = target;
-            RegisterWithConversationManager();
-
-            WaitingForReply = true;
-            LoginRequest request = new LoginRequest();
-            request.ConvId = MessageNumber.Create();
-            request.ProcessLabel = myProcess.Label;
-            request.ProcessType = myProcess.Type;
-            request.PublicKey = new PublicKey();
-            InitialMessage = new Envelope(target, request);
-        }
-
         protected override void BeginConversation()
         {
-            SendMessage(InitialMessage);
+            if (InitialMessage != null)
+            {
+                SendMessage(InitialMessage);
+            }
         }
 
         protected override void ProcessResponse(Envelope envelope)
         {
-            if (envelope.Message != null && envelope.Message.GetType() == typeof(LoginReply))
+            if (envelope?.Message != null && envelope.Message?.GetType() == typeof(LoginReply))
             {
                 LoginReply replyMessage = (LoginReply)envelope.Message;
                 Logger.Info("Received Login response: " + replyMessage.Note);
                 OnLoginUpdated?.Invoke(ProcessInfo.DeepCopy(replyMessage.ProcessInfo));
                 WaitingForReply = false;
             }
+            else if (envelope != null)
+            {
+                Logger.Info("Received unexpected message: " + envelope.Message?.ToString());
+            }
             else
             {
-                Logger.Info("Received unexpected message: " + envelope.Message.ToString());
+                Logger.Info("Received completely null envelope");
             }
         }
         

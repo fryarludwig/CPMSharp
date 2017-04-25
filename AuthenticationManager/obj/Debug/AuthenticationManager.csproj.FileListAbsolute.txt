@@ -42,3 +42,14 @@ C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\AuthenticationMana
 C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\AuthenticationManager\obj\Debug\AuthenticationManager.csproj.GenerateResource.Cache
 C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\AuthenticationManager\obj\Debug\AuthenticationManager.exe
 C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\AuthenticationManager\obj\Debug\AuthenticationManager.pdb
+C:\Users\fryar\projects\CPMSharp\AuthenticationManager\bin\Debug\AuthenticationManager.exe.config
+C:\Users\fryar\projects\CPMSharp\AuthenticationManager\bin\Debug\AuthenticationManager.exe
+C:\Users\fryar\projects\CPMSharp\AuthenticationManager\bin\Debug\AuthenticationManager.pdb
+C:\Users\fryar\projects\CPMSharp\AuthenticationManager\bin\Debug\Common.dll
+C:\Users\fryar\projects\CPMSharp\AuthenticationManager\bin\Debug\Common.pdb
+C:\Users\fryar\projects\CPMSharp\AuthenticationManager\obj\Debug\AuthenticationManager.csprojResolveAssemblyReference.cache
+C:\Users\fryar\projects\CPMSharp\AuthenticationManager\obj\Debug\AuthenticationManager.AuthenticatorGui.resources
+C:\Users\fryar\projects\CPMSharp\AuthenticationManager\obj\Debug\AuthenticationManager.Properties.Resources.resources
+C:\Users\fryar\projects\CPMSharp\AuthenticationManager\obj\Debug\AuthenticationManager.csproj.GenerateResource.Cache
+C:\Users\fryar\projects\CPMSharp\AuthenticationManager\obj\Debug\AuthenticationManager.exe
+C:\Users\fryar\projects\CPMSharp\AuthenticationManager\obj\Debug\AuthenticationManager.pdb

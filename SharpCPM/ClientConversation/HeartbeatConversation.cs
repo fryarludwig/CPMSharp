@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Common.Communication;
+﻿using Common.Communication;
 using Common.Messages;
 using Common.Messages.Replies;
 using Common.Messages.Requests;
-using Common.Utilities;
-using System.Threading;
 
-namespace SharpCPM.ClientConversation
+namespace CPMClient.ClientConversation
 {
     public class HeartbeatConversation : RequestReplyResponder
     {

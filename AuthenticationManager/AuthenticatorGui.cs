@@ -112,15 +112,12 @@ namespace AuthenticationManager
             IEnumerable<TextBox> textBoxes = Controls.OfType<TextBox>();
             foreach (TextBox box in textBoxes)
             {
-                if (string.IsNullOrWhiteSpace(box.Text))
-                {
-                    InputErrorProvider.SetError(box, "Input cannot be blank");
-                    validInformation = false;
-                }
+                if (!string.IsNullOrWhiteSpace(box.Text)) continue;
+                InputErrorProvider.SetError(box, "Input cannot be blank");
+                validInformation = false;
             }
 
-            int throwaway = 0;
-            if (!int.TryParse(portInput.Text, out throwaway))
+            if (!int.TryParse(portInput.Text, out int throwaway))
             {
                 validInformation = false;
                 InputErrorProvider.SetError(portInput, "Please enter a valid port number");
@@ -138,7 +135,8 @@ namespace AuthenticationManager
         private const string START_TEXT = "Start";
         private const string STOP_TEXT = "Stop";
 
-        protected AuthManager Authenticator { get { return (AuthManager)ProcessInstance; } }
+        protected AuthManager Authenticator => (AuthManager)ProcessInstance;
+
         public delegate void RegistrationChanged(ProcessInfo processInfo);
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

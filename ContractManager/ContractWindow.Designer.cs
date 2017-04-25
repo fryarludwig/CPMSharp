@@ -33,25 +33,31 @@
             this.label3 = new System.Windows.Forms.Label();
             this.authenticatorAddressInput = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.StatusDisplay = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.InputErrorProvider)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // ShowDebugInput
+            // 
+            this.ShowDebugInput.Location = new System.Drawing.Point(494, 204);
             // 
             // ShowTraceInput
             // 
-            this.ShowTraceInput.Location = new System.Drawing.Point(485, 206);
+            this.ShowTraceInput.Location = new System.Drawing.Point(434, 204);
             // 
             // ShowInfoInput
             // 
-            this.ShowInfoInput.Location = new System.Drawing.Point(435, 206);
+            this.ShowInfoInput.Location = new System.Drawing.Point(384, 205);
             // 
             // ShowWarningsInput
             // 
-            this.ShowWarningsInput.Location = new System.Drawing.Point(377, 206);
+            this.ShowWarningsInput.Location = new System.Drawing.Point(326, 205);
             // 
             // ShowErrorsInput
             // 
-            this.ShowErrorsInput.Location = new System.Drawing.Point(323, 205);
+            this.ShowErrorsInput.Location = new System.Drawing.Point(272, 204);
             // 
             // GuiLogOutput
             // 
@@ -59,7 +65,7 @@
             // 
             // StartButton
             // 
-            this.StartButton.Location = new System.Drawing.Point(323, 23);
+            this.StartButton.Location = new System.Drawing.Point(329, 20);
             this.StartButton.Name = "StartButton";
             this.StartButton.Size = new System.Drawing.Size(75, 23);
             this.StartButton.TabIndex = 10;
@@ -69,7 +75,7 @@
             // 
             // authenticatorPortInput
             // 
-            this.authenticatorPortInput.Location = new System.Drawing.Point(214, 25);
+            this.authenticatorPortInput.Location = new System.Drawing.Point(212, 22);
             this.authenticatorPortInput.Name = "authenticatorPortInput";
             this.authenticatorPortInput.Size = new System.Drawing.Size(100, 20);
             this.authenticatorPortInput.TabIndex = 15;
@@ -78,7 +84,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(182, 28);
+            this.label3.Location = new System.Drawing.Point(180, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(26, 13);
             this.label3.TabIndex = 14;
@@ -86,7 +92,7 @@
             // 
             // authenticatorAddressInput
             // 
-            this.authenticatorAddressInput.Location = new System.Drawing.Point(60, 25);
+            this.authenticatorAddressInput.Location = new System.Drawing.Point(58, 22);
             this.authenticatorAddressInput.Name = "authenticatorAddressInput";
             this.authenticatorAddressInput.Size = new System.Drawing.Size(100, 20);
             this.authenticatorAddressInput.TabIndex = 13;
@@ -95,46 +101,61 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 28);
+            this.label4.Location = new System.Drawing.Point(7, 25);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 13);
             this.label4.TabIndex = 12;
             this.label4.Text = "Address";
             // 
-            // label6
+            // groupBox1
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 9);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(120, 13);
-            this.label6.TabIndex = 18;
-            this.label6.Text = "Authentication Manager";
+            this.groupBox1.Controls.Add(this.StatusDisplay);
+            this.groupBox1.Controls.Add(this.StartButton);
+            this.groupBox1.Controls.Add(this.authenticatorPortInput);
+            this.groupBox1.Controls.Add(this.authenticatorAddressInput);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(541, 57);
+            this.groupBox1.TabIndex = 30;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Authenticator Connection Details";
+            // 
+            // StatusDisplay
+            // 
+            this.StatusDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.StatusDisplay.AutoSize = true;
+            this.StatusDisplay.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.StatusDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.StatusDisplay.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StatusDisplay.Location = new System.Drawing.Point(416, 20);
+            this.StatusDisplay.Margin = new System.Windows.Forms.Padding(5);
+            this.StatusDisplay.Name = "StatusDisplay";
+            this.StatusDisplay.Size = new System.Drawing.Size(117, 24);
+            this.StatusDisplay.TabIndex = 31;
+            this.StatusDisplay.Text = "Not Started";
+            this.StatusDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.StatusDisplay.UseCompatibleTextRendering = true;
             // 
             // ContractWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(586, 400);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.authenticatorPortInput);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.authenticatorAddressInput);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.StartButton);
+            this.ClientSize = new System.Drawing.Size(567, 401);
+            this.Controls.Add(this.groupBox1);
             this.Name = "ContractWindow";
             this.Text = "Contract Manager";
+            this.Controls.SetChildIndex(this.ShowDebugInput, 0);
             this.Controls.SetChildIndex(this.GuiLogOutput, 0);
             this.Controls.SetChildIndex(this.ShowErrorsInput, 0);
             this.Controls.SetChildIndex(this.ShowWarningsInput, 0);
             this.Controls.SetChildIndex(this.ShowInfoInput, 0);
             this.Controls.SetChildIndex(this.ShowTraceInput, 0);
-            this.Controls.SetChildIndex(this.StartButton, 0);
-            this.Controls.SetChildIndex(this.label4, 0);
-            this.Controls.SetChildIndex(this.authenticatorAddressInput, 0);
-            this.Controls.SetChildIndex(this.label3, 0);
-            this.Controls.SetChildIndex(this.authenticatorPortInput, 0);
-            this.Controls.SetChildIndex(this.label6, 0);
+            this.Controls.SetChildIndex(this.groupBox1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.InputErrorProvider)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -147,7 +168,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox authenticatorAddressInput;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label StatusDisplay;
     }
 }
 

@@ -1,4 +1,4 @@
-﻿namespace SharpCPM.Dialogs
+﻿namespace CPMClient.Dialogs
 {
     partial class LoginDialog
     {

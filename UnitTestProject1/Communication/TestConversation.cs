@@ -35,10 +35,10 @@ namespace TestCommon.Communication
 
             simple.Start();
             Thread.Sleep(250);
-            Assert.IsTrue(simple.IsActive());
+            Assert.IsTrue(simple.IsActive);
             simple.Stop();
             Thread.Sleep(250);
-            Assert.IsFalse(simple.IsActive());
+            Assert.IsFalse(simple.IsActive);
         }
 
         [TestMethod]
@@ -58,26 +58,15 @@ namespace TestCommon.Communication
 
             simple.Start();
             Thread.Sleep(250);
-            Assert.IsTrue(simple.IsActive());
+            Assert.IsTrue(simple.IsActive);
             simple.Stop();
             Thread.Sleep(250);
-            Assert.IsFalse(simple.IsActive());
+            Assert.IsFalse(simple.IsActive);
         }
 
         [TestMethod]
         public void ConversationSendAndReceive()
         {
-            MessageNumber initiatorNumber = new MessageNumber
-            {
-                Pid = 0,
-                Seq = 10
-            };
-            MessageNumber responderNumber = new MessageNumber
-            {
-                Pid = 1,
-                Seq = 10
-            };
-
             IPEndPoint initiatorEndpoint = new IPEndPoint(IPAddress.Loopback, 6789);
             IPEndPoint responderEndpoint = new IPEndPoint(IPAddress.Loopback, 6788);
 
@@ -90,15 +79,15 @@ namespace TestCommon.Communication
             Assert.AreNotEqual(convResponder.Id, convInitiator.Id);
             Assert.IsFalse(ConversationManager.ConversationDictionary.ContainsKey(convInitiator.Id));
             Assert.IsFalse(ConversationManager.ConversationDictionary.ContainsKey(convResponder.Id));
-            Assert.IsFalse(convResponder.IsActive());
-            Assert.IsFalse(convInitiator.IsActive());
+            Assert.IsFalse(convResponder.IsActive);
+            Assert.IsFalse(convInitiator.IsActive);
 
             convResponder.Start();
             convInitiator.Start();
 
             Thread.Sleep(5000);
-            Assert.IsTrue(convResponder.IsActive());
-            Assert.IsTrue(convInitiator.IsActive());
+            Assert.IsTrue(convResponder.IsActive);
+            Assert.IsTrue(convInitiator.IsActive);
             Assert.IsNotNull(convInitiator.SentMessage);
             Assert.IsNotNull(convResponder.ReceivedMessage);
             Assert.AreNotEqual(convResponder.ReceivedMessages.Count, 0);

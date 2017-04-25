@@ -43,7 +43,7 @@ namespace Common.Communication
         {
             foreach (Conversation conversation in ConversationDictionary.Values)
             {
-                if (conversation.IsActive())
+                if (conversation.IsActive)
                 {
                     conversation.Stop();
                 }
@@ -69,7 +69,7 @@ namespace Common.Communication
         {
             conversation?.RegisterDistributedProcessCallbacks(Properties?.DistInstance);
 
-            if (!ConversationDictionary.ContainsKey(conversation.Id))
+            if (conversation != null && !ConversationDictionary.ContainsKey(conversation.Id))
             {
                 ConversationDictionary[conversation.Id] = conversation;
             }
@@ -134,7 +134,7 @@ namespace Common.Communication
         private static BaseCommunicator _PrimaryCommunicator { get; set; }
         public static BaseCommunicator PrimaryCommunicator
         {
-            get { return _PrimaryCommunicator ?? (_PrimaryCommunicator = new UdpCommunicator()); }
+            get => _PrimaryCommunicator ?? (_PrimaryCommunicator = new UdpCommunicator());
             set
             {
                 _PrimaryCommunicator = value ?? new UdpCommunicator();
@@ -144,7 +144,7 @@ namespace Common.Communication
 
         public static uint Retries { get; set; }
         public static int Timeout { get; set; }
-        public static int CommunicatorPort { get { return PrimaryCommunicator.LocalEndpoint.Port; } }
+        public static int CommunicatorPort => PrimaryCommunicator.LocalEndpoint.Port;
         public static SharedProperties Properties { get; set; }
 
         private static Dictionary<Type, Type> ConversationTypes { get; set; }

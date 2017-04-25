@@ -34,11 +34,14 @@ namespace Common.Forms
         protected void InitializeLogger(string name)
         {
             LoggerOutput = GuiLogOutput;
-            LevelMap = new ConcurrentDictionary<Level, bool>();
-            LevelMap[Level.ERROR] = true;
-            LevelMap[Level.WARN] = true;
-            LevelMap[Level.INFO] = true;
-            LevelMap[Level.TRACE] = true;
+            LevelMap = new ConcurrentDictionary<Level, bool>
+            {
+                [Level.ERROR] = true,
+                [Level.WARN] = true,
+                [Level.INFO] = true,
+                [Level.TRACE] = true,
+                [Level.DEBUG] = true
+            };
             Logger = new LogUtility(name)
             {
                 ConsoleOutput = true,
@@ -83,7 +86,7 @@ namespace Common.Forms
 
         protected void LoggerOutput_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (e != null && e.Index >= 0)
+            if (e?.Index >= 0)
             {
                 LogItem item = (LogItem)LoggerOutput.Items[e.Index];
                 e.DrawBackground();
@@ -96,8 +99,7 @@ namespace Common.Forms
 
         protected bool ValidateInteger(string value)
         {
-            int throwaway;
-            return int.TryParse(value, out throwaway);
+            return int.TryParse(value, out int throwaway);
         }
 
         protected virtual void PrepopulateProcessValues()
@@ -110,16 +112,10 @@ namespace Common.Forms
             throw new Exception();
         }
 
-        public delegate void OnLogMessageReceived(LogItem message);
-        public delegate void OnProcessStatusChanged(ProcessInfo processInfo);
-
         private ListBox _LoggerOutput;
         protected ListBox LoggerOutput
         {
-            get
-            {
-                return _LoggerOutput;
-            }
+            get => _LoggerOutput;
             set
             {
                 if (_LoggerOutput != null)
@@ -132,6 +128,9 @@ namespace Common.Forms
                 _LoggerOutput.DrawItem += LoggerOutput_DrawItem;
             }
         }
+
+        public delegate void OnLogMessageReceived(LogItem message);
+        public delegate void OnProcessStatusChanged(ProcessInfo processInfo);
 
         protected LogUtility Logger { get; set; }
         protected DistributedProcess ProcessInstance { get; set; }
@@ -156,6 +155,10 @@ namespace Common.Forms
         protected void ShowTraceInput_CheckedChanged(object sender, EventArgs e)
         {
             LevelMap[Level.TRACE] = ShowTraceInput.Checked;
+        }
+        protected void ShowDebugInput_CheckedChanged(object sender, EventArgs e)
+        {
+            LevelMap[Level.DEBUG] = ShowTraceInput.Checked;
         }
     }
 }

@@ -17,7 +17,6 @@ namespace TestCommon.TestObjects
 {
     public class SimpleRequestReplyInitiator : RequestReplyInitiator
     {
-
         public SimpleRequestReplyInitiator() : base("SimpleInitiator")
         {
             EventResponse = null;
@@ -70,11 +69,7 @@ namespace TestCommon.TestObjects
         public bool HasCompleted { get; set; }
 
         public string EventResponse { get; set; }
-        public Envelope SentMessage
-        {
-            get { return LastSentEnvelope; }
-        }
-        public Envelope ReceivedMessage { get; set; }
+        public Envelope SentMessage => LastSentEnvelope; public Envelope ReceivedMessage { get; set; }
 
         public delegate string SimpleMessageReceived(string something);
         public event SimpleMessageReceived Updated;
@@ -115,11 +110,7 @@ namespace TestCommon.TestObjects
         public bool HasCompleted { get; set; }
 
         public string EventResponse { get; set; }
-        public Envelope SentMessage
-        {
-            get { return LastSentEnvelope; }
-        }
-        public Envelope ReceivedMessage { get; set; }
+        public Envelope SentMessage => LastSentEnvelope; public Envelope ReceivedMessage { get; set; }
 
         public delegate string SimpleMessageReceived(string something);
         public event SimpleMessageReceived Updated;

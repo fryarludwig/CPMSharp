@@ -38,12 +38,12 @@ namespace TestCommon.Communication
             Thread.Sleep(250);
 
             Assert.IsTrue(tester.HasRun);
-            Assert.IsTrue(tester.IsActive());
+            Assert.IsTrue(tester.IsActive);
 
             tester.Stop();
             Thread.Sleep(250);
 
-            Assert.IsFalse(tester.IsActive());
+            Assert.IsFalse(tester.IsActive);
         }
     }
 }

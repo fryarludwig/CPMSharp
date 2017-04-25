@@ -44,8 +44,7 @@ namespace TestCommon.TestObjects
                     }
                     else if (!OutboundQueue.IsEmpty)
                     {
-                        Envelope outboundEnvelope;
-                        if (OutboundQueue.TryDequeue(out outboundEnvelope))
+                        if (OutboundQueue.TryDequeue(out Envelope outboundEnvelope))
                         {
                             byte[] bytesToSend = outboundEnvelope.Message.Encode();
                             if (bytesToSend.Length > 0)
@@ -78,13 +77,7 @@ namespace TestCommon.TestObjects
             return InboundQueue.TryDequeue(out envelope);
         }
 
-        public bool ReplyWaiting
-        {
-            get
-            {
-                return !InboundQueue.IsEmpty;
-            }
-        }
+        public bool ReplyWaiting => !InboundQueue.IsEmpty;
 
         public void Start()
         {

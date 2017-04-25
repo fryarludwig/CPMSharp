@@ -33,5 +33,6 @@ namespace Common.Communication
 
         protected abstract override void ProcessResponse(Envelope envelope);
         protected IPEndPoint Destination { get; set; }
+        public Envelope InitialMessage { get; set; }
     }
 }

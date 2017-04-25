@@ -22,7 +22,7 @@ namespace Common.Utilities
         public override string ToString() { return LogMessage ?? "null"; }
         public Level LogLevel { get; set; }
         public string LogMessage { get; set; }
-        public Color Coloring { get { return LogLevelMapper.ColorFromLevel(LogLevel); } }
+        public Color Coloring => LogLevelMapper.ColorFromLevel(LogLevel);
     }
 
     public static class LogLevelMapper
@@ -34,10 +34,13 @@ namespace Common.Utilities
             LevelDictionary["Warn"] = Level.WARN;
             LevelDictionary["Info"] = Level.INFO;
             LevelDictionary["Trace"] = Level.TRACE;
+            LevelDictionary["Debug"] = Level.DEBUG;
+            LevelColoring[Level.DEBUG] = Color.White;
             LevelColoring[Level.TRACE] = Color.FloralWhite;
             LevelColoring[Level.INFO] = Color.LightYellow;
             LevelColoring[Level.WARN] = Color.AntiqueWhite;
             LevelColoring[Level.ERROR] = Color.LightSalmon;
+            LabelDictionary[Level.DEBUG] = "[DEBUG]: ";
             LabelDictionary[Level.TRACE] = "[TRACE]: ";
             LabelDictionary[Level.INFO] = "[INFO ]: ";
             LabelDictionary[Level.WARN] = "[WARN ]: ";
@@ -71,6 +74,7 @@ namespace Common.Utilities
         WARN = 2,
         INFO = 3,
         TRACE = 4,
+        DEBUG = 5
     }
 
     public class LogUtility
@@ -78,6 +82,11 @@ namespace Common.Utilities
         public LogUtility(string loggerName)
         {
             LogSource = loggerName ?? "UNKNOWN";
+        }
+
+        public void Debug(string logMessage)
+        {
+            LogUtilityHelper.Log(Level.DEBUG, LogSource, logMessage);
         }
 
         public void Trace(string logMessage)
@@ -107,8 +116,8 @@ namespace Common.Utilities
 
         public string LogSource
         {
-            get { return (_name.Length > 0) ? ProcType + _name : "UNKNOWN"; }
-            set { _name = value; }
+            get => (_name.Length > 0) ? ProcType + _name : "UNKNOWN";
+            set => _name = value;
         }
 
         private string FindThatName()
@@ -123,21 +132,19 @@ namespace Common.Utilities
             return _procType ?? "NONE# ";
         }
 
-        private string ProcType { get { return _procType ?? FindThatName(); } }
-
+        private string ProcType => _procType ?? FindThatName();
         private string _procType = null;
         private string _name = "";
-        private static LogHelper LogUtilityHelper = new LogHelper();
+        private static readonly LogHelper LogUtilityHelper = new LogHelper();
 
-        public bool ConsoleOutput { set { LogUtilityHelper.PrintToConsole = value; } }
-        public bool FileOutput { set { LogUtilityHelper.WriteToFile = value; } }
-        public bool GuiOutput { set { LogUtilityHelper.GuiOutput = value; } }
+        public bool ConsoleOutput { set => LogUtilityHelper.PrintToConsole = value; }
+        public bool FileOutput { set => LogUtilityHelper.WriteToFile = value; }
+        public bool GuiOutput { set => LogUtilityHelper.GuiOutput = value; }
         public Level LogLevel
         {
-            get { return LogUtilityHelper.GlobalLogLevel; }
-            set { LogUtilityHelper.GlobalLogLevel = value; }
+            get => LogUtilityHelper.GlobalLogLevel;
+            set => LogUtilityHelper.GlobalLogLevel = value;
         }
-
 
         public void RegisterGuiCallback(BaseLoggingForm winForm)
         {
@@ -154,14 +161,11 @@ namespace Common.Utilities
     {
         public LogHelper() : base("Logger")
         {
-
             GlobalLogLevel = Level.TRACE;
             PrintToConsole = true;
             WriteToFile = true;
             GuiOutput = true;
             LogFileName = "Log - " + DateTime.Now.ToString("yyyy-MM-dd_HH-mm") + ".txt";
-
-            ContinueThread = true;
             Start();
         }
 
@@ -186,8 +190,7 @@ namespace Common.Utilities
 
             while (ContinueThread || !LogQueue.IsEmpty)
             {
-                string message;
-                if (!LogQueue.IsEmpty && LogQueue.TryDequeue(out message))
+                if (!LogQueue.IsEmpty && LogQueue.TryDequeue(out string message))
                 {
                     if (PrintToConsole)
                     {

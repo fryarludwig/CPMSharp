@@ -1,23 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Common.Utilities;
-using Common.Messages;
-using Common.Alerts;
-using Common.Communication;
-using Common.Users;
-using Common.WorkItems;
-using System.Net;
 using System.Threading;
-
-using SharpCPM.ClientConversation;
-using Common.Messages.Replies;
+using Common.Communication;
+using Common.Messages;
 using Common.Messages.Requests;
+using Common.Users;
+using Common.Utilities;
+using CPMClient.ClientConversation;
 
-namespace SharpCPM
+namespace CPMClient
 {
     public class CPMClient : DistributedProcess
     {

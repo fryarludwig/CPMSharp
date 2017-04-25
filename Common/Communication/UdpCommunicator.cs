@@ -52,8 +52,7 @@ namespace Common.Communication
                     }
                     else if (!OutboundQueue.IsEmpty)
                     {
-                        Envelope outboundEnvelope;
-                        if (OutboundQueue.TryDequeue(out outboundEnvelope))
+                        if (OutboundQueue.TryDequeue(out Envelope outboundEnvelope))
                         {
                             byte[] bytesToSend = outboundEnvelope.Message.Encode();
                             Logger.Info($"Sending outbound message of length {bytesToSend.Length} to {outboundEnvelope.Address.ToString()}");

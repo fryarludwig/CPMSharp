@@ -26,6 +26,7 @@ namespace ContractManager
             ProcessInstance.OnStatusChanged += ProcessStatusChanged;
             Contractor.Registration_OnChange += ProcessStatusChanged;
             StartButton.Text = START_TEXT;
+            StatusDisplay.Text = "Not Started";
             Logger.Trace("Started Contract Manager Interface");
         }
         
@@ -37,10 +38,11 @@ namespace ContractManager
             }
             else
             {
+                StatusDisplay.Text = processInfo.StatusString;
                 StartButton.Enabled = true;
                 if (processInfo.Status == ProcessInfo.StatusCode.Registered)
                 {
-                    Logger.Trace("Contractor started successfull");
+                    Logger.Trace("Contractor registered successfully");
                     StartButton.Text = STOP_TEXT;
                 }
                 else
@@ -107,7 +109,7 @@ namespace ContractManager
         private const string START_TEXT = "Connect";
         private const string STOP_TEXT = "Disconnect";
 
-        protected ContractManager Contractor { get { return (ContractManager)ProcessInstance; } }
+        protected ContractManager Contractor => (ContractManager)ProcessInstance;
         public delegate void StatusChanged_Update(ProcessInfo processInfo);
     }
 }

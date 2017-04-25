@@ -1,20 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Net;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net;
 using System.Windows.Forms;
-
 using Common.Forms;
-using Common.Utilities;
-using System.Collections.Concurrent;
-using System.Threading;
 
-namespace SharpCPM
+namespace CPMClient
 {
     public partial class ClientWindow : BaseLoggingForm
     {
@@ -68,8 +59,7 @@ namespace SharpCPM
                 }
             }
 
-            int throwaway = 0;
-            if (!int.TryParse(portInput.Text, out throwaway))
+            if (!int.TryParse(portInput.Text, out int throwaway))
             {
                 validInformation = false;
                 InputErrorProvider.SetError(portInput, "Please enter a valid port number");
@@ -98,9 +88,8 @@ namespace SharpCPM
         {
             // Call a method to update the gui
         }
-        
-        protected CPMClient ClientService { get { return (CPMClient)ProcessInstance; } }
 
+        protected CPMClient ClientService => (CPMClient)ProcessInstance;
         private void ClientWindow_Load(object sender, EventArgs e)
         {
 
@@ -117,6 +106,11 @@ namespace SharpCPM
         }
 
         private void Contract_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ShowDebugInput_CheckedChanged_1(object sender, EventArgs e)
         {
 
         }

@@ -24,11 +24,13 @@ namespace ContractManager.Conversations
         {
             if (envelope.Message.GetType() == typeof(AliveRequest))
             {
-                AliveReply message = new AliveReply();
-                message.ConvId = Id;
-                message.MsgId = MessageNumber.Create();
-                message.Success = true;
-                message.Note = "Ah, ha, ha, ha, stayin' alive, stayin' alive";
+                AliveReply message = new AliveReply
+                {
+                    ConvId = envelope.ConvId,
+                    MsgId = MessageNumber.Create(),
+                    Success = true,
+                    Note = "Ah, ha, ha, ha, stayin' alive, stayin' alive"
+                };
                 Envelope toSend = new Envelope(envelope.Address, message);
                 WaitingForReply = false;
                 SendMessage(toSend);

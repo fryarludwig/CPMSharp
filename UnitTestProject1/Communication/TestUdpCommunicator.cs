@@ -22,21 +22,18 @@ namespace TestCommon.Communication
             string testerAddress = "127.0.0.1";
             string comServiceAddress = "127.0.0.1";
             TestUdpSocket testerSocket = new TestUdpSocket(testerPort);
-            UdpCommunicator testComService = new UdpCommunicator();
-            testComService.LocalEndpoint = new IPEndPoint(IPAddress.Any, comServicePort);
+            UdpCommunicator testComService = new UdpCommunicator(comServicePort);
 
             testerSocket.Start();
             testComService.Start();
             AliveRequest request = new AliveRequest();
             AliveReply reply = new AliveReply();
-            Envelope requestEnvelope = null;
-            Envelope replyEnvelope = null;
 
             int retries = 20;
-            while (!(testerSocket.IsActive() && testComService.IsActive()) && retries-- > 0 && wait(50)) { }
+            while (!(testerSocket.IsActive() && testComService.IsActive) && retries-- > 0 && wait(50)) { }
 
             Assert.IsNotNull(testComService);
-            Assert.IsTrue(testComService.IsActive());
+            Assert.IsTrue(testComService.IsActive);
             Assert.IsTrue(testerSocket.IsActive());
 
             testComService.Send(new Envelope(new IPEndPoint(IPAddress.Parse(testerAddress), testerPort), request));
@@ -44,7 +41,7 @@ namespace TestCommon.Communication
             while (!testerSocket.ReplyWaiting && retries-- > 0 && wait(50)) { }
 
             Assert.IsTrue(testerSocket.ReplyWaiting);
-            Assert.IsTrue(testerSocket.Receive(out requestEnvelope));
+            Assert.IsTrue(testerSocket.Receive(out Envelope requestEnvelope));
             Assert.IsNotNull(requestEnvelope);
             Assert.IsTrue(requestEnvelope.Message.GetType() == request.GetType());
             Assert.IsTrue(requestEnvelope.Message.MsgId == request.MsgId);
@@ -58,7 +55,7 @@ namespace TestCommon.Communication
             while (!testComService.ReplyWaiting && retries-- > 0 && wait(50)) { }
 
             Assert.IsTrue(testComService.ReplyWaiting);
-            Assert.IsTrue(testComService.Receive(out replyEnvelope));
+            Assert.IsTrue(testComService.Receive(out Envelope replyEnvelope));
             Assert.IsNotNull(replyEnvelope);
             Assert.IsTrue(replyEnvelope.Message.GetType() == reply.GetType());
             Assert.IsTrue(replyEnvelope.Message.MsgId == reply.MsgId);
@@ -69,9 +66,9 @@ namespace TestCommon.Communication
             testComService.Stop();
 
             retries = 20;
-            while ((testerSocket.IsActive() || testComService.IsActive()) && retries-- > 0 && wait(50)){ }
+            while ((testerSocket.IsActive() || testComService.IsActive) && retries-- > 0 && wait(50)){ }
 
-            Assert.IsFalse(testComService.IsActive());
+            Assert.IsFalse(testComService.IsActive);
             Assert.IsFalse(testerSocket.IsActive());
         }
 
@@ -92,14 +89,12 @@ namespace TestCommon.Communication
             LoginRequest request2 = new LoginRequest();
             AliveReply reply = new AliveReply();
 
-            Envelope requestEnvelope = null;
-            Envelope replyEnvelope = null;
 
             int retries = 20;
-            while (!(testerSocket.IsActive() && testComService.IsActive()) && retries-- > 0 && wait(50)) { }
+            while (!(testerSocket.IsActive() && testComService.IsActive) && retries-- > 0 && wait(50)) { }
 
             Assert.IsNotNull(testComService);
-            Assert.IsTrue(testComService.IsActive());
+            Assert.IsTrue(testComService.IsActive);
             Assert.IsTrue(testerSocket.IsActive());
 
             testComService.Send(new Envelope(new IPEndPoint(IPAddress.Parse(testerAddress), testerPort), request));
@@ -109,7 +104,7 @@ namespace TestCommon.Communication
             while (!testerSocket.ReplyWaiting && retries-- > 0 && wait(50)) { }
 
             Assert.IsTrue(testerSocket.ReplyWaiting);
-            Assert.IsTrue(testerSocket.Receive(out requestEnvelope));
+            Assert.IsTrue(testerSocket.Receive(out Envelope requestEnvelope));
             Assert.IsNotNull(requestEnvelope);
             Assert.IsTrue(requestEnvelope.Message.GetType() == request.GetType());
             Assert.IsTrue(requestEnvelope.Message.MsgId == request.MsgId);
@@ -141,7 +136,7 @@ namespace TestCommon.Communication
             while (!testComService.ReplyWaiting && retries-- > 0 && wait(50)) { }
 
             Assert.IsTrue(testComService.ReplyWaiting);
-            Assert.IsTrue(testComService.Receive(out replyEnvelope));
+            Assert.IsTrue(testComService.Receive(out Envelope replyEnvelope));
             Assert.IsNotNull(replyEnvelope);
             Assert.IsTrue(replyEnvelope.Message.GetType() == reply.GetType());
             Assert.IsTrue(replyEnvelope.Message.MsgId == reply.MsgId);
@@ -152,9 +147,9 @@ namespace TestCommon.Communication
             testComService.Stop();
 
             retries = 20;
-            while ((testerSocket.IsActive() || testComService.IsActive()) && retries-- > 0 && wait(50)) { }
+            while ((testerSocket.IsActive() || testComService.IsActive) && retries-- > 0 && wait(50)) { }
 
-            Assert.IsFalse(testComService.IsActive());
+            Assert.IsFalse(testComService.IsActive);
             Assert.IsFalse(testerSocket.IsActive());
         }
 

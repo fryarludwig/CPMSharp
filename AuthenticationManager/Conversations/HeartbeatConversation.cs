@@ -30,7 +30,6 @@ namespace AuthenticationManager.Conversations
         protected override void BeginConversation()
         {
             AliveRequest request = new AliveRequest();
-            request.InitMessageAndConversationNumbers();
             Envelope toSend = new Envelope(Destination, request);
             SendMessage(toSend);
         }

@@ -18,8 +18,6 @@ namespace Common.Communication
         public Conversation(string name, MessageNumber convId = null) : base(name)
         {
             Id = convId ?? MessageNumber.Create();
-            Timeout = 2000;
-            MaxRetries = 5;
             Properties = SharedProperties.Instance;
             Communicator = ConversationManager.PrimaryCommunicator;
             MessageInbox = new ConcurrentQueue<Envelope>();
@@ -35,8 +33,6 @@ namespace Common.Communication
         public Conversation(string name, BaseCommunicator communicator, MessageNumber convId = null) : base(name)
         {
             Id = convId ?? MessageNumber.Create();
-            Timeout = 2000;
-            MaxRetries = 5;
             Properties = SharedProperties.Instance;
             Communicator = communicator;
             Communicator.OnMessageReceived += new BaseCommunicator.MessageReceived(ReceiveDirectMessage);
@@ -63,58 +59,64 @@ namespace Common.Communication
         {
             if (Communicator?.LocalEndpoint != null)
             {
-                if (!Communicator.IsActive()) { Communicator.Start(); }
+                if (!Communicator.IsActive) { Communicator.Start(); }
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         protected bool VerifyReceivePermissions(Envelope envelope)
         {
-            Logger.Trace("Verifying permissions to receive envelope");
-            if (envelope?.Address != null && envelope.Message != null)
+            if (!AllowInboundMessages)
             {
-                if (AllowInboundMessages &&(!ReceivedMessages.ContainsKey(envelope.Message))
-                    || (ReceivedMessages.ContainsKey(envelope.Message)))
-                {
-                    Logger.Trace("Permission to receive is granted");
-                    return true;
-                }
+                Logger.Warn("Inbound messages are not allowed for this conversation.");
             }
-
-            Logger.Trace("We are not allow to receive this envelope");
+            else if (envelope?.Address == null || envelope.Message == null)
+            {
+                Logger.Warn("The envelope contains incomplete data - discarding.");
+            }
+            else if (ReceivedMessages.ContainsKey(envelope.Message))
+            {
+                Logger.Warn("Envelope is valid, however we have already received this exact message");
+            }
+            else
+            {
+                Logger.Trace("Message receipt is permitted");
+                return true;
+            }
+            
             return false;
         }
 
         // Template method
         protected override void Run()
         {
+            AttemptedRetries = 0;
+
             if (ValidateConversation())
             {
                 BeginConversation();
+                Thread.Sleep(150);
 
                 while (ContinueThread && WaitingForReply)
                 {
-                    Envelope inbound;
-                    if (!MessageInbox.IsEmpty && MessageInbox.TryDequeue(out inbound) && 
+                    if (!MessageInbox.IsEmpty && MessageInbox.TryDequeue(out Envelope inbound) && 
                         VerifyReceivePermissions(inbound))
                     {
-                            Logger.Info("Received some kind of response");
-                            ReceivedMessages[inbound.Message] = inbound.Address;
-                            ProcessResponse(inbound);
+                        Logger.Info("Received some kind of response");
+                        ReceivedMessages[inbound.Message] = inbound.Address;
+                        ProcessResponse(inbound);
                     }
-                    else if (WaitingForReply && AttemptedRetries < MaxRetries)
+                    else if (WaitingForReply && AttemptedRetries > MaxRetries)
+                    {
+                        HandleNoResponse();
+                    }
+                    else if (WaitingForReply)
                     {
                         RetryMessage();
                         AttemptedRetries++;
                         Thread.Sleep(Timeout);
-                    }
-                    else if (WaitingForReply)
-                    {
-                        HandleNoResponse();
                     }
                     else
                     {
@@ -137,6 +139,7 @@ namespace Common.Communication
         {
             if (LastSentEnvelope != null)
             {
+                Logger.Info("Resending last sent message");
                 Communicator.Send(LastSentEnvelope);
             }
         }
@@ -158,27 +161,20 @@ namespace Common.Communication
 
         protected abstract void ProcessResponse(Envelope envelope);
 
-        protected virtual void ProcessNullMessage(Envelope envelope)
-        {
-            RetryMessage();
-        }
-
-        protected Envelope LastSentEnvelope => (SentMessages.Count == 0) ? null : SentMessages.Last();
-
         protected void SendMessage(Envelope envelope)
         {
-            if (envelope?.Address != null && envelope.Message != null)
+            if (envelope == null)
             {
-                Communicator.Send(envelope);
-                SentMessages.Enqueue(envelope);
+                Logger.Error($"Not even going to try to send null message to null address");
             }
-            else if (envelope?.Message != null)
+            else if (envelope.Message == null || envelope.Address == null)
             {
-                Logger.Error($"Null Address: Cannot send message {envelope.Message.ToString()}");
+                Logger.Error($"Null Address: Cannot send message {envelope.Message?.ToString() ?? "'null msg'"}");
             }
             else
             {
-                Logger.Error($"Not even going to try to send null message to null address");
+                SentMessages.Enqueue(envelope);
+                Communicator.Send(envelope);
             }
         }
 
@@ -202,16 +198,17 @@ namespace Common.Communication
             return Id.GetHashCode();
         }
 
+        public int Timeout = 2000;
+        public uint MaxRetries = 5;
+        public uint AttemptedRetries = 0;
+
+        protected Envelope LastSentEnvelope => (SentMessages.Count == 0) ? null : SentMessages.Last();
         public bool AllowInboundMessages { get; set; }
         public bool CallbacksRegistered { get; set; }
         protected bool WaitingForReply { get; set; }
         public MessageNumber Id { get; set; }
-        public int Timeout { get; set; }
-        public uint MaxRetries { get; set; }
-        public uint AttemptedRetries { get; set; }
         public SharedProperties Properties { get; set; }
         protected BaseCommunicator Communicator { get; set; }
-        public Envelope InitialMessage { get; set; }
         public ConcurrentQueue<Envelope> MessageInbox { get; }
         public ConcurrentQueue<Envelope> SentMessages { get; }
         public ConcurrentDictionary<Message, IPEndPoint> ReceivedMessages { get; set; }

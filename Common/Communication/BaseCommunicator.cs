@@ -39,16 +39,15 @@ namespace Common.Communication
             return InboundQueue.TryDequeue(out envelope);
         }
 
-        public bool ReplyWaiting { get { return !InboundQueue.IsEmpty; } }
-
+        public bool ReplyWaiting => !InboundQueue.IsEmpty;
         protected IPEndPoint _LocalEndpoint { get; set; }
         public IPEndPoint LocalEndpoint
         {
-            get { return _LocalEndpoint; }
+            get => _LocalEndpoint;
             set
             {
                 _LocalEndpoint = value ?? new IPEndPoint(IPAddress.Any, 0);
-                if (IsActive())
+                if (IsActive)
                 {
                     Stop();
                     Thread.Sleep(500);

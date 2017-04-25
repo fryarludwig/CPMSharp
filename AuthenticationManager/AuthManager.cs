@@ -22,7 +22,8 @@ namespace AuthenticationManager
         {
             MessageNumber.SetSeqNumber(84);
             HeartbeatIntervalMs = 30000;
-            KnownClients = new Dictionary<ProcessInfo, ProcessInfo>();
+            KnownClients = new Dictionary<int, ProcessInfo>();
+            PendingHeartbeatReplies = new Dictionary<MessageNumber, int>();
             MyProcessInfo.ProcessId = 0;
             MyProcessInfo.Type = ProcessInfo.ProcessType.AuthenticationManager;
             MyProcessInfo.Status = ProcessInfo.StatusCode.NotInitialized;
@@ -37,31 +38,36 @@ namespace AuthenticationManager
             HeartbeatConversation conversation = new HeartbeatConversation(process.EndPoint);
             conversation.Heartbeat_OnUpdate += UpdateProcessStatus;
             conversation.Start();
-            Console.WriteLine("The Elapsed event was raised at {0}", e.SignalTime);
         }
 
         protected void UpdateProcessStatus(MessageNumber convId, bool alive)
         {
             if (PendingHeartbeatReplies.ContainsKey(convId))
             {
-                ProcessInfo process = PendingHeartbeatReplies[convId];
+                int processId = PendingHeartbeatReplies[convId];
                 PendingHeartbeatReplies.Remove(convId);
-
-                if (!alive)
+                
+                if (!alive && KnownClients.ContainsKey(processId))
                 {
+                    Logger.Info("Process " + processId + " is not responding, removing from current connections");
+                    ProcessInfo process = KnownClients[processId];
                     process.Status = ProcessInfo.StatusCode.Terminated;
                     process.HeartbeatTimer.Stop();
                     KillProcessConversation conv = new KillProcessConversation(process.ProcessId, process.EndPoint);
-                    conv.RegisterWithConversationManager();
                     conv.Start();
+                }
+                else
+                {
+                    Logger.Info("Process " + processId.ToString() + " is still responding");
                 }
             }
             else
             {
                 Logger.Error("Received unexpected response from heatbeat conversation");
             }
-        }
 
+        }
+        
         public override void StartConnection()
         {
             Logger.Info("Starting Authentication Server");
@@ -77,7 +83,7 @@ namespace AuthenticationManager
             switch (state)
             {
                 case BaseCommunicator.STATE.READY:
-                    if (MyProcessInfo.Status != ProcessInfo.StatusCode.Registered && ConversationManager.PrimaryCommunicator.IsActive())
+                    if (MyProcessInfo.Status != ProcessInfo.StatusCode.Registered && ConversationManager.PrimaryCommunicator.IsActive)
                     {
                         MyProcessInfo.Status = ProcessInfo.StatusCode.Registered;
                         MyProcessInfo.EndPoint = ConversationManager.PrimaryCommunicator.LocalEndpoint;
@@ -98,6 +104,9 @@ namespace AuthenticationManager
                         MyProcessInfo.Status = ProcessInfo.StatusCode.Terminated;
                     }
                     break;
+                default:
+                    Logger.Error("Communicator has entered a state that should not have been possible");
+                    break;
             }
         }
 
@@ -111,7 +120,7 @@ namespace AuthenticationManager
 
         public ProcessInfo ValidateProcess(ProcessInfo newProcess)
         {
-            if (newProcess == null) { return newProcess; }
+            if (newProcess == null) { return null; }
 
             Logger.Trace("Received login request from a process");
             bool success = true;
@@ -119,7 +128,7 @@ namespace AuthenticationManager
             {
                 case ProcessInfo.ProcessType.Client:
                     newProcess.ProcessId = NewProcessId;
-                    KnownClients[newProcess] = newProcess;
+                    KnownClients[newProcess.ProcessId] = newProcess;
                     break;
                 case ProcessInfo.ProcessType.ContractManager:
                     newProcess.ProcessId = 1;
@@ -141,7 +150,7 @@ namespace AuthenticationManager
             else
             {
                 newProcess.Status = ProcessInfo.StatusCode.Terminated;
-                Logger.Info($"Cannot register {newProcess.LabelAndId} registered");
+                Logger.Info($"Cannot register {newProcess.LabelAndId} ");
             }
 
             return ProcessInfo.DeepCopy(newProcess);
@@ -152,9 +161,9 @@ namespace AuthenticationManager
 
         protected Timer HeartbeatTimer { get; set; }
         public int HeartbeatIntervalMs { get; set; }
-        private Dictionary<MessageNumber, ProcessInfo> PendingHeartbeatReplies { get; set; }
-        private Dictionary<ProcessInfo, ProcessInfo> KnownClients { get; set; }
-        private int NewProcessId { get { return KnownClients.Count + 2; } }
+        private Dictionary<MessageNumber, int> PendingHeartbeatReplies { get; set; }
+        private Dictionary<int, ProcessInfo> KnownClients { get; set; }
+        private int NewProcessId => KnownClients.Count + 2;
         private ProcessInfo ContractManagerInfo { get; set; }
     }
 }

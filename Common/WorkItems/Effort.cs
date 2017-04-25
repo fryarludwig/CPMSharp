@@ -67,13 +67,7 @@ namespace Common.WorkItems
         protected DateTime StartTime { get; set; }
         [DataMember]
         protected DateTime EndTime { get; set; }
-        public TimeSpan TimeElapsed
-        {
-            get
-            {
-                return TotalDuration;
-            }
-        }
+        public TimeSpan TimeElapsed => TotalDuration;
 
         [DataMember]
         public int EffortId { get; }

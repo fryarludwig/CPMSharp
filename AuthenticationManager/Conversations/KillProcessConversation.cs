@@ -31,7 +31,7 @@ namespace AuthenticationManager.Conversations
 
         protected override void ProcessResponse(Envelope envelope)
         {
-            Logger.Warn("Unexpected message received from " + envelope.Address.ToString());
+            Logger.Warn("Unexpected message received from " + envelope.Address.ToString() + ". Dead processes don't talk");
             WaitingForReply = false;
         }
 

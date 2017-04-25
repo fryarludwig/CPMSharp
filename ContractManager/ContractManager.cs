@@ -44,6 +44,7 @@ namespace ContractManager
             ConversationManager.PrimaryCommunicator.Start();
             LoginConversation loginConv = new LoginConversation(AuthenticatorEndpoint, MyProcessInfo);
             loginConv.RegisterDistributedProcessCallbacks(this);
+            
             loginConv.Start();
         }
 

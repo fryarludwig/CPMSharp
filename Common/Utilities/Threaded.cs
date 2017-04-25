@@ -13,8 +13,7 @@ namespace Common.Utilities
         {
             ContinueThread = false;
             Logger = (name != "LogHelper") ? new LogUtility(name) : null;
-            ActiveThread = new Thread(Run);
-            ActiveThread.IsBackground = true;
+            ActiveThread = new Thread(Run) {IsBackground = true};
             try { ActiveThread.Name = name; }
             catch (InvalidOperationException e) { Logger?.Warn($"Unable to name thread due to exception {e.ToString()}"); }
         }
@@ -30,8 +29,7 @@ namespace Common.Utilities
             {
                 Setup();
                 ContinueThread = true;
-                ActiveThread = new Thread(Run);
-                ActiveThread.IsBackground = true;
+                ActiveThread = new Thread(Run) {IsBackground = true};
                 ActiveThread.Start();
             }
             else
@@ -59,16 +57,10 @@ namespace Common.Utilities
 
         protected virtual void Setup() { }
         protected virtual void Cleanup() { }
-
         protected abstract void Run();
-
         protected virtual void DerivedStop() { }
 
-        public bool IsActive()
-        {
-            return ContinueThread;
-        }
-
+        public bool IsActive => ContinueThread;
         protected Thread ActiveThread;
         protected volatile bool ContinueThread;
         protected LogUtility Logger;

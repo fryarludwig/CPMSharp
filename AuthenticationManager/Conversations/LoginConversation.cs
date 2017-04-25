@@ -19,9 +19,6 @@ namespace AuthenticationManager.Conversations
     {
         public LoginConversation() : base("Auth - Login Conv")
         {
-            WaitingForReply = true;
-            AllowInboundMessages = false;
-            CallbacksRegistered = false;
         }
 
         public override void RegisterDistributedProcessCallbacks(DistributedProcess process)
@@ -48,16 +45,18 @@ namespace AuthenticationManager.Conversations
             if (envelope.Message.GetType() == typeof(LoginRequest))
             {
                 LoginRequest received = (LoginRequest)envelope.Message;
-                ProcessInfo newInfo = new ProcessInfo();
-                newInfo.EndPoint = envelope.Address;
-                newInfo.Label = received.ProcessLabel;
-                newInfo.Type = received.ProcessType;
+                ProcessInfo newInfo = new ProcessInfo
+                {
+                    EndPoint = envelope.Address,
+                    Label = received.ProcessLabel,
+                    Type = received.ProcessType
+                };
                 ProcessInfo procResponse = OnLoginUpdated?.Invoke(newInfo);
 
-                LoginReply reply = new LoginReply();
-                reply.ConvId = Id;
-                reply.MsgId = MessageNumber.Create();
-                reply.Success = (procResponse != null && procResponse?.Status == ProcessInfo.StatusCode.Registered);
+                LoginReply reply = new LoginReply(envelope.ConvId)
+                {
+                    Success = (procResponse != null && procResponse?.Status == ProcessInfo.StatusCode.Registered)
+                };
                 reply.Note = (reply.Success) ? "Granted!" : "Bad request";
                 reply.ProcessInfo = procResponse;
 
@@ -70,7 +69,7 @@ namespace AuthenticationManager.Conversations
             }
 
             WaitingForReply = false;
-            //HandleConversationCompleted();
+            AllowInboundMessages = false;
         }
         
         public delegate ProcessInfo LoginResponseEvent(ProcessInfo newProcess);

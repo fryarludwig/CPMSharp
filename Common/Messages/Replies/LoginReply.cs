@@ -14,6 +14,11 @@ namespace Common.Messages.Replies
     [DataContract]
     public class LoginReply : Reply
     {
+        public LoginReply(MessageNumber convId) : base(convId)
+        {
+            
+        }
+
         [DataMember]
         public ProcessInfo ProcessInfo { get; set; }
 
