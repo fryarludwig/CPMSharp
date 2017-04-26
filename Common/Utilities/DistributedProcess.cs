@@ -50,7 +50,7 @@ namespace Common.Utilities
             {
                 if (ConversationManager.PrimaryCommunicator == null)
                 {
-                    ConversationManager.PrimaryCommunicator = new UdpCommunicator();
+                    ConversationManager.PrimaryCommunicator = new UdpTransport();
                 }
 
                 ConversationManager.PrimaryCommunicator.LocalEndpoint = value;
@@ -59,7 +59,8 @@ namespace Common.Utilities
         
         public delegate void ProcessStatusChanged(ProcessInfo processInfo);
         public event ProcessStatusChanged OnStatusChanged;
-
+        
+        
         public IPEndPoint ContractManagerEndpoint { get; set; }
         public IPEndPoint AuthenticatorEndpoint { get; set; }
         public SharedProperties Properties { get; set; }

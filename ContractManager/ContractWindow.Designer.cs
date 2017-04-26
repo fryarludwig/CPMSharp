@@ -2,6 +2,8 @@
 {
     partial class ContractWindow
     {
+
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -27,6 +29,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
         {
             this.StartButton = new System.Windows.Forms.Button();
             this.authenticatorPortInput = new System.Windows.Forms.TextBox();
@@ -35,6 +38,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.StatusDisplay = new System.Windows.Forms.Label();
+            this.workItemsDisplay = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.InputErrorProvider)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -138,11 +142,20 @@
             this.StatusDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.StatusDisplay.UseCompatibleTextRendering = true;
             // 
+            // workItemsDisplay
+            // 
+            this.workItemsDisplay.FormattingEnabled = true;
+            this.workItemsDisplay.Location = new System.Drawing.Point(12, 76);
+            this.workItemsDisplay.Name = "workItemsDisplay";
+            this.workItemsDisplay.Size = new System.Drawing.Size(541, 121);
+            this.workItemsDisplay.TabIndex = 31;
+            // 
             // ContractWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(567, 401);
+            this.Controls.Add(this.workItemsDisplay);
             this.Controls.Add(this.groupBox1);
             this.Name = "ContractWindow";
             this.Text = "Contract Manager";
@@ -153,6 +166,7 @@
             this.Controls.SetChildIndex(this.ShowInfoInput, 0);
             this.Controls.SetChildIndex(this.ShowTraceInput, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
+            this.Controls.SetChildIndex(this.workItemsDisplay, 0);
             ((System.ComponentModel.ISupportInitialize)(this.InputErrorProvider)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -170,6 +184,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label StatusDisplay;
+        private System.Windows.Forms.ListBox workItemsDisplay;
     }
 }
 

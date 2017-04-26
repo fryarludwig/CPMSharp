@@ -2,9 +2,10 @@
 {
     partial class AuthenticatorGui
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
+                              /// <summary>
+                              /// Required designer variable.
+                              /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
@@ -27,6 +28,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
         {
             this.portInput = new System.Windows.Forms.TextBox();
             this.intervalInput = new System.Windows.Forms.TextBox();

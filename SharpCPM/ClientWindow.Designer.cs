@@ -5,6 +5,7 @@
         /// <summary>
         /// Required designer variable.
         /// </summary>
+#pragma warning disable 108,114
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
@@ -27,6 +28,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
+#pragma warning restore 108,114
         {
             this.ConnectButton = new System.Windows.Forms.Button();
             this.portInput = new System.Windows.Forms.TextBox();

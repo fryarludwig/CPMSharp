@@ -27,7 +27,7 @@ namespace TestCommon.TestObjects
             Destination = target;
         }
 
-        public SimpleRequestReplyInitiator(BaseCommunicator communicator, IPEndPoint target) : base("SimpleInitiator", communicator)
+        public SimpleRequestReplyInitiator(NetworkClient communicator, IPEndPoint target) : base("SimpleInitiator", communicator)
         {
             Destination = target;
         }
@@ -81,7 +81,7 @@ namespace TestCommon.TestObjects
         {
         }
 
-        public SimpleRequestReplyResponder(BaseCommunicator communicator) : base("SimpleResponder", communicator)
+        public SimpleRequestReplyResponder(NetworkClient communicator) : base("SimpleResponder", communicator)
         {
         }
 

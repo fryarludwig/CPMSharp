@@ -70,8 +70,8 @@ namespace TestCommon.Communication
             IPEndPoint initiatorEndpoint = new IPEndPoint(IPAddress.Loopback, 6789);
             IPEndPoint responderEndpoint = new IPEndPoint(IPAddress.Loopback, 6788);
 
-            UdpCommunicator initiatorCommunicator = new UdpCommunicator(initiatorEndpoint.Port);
-            UdpCommunicator responderCommunicator = new UdpCommunicator(responderEndpoint.Port);
+            UdpTransport initiatorCommunicator = new UdpTransport(initiatorEndpoint.Port);
+            UdpTransport responderCommunicator = new UdpTransport(responderEndpoint.Port);
 
             SimpleRequestReplyInitiator convInitiator = new SimpleRequestReplyInitiator(initiatorCommunicator, responderEndpoint);
             SimpleRequestReplyResponder convResponder = new SimpleRequestReplyResponder(responderCommunicator);

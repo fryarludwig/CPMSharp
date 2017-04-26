@@ -12,9 +12,9 @@ using Common.Utilities;
 
 namespace Common.Communication
 {
-    public abstract class BaseCommunicator : Threaded
+    public abstract class NetworkClient : Threaded
     {
-        public BaseCommunicator(string name) : base(name)
+        public NetworkClient(string name) : base(name)
         {
             _LocalEndpoint = new IPEndPoint(IPAddress.Any, 0);
             InboundQueue = new ConcurrentQueue<Envelope>();

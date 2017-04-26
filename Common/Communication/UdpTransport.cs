@@ -12,14 +12,14 @@ using Common.Utilities;
 
 namespace Common.Communication
 {
-    public class UdpCommunicator : BaseCommunicator
+    public class UdpTransport : NetworkClient
     {
-        public UdpCommunicator() : base("UDP Com")
+        public UdpTransport() : base("UDP")
         {
             LocalEndpoint = new IPEndPoint(IPAddress.Any, 0);
         }
 
-        public UdpCommunicator(int port) : base("UDP Com")
+        public UdpTransport(int port) : base("UDP")
         {
             LocalEndpoint = new IPEndPoint(IPAddress.Any, port);
         }

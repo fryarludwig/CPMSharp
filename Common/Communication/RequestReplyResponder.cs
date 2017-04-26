@@ -14,7 +14,7 @@ namespace Common.Communication
         {
         }
 
-        public RequestReplyResponder(string name, BaseCommunicator communicator) : base(name, communicator)
+        public RequestReplyResponder(string name, NetworkClient communicator) : base(name, communicator)
         {
         }
 

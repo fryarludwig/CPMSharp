@@ -76,13 +76,13 @@ namespace AuthenticationManager
             Registration_OnChange?.Invoke(MyProcessInfo);
         }
 
-        private void CommunicatorState_OnChanged(BaseCommunicator.STATE state)
+        private void CommunicatorState_OnChanged(NetworkClient.STATE state)
         {
             Logger.Trace("Communicator state has changed to " + state.ToString());
 
             switch (state)
             {
-                case BaseCommunicator.STATE.READY:
+                case NetworkClient.STATE.READY:
                     if (MyProcessInfo.Status != ProcessInfo.StatusCode.Registered && ConversationManager.PrimaryCommunicator.IsActive)
                     {
                         MyProcessInfo.Status = ProcessInfo.StatusCode.Registered;
@@ -90,15 +90,15 @@ namespace AuthenticationManager
                     }
                     break;
 
-                case BaseCommunicator.STATE.ERROR:
+                case NetworkClient.STATE.ERROR:
                     Logger.Error("Communicator encountered an error state, no can continue");
                     break;
 
-                case BaseCommunicator.STATE.BUSY:
+                case NetworkClient.STATE.BUSY:
                     Logger.Error("There's no use case for this log statement yet.");
                     break;
 
-                case BaseCommunicator.STATE.STOPPED:
+                case NetworkClient.STATE.STOPPED:
                     if (MyProcessInfo.Status == ProcessInfo.StatusCode.Terminating)
                     {
                         MyProcessInfo.Status = ProcessInfo.StatusCode.Terminated;

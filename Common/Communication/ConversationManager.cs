@@ -25,18 +25,18 @@ namespace Common.Communication
             Properties = SharedProperties.Instance;
             ConversationTypes = new Dictionary<Type, Type>();
             ConversationDictionary = new ConcurrentDictionary<MessageNumber, Conversation>();
-            PrimaryCommunicator = new UdpCommunicator();
+            PrimaryCommunicator = new UdpTransport();
             RegisterCommunicatorCallback(PrimaryCommunicator);
         }
 
-        public static void RegisterCommunicatorCallback(BaseCommunicator communicator)
+        public static void RegisterCommunicatorCallback(NetworkClient communicator)
         {
-            communicator.OnMessageReceived += new BaseCommunicator.MessageReceived(ReceiveMessage);
+            communicator.OnMessageReceived += new NetworkClient.MessageReceived(ReceiveMessage);
         }
 
-        public static void RemoveCommunicatorCallback(BaseCommunicator communicator)
+        public static void RemoveCommunicatorCallback(NetworkClient communicator)
         {
-            communicator.OnMessageReceived -= new BaseCommunicator.MessageReceived(ReceiveMessage);
+            communicator.OnMessageReceived -= new NetworkClient.MessageReceived(ReceiveMessage);
         }
 
         public static void ClearConversations()
@@ -131,13 +131,13 @@ namespace Common.Communication
             }
         }
 
-        private static BaseCommunicator _PrimaryCommunicator { get; set; }
-        public static BaseCommunicator PrimaryCommunicator
+        private static NetworkClient _PrimaryCommunicator { get; set; }
+        public static NetworkClient PrimaryCommunicator
         {
-            get => _PrimaryCommunicator ?? (_PrimaryCommunicator = new UdpCommunicator());
+            get => _PrimaryCommunicator ?? (_PrimaryCommunicator = new UdpTransport());
             set
             {
-                _PrimaryCommunicator = value ?? new UdpCommunicator();
+                _PrimaryCommunicator = value ?? new UdpTransport();
                 RegisterCommunicatorCallback(_PrimaryCommunicator);
             }
         }

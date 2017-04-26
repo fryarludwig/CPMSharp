@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Common</RootNamespace>
     <AssemblyName>Common</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -54,10 +55,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alerts\Alert.cs" />
-    <Compile Include="Communication\BaseCommunicator.cs" />
+    <Compile Include="Communication\NetworkClient.cs" />
     <Compile Include="Communication\RequestReplyInitiator.cs" />
     <Compile Include="Communication\RequestReplyResponder.cs" />
-    <Compile Include="Communication\UdpCommunicator.cs" />
+    <Compile Include="Communication\TcpStreamer.cs" />
+    <Compile Include="Communication\TcpReceiver.cs" />
+    <Compile Include="Communication\UdpTransport.cs" />
     <Compile Include="Communication\Conversation.cs" />
     <Compile Include="Communication\ConversationManager.cs" />
     <Compile Include="Forms\BaseLoggingForm.cs">

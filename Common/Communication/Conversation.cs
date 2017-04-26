@@ -30,12 +30,12 @@ namespace Common.Communication
             RegisterWithConversationManager();
         }
 
-        public Conversation(string name, BaseCommunicator communicator, MessageNumber convId = null) : base(name)
+        public Conversation(string name, NetworkClient communicator, MessageNumber convId = null) : base(name)
         {
             Id = convId ?? MessageNumber.Create();
             Properties = SharedProperties.Instance;
             Communicator = communicator;
-            Communicator.OnMessageReceived += new BaseCommunicator.MessageReceived(ReceiveDirectMessage);
+            Communicator.OnMessageReceived += new NetworkClient.MessageReceived(ReceiveDirectMessage);
             MessageInbox = new ConcurrentQueue<Envelope>();
             SentMessages = new ConcurrentQueue<Envelope>();
             ReceivedMessages = new ConcurrentDictionary<Message, IPEndPoint>();
@@ -208,7 +208,7 @@ namespace Common.Communication
         protected bool WaitingForReply { get; set; }
         public MessageNumber Id { get; set; }
         public SharedProperties Properties { get; set; }
-        protected BaseCommunicator Communicator { get; set; }
+        protected NetworkClient Communicator { get; set; }
         public ConcurrentQueue<Envelope> MessageInbox { get; }
         public ConcurrentQueue<Envelope> SentMessages { get; }
         public ConcurrentDictionary<Message, IPEndPoint> ReceivedMessages { get; set; }

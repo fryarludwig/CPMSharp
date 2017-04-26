@@ -1,15 +1,3 @@
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\bin\Debug\Common.dll
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\bin\Debug\Common.pdb
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\CPMClient.csprojResolveAssemblyReference.cache
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\SharpCPM.Dialogs.LoginDialog.resources
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\SharpCPM.ClientWindow.resources
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\CPMClient.csproj.GenerateResource.Cache
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\bin\Debug\CPMClient.exe.config
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\bin\Debug\CPMClient.exe
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\bin\Debug\CPMClient.pdb
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\CPMClient.Properties.Resources.resources
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\CPMClient.exe
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\CPMClient.pdb
 C:\Users\fryar\projects\CPMSharp\SharpCPM\bin\Debug\CPMClient.exe.config
 C:\Users\fryar\projects\CPMSharp\SharpCPM\bin\Debug\CPMClient.exe
 C:\Users\fryar\projects\CPMSharp\SharpCPM\bin\Debug\CPMClient.pdb
@@ -22,3 +10,15 @@ C:\Users\fryar\projects\CPMSharp\SharpCPM\obj\Debug\CPMClient.exe
 C:\Users\fryar\projects\CPMSharp\SharpCPM\obj\Debug\CPMClient.pdb
 C:\Users\fryar\projects\CPMSharp\SharpCPM\obj\Debug\CPMClient.Dialogs.LoginDialog.resources
 C:\Users\fryar\projects\CPMSharp\SharpCPM\obj\Debug\CPMClient.ClientWindow.resources
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\CPMClient.csprojResolveAssemblyReference.cache
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\CPMClient.Dialogs.LoginDialog.resources
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\CPMClient.Properties.Resources.resources
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\CPMClient.ClientWindow.resources
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\CPMClient.csproj.GenerateResource.Cache
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\bin\Debug\CPMClient.exe.config
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\bin\Debug\CPMClient.exe
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\bin\Debug\CPMClient.pdb
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\bin\Debug\Common.dll
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\bin\Debug\Common.pdb
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\CPMClient.exe
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\SharpCPM\obj\Debug\CPMClient.pdb

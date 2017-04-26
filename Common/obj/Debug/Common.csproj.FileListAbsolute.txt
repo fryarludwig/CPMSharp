@@ -13,13 +13,6 @@ C:\Users\fryar\Source\Repos\CPMSharp\Common\obj\Debug\Common.Forms.LoggingUtilit
 C:\Users\fryar\Source\Repos\CPMSharp\Common\obj\Debug\Common.csproj.GenerateResource.Cache
 C:\Users\fryar\Source\Repos\CPMSharp\Common\obj\Debug\Common.dll
 C:\Users\fryar\Source\Repos\CPMSharp\Common\obj\Debug\Common.pdb
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\Common\bin\Debug\Common.dll
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\Common\bin\Debug\Common.pdb
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\Common\obj\Debug\Common.csproj.GenerateResource.Cache
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\Common\obj\Debug\Common.dll
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\Common\obj\Debug\Common.pdb
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\Common\obj\Debug\Common.Forms.BaseLoggingForm.resources
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
 C:\Users\fryar\projects\CPMSharp\Common\bin\Debug\Common.dll
 C:\Users\fryar\projects\CPMSharp\Common\bin\Debug\Common.pdb
 C:\Users\fryar\projects\CPMSharp\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
@@ -27,3 +20,10 @@ C:\Users\fryar\projects\CPMSharp\Common\obj\Debug\Common.Forms.BaseLoggingForm.r
 C:\Users\fryar\projects\CPMSharp\Common\obj\Debug\Common.csproj.GenerateResource.Cache
 C:\Users\fryar\projects\CPMSharp\Common\obj\Debug\Common.dll
 C:\Users\fryar\projects\CPMSharp\Common\obj\Debug\Common.pdb
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\Common\bin\Debug\Common.dll
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\Common\bin\Debug\Common.pdb
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\Common\obj\Debug\Common.Forms.BaseLoggingForm.resources
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\Common\obj\Debug\Common.csproj.GenerateResource.Cache
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\Common\obj\Debug\Common.dll
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\Common\obj\Debug\Common.pdb
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache

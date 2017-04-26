@@ -15,7 +15,7 @@ namespace Common.Communication
         {
         }
 
-        public RequestReplyInitiator(string name, BaseCommunicator communicator) : base(name, communicator)
+        public RequestReplyInitiator(string name, NetworkClient communicator) : base(name, communicator)
         {
         }
 
@@ -24,7 +24,7 @@ namespace Common.Communication
             Destination = target;
         }
 
-        public RequestReplyInitiator(string name, BaseCommunicator communicator, IPEndPoint target) : base(name, communicator)
+        public RequestReplyInitiator(string name, NetworkClient communicator, IPEndPoint target) : base(name, communicator)
         {
             Destination = target;
         }

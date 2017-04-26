@@ -22,7 +22,7 @@ namespace TestCommon.Communication
             string testerAddress = "127.0.0.1";
             string comServiceAddress = "127.0.0.1";
             TestUdpSocket testerSocket = new TestUdpSocket(testerPort);
-            UdpCommunicator testComService = new UdpCommunicator(comServicePort);
+            UdpTransport testComService = new UdpTransport(comServicePort);
 
             testerSocket.Start();
             testComService.Start();
@@ -80,7 +80,7 @@ namespace TestCommon.Communication
             string testerAddress = "127.0.0.1";
             string comServiceAddress = "127.0.0.1";
             TestUdpSocket testerSocket = new TestUdpSocket(testerPort);
-            UdpCommunicator testComService = new UdpCommunicator();
+            UdpTransport testComService = new UdpTransport();
             testComService.LocalEndpoint = new IPEndPoint(IPAddress.Any, comServicePort);
 
             testerSocket.Start();

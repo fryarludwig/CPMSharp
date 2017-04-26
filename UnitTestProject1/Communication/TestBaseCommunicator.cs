@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace TestCommon.Communication
 {
-    public class TestCommunicator : BaseCommunicator
+    public class TestCommunicator : NetworkClient
     {
         public TestCommunicator() : base("Tester")
         {

@@ -31,17 +31,6 @@ C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\obj\Debug\ContractManager.P
 C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\obj\Debug\ContractManager.csproj.GenerateResource.Cache
 C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\obj\Debug\ContractManager.exe
 C:\Users\fryar\Source\Repos\CPMSharp\ContractManager\obj\Debug\ContractManager.pdb
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\bin\Debug\ContractManager.exe.config
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\bin\Debug\ContractManager.exe
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\bin\Debug\ContractManager.pdb
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\bin\Debug\Common.dll
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\bin\Debug\Common.pdb
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\obj\Debug\ContractManager.csprojResolveAssemblyReference.cache
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\obj\Debug\ContractManager.ContractWindow.resources
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\obj\Debug\ContractManager.Properties.Resources.resources
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\obj\Debug\ContractManager.csproj.GenerateResource.Cache
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\obj\Debug\ContractManager.exe
-C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\obj\Debug\ContractManager.pdb
 C:\Users\fryar\projects\CPMSharp\ContractManager\bin\Debug\ContractManager.exe.config
 C:\Users\fryar\projects\CPMSharp\ContractManager\bin\Debug\ContractManager.exe
 C:\Users\fryar\projects\CPMSharp\ContractManager\bin\Debug\ContractManager.pdb
@@ -53,3 +42,14 @@ C:\Users\fryar\projects\CPMSharp\ContractManager\obj\Debug\ContractManager.Prope
 C:\Users\fryar\projects\CPMSharp\ContractManager\obj\Debug\ContractManager.csproj.GenerateResource.Cache
 C:\Users\fryar\projects\CPMSharp\ContractManager\obj\Debug\ContractManager.exe
 C:\Users\fryar\projects\CPMSharp\ContractManager\obj\Debug\ContractManager.pdb
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\bin\Debug\ContractManager.exe.config
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\bin\Debug\ContractManager.exe
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\bin\Debug\ContractManager.pdb
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\bin\Debug\Common.dll
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\bin\Debug\Common.pdb
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\obj\Debug\ContractManager.csprojResolveAssemblyReference.cache
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\obj\Debug\ContractManager.ContractWindow.resources
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\obj\Debug\ContractManager.Properties.Resources.resources
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\obj\Debug\ContractManager.csproj.GenerateResource.Cache
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\obj\Debug\ContractManager.exe
+C:\Users\fryar\Documents\Visual Studio 2017\Projects\CPMSharp\ContractManager\obj\Debug\ContractManager.pdb
