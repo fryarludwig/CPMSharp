@@ -82,7 +82,7 @@ namespace AuthenticationManager
 
             switch (state)
             {
-                case NetworkClient.STATE.READY:
+                case NetworkClient.STATE.Ready:
                     if (MyProcessInfo.Status != ProcessInfo.StatusCode.Registered && ConversationManager.PrimaryCommunicator.IsActive)
                     {
                         MyProcessInfo.Status = ProcessInfo.StatusCode.Registered;
@@ -90,15 +90,15 @@ namespace AuthenticationManager
                     }
                     break;
 
-                case NetworkClient.STATE.ERROR:
+                case NetworkClient.STATE.Error:
                     Logger.Error("Communicator encountered an error state, no can continue");
                     break;
 
-                case NetworkClient.STATE.BUSY:
+                case NetworkClient.STATE.Busy:
                     Logger.Error("There's no use case for this log statement yet.");
                     break;
 
-                case NetworkClient.STATE.STOPPED:
+                case NetworkClient.STATE.Stopped:
                     if (MyProcessInfo.Status == ProcessInfo.StatusCode.Terminating)
                     {
                         MyProcessInfo.Status = ProcessInfo.StatusCode.Terminated;

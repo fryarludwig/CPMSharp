@@ -59,7 +59,6 @@
     <Compile Include="Communication\RequestReplyInitiator.cs" />
     <Compile Include="Communication\RequestReplyResponder.cs" />
     <Compile Include="Communication\TcpStreamer.cs" />
-    <Compile Include="Communication\TcpReceiver.cs" />
     <Compile Include="Communication\UdpTransport.cs" />
     <Compile Include="Communication\Conversation.cs" />
     <Compile Include="Communication\ConversationManager.cs" />

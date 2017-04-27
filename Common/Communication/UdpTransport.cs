@@ -31,7 +31,7 @@ namespace Common.Communication
             socket.Client.ReceiveTimeout = 2000;
             Logger.Trace("Listening on port " + port.ToString());
             IPEndPoint recvEndpoint = null;
-            State = (socket != null) ? STATE.READY : STATE.ERROR;
+            State = (socket != null) ? STATE.Ready : STATE.Error;
             while (ContinueThread)
             {
                 try
@@ -69,7 +69,7 @@ namespace Common.Communication
                 }
                 catch (Exception exc)
                 {
-                    State = STATE.ERROR;
+                    State = STATE.Error;
                     Logger.Error("UDP socket exception : " + exc.Message);
                 }
             }

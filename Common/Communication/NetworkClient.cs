@@ -16,10 +16,10 @@ namespace Common.Communication
     {
         public NetworkClient(string name) : base(name)
         {
+            State = STATE.Stopped;
             _LocalEndpoint = new IPEndPoint(IPAddress.Any, 0);
             InboundQueue = new ConcurrentQueue<Envelope>();
             OutboundQueue = new ConcurrentQueue<Envelope>();
-            State = STATE.STOPPED;
         }
 
         protected void HandleReceivedMessage(Envelope envelope)
@@ -58,20 +58,21 @@ namespace Common.Communication
 
         protected override void Setup()
         {
-            State = STATE.READY;
+            //State = STATE.Ready;
         }
 
         protected override void Cleanup()
         {
-            State = STATE.STOPPED;
+            State = STATE.Stopped;
         }
 
         public enum STATE
         {
-            ERROR,
-            STOPPED,
-            READY,
-            BUSY
+            Error,
+            Stopped,
+            Ready,
+            Busy,
+            Listening
         }
         
         protected ConcurrentQueue<Envelope> InboundQueue { get; }
@@ -81,22 +82,22 @@ namespace Common.Communication
         {
             get
             {
-                if (LOCK_STATE != null)
-                    lock (LOCK_STATE) { return _State; }
+                if (_lockState != null)
+                    lock (_lockState) { return _State; }
                 else
                     return _State;
             }
             set
             {
-                if (LOCK_STATE != null)
-                    lock (LOCK_STATE) { _State = value; }
+                if (_lockState != null)
+                    lock (_lockState) { _State = value; }
                 else
                     _State = value;
                 State_OnChanged?.Invoke(State);
             }
         }
 
-        private object LOCK_STATE = new object();
+        private object _lockState = new object();
 
         public delegate void StateChanged(STATE state);
         public event StateChanged State_OnChanged;
